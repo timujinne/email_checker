@@ -1,0 +1,83 @@
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+
+# Compiled CSS
+web/assets/css/output.css
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+*.egg-info/
+dist/
+build/
+
+# Cache files
+.cache/
+
+# Database files
+*.db
+*.sqlite
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Testing
+coverage/
+.nyc_output/
+*.log
+
+# Environment
+.env
+.env.local
+
+# === SENSITIVE DATA DIRECTORIES ===
+# Email lists and contact databases
+input/
+output/
+blocklists/
+backups/
+
+# Application logs directory
+logs/
+migration.log
+server.log
+
+# Reports and analytics
+reports/
+
+# Dynamic runtime configuration
+lists_config.json
+metadata_config.json
+
+# Test outputs
+test_output_*.json
+
+# Backup files
+*.bak
+
+# Directory with space in name
+text lists/
+
+# Cypress E2E test artifacts
+cypress/videos/
+cypress/screenshots/
+
+# Large temporary files
+--help
