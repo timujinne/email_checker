@@ -81,3 +81,11 @@ cypress/screenshots/
 
 # Large temporary files
 --help
+
+# One-time scripts and temporary files (to prevent clutter)
+test_*.py
+compare_*.py
+analyze_*.py
+fix_*.py
+migrate_*.py
+remove_*.py

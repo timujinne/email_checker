@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="ru" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,497 +9,388 @@
     <link rel="icon" type="image/webp" href="assets/images/logo.webp">
     <link rel="apple-touch-icon" href="assets/images/logo.webp">
 
-    <link href="https://cdn.tailwindcss.com" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/daisyui@latest/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <!-- Compiled Tailwind CSS + daisyUI + Custom Styles -->
+    <link href="assets/css/output.css" rel="stylesheet">
+    <link href="assets/css/custom.css?v=2" rel="stylesheet">
+
     <style>
+        /* Color palette override - Dark Blue + Dark Red */
         :root {
-            --primary: #1e40af;
-            --secondary: #991b1b;
-            --success: #065f46;
+            --primary: #1e40af;        /* Dark Blue - Blue-900 */
+            --primary-dark: #1e3a8a;   /* Blue-800 */
+            --secondary: #991b1b;       /* Dark Red - Red-900 */
+            --secondary-dark: #7f1d1d;  /* Red-800 */
+            --success: #065f46;         /* Emerald-900 */
+            --warning: #92400e;         /* Amber-900 */
         }
 
-        .processing-queue {
-            display: flex;
-            flex-direction: column;
-            height: 100vh;
-            background: var(--bg-primary, white);
-            color: var(--text-primary, black);
+        /* Dark Theme Colors */
+        html[data-theme="dark"] {
+            --bg-primary: #0f172a;      /* Slate-950 */
+            --bg-secondary: #1e293b;    /* Slate-900 */
+            --bg-tertiary: #334155;     /* Slate-700 */
+            --text-primary: #f1f5f9;    /* Slate-100 */
+            --text-secondary: #cbd5e1;  /* Slate-300 */
         }
 
-        .queue-header {
-            padding: 1.5rem;
-            border-bottom: 1px solid rgba(0,0,0,0.1);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        /* Light Theme Colors */
+        html[data-theme="light"] {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8fafc;    /* Slate-50 */
+            --bg-tertiary: #f1f5f9;     /* Slate-100 */
+            --text-primary: #0f172a;    /* Slate-950 */
+            --text-secondary: #8596ad;  /* Slate-600 */
         }
 
-        .queue-header h1 {
-            margin: 0;
-            font-size: 1.5rem;
-            color: var(--primary);
-        }
-
-        .queue-status {
-            display: flex;
-            gap: 1rem;
-            align-items: center;
-        }
-
-        .status-badge {
-            padding: 0.5rem 1rem;
-            border-radius: 0.375rem;
-            font-size: 0.875rem;
-            font-weight: 600;
-        }
-
-        .status-badge.connected {
-            background: #dcfce7;
-            color: #065f46;
-        }
-
-        .status-badge.disconnected {
-            background: #fee2e2;
-            color: #7f1d1d;
-        }
-
-        .tasks-badge {
-            font-size: 0.875rem;
-            color: var(--text-secondary);
-        }
-
-        .progress-tracker-wrapper {
-            flex: 1;
-            padding: 1rem;
-            overflow-y: auto;
-            border-bottom: 1px solid rgba(0,0,0,0.1);
-        }
-
-        .progress-tracker {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        .active-tasks {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        .progress-item {
-            background: white;
-            border: 1px solid rgba(0,0,0,0.1);
-            border-radius: 0.5rem;
-            padding: 1rem;
-            display: flex;
-            flex-direction: column;
-            gap: 0.75rem;
-        }
-
-        .progress-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-        }
-
-        .progress-title {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-        }
-
-        .task-name {
-            font-weight: 600;
-            color: var(--text-primary);
-        }
-
-        .task-status {
-            padding: 0.25rem 0.75rem;
-            border-radius: 0.25rem;
-            font-size: 0.75rem;
-            font-weight: 600;
-            text-transform: uppercase;
-        }
-
-        .task-status.running {
-            background: #dbeafe;
-            color: #1e40af;
-        }
-
-        .task-status.paused {
-            background: #fef3c7;
-            color: #92400e;
-        }
-
-        .task-status.completed {
-            background: #dcfce7;
-            color: #065f46;
-        }
-
-        .task-status.failed {
-            background: #fee2e2;
-            color: #7f1d1d;
-        }
-
-        .progress-info {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-end;
-            gap: 0.25rem;
-        }
-
-        .progress-percentage {
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: var(--primary);
-        }
-
-        .progress-stats {
-            font-size: 0.75rem;
-            color: var(--text-secondary);
-        }
-
-        .progress-bar-container {
+        /* Page visibility control - CRITICAL */
+        .page-content {
+            display: block;
             width: 100%;
-            height: 24px;
-            background: rgba(0,0,0,0.1);
-            border-radius: 0.375rem;
+        }
+
+        .page-content.hidden {
+            display: none !important;
+            visibility: hidden;
+            height: 0;
             overflow: hidden;
-            position: relative;
+            pointer-events: none;
         }
 
-        .progress-bar {
-            height: 100%;
-            background: linear-gradient(90deg, var(--primary), #60a5fa);
-            display: flex;
-            align-items: center;
-            justify-content: flex-end;
-            padding-right: 0.5rem;
-            transition: width 0.2s ease;
-        }
-
-        .progress-label {
-            color: white;
-            font-size: 0.75rem;
-            font-weight: 600;
-            text-shadow: 0 1px 2px rgba(0,0,0,0.2);
-        }
-
-        .progress-controls {
-            display: flex;
-            gap: 0.5rem;
-        }
-
-        .btn {
-            padding: 0.5rem 1rem;
-            border: none;
-            border-radius: 0.375rem;
-            cursor: pointer;
-            font-size: 0.875rem;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            transition: all 0.2s;
-        }
-
-        .btn-primary {
-            background: var(--primary);
-            color: white;
-        }
-
-        .btn-secondary {
-            background: rgba(0,0,0,0.1);
-            color: var(--text-primary);
-        }
-
-        .btn-danger-outline {
-            background: transparent;
-            color: #7f1d1d;
-            border: 1px solid #fca5a5;
-        }
-
-        .btn-ghost {
-            background: transparent;
-            color: var(--text-primary);
-        }
-
-        .btn-sm {
-            padding: 0.375rem 0.75rem;
-            font-size: 0.75rem;
-        }
-
-        .btn:hover:not(:disabled) {
-            opacity: 0.9;
-        }
-
-        .btn:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-        }
-
-        .logs-section {
-            flex: 0.5;
-            display: flex;
-            flex-direction: column;
-            border-top: 1px solid rgba(0,0,0,0.1);
-        }
-
-        .logs-header {
-            padding: 0.75rem 1rem;
-            background: rgba(0,0,0,0.02);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid rgba(0,0,0,0.1);
-        }
-
-        .logs-header h3 {
-            margin: 0;
-            font-size: 0.95rem;
-        }
-
-        .logs-container {
-            flex: 1;
-            overflow-y: auto;
-            padding: 0.75rem;
+        /* Logs terminal styling */
+        .logs-terminal {
             background: #1e1e1e;
             color: #e0e0e0;
             font-family: 'Monaco', 'Courier New', monospace;
             font-size: 0.85rem;
+            line-height: 1.4;
         }
 
-        .logs-empty {
-            color: #666;
-            text-align: center;
-            padding: 2rem;
-        }
-
-        .logs-list {
-            display: flex;
-            flex-direction: column;
-            gap: 0.25rem;
+        html[data-theme="light"] .logs-terminal {
+            background: #2d2d2d;
+            color: #f0f0f0;
         }
 
         .log-entry {
             padding: 0.25rem 0.5rem;
-            font-size: 0.8rem;
-            line-height: 1.3;
             white-space: pre-wrap;
             word-wrap: break-word;
         }
 
-        .log-info {
-            color: #a0a0a0;
+        .log-info { color: #a0a0a0; }
+        .log-success { color: #4ec9b0; }
+        .log-warning { color: #dcdcaa; }
+        .log-error { color: #f48771; }
+        .log-time { color: #858585; margin-right: 0.5rem; }
+        .log-task { color: #569cd6; margin-right: 0.5rem; }
+
+        /* Animate pulse for active tasks */
+        @keyframes pulse-status {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
         }
 
-        .log-success {
-            color: #4ec9b0;
+        .status-pulse {
+            animation: pulse-status 2s ease-in-out infinite;
         }
 
-        .log-warning {
-            color: #dcdcaa;
-        }
-
-        .log-error {
-            color: #f48771;
-        }
-
-        .log-time {
-            color: #858585;
-            margin-right: 0.5rem;
-        }
-
-        .log-task {
-            color: #569cd6;
-            margin-right: 0.5rem;
-        }
-
-        .queue-stats {
-            padding: 1rem;
-            background: rgba(0,0,0,0.02);
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 1rem;
-            border-bottom: 1px solid rgba(0,0,0,0.1);
-        }
-
-        .stat-card {
-            background: white;
-            padding: 1rem;
-            border-radius: 0.5rem;
-            border: 1px solid rgba(0,0,0,0.1);
-            text-align: center;
-        }
-
-        .stat-value {
-            font-size: 1.75rem;
-            font-weight: 700;
-            color: var(--primary);
-        }
-
-        .stat-label {
-            font-size: 0.75rem;
-            color: var(--text-secondary);
-            margin-top: 0.5rem;
-        }
-
-        .queue-history {
-            padding: 1rem;
-            flex: 0.5;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .history-header {
-            margin-bottom: 1rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .history-header h2 {
-            margin: 0;
-            font-size: 1rem;
-        }
-
-        .history-controls {
-            display: flex;
-            gap: 0.5rem;
-            align-items: center;
-        }
-
-        .filter-select {
-            padding: 0.5rem;
-            border: 1px solid rgba(0,0,0,0.2);
-            border-radius: 0.375rem;
-            font-size: 0.875rem;
-        }
-
-        .history-table {
-            flex: 1;
-            overflow-y: auto;
-            border: 1px solid rgba(0,0,0,0.1);
-            border-radius: 0.5rem;
-        }
-
-        #history-table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 0.875rem;
-        }
-
-        #history-table thead {
-            background: #f3f4f6;
+        /* Sticky table header */
+        .table-pin-rows thead tr {
             position: sticky;
             top: 0;
-        }
-
-        #history-table th {
-            padding: 0.75rem;
-            text-align: left;
-            font-weight: 600;
-            border-bottom: 2px solid #e5e7eb;
-        }
-
-        #history-table td {
-            padding: 0.75rem;
-            border-bottom: 1px solid #f3f4f6;
-        }
-
-        #history-table tr.history-completed td:nth-child(2) {
-            color: #065f46;
-            font-weight: 600;
-        }
-
-        #history-table tr.history-failed td:nth-child(2) {
-            color: #7f1d1d;
-            font-weight: 600;
-        }
-
-        .history-pagination {
-            margin-top: 1rem;
-            display: flex;
-            justify-content: center;
-            gap: 0.5rem;
-            align-items: center;
-        }
-
-        .pagination-info {
-            font-size: 0.875rem;
-            color: var(--text-secondary);
-            margin: 0 1rem;
-        }
-
-        .no-tasks {
-            text-align: center;
-            color: var(--text-secondary);
-            padding: 2rem;
-        }
-
-        .text-center {
-            text-align: center;
-        }
-
-        /* Dark theme */
-        html[data-theme="dark"] {
-            --bg-primary: #0f172a;
-            --bg-secondary: #1e293b;
-            --text-primary: #f1f5f9;
-            --text-secondary: #cbd5e1;
-        }
-
-        html[data-theme="dark"] .progress-item,
-        html[data-theme="dark"] .stat-card {
-            background: #1e293b;
-            border-color: #334155;
-        }
-
-        html[data-theme="dark"] .filter-select {
-            background: #1e293b;
-            color: #f1f5f9;
-            border-color: #334155;
-        }
-
-        html[data-theme="dark"] #history-table thead {
-            background: #334155;
-        }
-
-        @media (max-width: 768px) {
-            .queue-stats {
-                grid-template-columns: 1fr 1fr;
-            }
-
-            .processing-queue {
-                height: auto;
-            }
-
-            .progress-tracker-wrapper {
-                max-height: 50vh;
-            }
-
-            .queue-history {
-                max-height: 50vh;
-            }
+            z-index: 10;
         }
     </style>
 </head>
-<body>
-    <div id="processing-queue-root"></div>
+<body class="bg-base-100 transition-colors duration-200">
+    <div id="app">
+        <!-- daisyUI Drawer for responsive sidebar -->
+        <div class="drawer lg:drawer-open">
+            <input id="sidebar-drawer" type="checkbox" class="drawer-toggle" />
 
-    <!-- Scripts -->
-    <script src="assets/js/components/task-monitor.js"></script>
-    <script src="assets/js/components/progress-tracker.js"></script>
-    <script src="assets/js/components/processing-queue.js"></script>
+            <!-- Main Content Area -->
+            <div class="drawer-content flex flex-col">
+                <!-- Navigation -->
+                <nav id="navbar-container"></nav>
 
+                <!-- Backup Navigation (if navbar.js fails to load) -->
+                <noscript>
+                    <div class="navbar bg-base-100 shadow-lg px-4">
+                        <div class="navbar-start">
+                            <span class="text-xl font-bold">Email Checker</span>
+                        </div>
+                        <div class="navbar-end">
+                            <a href="/" class="btn btn-ghost btn-sm gap-2">
+                                ← Вернуться
+                            </a>
+                        </div>
+                    </div>
+                </noscript>
+
+                <!-- Page Content -->
+                <main id="main-content" class="flex-1 p-4 lg:p-8 overflow-auto bg-base-200">
+
+                    <!-- Processing Queue Page -->
+                    <div id="processing-queue-page" class="page-content">
+                        <!-- Page Header with Gradient -->
+                        <div class="mb-6 sm:mb-8">
+                            <div class="bg-gradient-to-r from-primary to-secondary rounded-lg p-6 sm:p-8 shadow-xl">
+                                <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-2">⏳ Processing Queue</h1>
+                                <p class="text-white/80 text-sm sm:text-base">Мониторинг и управление очередью обработки email списков</p>
+                            </div>
+                        </div>
+
+                        <!-- Connection Status -->
+                        <div class="alert shadow-lg mb-6" id="connection-status">
+                            <div class="flex items-center gap-3">
+                                <div class="w-3 h-3 rounded-full bg-info animate-pulse" id="ws-indicator"></div>
+                                <div class="flex-1">
+                                    <div class="font-semibold" id="ws-status-text">Подключение к WebSocket...</div>
+                                    <div class="text-xs opacity-70" id="ws-detail-text">Инициализация...</div>
+                                </div>
+                                <div class="badge badge-outline" id="tasks-count-badge">0 задач</div>
+                            </div>
+                        </div>
+
+                        <!-- Queue Statistics (daisyUI stats) -->
+                        <div class="stats stats-vertical lg:stats-horizontal shadow-xl w-full mb-6 sm:mb-8">
+                            <!-- Active Tasks -->
+                            <div class="stat border-l-4 border-primary hover:shadow-2xl transition-all duration-300">
+                                <div class="stat-figure text-primary">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 opacity-40" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                                    </svg>
+                                </div>
+                                <div class="stat-title font-semibold">Активные</div>
+                                <div class="stat-value text-primary" id="stat-active">0</div>
+                                <div class="stat-desc opacity-70">задач в процессе</div>
+                            </div>
+
+                            <!-- Completed Tasks -->
+                            <div class="stat border-l-4 border-success hover:shadow-2xl transition-all duration-300">
+                                <div class="stat-figure text-success">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 opacity-40" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                    </svg>
+                                </div>
+                                <div class="stat-title font-semibold">Завершено</div>
+                                <div class="stat-value text-success" id="stat-completed">0</div>
+                                <div class="stat-desc opacity-70">успешно</div>
+                            </div>
+
+                            <!-- Failed Tasks -->
+                            <div class="stat border-l-4 border-error hover:shadow-2xl transition-all duration-300">
+                                <div class="stat-figure text-error">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 opacity-40" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                    </svg>
+                                </div>
+                                <div class="stat-title font-semibold">Ошибки</div>
+                                <div class="stat-value text-error" id="stat-failed">0</div>
+                                <div class="stat-desc opacity-70">с ошибками</div>
+                            </div>
+
+                            <!-- Pending Tasks -->
+                            <div class="stat border-l-4 border-warning hover:shadow-2xl transition-all duration-300">
+                                <div class="stat-figure text-warning">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 opacity-40" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                    </svg>
+                                </div>
+                                <div class="stat-title font-semibold">В очереди</div>
+                                <div class="stat-value text-warning" id="stat-pending">0</div>
+                                <div class="stat-desc opacity-70">ожидают</div>
+                            </div>
+                        </div>
+
+                        <!-- Active Tasks Section -->
+                        <div class="card bg-base-100 shadow-xl mb-6">
+                            <div class="card-body">
+                                <div class="flex items-center justify-between mb-4">
+                                    <h2 class="card-title text-lg sm:text-xl">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                                        </svg>
+                                        Активные задачи
+                                    </h2>
+                                    <div class="badge badge-primary badge-sm" id="active-count-badge">0</div>
+                                </div>
+                                <div class="divider my-2"></div>
+
+                                <!-- Active Tasks Container -->
+                                <div id="active-tasks-container" class="space-y-4 max-h-96 overflow-y-auto">
+                                    <!-- Empty State -->
+                                    <div class="text-center py-12 empty-state" id="active-empty-state">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-16 h-16 mx-auto opacity-20 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                        </svg>
+                                        <p class="opacity-60 text-sm">Нет активных задач</p>
+                                        <p class="opacity-40 text-xs mt-1">Задачи появятся здесь при запуске обработки</p>
+                                    </div>
+                                    <!-- Tasks will be dynamically inserted here -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Two Column Layout: Logs + History -->
+                        <div class="grid grid-cols-1 xl:grid-cols-2 gap-6">
+
+                            <!-- Logs Section -->
+                            <div class="card bg-base-100 shadow-xl">
+                                <div class="card-body p-0">
+                                    <!-- Logs Header -->
+                                    <div class="flex items-center justify-between p-4 border-b border-base-300">
+                                        <h2 class="card-title text-lg">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-info" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                            </svg>
+                                            Логи обработки
+                                        </h2>
+                                        <div class="flex gap-2">
+                                            <button class="btn btn-ghost btn-xs" id="clear-logs-btn" title="Очистить логи">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                                </svg>
+                                            </button>
+                                            <div class="badge badge-ghost badge-sm" id="log-count-badge">0</div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Logs Container (Terminal Style) -->
+                                    <div class="logs-terminal p-3 overflow-y-auto" style="height: 400px; max-height: 50vh;" id="logs-container">
+                                        <div class="text-center py-8 opacity-60 text-sm" id="logs-empty-state">
+                                            Логи появятся здесь...
+                                        </div>
+                                        <div id="logs-list" class="space-y-1">
+                                            <!-- Logs will be dynamically inserted here -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Queue History Section -->
+                            <div class="card bg-base-100 shadow-xl">
+                                <div class="card-body">
+                                    <!-- History Header -->
+                                    <div class="flex items-center justify-between mb-4">
+                                        <h2 class="card-title text-lg">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                            </svg>
+                                            История задач
+                                        </h2>
+                                        <div class="flex gap-2 items-center">
+                                            <select id="history-filter" class="select select-bordered select-xs">
+                                                <option value="all">Все</option>
+                                                <option value="completed">Завершено</option>
+                                                <option value="failed">Ошибки</option>
+                                            </select>
+                                            <button class="btn btn-ghost btn-xs" id="refresh-history-btn" title="Обновить">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="divider my-2"></div>
+
+                                    <!-- History Table -->
+                                    <div class="overflow-x-auto" style="height: 400px; max-height: 50vh;">
+                                        <table class="table table-zebra table-pin-rows table-xs" id="history-table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Задача</th>
+                                                    <th>Статус</th>
+                                                    <th>Время</th>
+                                                    <th class="hidden sm:table-cell">Результат</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="history-table-body">
+                                                <tr>
+                                                    <td colspan="4" class="text-center text-sm opacity-60 py-8">
+                                                        История задач пуста
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                    <!-- Pagination -->
+                                    <div class="flex justify-center items-center gap-2 mt-4" id="history-pagination">
+                                        <button class="btn btn-xs" id="history-prev-btn" disabled>
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                                            </svg>
+                                        </button>
+                                        <span class="text-xs" id="history-page-info">Страница 1 из 1</span>
+                                        <button class="btn btn-xs" id="history-next-btn" disabled>
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </main>
+            </div>
+
+            <!-- Drawer Side (Sidebar) -->
+            <div class="drawer-side z-40">
+                <label for="sidebar-drawer" class="drawer-overlay"></label>
+                <aside id="sidebar-container" class="w-64 h-full"></aside>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div id="toast-container" class="fixed bottom-4 right-4 z-50 space-y-3"></div>
+
+    <!-- Modal Container -->
+    <div id="modal-container"></div>
+
+    <!-- JavaScript -->
+    <!-- Application Config (MUST load first!) -->
+    <script src="assets/js/config.js?v=1"></script>
+
+    <!-- Preferences Manager -->
+    <script src="assets/js/utils/preferences.js?v=1"></script>
+
+    <!-- Core Utils -->
+    <script src="assets/js/utils/state.js?v=1"></script>
+    <script src="assets/js/utils/theme.js?v=1"></script>
+    <script src="assets/js/utils/router.js?v=1"></script>
+
+    <!-- Services -->
+    <script src="assets/js/services/api.js?v=1"></script>
+    <script src="assets/js/services/websocket.js?v=3"></script>
+
+    <!-- Components (UI) -->
+    <script src="assets/js/components/toast.js?v=11"></script>
+    <script src="assets/js/components/modal.js?v=21"></script>
+
+    <!-- Navigation Components -->
+    <script src="assets/js/components/navbar-init.js?v=11"></script>
+    <script src="assets/js/components/sidebar-init.js?v=11"></script>
+
+    <!-- Processing Queue Components -->
+    <script src="assets/js/components/task-monitor.js?v=2"></script>
+    <script src="assets/js/components/progress-tracker.js?v=2"></script>
+    <script src="assets/js/components/processing-queue.js?v=2"></script>
+
+    <!-- Main Application -->
     <script>
-        // Initialize Processing Queue
+        // Initialize Processing Queue when DOM is ready
         document.addEventListener('DOMContentLoaded', () => {
             // WebSocket URL - dynamically determined based on current location
             const wsProtocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
             const hostname = window.location.hostname;
             const httpPort = window.location.port ? parseInt(window.location.port) : 8080;
-            const wsUrl = `${wsProtocol}//${hostname}:${httpPort}/ws`;
+            const wsPort = httpPort + 1;  // WebSocket runs on next port (HTTP_PORT + 1)
+            const wsUrl = `${wsProtocol}//${hostname}:${wsPort}/ws`;
 
             console.log('🔌 Processing Queue WebSocket URL:', wsUrl);
             console.log('🌐 Current location:', {
@@ -508,22 +399,30 @@
                 port: window.location.port
             });
 
-            const queue = new ProcessingQueue(
-                'processing-queue-root',
-                wsUrl,
-                {
-                    enableHistory: true,
-                    historyPageSize: 20
-                }
-            );
+            // Initialize Processing Queue component
+            const queueContainer = document.getElementById('processing-queue-page');
+            if (queueContainer && typeof ProcessingQueue !== 'undefined') {
+                const queue = new ProcessingQueue(
+                    'processing-queue-page',
+                    wsUrl,
+                    {
+                        enableHistory: true,
+                        historyPageSize: 20
+                    }
+                );
 
-            // Subscribe to events
-            queue.subscribe((event, data) => {
-                console.log(`🔄 Event: ${event}`, data);
-            });
+                // Subscribe to events
+                queue.subscribe((event, data) => {
+                    console.log(`🔄 Queue Event: ${event}`, data);
+                });
 
-            // Make accessible globally for debugging
-            window.processingQueue = queue;
+                // Make accessible globally for debugging
+                window.processingQueue = queue;
+
+                console.log('✅ Processing Queue initialized');
+            } else {
+                console.warn('⚠️ ProcessingQueue component not loaded or container not found');
+            }
         });
     </script>
 </body>

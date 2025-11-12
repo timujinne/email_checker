@@ -5,6 +5,7 @@ Web server для управления email списками - БЕЗОПАСН
 """
 
 import os
+import sys
 import json
 import subprocess
 import shlex  # Для безопасного экранирования команд
@@ -128,6 +129,9 @@ def run_subprocess_with_logging(cmd, cwd=".", current_file="", total_files=1, fi
     """
     global processing_state
 
+    # Generate unique task ID
+    task_id = f"task_{current_file.replace('/', '_').replace(' ', '_')}_{int(time.time())}"
+
     with processing_state["lock"]:
         processing_state["is_running"] = True
         processing_state["current_file"] = current_file
@@ -135,6 +139,13 @@ def run_subprocess_with_logging(cmd, cwd=".", current_file="", total_files=1, fi
         processing_state["processed_files"] = file_index
         if processing_state["start_time"] is None:
             processing_state["start_time"] = time.time()
+
+    # Broadcast task start
+    websocket_server.broadcast_message("task_created", {
+        "taskId": task_id,
+        "name": current_file,
+        "total": total_files
+    })
 
     try:
         # Валидация и экранирование всех частей команды
@@ -164,26 +175,65 @@ def run_subprocess_with_logging(cmd, cwd=".", current_file="", total_files=1, fi
         for line in iter(process.stdout.readline, ''):
             if line:
                 line = line.rstrip()
+                timestamp = datetime.now().strftime("%H:%M:%S")
+
                 with processing_state["lock"]:
                     processing_state["logs"].append({
-                        "timestamp": datetime.now().strftime("%H:%M:%S"),
+                        "timestamp": timestamp,
                         "message": line
                     })
 
+                # Отправляем через WebSocket в реальном времени
+                websocket_server.broadcast_message("task_log", {
+                    "taskId": task_id,
+                    "message": line,
+                    "timestamp": timestamp
+                })
+
         process.wait()
-        return process.returncode
+        returncode = process.returncode
+
+        # Broadcast task completion
+        websocket_server.broadcast_message("task_completed", {
+            "taskId": task_id,
+            "returncode": returncode,
+            "result": {
+                "success": returncode == 0
+            }
+        })
+
+        return returncode
 
     except Exception as e:
+        timestamp = datetime.now().strftime("%H:%M:%S")
+        error_msg = f"❌ Ошибка: {str(e)}"
+
         with processing_state["lock"]:
             processing_state["logs"].append({
-                "timestamp": datetime.now().strftime("%H:%M:%S"),
-                "message": f"❌ Ошибка: {str(e)}"
+                "timestamp": timestamp,
+                "message": error_msg
             })
+
+        # Broadcast error
+        websocket_server.broadcast_message("task_failed", {
+            "taskId": task_id,
+            "error": str(e),
+            "timestamp": timestamp
+        })
+
         return 1
     finally:
         # Обновляем счетчик обработанных файлов
         with processing_state["lock"]:
             processing_state["processed_files"] = file_index + 1
+
+        # Broadcast progress update
+        websocket_server.broadcast_message("task_progress", {
+            "taskId": task_id,
+            "processed": file_index + 1,
+            "total": total_files,
+            "progress": int((file_index + 1) / total_files * 100) if total_files > 0 else 0
+        })
 
 class EmailCheckerWebHandler(BaseHTTPRequestHandler):
     def __init__(self, *args, **kwargs):
@@ -200,7 +250,8 @@ class EmailCheckerWebHandler(BaseHTTPRequestHandler):
             "/new", "/v2", "/modern",  # Новый интерфейс (SPA)
             "/old", "/classic", "/legacy",  # Старый интерфейс (явный доступ)
             # Прямой доступ к HTML страницам
-            "/index.html", "/lists.html", "/smart-filter.html", "/blocklist.html",
+            "/index.html", "/lists.html", "/email-list.html", "/bulk-lists.html",
+            "/smart-filter.html", "/blocklist.html",
             "/processing-queue.html", "/analytics.html", "/ml-analytics.html",
             "/archive.html", "/settings.html",
             "/api/lists", "/api/status", "/api/reports",
@@ -786,7 +837,7 @@ class EmailCheckerWebHandler(BaseHTTPRequestHandler):
                 safe_input_path = str(Path("input") / filename)
 
                 returncode = run_subprocess_with_logging(
-                    ["python3", "email_checker.py", command, safe_input_path],
+                    [sys.executable, "email_checker.py", command, safe_input_path],
                     cwd=str(self.base_dir),
                     current_file=filename,
                     total_files=1,
@@ -889,7 +940,7 @@ class EmailCheckerWebHandler(BaseHTTPRequestHandler):
                 return
 
             # Формируем команду
-            cmd = ["python3", "email_checker.py", mode]
+            cmd = [sys.executable, "email_checker.py", mode]
 
             if exclude_duplicates:
                 cmd.append("--exclude-duplicates")
