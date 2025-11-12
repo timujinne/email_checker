@@ -1911,7 +1911,7 @@ class ListsManagerComponent {
     }
 
     /**
-     * View list details
+     * View list details - opens Email Manager with filter
      */
     viewDetails(filename) {
         const list = this.lists.find(l => l.filename === filename);
@@ -1920,73 +1920,12 @@ class ListsManagerComponent {
             return;
         }
 
-        console.log('👁️ Viewing details:', filename);
+        console.log('👁️ Opening Email Manager for:', filename);
         console.log('📊 List data:', list);
-        console.log('🔍 Checking ModalService:', typeof ModalService, typeof window.ModalService, typeof window.modal);
 
-        const details = `
-            <div class="space-y-4">
-                <div>
-                    <label class="block text-sm font-semibold mb-2 text-base-content">Файл</label>
-                    <p class="text-base-content">${list.filename}</p>
-                </div>
-                <div>
-                    <label class="block text-sm font-semibold mb-2 text-base-content">Тип</label>
-                    <p class="text-base-content">${(list.file_type || 'TXT').toUpperCase()}</p>
-                </div>
-                <div>
-                    <label class="block text-sm font-semibold mb-2 text-base-content">Страна</label>
-                    <p class="text-base-content">${list.country || 'Unknown'}</p>
-                </div>
-                <div>
-                    <label class="block text-sm font-semibold mb-2 text-base-content">Категория</label>
-                    <p class="text-base-content">${list.category || 'General'}</p>
-                </div>
-                <div>
-                    <label class="block text-sm font-semibold mb-2 text-base-content">Приоритет</label>
-                    <p class="text-base-content">${list.priority || 100}</p>
-                </div>
-                <div>
-                    <label class="block text-sm font-semibold mb-2 text-base-content">Статистика</label>
-                    <div class="space-y-1 text-base-content">
-                        <div>📧 Всего: ${list.emails || 0}</div>
-                        <div>✅ Чистые: ${list.clean || 0}</div>
-                        <div>🚫 Заблокированы: ${list.blocked || 0}</div>
-                    </div>
-                </div>
-                ${list.description ? `
-                    <div>
-                        <label class="block text-sm font-semibold mb-2 text-base-content">Описание</label>
-                        <p class="text-base-content">${list.description}</p>
-                    </div>
-                ` : ''}
-            </div>
-        `;
-
-        // Show modal using ModalService (как в smart-filter.js)
-        try {
-            console.log('🚀 Attempting to show modal...');
-
-            // Используем window.ModalService напрямую, как в smart-filter
-            if (typeof window.ModalService !== 'undefined') {
-                console.log('✅ Using window.ModalService.show()');
-
-                // ВАЖНО: Передаём пустой массив [] для buttons, чтобы использовать дефолтную кнопку "Закрыть"
-                window.ModalService.show(
-                    `📋 ${list.display_name || filename}`,
-                    details,
-                    [],  // Пустой массив buttons - будет добавлена дефолтная кнопка "Закрыть"
-                    { size: 'medium', closable: true }
-                );
-            } else {
-                console.error('❌ ModalService not loaded!');
-                console.error('window.ModalService:', typeof window.ModalService);
-                toast.error('Модальное окно недоступно. Проверьте загрузку modal.js');
-            }
-        } catch (error) {
-            console.error('❌ Error showing modal:', error);
-            toast.error(`Ошибка модального окна: ${error.message}`);
-        }
+        // Navigate to bulk-lists page with filename parameter
+        // The email-list-view component will auto-filter by this filename
+        window.location.href = `/bulk-lists.html?list=${encodeURIComponent(filename)}`;
     }
 }
 

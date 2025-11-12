@@ -40,6 +40,14 @@ class EmailListViewComponent {
 
         console.log('📧 Initializing Email List View...');
 
+        // Check for URL parameter ?list=filename
+        const urlParams = new URLSearchParams(window.location.search);
+        const listParam = urlParams.get('list');
+        if (listParam) {
+            console.log('🔍 URL parameter detected: list =', listParam);
+            this.filters.source = listParam;
+        }
+
         // Initialize virtual table for performance
         this.initVirtualTable();
 
@@ -51,6 +59,15 @@ class EmailListViewComponent {
 
         // Setup filters
         await this.setupFilters();
+
+        // Apply URL parameter to filter dropdown if present
+        if (listParam) {
+            const sourceSelect = document.getElementById('filter-source');
+            if (sourceSelect) {
+                sourceSelect.value = listParam;
+                console.log('✅ Applied URL filter to source dropdown:', listParam);
+            }
+        }
 
         // Setup event listeners
         this.setupEventListeners();

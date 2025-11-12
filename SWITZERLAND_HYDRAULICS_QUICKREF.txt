@@ -1,0 +1,102 @@
+╔══════════════════════════════════════════════════════════════════════════════╗
+║  SWITZERLAND HYDRAULIC CYLINDERS SMART FILTER - QUICK REFERENCE CARD        ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+📄 CONFIG FILE
+  smart_filters/configs/switzerland_hydraulics.json
+
+🚀 QUICK START
+  python3 email_checker.py smart-filter output/Switherland_HC_*_clean_*.txt
+
+📊 STATISTICS
+  ✓ 4 languages (DE/FR/IT/EN)
+  ✓ 11 exclusion categories
+  ✓ 705 total exclusion terms
+  ✓ 283 industry keywords
+  ✓ 53 personal domains
+  ✓ 61 HR prefixes
+
+🎯 SCORING WEIGHTS
+  Email Quality:       10%
+  Company Relevance:   45% ← Biggest factor!
+  Geographic Priority: 30%
+  Engagement:          15%
+
+🏆 BONUSES
+  Swiss domain (.ch):    2.0x
+  OEM manufacturer:      1.3x
+  Domain match:          1.5x
+
+📈 THRESHOLDS
+  HIGH Priority:    100+
+  MEDIUM Priority:  50+
+  LOW Priority:     10+
+  EXCLUDED:         < 10
+
+❌ HARD EXCLUSIONS (Always removed)
+  • Personal: gmail.com, bluewin.ch, yahoo.ch, hotmail.ch
+  • HR: hr@, jobs@, karriere@, recrutement@, lavoro@
+  • Service: noreply@, info@example, webmaster@
+  • Finance: finance@, investors@, ir@
+  • Countries: .cn, .in, .ru, .pl, .tr, .br
+  • Cities: Mumbai, Beijing, Warsaw, Istanbul
+
+🚫 INDUSTRY EXCLUSIONS (11 categories, 705 terms)
+  1. Education (79)     - schule, école, scuola, school
+  2. Media (86)         - zeitung, journal, giornale, newspaper
+  3. Finance (87)       - bank, assurance, assicurazione
+  4. Legal (46)         - notar, avocat, avvocato, lawyer
+  5. Tourism (98) ★     - hotel, ski, restaurant, wellness
+  6. Healthcare (70)    - krankenhaus, hôpital, ospedale
+  7. Pharmacy (32)      - apotheke, pharmacie, farmacia
+  8. Government (54)    - behörde, ministère, autorità
+  9. Retail (65)        - einzelhandel, magasin, negozio
+  10. Research/NGO (46) - forschung, recherche, ricerca
+  11. HR Agencies (42)  - zeitarbeit, intérim, lavoro temporaneo
+
+  ★ Tourism most critical for Switzerland!
+
+✅ POSITIVE KEYWORDS (283 terms)
+  Hydraulics (DE): hydraulikzylinder, ölhydraulik, kolben
+  Hydraulics (FR): vérins hydrauliques, huile hydraulique
+  Hydraulics (IT): cilindri idraulici, olio idraulico
+  Hydraulics (EN): hydraulic cylinders, hydraulic oil
+
+  OEM: hersteller, fabricant, produttore, manufacturer
+  Apps: landmaschinen, engins agricoles, macchine agricole
+
+🌍 GEOGRAPHY
+  High Priority: schweiz, .ch, zürich, geneva, basel, bern
+  Medium Priority: deutschland, austria, france, italy, .de, .at
+  Excluded: .cn, .in, .ru, .pl, .tr, .br, .au, .za
+
+📁 OUTPUT FILES
+  Switzerland_Hydraulic_Cylinders_clean_YYYYMMDD.txt
+  Switzerland_Hydraulic_Cylinders_excluded_YYYYMMDD.txt
+  Switzerland_Hydraulic_Cylinders_EXCLUSION_REPORT_YYYYMMDD.csv
+
+💡 EXAMPLES
+  ✅ HIGH SCORE (200+):
+     verkauf@hydraulikzylinder.ch
+     → Swiss + perfect keywords + sales
+
+  ✅ HIGH SCORE (150+):
+     info@maschinenbau-basel.ch
+     → Swiss + manufacturing + city
+
+  ❌ EXCLUDED:
+     info@hotel-zurich.ch
+     → Tourism industry
+
+  ❌ EXCLUDED:
+     hr@hydraulikzylinder.ch
+     → HR prefix (hard exclusion)
+
+📖 DOCUMENTATION
+  Full Guide: SWITZERLAND_HYDRAULICS_FILTER_GUIDE.md
+  Main Docs:  SMART_FILTER_GUIDE.md
+  Project:    CLAUDE.md
+
+╔══════════════════════════════════════════════════════════════════════════════╗
+║  Version 1.0.0 | Created 2024-11-12 | Target: Switzerland (CH)             ║
+╚══════════════════════════════════════════════════════════════════════════════╝
