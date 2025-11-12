@@ -1,0 +1,91 @@
+================================================================================
+KOHUS.EE EMAIL REMOVAL REPORT
+================================================================================
+Date: 2025-10-30
+Task: Remove all @kohus.ee email addresses from clean list files
+
+REMOVED EMAILS (4 total):
+  • hmktallinn.menetlus@kohus.ee
+  • info@kohus.ee
+  • jogevamk.lastekaitse@kohus.ee
+  • pmkrapla.menetlus@kohus.ee
+
+================================================================================
+PROCESSING RESULTS
+================================================================================
+
+FILE 1: Spain_PM_Испания порошок_clean_20251024_100109.txt
+  Status: ✅ COMPLETED
+  Removed: 4 emails
+  Before: 6,789 emails
+  After:  6,785 emails
+  Remaining kohus.ee: 0
+
+FILE 2: Spain_PM_Испания порошок_clean_20251024_100109.csv
+  Status: ✅ COMPLETED
+  Removed: 4 emails
+  Before: 6,793 emails
+  After:  6,789 emails
+  Remaining kohus.ee: 0
+
+FILE 3: Spain_PM_Испания порошок_clean_20251024_100109.json
+  Status: ✅ COMPLETED
+  Removed: 4 emails
+  Before: 6,793 emails
+  After:  6,789 emails
+  Remaining kohus.ee: 0
+
+FILE 4: Испания порошок_clean_20251024_100109.txt
+  Status: ✅ COMPLETED
+  Removed: 4 emails
+  Before: 7,297 emails
+  After:  7,293 emails
+  Remaining kohus.ee: 0
+
+FILE 5: Испания порошок_clean_metadata_20251024_100109.csv
+  Status: ✅ COMPLETED
+  Removed: 4 emails
+  Before: 7,297 emails
+  After:  7,293 emails
+  Remaining kohus.ee: 0
+
+FILE 6: Испания порошок_clean_metadata_20251024_100109.json
+  Status: ✅ COMPLETED (with fix)
+  Removed: 4 emails
+  Before: 7,297 emails
+  After:  7,293 emails
+  Format: Wrapped JSON (metadata + emails wrapper)
+  Remaining kohus.ee: 0
+
+================================================================================
+SUMMARY
+================================================================================
+
+Total Files Processed: 6
+Total Emails Removed: 24 (4 emails × 6 files = 24 total instances)
+All Kohus.ee Emails: ✅ SUCCESSFULLY REMOVED
+
+Verification Status: ✅ CONFIRMED
+- All 6 files verified for remaining kohus.ee emails
+- Zero matches found in any file
+- All cleaned files written back to disk
+
+================================================================================
+NOTES
+================================================================================
+
+Initial Processing:
+- The standard remove_kohus.py script successfully processed 5 files
+- One file (JSON metadata) had an error due to wrapped format
+
+Issue Resolution:
+- Created fix_json_kohus.py to handle wrapped JSON structure
+- Fixed file correctly processed and verified
+
+All email instances removed:
+- TXT files: 8 instances removed (4 files × 2 emails per file)
+- CSV files: 8 instances removed (2 files × 4 emails per file)
+- JSON files: 8 instances removed (2 files × 4 emails per file)
+
+Total: 24 instances of 4 unique kohus.ee emails removed
+================================================================================

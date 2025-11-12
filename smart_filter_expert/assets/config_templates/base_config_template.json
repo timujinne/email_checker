@@ -1,0 +1,199 @@
+{
+  "config_name": "{{country}}_{{industry}}_config",
+  "display_name": "{{Country}} - {{Industry}} Filter",
+  "version": "1.0.0",
+  "description": "Smart filter for {{country}} {{industry}} market",
+  "created_date": "{{creation_date}}",
+  "created_by": "Smart Filter Expert Skill",
+
+  "target_market": {
+    "country_code": "{{country_code}}",
+    "country_name": "{{country_name}}",
+    "language_codes": {{languages_array}},
+    "primary_language": "{{primary_language}}",
+    "market_maturity": "{{market_maturity}}",
+    "estimated_companies": {{estimated_companies}}
+  },
+
+  "quality_targets": {
+    "high_priority_max_percent": {{high_priority_max_percent}},
+    "high_priority_min_relevance": {{high_priority_min_relevance}},
+    "medium_priority_range": [{{medium_priority_min}}, {{medium_priority_max}}],
+    "processing_speed_target": {{processing_speed_target}},
+    "exclusion_justification_min": {{exclusion_justification_min}}
+  },
+
+  "geographic": {
+    "priority_high": [
+      "{{country_lower}}", ".{{country_lower}}", "{{country_native}}",
+      {{major_cities_array}},
+      {{industrial_regions_array}}
+    ],
+    "priority_medium": [
+      {{neighboring_countries_array}},
+      "europe", "eu"
+    ],
+    "excluded_countries": [
+      ".cn", ".com.cn", ".hk", ".tw",
+      ".in", ".co.in",
+      ".tr", ".com.tr",
+      ".ru", ".by", ".ua",
+      ".br", ".com.br",
+      ".za", ".com.za",
+      ".jp", ".kr", ".vn"
+    ],
+    "regions": [
+      {{administrative_regions_array}}
+    ]
+  },
+
+  "industry_keywords": {
+    "{{industry}}_{{primary_language}}": [
+      {{primary_industry_terms_native}}
+    ],
+    "{{industry}}_en": [
+      {{primary_industry_terms_english}}
+    ],
+    "secondary_terms_{{primary_language}}": [
+      {{secondary_industry_terms_native}}
+    ],
+    "secondary_terms_en": [
+      {{secondary_industry_terms_english}}
+    ],
+    "process_terms_{{primary_language}}": [
+      {{process_terms_native}}
+    ],
+    "process_terms_en": [
+      {{process_terms_english}}
+    ],
+    "negative_keywords": [
+      {{negative_keywords_array}}
+    ]
+  },
+
+  "hard_exclusions": {
+    "personal_domains": [
+      "gmail.com", "yahoo.com", "hotmail.com", "outlook.com",
+      "icloud.com", "me.com", "mac.com",
+      {{country_specific_personal_domains}}
+    ],
+    "hr_prefixes": {
+      {{hr_prefixes_by_language}}
+    },
+    "service_prefixes": [
+      "noreply@", "no-reply@", "donotreply@",
+      "admin@", "webmaster@", "postmaster@",
+      "privacy@", "legal@", "gdpr@"
+    ],
+    "suspicious_patterns": [
+      "^[a-f0-9]{20,}@",     // Long hex strings
+      "^[a-z0-9]{15,}@",     // Long random strings
+      "[\\u4e00-\\u9fff]",    // Chinese characters
+      "[\\u0400-\\u04FF]"     // Cyrillic (if not target market)
+    ],
+    "excluded_industries": {
+      "education": {{education_keywords}},
+      "retail_consumer": {{retail_keywords}},
+      "media_advertising": {{media_keywords}},
+      "finance_insurance": {{finance_keywords}},
+      "government": {{government_keywords}},
+      "hr_recruitment": {{hr_keywords}}
+    },
+    "company_suffixes": {
+      {{company_suffixes_by_language}}
+    }
+  },
+
+  "domain_patterns": {
+    "relevant_patterns": [
+      {{industry_domain_patterns}},
+      {{manufacturing_terms}}
+    ],
+    "high_value_domains": [
+      {{legal_entity_suffixes}},
+      "group", "holding", "international",
+      "engineering", "technology", "systems",
+      "manufacturing", "industrial", "precision"
+    ],
+    "suspicious_patterns": [
+      "temp", "temporary", "disposable", "throw",
+      "spam", "scam", "fake", "trash"
+    ]
+  },
+
+  "scoring": {
+    "weights": {
+      "email_quality": 0.10,
+      "company_relevance": 0.45,
+      "geographic_priority": 0.30,
+      "engagement": 0.15
+    },
+    "thresholds": {
+      "high_priority": {{high_priority_threshold}},
+      "medium_priority": {{medium_priority_threshold}},
+      "low_priority": {{low_priority_threshold}},
+      "exclude": 0
+    },
+    "bonus_multipliers": {
+      "oem_manufacturer": 1.3,
+      "target_geography_high": 2.0,
+      "target_geography_medium": 1.2,
+      "domain_match": 1.5,
+      "industry_leader": 1.2,
+      "precision_manufacturing": 1.2
+    },
+    "penalty_multipliers": {
+      "personal_domain": 0.1,
+      "hr_email": 0.1,
+      "service_email": 0.2,
+      "excluded_industry": 0.1
+    }
+  },
+
+  "processing": {
+    "case_sensitive": false,
+    "accent_sensitive": false,
+    "normalize_text": true,
+    "remove_diacritics": false,
+    "max_text_length": 1000,
+    "timeout_seconds": 30
+  },
+
+  "output": {
+    "filename_prefix": "{{country}}_{{industry}}",
+    "categories": {
+      "high": "HIGH_PRIORITY",
+      "medium": "MEDIUM_PRIORITY",
+      "low": "LOW_PRIORITY",
+      "excluded": "EXCLUDED"
+    },
+    "include_metadata": true,
+    "generate_html_report": true,
+    "generate_exclusion_report": true,
+    "include_confidence_scores": true,
+    "include_classification_reasons": true
+  },
+
+  "validation": {
+    "required_quality_score": 80,
+    "min_test_accuracy": 85,
+    "min_processing_speed": 100,
+    "max_high_priority_percent": 12
+  },
+
+  "metadata": {
+    "template_version": "1.0.0",
+    "skill_version": "2.0.0",
+    "last_updated": "{{last_updated}}",
+    "quality_assurance": {
+      "status": "pending",
+      "tested": false,
+      "approved": false
+    },
+    "performance_benchmarks": {
+      "test_accuracy": null,
+      "processing_speed": null,
+      "quality_score": null
+    }
+  }
+}

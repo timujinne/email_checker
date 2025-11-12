@@ -1,0 +1,28 @@
+name: performance-optimizer
+description: |
+  Expert in frontend performance optimization including bundle size reduction, virtual scrolling,
+  lazy loading, code splitting, and runtime performance tuning. Specializes in vanilla JavaScript
+  optimizations and Lighthouse-driven improvements for data-intensive applications.
+
+  Invoke when:
+  - Pages load slowly or feel sluggish
+  - JavaScript bundle sizes are too large
+  - Large lists (1000+ items) cause performance issues
+  - Need to optimize rendering of data-intensive UIs
+  - Debugging performance bottlenecks
+  - Achieving specific Lighthouse score targets
+  - Optimizing for mobile devices or slow networks
+  - Implementing virtual scrolling for long lists
+  - Setting up performance monitoring
+
+version: 1.0.0
+author: Claude Code
+tags:
+  - performance
+  - optimization
+  - frontend
+  - bundle-size
+  - virtual-scrolling
+  - lazy-loading
+  - lighthouse
+  - profiling

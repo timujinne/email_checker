@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ru" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Checker - Processing</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/webp" href="assets/images/logo.webp">
+    <link rel="apple-touch-icon" href="assets/images/logo.webp">
+
+    <link href="https://cdn.tailwindcss.com" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@latest/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <style>
+        :root {
+            --primary: #1e40af;
+            --secondary: #991b1b;
+            --success: #065f46;
+        }
+        html[data-theme="dark"] {
+            --bg-primary: #0f172a;
+            --bg-secondary: #1e293b;
+            --text-primary: #f1f5f9;
+            --text-secondary: #cbd5e1;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100">
+    <div id="app">
+        <nav id="navbar-container"></nav>
+        <div class="flex">
+            <aside id="sidebar-container" class="w-64 bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800"></aside>
+            <main id="main-content" class="flex-1 p-8">
+                <h1 class="text-4xl font-bold mb-4" id="page-title">Loading...</h1>
+                <p class="text-slate-600 dark:text-slate-400 mb-6" id="page-description">Coming soon...</p>
+                <div class="bg-white dark:bg-slate-900 rounded-lg shadow p-6">
+                    <p class="text-center text-slate-500">Page content coming soon...</p>
+                </div>
+            </main>
+        </div>
+    </div>
+    <div id="toast-container" class="fixed bottom-4 right-4 z-50 space-y-3"></div>
+    <div id="modal-container"></div>
+
+    <script src="assets/js/utils/state.js"></script>
+    <script src="assets/js/utils/theme.js"></script>
+    <script src="assets/js/utils/router.js"></script>
+    <script src="assets/js/services/api.js"></script>
+    <script src="assets/js/services/websocket.js"></script>
+    <script src="assets/js/components/navbar.js"></script>
+    <script src="assets/js/components/sidebar.js"></script>
+    <script src="assets/js/components/toast.js"></script>
+    <script src="assets/js/main.js"></script>
+</body>
+</html>

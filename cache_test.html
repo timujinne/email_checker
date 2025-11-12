@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Filter - Cache Test</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .test-card {
+            background: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #2c3e50;
+            margin-top: 0;
+        }
+        .status {
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        .success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .warning {
+            background: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeaa7;
+        }
+        .info {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+        pre {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        button {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 10px 5px 10px 0;
+        }
+        button:hover {
+            background: #2980b9;
+        }
+        .detail {
+            margin: 10px 0;
+            padding: 10px;
+            background: #ecf0f1;
+            border-left: 4px solid #3498db;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        th, td {
+            text-align: left;
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background: #3498db;
+            color: white;
+        }
+        tr:hover {
+            background: #f5f5f5;
+        }
+        .check {
+            color: #27ae60;
+            font-size: 20px;
+        }
+        .cross {
+            color: #e74c3c;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-card">
+        <h1>🔍 Smart Filter - Cache Verification Test</h1>
+
+        <div id="loading" class="status info">
+            ⏳ Running diagnostics...
+        </div>
+
+        <div id="results" style="display: none;">
+            <h2>Test Results</h2>
+            <div id="overall-status"></div>
+
+            <h3>Component Container IDs</h3>
+            <table id="container-table">
+                <thead>
+                    <tr>
+                        <th>Component</th>
+                        <th>Expected</th>
+                        <th>Actual</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody id="container-results"></tbody>
+            </table>
+
+            <h3>Component Instances</h3>
+            <div id="instance-results"></div>
+
+            <h3>Next Steps</h3>
+            <div id="next-steps"></div>
+        </div>
+
+        <button onclick="runTest()">🔄 Re-run Test</button>
+        <button onclick="clearAndReload()">🗑️ Clear Cache & Reload</button>
+        <button onclick="window.location.href='/new#smart-filter'">🚀 Go to Smart Filter</button>
+    </div>
+
+    <script>
+        // Load smart-filter.js
+        const script = document.createElement('script');
+        script.src = '/assets/js/components/smart-filter.js?v=10';
+        script.onload = () => {
+            console.log('✅ smart-filter.js loaded');
+            runTest();
+        };
+        script.onerror = () => {
+            document.getElementById('loading').innerHTML = '❌ Failed to load smart-filter.js';
+            document.getElementById('loading').className = 'status error';
+        };
+        document.head.appendChild(script);
+
+        // Also load component scripts
+        const componentScripts = [
+            '/assets/js/components/visual-filter-builder.js?v=6',
+            '/assets/js/components/json-editor.js?v=6',
+            '/assets/js/components/filter-wizard.js?v=6',
+            '/assets/js/components/template-library.js?v=6',
+            '/assets/js/components/filter-tester.js?v=6',
+            '/assets/js/core/filter-config.js?v=3',
+            '/assets/js/core/filter-scorer.js?v=3'
+        ];
+
+        componentScripts.forEach(src => {
+            const s = document.createElement('script');
+            s.src = src;
+            document.head.appendChild(s);
+        });
+
+        function runTest() {
+            setTimeout(() => {
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('results').style.display = 'block';
+
+                const tests = [
+                    {
+                        name: 'VisualFilterBuilder',
+                        component: window.VisualFilterBuilder,
+                        expectedId: 'visual-filter-builder',
+                        actualId: null
+                    },
+                    {
+                        name: 'JSONEditor',
+                        component: window.JSONEditor,
+                        expectedId: 'json-editor-container',
+                        actualId: null
+                    },
+                    {
+                        name: 'FilterWizard',
+                        component: window.FilterWizard,
+                        expectedId: 'filter-wizard-container',
+                        actualId: null
+                    },
+                    {
+                        name: 'FilterTester',
+                        component: window.FilterTester,
+                        expectedId: 'filter-tester-container',
+                        actualId: null
+                    },
+                    {
+                        name: 'TemplateLibrary',
+                        component: window.TemplateLibrary,
+                        expectedId: 'template-library-container',
+                        actualId: null
+                    }
+                ];
+
+                // Try to create SmartFilter instance to check actual container IDs
+                if (window.SmartFilter) {
+                    // Create temporary containers
+                    const containers = {};
+                    tests.forEach(test => {
+                        const container = document.createElement('div');
+                        container.id = test.expectedId;
+                        document.body.appendChild(container);
+                        containers[test.expectedId] = container;
+                    });
+
+                    try {
+                        const sf = new window.SmartFilter();
+                        tests[0].actualId = sf.visualBuilder?.containerId;
+                        tests[1].actualId = sf.jsonEditor?.containerId;
+                        tests[2].actualId = sf.filterWizard?.containerId;
+                        tests[3].actualId = sf.filterTester?.containerId;
+                        tests[4].actualId = sf.templateLibrary?.containerId;
+                    } catch (e) {
+                        console.error('Error creating SmartFilter instance:', e);
+                    }
+
+                    // Cleanup
+                    Object.values(containers).forEach(c => c.remove());
+                }
+
+                // Generate table
+                const tbody = document.getElementById('container-results');
+                let allPassed = true;
+                let passedCount = 0;
+
+                tests.forEach(test => {
+                    const row = tbody.insertRow();
+                    const passed = test.actualId === test.expectedId;
+                    if (passed) passedCount++;
+                    else allPassed = false;
+
+                    row.innerHTML = `
+                        <td><strong>${test.name}</strong></td>
+                        <td><code>${test.expectedId}</code></td>
+                        <td><code>${test.actualId || 'N/A'}</code></td>
+                        <td>${passed ? '<span class="check">✅</span>' : '<span class="cross">❌</span>'}</td>
+                    `;
+                });
+
+                // Overall status
+                const overall = document.getElementById('overall-status');
+                if (allPassed && passedCount === tests.length) {
+                    overall.innerHTML = `
+                        <div class="status success">
+                            ✅ <strong>ALL TESTS PASSED!</strong> (${passedCount}/${tests.length})<br>
+                            Cache has been cleared successfully. All container IDs are correct.
+                        </div>
+                    `;
+                } else {
+                    overall.innerHTML = `
+                        <div class="status error">
+                            ❌ <strong>TESTS FAILED</strong> (${passedCount}/${tests.length} passed)<br>
+                            Browser is still loading cached files. Follow instructions below.
+                        </div>
+                    `;
+                }
+
+                // Instance results
+                const instanceResults = document.getElementById('instance-results');
+                const instances = tests.map(t => ({
+                    name: t.name,
+                    exists: !!t.component
+                }));
+
+                instanceResults.innerHTML = instances.map(i => `
+                    <div class="detail">
+                        ${i.exists ? '✅' : '❌'} <strong>${i.name}</strong>: ${i.exists ? 'Loaded' : 'Not found'}
+                    </div>
+                `).join('');
+
+                // Next steps
+                const nextSteps = document.getElementById('next-steps');
+                if (allPassed && passedCount === tests.length) {
+                    nextSteps.innerHTML = `
+                        <div class="status success">
+                            <strong>🎉 You're ready to test Smart Filter!</strong><br><br>
+                            1. Click "Go to Smart Filter" button above<br>
+                            2. Test all 5 tabs render correctly<br>
+                            3. Try creating a filter in Visual Builder<br>
+                            4. Test JSON Editor, Wizard, Templates, and Tester
+                        </div>
+                    `;
+                } else {
+                    nextSteps.innerHTML = `
+                        <div class="status warning">
+                            <strong>⚠️ Cache still active. Try these solutions:</strong><br><br>
+                            <strong>Solution 1: Hard Refresh</strong><br>
+                            Press <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>R</kbd> (or <kbd>Ctrl</kbd> + <kbd>F5</kbd>)<br><br>
+
+                            <strong>Solution 2: DevTools Disable Cache</strong><br>
+                            1. Press <kbd>F12</kbd> to open DevTools<br>
+                            2. Go to <strong>Network</strong> tab<br>
+                            3. Check ✅ <strong>"Disable cache"</strong><br>
+                            4. Keep DevTools open<br>
+                            5. Click "Clear Cache & Reload" button above<br><br>
+
+                            <strong>Solution 3: Manual Cache Clear</strong><br>
+                            Press <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>Delete</kbd><br>
+                            Select "Cached images and files"<br>
+                            Time range: "Last hour"<br>
+                            Click "Clear data"<br>
+                            Then reload this page
+                        </div>
+                    `;
+                }
+            }, 1000);
+        }
+
+        function clearAndReload() {
+            // Try to clear service worker cache
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.getRegistrations().then(registrations => {
+                    registrations.forEach(reg => reg.unregister());
+                });
+            }
+
+            // Clear localStorage
+            localStorage.clear();
+
+            // Clear sessionStorage
+            sessionStorage.clear();
+
+            // Add timestamp to force reload
+            window.location.href = window.location.pathname + '?cache_bust=' + Date.now();
+        }
+    </script>
+</body>
+</html>

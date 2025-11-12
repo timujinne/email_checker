@@ -1,0 +1,277 @@
+{
+  "config_name": "czech_powder_metal",
+  "display_name": "Czech Republic - Powder Metallurgy",
+  "version": "1.0",
+  "target_market": {
+    "country_code": "CZ",
+    "country_name": "Czech Republic",
+    "language_codes": ["cs", "en"],
+    "primary_language": "cs"
+  },
+
+  "scoring": {
+    "weights": {
+      "email_quality": 0.10,
+      "company_relevance": 0.45,
+      "geographic_priority": 0.30,
+      "engagement": 0.15
+    },
+    "thresholds": {
+      "high_priority": 100,
+      "medium_priority": 50,
+      "low_priority": 10,
+      "exclude": 0
+    }
+  },
+
+  "target_industry": "powder_metallurgy",
+
+  "keywords": {
+    "powder_metallurgy": [
+      "prášková metalurgie", "práškové kovy", "práškový kov", "slinutí",
+      "slinování", "sintrování", "sinter", "práškování",
+      "powder metallurgy", "powder metal", "sintering", "PM parts",
+      "metal injection molding", "MIM", "hot isostatic pressing", "HIP",
+      "práškové technologie", "kovový prášek", "práškové komponenty",
+      "sintrované díly", "lisování prášku", "prášková technologie"
+    ],
+
+    "manufacturing": [
+      "výroba", "výrobce", "produkce", "továrna", "závod",
+      "strojírenství", "strojní výroba", "strojírna",
+      "obráběcí stroje", "obrábění", "obrábění kovů",
+      "lisování", "tváření", "kování", "slévárna", "slévárenství",
+      "zpracování kovů", "kovovýroba", "hutnictví",
+      "manufacturer", "production", "factory", "plant", "works",
+      "engineering", "machine shop", "machining", "metalworking",
+      "metal processing", "foundry", "casting", "forging", "pressing"
+    ],
+
+    "applications": [
+      "automobilový průmysl", "automotive", "automotive industry",
+      "letecký průmysl", "aerospace", "letectví", "aviation",
+      "elektrotechnika", "electronics", "elektronika",
+      "nástroje", "tools", "nářadí", "tooling",
+      "ložiska", "bearings", "kuličková ložiska", "ball bearings",
+      "převody", "gears", "ozubená kola", "gearwheels",
+      "filtry", "filters", "filtrační systémy",
+      "kontakty", "contacts", "elektrické kontakty", "electrical contacts",
+      "magnety", "magnets", "magnetické materiály", "magnetic materials"
+    ],
+
+    "materials": [
+      "ocel", "steel", "nerezová ocel", "stainless steel",
+      "železo", "iron", "železné prášky", "iron powder",
+      "měď", "copper", "bronz", "bronze", "mosaz", "brass",
+      "titan", "titanium", "titanova slitina", "titanium alloy",
+      "hliník", "aluminum", "aluminium", "hliníkové slitiny",
+      "wolfram", "tungsten", "wolframové karbidy", "tungsten carbide",
+      "kobalt", "cobalt", "nikl", "nickel",
+      "keramika", "ceramics", "karbidy", "carbides",
+      "kompozity", "composites", "kompozitní materiály"
+    ],
+
+    "oem_indicators": [
+      "výrobce", "producent", "továrna", "závod", "výroba",
+      "dodavatel", "subdodavatel", "kontraktní výroba",
+      "zpracovatel", "zpracování", "výrobní závod",
+      "manufacturer", "producer", "maker", "fabricator",
+      "production", "factory", "plant", "works",
+      "OEM", "original equipment manufacturer",
+      "supplier", "subcontractor", "contract manufacturing",
+      "processor", "processing", "manufacturing facility"
+    ]
+  },
+
+  "geographic_priorities": {
+    "high": [
+      "česká republika", "czech republic", "czechia", "česko", ".cz", "czech",
+      "praha", "prague", "brno", "ostrava", "plzeň", "pilsen",
+      "liberec", "olomouc", "ústí nad labem", "české budějovice",
+      "hradec králové", "pardubice", "zlín", "havířov",
+      "kladno", "most", "opava", "frýdek-místek", "karviná",
+      "jihlava", "teplice", "karlovy vary", "děčín", "chomutov"
+    ],
+
+    "medium": [
+      "slovensko", "slovakia", "slovenská republika", ".sk", "slovak",
+      "bratislava", "košice", "prešov", "žilina", "banská bystrica",
+      "polsko", "poland", "polska", ".pl", "polish",
+      "warszawa", "warsaw", "kraków", "wrocław", "poznań",
+      "rakousko", "austria", "österreich", ".at", "austrian",
+      "vídeň", "vienna", "wien", "graz", "linz",
+      "německo", "germany", "deutschland", ".de", "german",
+      "drážďany", "dresden", "mnichov", "munich", "münchen"
+    ],
+
+    "regions": [
+      "morava", "moravia", "čechy", "bohemia",
+      "středočeský kraj", "jihomoravský kraj", "moravskoslezský kraj",
+      "plzeňský kraj", "ústecký kraj", "liberecký kraj",
+      "královéhradecký kraj", "pardubický kraj", "vysočina",
+      "jihočeský kraj", "olomoucký kraj", "zlínský kraj", "karlovarský kraj"
+    ]
+  },
+
+  "exclusions": {
+    "personal_domains": [
+      "gmail.com", "googlemail.com",
+      "yahoo.com", "yahoo.cz",
+      "hotmail.com", "hotmail.cz",
+      "outlook.com", "outlook.cz",
+      "live.com", "live.cz",
+      "seznam.cz", "email.cz", "centrum.cz", "post.cz",
+      "volny.cz", "atlas.cz", "quick.cz", "tiscali.cz",
+      "icloud.com", "me.com", "mac.com",
+      "mail.ru", "yandex.ru", "yandex.com",
+      "163.com", "126.com", "qq.com", "sina.com"
+    ],
+
+    "hr_prefixes": [
+      "hr@", "jobs@", "job@", "career@", "careers@", "recruitment@", "recruiter@",
+      "vacancy@", "vacancies@", "work@", "employment@", "staff@", "personnel@",
+      "resume@", "cv@", "hiring@", "talent@", "headhunter@",
+      "personalni@", "personalistika@", "personál@",
+      "kariera@", "kariéra@", "kariery@",
+      "prace@", "práce@", "zamestnani@", "zaměstnání@",
+      "nabor@", "nábor@", "prijimame@", "přijímáme@",
+      "volnamista@", "volná místa@", "pracovni@", "pracovní@",
+      "zivotopis@", "životopis@", "brigada@", "brigády@"
+    ],
+
+    "service_prefixes": [
+      "example@", "test@", "demo@", "sample@",
+      "noreply@", "donotreply@", "no-reply@", "do-not-reply@",
+      "info@example", "contact@domain",
+      "webmaster@", "admin@", "postmaster@", "mailer-daemon@",
+      "ochrana@", "gdpr@", "dpo@", "privacy@", "legal@",
+      "cert@", "security@", "abuse@", "reportphishing@",
+      "compliance@", "audit@",
+      "investors@", "investor@", "investor-relations@", "ir@",
+      "finance@", "financi@", "financni@", "finanční@",
+      "accounting@", "ucetnictvi@", "účetnictví@", "ekonom@"
+    ],
+
+    "suspicious_domains": [
+      "sentry.io", "panjiva.com", "temp-mail.org", "10minutemail.com",
+      "guerrillamail.com", "mailinator.com", "throwaway.email"
+    ],
+
+    "excluded_country_domains": [
+      ".cn", ".com.cn", ".hk", ".tw",
+      ".in", ".co.in",
+      ".ru", ".by", ".ua", ".kz", ".uz",
+      ".tr", ".com.tr",
+      ".br", ".com.br",
+      ".au", ".com.au",
+      ".za", ".co.za",
+      ".pk", ".bd",
+      ".vn", ".th", ".id", ".my", ".ph",
+      ".ke", ".tz", ".ug", ".ng"
+    ],
+
+    "excluded_industries": {
+      "education": [
+        "škola", "školy", "základní škola", "střední škola",
+        "gymnázium", "univerzita", "vysoká škola", "fakulta",
+        "vzdělávání", "vzdělání", "výuka", "školení",
+        "kurz", "kurzy", "seminář", "semináře", "školení",
+        "student", "studenti", "žák", "žáci", "učitel", "vyučující", "pedagog",
+        "school", "college", "university", "academy", "institute",
+        "education", "training", "learning", "course", "lesson",
+        "student", "pupil", "teacher", "professor", "lecturer"
+      ],
+      "tourism_hospitality": [
+        "hotel", "penzion", "ubytování", "ubytovna",
+        "turismus", "turistika", "cestovní", "zájezd", "dovolená",
+        "restaurace", "kavárna", "pohostinství", "catering",
+        "camping", "kemping", "hostel", "motel",
+        "lyžování", "wellness", "spa", "lázně", "lázeňský",
+        "hotel", "hostel", "motel", "resort", "accommodation",
+        "tourism", "travel", "vacation", "holiday",
+        "restaurant", "café", "catering", "hospitality", "campsite"
+      ],
+      "retail_consumer": [
+        "maloobchod", "obchod", "prodejna", "shop",
+        "e-shop", "eshop", "e-commerce", "online obchod",
+        "supermarket", "hypermarket", "obchodní dům",
+        "móda", "oblečení", "oděvy", "nábytek", "nábytkový",
+        "retail", "shop", "store", "boutique",
+        "e-commerce", "online shop", "supermarket", "department store",
+        "fashion", "clothing", "apparel", "furniture", "home decor"
+      ],
+      "media_advertising": [
+        "noviny", "časopis", "magazín", "vydavatelství", "tisk",
+        "televize", "tv", "rozhlas", "rádio", "vysílání",
+        "reklama", "marketing", "agentura", "reklamní agentura",
+        "média", "komunikace", "public relations", "pr",
+        "newspaper", "magazine", "journal", "publisher", "press",
+        "television", "tv", "radio", "broadcasting",
+        "advertising", "marketing", "agency", "ad agency",
+        "media", "communication", "public relations", "pr"
+      ],
+      "finance_insurance": [
+        "banka", "bankovní", "spořitelna", "finanční ústav",
+        "pojišťovna", "pojištění", "zajištění",
+        "financování", "úvěr", "půjčka", "hypotéka",
+        "leasing", "faktoring", "investice", "investiční",
+        "burza", "trading", "broker", "makléř",
+        "bank", "banking", "financial institution",
+        "insurance", "reinsurance", "assurance",
+        "financing", "credit", "loan", "mortgage",
+        "leasing", "factoring", "investment",
+        "stock exchange", "trading", "broker"
+      ],
+      "hr_agencies": [
+        "personální agentura", "pracovní agentura", "agentura práce",
+        "dočasná práce", "brigády", "headhunter", "headhunting",
+        "personální poradenství", "výběr zaměstnanců",
+        "staffing agency", "recruitment agency", "temp agency",
+        "employment agency", "headhunter", "hr agency",
+        "personnel agency", "job agency"
+      ]
+    },
+
+    "suspicious_patterns": [
+      "^[a-f0-9]{20,}@",
+      "^[a-z0-9]{15,}@",
+      "[\\u4e00-\\u9fff]",
+      "[\\u0400-\\u04FF]",
+      "[\\u0590-\\u05FF]",
+      "[\\u0600-\\u06FF]"
+    ]
+  },
+
+  "domain_patterns": {
+    "relevant_patterns": [
+      "praskovy", "praskova", "prasku", "powder", "sinter", "PM",
+      "metalurgie", "metallurgy", "hutnictvi", "foundry",
+      "vyrobu", "vyroba", "production", "manufacturing",
+      "strojirenstvi", "strojirna", "engineering", "machining",
+      "obrabeni", "obraběcí", "processing", "zpracovani",
+      "lisovani", "pressing", "tvareni", "forging"
+    ],
+    "high_value_domains": [
+      "s.r.o.", "sro", "a.s.", "as", "spol", "group", "groupe",
+      "engineering", "technology", "technik", "technologie",
+      "manufacturing", "systems", "solutions", "industrial"
+    ]
+  },
+
+  "processing": {
+    "batch_size": 100,
+    "max_retries": 3,
+    "processing_delay": 50,
+    "backup_original": true,
+    "preserve_metadata": true,
+    "generate_reports": true
+  },
+
+  "output": {
+    "prefix": "Czech_PM_",
+    "include_metadata": true,
+    "metadata_format": "csv",
+    "generate_statistics": true,
+    "create_backup": true
+  }
+}

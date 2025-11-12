@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blocklist Debug - Email Checker</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/webp" href="assets/images/logo.webp">
+    <link rel="apple-touch-icon" href="assets/images/logo.webp">
+
+    <style>
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .debug-section {
+            background: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .debug-section h2 {
+            margin-top: 0;
+            color: #1e40af;
+        }
+        .status {
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+        }
+        .status.success {
+            background: #dcfce7;
+            color: #065f46;
+        }
+        .status.error {
+            background: #fee2e2;
+            color: #7f1d1d;
+        }
+        .status.pending {
+            background: #fef3c7;
+            color: #92400e;
+        }
+        .code {
+            background: #f3f4f6;
+            padding: 10px;
+            border-radius: 4px;
+            font-family: monospace;
+            overflow-x: auto;
+        }
+        button {
+            background: #1e40af;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover {
+            background: #1e3a8a;
+        }
+        #console-output {
+            background: #0f172a;
+            color: #f1f5f9;
+            padding: 10px;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 12px;
+            max-height: 300px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+    <h1>🔍 Blocklist Manager - Diagnostic Page</h1>
+
+    <div class="debug-section">
+        <h2>1. API Connection Test</h2>
+        <button onclick="testAPI()">Test API</button>
+        <div id="api-status" class="status pending">⏳ Waiting for test...</div>
+        <div id="api-details" class="code"></div>
+    </div>
+
+    <div class="debug-section">
+        <h2>2. JavaScript Components</h2>
+        <button onclick="testComponents()">Test Components</button>
+        <div id="components-status" class="status pending">⏳ Waiting for test...</div>
+        <div id="components-details" class="code"></div>
+    </div>
+
+    <div class="debug-section">
+        <h2>3. BlocklistManager Initialization</h2>
+        <button onclick="testBlocklistManager()">Test Manager</button>
+        <div id="manager-status" class="status pending">⏳ Waiting for test...</div>
+        <div id="manager-details" class="code"></div>
+    </div>
+
+    <div class="debug-section">
+        <h2>4. Live Demo</h2>
+        <div id="blocklist-demo" style="min-height: 400px; border: 1px solid #e5e7eb; border-radius: 4px;"></div>
+    </div>
+
+    <div class="debug-section">
+        <h2>5. Console Output</h2>
+        <button onclick="clearConsole()">Clear Console</button>
+        <div id="console-output"></div>
+    </div>
+
+    <!-- Load Scripts -->
+    <script src="assets/js/utils/state.js"></script>
+    <script src="assets/js/components/virtual-table.js"></script>
+    <script src="assets/js/components/blocklist-search.js"></script>
+    <script src="assets/js/components/bulk-operations.js"></script>
+    <script src="assets/js/components/undo-redo-manager.js"></script>
+    <script src="assets/js/components/csv-import-wizard.js"></script>
+    <script src="assets/js/components/stats-dashboard.js"></script>
+    <script src="assets/js/components/export-manager.js"></script>
+    <script src="assets/js/components/blocklist-manager.js"></script>
+
+    <script>
+        // Override console.log to capture output
+        const consoleOutput = document.getElementById('console-output');
+        const originalLog = console.log;
+        const originalError = console.error;
+
+        console.log = function(...args) {
+            originalLog.apply(console, args);
+            consoleOutput.innerHTML += args.join(' ') + '\n';
+            consoleOutput.scrollTop = consoleOutput.scrollHeight;
+        };
+
+        console.error = function(...args) {
+            originalError.apply(console, args);
+            consoleOutput.innerHTML += '❌ ERROR: ' + args.join(' ') + '\n';
+            consoleOutput.scrollTop = consoleOutput.scrollHeight;
+        };
+
+        function clearConsole() {
+            consoleOutput.innerHTML = '';
+        }
+
+        async function testAPI() {
+            const statusEl = document.getElementById('api-status');
+            const detailsEl = document.getElementById('api-details');
+
+            statusEl.className = 'status pending';
+            statusEl.textContent = '⏳ Testing API...';
+
+            try {
+                const response = await fetch('/api/blocklist/stats');
+                const data = await response.json();
+
+                if (data.status === 'success') {
+                    statusEl.className = 'status success';
+                    statusEl.textContent = '✅ API Working!';
+                    detailsEl.textContent = JSON.stringify(data, null, 2);
+                    console.log('✅ API Test Passed:', data.stats);
+                } else {
+                    statusEl.className = 'status error';
+                    statusEl.textContent = '❌ API Error: ' + data.message;
+                    detailsEl.textContent = JSON.stringify(data, null, 2);
+                    console.error('❌ API Test Failed:', data);
+                }
+            } catch (error) {
+                statusEl.className = 'status error';
+                statusEl.textContent = '❌ Connection Error: ' + error.message;
+                detailsEl.textContent = error.stack;
+                console.error('❌ API Test Error:', error);
+            }
+        }
+
+        function testComponents() {
+            const statusEl = document.getElementById('components-status');
+            const detailsEl = document.getElementById('components-details');
+
+            const components = [
+                'VirtualTable',
+                'BlocklistSearch',
+                'BulkOperations',
+                'UndoRedoManager',
+                'CSVImportWizard',
+                'StatsDashboard',
+                'ExportManager',
+                'BlocklistManager'
+            ];
+
+            const results = [];
+            let allPresent = true;
+
+            for (const component of components) {
+                const present = typeof window[component] !== 'undefined';
+                results.push(`${present ? '✅' : '❌'} ${component}: ${present ? 'Loaded' : 'Missing'}`);
+                if (!present) allPresent = false;
+                console.log(`${present ? '✅' : '❌'} ${component} ${present ? 'loaded' : 'missing'}`);
+            }
+
+            if (allPresent) {
+                statusEl.className = 'status success';
+                statusEl.textContent = '✅ All Components Loaded!';
+            } else {
+                statusEl.className = 'status error';
+                statusEl.textContent = '❌ Some Components Missing';
+            }
+
+            detailsEl.textContent = results.join('\n');
+        }
+
+        async function testBlocklistManager() {
+            const statusEl = document.getElementById('manager-status');
+            const detailsEl = document.getElementById('manager-details');
+
+            statusEl.className = 'status pending';
+            statusEl.textContent = '⏳ Testing BlocklistManager...';
+
+            try {
+                // Create container
+                const container = document.getElementById('blocklist-demo');
+                container.innerHTML = '<div id="test-container"></div>';
+
+                // Initialize manager
+                console.log('📋 Creating BlocklistManager instance...');
+                const manager = new BlocklistManager('test-container', {
+                    enableUndo: false,
+                    enableBulkOps: false,
+                    enableStats: false,
+                    enableCsvImport: false
+                });
+
+                console.log('✅ BlocklistManager created');
+
+                // Load data
+                console.log('📥 Loading data from API...');
+                const response = await fetch('/api/blocklist');
+                const data = await response.json();
+
+                if (data.status === 'success' && data.items) {
+                    console.log(`✅ Loaded ${data.items.length} items`);
+                    manager.loadItems(data.items);
+
+                    statusEl.className = 'status success';
+                    statusEl.textContent = `✅ Manager Working! Loaded ${data.items.length} items`;
+                    detailsEl.textContent = `Items: ${data.items.length}\nFiltered: ${manager.filteredItems.length}\nTable initialized: ${manager.table !== null}`;
+
+                    console.log('✅ BlocklistManager test passed');
+                } else {
+                    throw new Error('Failed to load data from API');
+                }
+            } catch (error) {
+                statusEl.className = 'status error';
+                statusEl.textContent = '❌ Manager Error: ' + error.message;
+                detailsEl.textContent = error.stack;
+                console.error('❌ BlocklistManager test failed:', error);
+            }
+        }
+
+        // Auto-run tests on load
+        window.addEventListener('load', () => {
+            console.log('🚀 Blocklist Debug Page Loaded');
+            console.log('Running automatic tests...\n');
+
+            setTimeout(() => {
+                testAPI();
+            }, 100);
+
+            setTimeout(() => {
+                testComponents();
+            }, 500);
+
+            setTimeout(() => {
+                testBlocklistManager();
+            }, 1000);
+        });
+    </script>
+</body>
+</html>

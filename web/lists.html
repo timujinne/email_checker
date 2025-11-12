@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="ru" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Checker - Lists Manager</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/webp" href="assets/images/logo.webp">
+    <link rel="apple-touch-icon" href="assets/images/logo.webp">
+
+    <link href="https://cdn.tailwindcss.com" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@latest/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <style>
+        :root {
+            --primary: #1e40af;
+            --secondary: #991b1b;
+            --success: #065f46;
+        }
+        html[data-theme="dark"] {
+            --bg-primary: #0f172a;
+            --bg-secondary: #1e293b;
+            --text-primary: #f1f5f9;
+            --text-secondary: #cbd5e1;
+        }
+
+        /* Modal backdrop override for theme consistency */
+        .modal-backdrop {
+            background-color: rgba(0, 0, 0, 0.6) !important;
+        }
+
+        html[data-theme="light"] .modal-backdrop {
+            background-color: rgba(0, 0, 0, 0.5) !important;
+        }
+
+        html[data-theme="dark"] .modal-backdrop {
+            background-color: rgba(0, 0, 0, 0.7) !important;
+        }
+
+        /* Fixed table layout for consistent column widths */
+        .table-fixed {
+            table-layout: fixed;
+        }
+
+        .table-fixed th,
+        .table-fixed td {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        /* Allow wrapping in description column */
+        .table-fixed td:has(.description-cell) {
+            white-space: normal;
+            word-wrap: break-word;
+        }
+
+        /* Sticky header for long tables */
+        .table-pin-rows thead tr {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            background-color: hsl(var(--b1));
+        }
+    </style>
+</head>
+<body class="bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100">
+    <div id="app">
+        <nav id="navbar-container"></nav>
+        <div class="flex">
+            <aside id="sidebar-container" class="w-64 bg-base-100 border-r border-base-300"></aside>
+            <main id="main-content" class="flex-1 p-8 overflow-auto">
+                <div class="mb-8">
+                    <h1 class="text-4xl font-bold text-base-content">📋 Lists Manager</h1>
+                    <p class="text-base-content opacity-70 mt-2">Управление email списками и их обработка</p>
+                </div>
+
+                <!-- Toolbar -->
+                <div class="bg-base-100 rounded-lg shadow p-4 mb-6">
+                    <div class="flex flex-wrap items-center gap-4 mb-4">
+                        <!-- Search -->
+                        <div class="flex-1 min-w-80">
+                            <input type="text" placeholder="🔍 Поиск по названию или стране..."
+                                   id="search-input"
+                                   class="w-full px-4 py-2 border border-base-300 rounded-lg bg-base-200 text-base-content focus:outline-none focus:ring-2 focus:ring-primary">
+                        </div>
+
+                        <!-- Filter by Country -->
+                        <select id="country-filter"
+                                class="px-4 py-2 border border-base-300 rounded-lg bg-base-200 text-base-content focus:outline-none focus:ring-2 focus:ring-primary">
+                            <option value="">Все страны</option>
+                            <option value="Germany">Germany</option>
+                            <option value="Poland">Poland</option>
+                            <option value="Mixed">Mixed</option>
+                            <option value="Unknown">Unknown</option>
+                        </select>
+
+                        <!-- Filter by Category -->
+                        <select id="category-filter"
+                                class="px-4 py-2 border border-base-300 rounded-lg bg-base-200 text-base-content focus:outline-none focus:ring-2 focus:ring-primary">
+                            <option value="">Все категории</option>
+                            <option value="Business">Business</option>
+                            <option value="Technology">Technology</option>
+                            <option value="Manufacturing">Manufacturing</option>
+                        </select>
+
+                        <!-- Action Buttons -->
+                        <button onclick="listsManager.uploadFile()"
+                                class="btn btn-primary btn-sm md:btn-md gap-2"
+                                aria-label="Загрузить файлы">
+                            <span class="text-lg">📤</span>
+                            <span class="hidden sm:inline">Загрузить файл</span>
+                            <span class="sm:hidden">Загрузить</span>
+                        </button>
+                        <button onclick="listsManager.processSelected()"
+                                class="btn btn-success btn-sm md:btn-md gap-2"
+                                aria-label="Обработать выбранные списки">
+                            <span class="text-lg">▶️</span>
+                            <span class="hidden sm:inline">Обработать выбранные</span>
+                            <span class="sm:hidden">Обработать</span>
+                        </button>
+                        <button onclick="listsManager.scanNewFiles()"
+                                class="btn btn-info btn-sm md:btn-md gap-2"
+                                aria-label="Сканировать новые файлы">
+                            <svg aria-hidden="true" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                            </svg>
+                            <span class="hidden sm:inline">Сканировать новые файлы</span>
+                            <span class="sm:hidden">Сканировать</span>
+                        </button>
+                    </div>
+
+                    <!-- Second Row: Bulk Edit and Column Manager -->
+                    <div class="flex justify-between items-center">
+                        <div class="flex gap-2">
+                            <!-- Bulk Edit Button -->
+                            <button id="bulk-edit-btn"
+                                    class="btn btn-primary btn-sm md:btn-md gap-2"
+                                    disabled
+                                    aria-label="Редактировать выбранные списки"
+                                    aria-describedby="selected-count-badge">
+                                <svg aria-hidden="true" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                                </svg>
+                                <span class="hidden sm:inline">Редактировать выбранные</span>
+                                <span class="sm:hidden">Редактировать</span>
+                                <span id="selected-count-badge" class="badge badge-sm ml-1" role="status" aria-live="polite">0</span>
+                            </button>
+
+                            <!-- Help Button -->
+                            <button id="help-btn"
+                                    class="btn btn-ghost btn-sm"
+                                    aria-label="Показать справку по горячим клавишам"
+                                    title="Горячие клавиши и помощь (?)">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                            </button>
+                        </div>
+
+                        <!-- Column Manager -->
+                        <div id="column-manager-container"></div>
+                    </div>
+                </div>
+
+                <!-- Table -->
+                <div class="bg-base-100 rounded-lg shadow p-6">
+                    <div id="lists-table-container" class="overflow-x-auto">
+                        <p class="text-center text-base-content opacity-60 py-8">Loading...</p>
+                    </div>
+
+                    <!-- Pagination Controls -->
+                    <div id="pagination-controls" class="border-t border-base-300 mt-4"></div>
+                </div>
+
+                <!-- Drag & Drop Zone (Hidden file input) -->
+                <input type="file" id="file-input" multiple style="display: none;">
+            </main>
+        </div>
+    </div>
+    <div id="toast-container" class="fixed bottom-4 right-4 z-50 space-y-3"></div>
+    <div id="modal-container"></div>
+
+    <!-- Bulk Edit Modal -->
+    <dialog id="bulk-edit-modal"
+            class="modal modal-bottom sm:modal-middle"
+            role="dialog"
+            aria-labelledby="modal-title"
+            aria-describedby="modal-description">
+        <div class="modal-box max-w-2xl">
+            <h3 id="modal-title" class="font-bold text-lg mb-4">
+                Массовое редактирование
+                <span id="modal-selected-count" class="text-sm text-base-content/60"></span>
+            </h3>
+
+            <p id="modal-description" class="sr-only">
+                Модальное окно для редактирования нескольких списков одновременно
+            </p>
+
+            <form id="bulk-edit-form">
+                <!-- Country Field -->
+                <div class="form-control mb-3">
+                    <label class="label cursor-pointer justify-start gap-3">
+                        <input type="checkbox" id="update-country-check" class="checkbox checkbox-sm" />
+                        <span class="label-text font-semibold">Страна</span>
+                    </label>
+                    <select id="update-country" class="select select-bordered w-full" disabled>
+                        <option value="">Не изменять</option>
+                    </select>
+                </div>
+
+                <!-- Category Field -->
+                <div class="form-control mb-3">
+                    <label class="label cursor-pointer justify-start gap-3">
+                        <input type="checkbox" id="update-category-check" class="checkbox checkbox-sm" />
+                        <span class="label-text font-semibold">Категория</span>
+                    </label>
+                    <select id="update-category" class="select select-bordered w-full" disabled>
+                        <option value="">Не изменять</option>
+                    </select>
+                </div>
+
+                <!-- Priority Field -->
+                <div class="form-control mb-3">
+                    <label class="label cursor-pointer justify-start gap-3">
+                        <input type="checkbox" id="update-priority-check" class="checkbox checkbox-sm" />
+                        <span class="label-text font-semibold">Приоритет</span>
+                    </label>
+                    <input
+                        type="number"
+                        id="update-priority"
+                        class="input input-bordered w-full"
+                        min="50"
+                        max="999"
+                        placeholder="50-999"
+                        disabled
+                    />
+                </div>
+
+                <!-- Processed Status Field -->
+                <div class="form-control mb-3">
+                    <label class="label cursor-pointer justify-start gap-3">
+                        <input type="checkbox" id="update-processed-check" class="checkbox checkbox-sm" />
+                        <span class="label-text font-semibold">Статус обработки</span>
+                    </label>
+                    <select id="update-processed" class="select select-bordered w-full" disabled>
+                        <option value="">Не изменять</option>
+                        <option value="true">Обработан</option>
+                        <option value="false">Не обработан</option>
+                    </select>
+                </div>
+
+                <!-- Description Field -->
+                <div class="form-control mb-3">
+                    <label class="label cursor-pointer justify-start gap-3">
+                        <input type="checkbox" id="update-description-check" class="checkbox checkbox-sm" />
+                        <span class="label-text font-semibold">Описание</span>
+                    </label>
+                    <textarea
+                        id="update-description"
+                        class="textarea textarea-bordered w-full"
+                        rows="2"
+                        placeholder="Введите описание..."
+                        disabled
+                    ></textarea>
+                </div>
+
+                <!-- Preview Section -->
+                <div class="alert alert-info mb-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-current shrink-0 w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                    <div>
+                        <p class="text-sm" id="bulk-edit-preview">Выберите поля для изменения</p>
+                    </div>
+                </div>
+
+                <!-- Progress Bar (hidden initially) -->
+                <div id="bulk-edit-progress" class="hidden mb-4">
+                    <progress class="progress progress-primary w-full" value="0" max="100"></progress>
+                    <p class="text-sm text-center mt-1" id="progress-text">Обработка...</p>
+                </div>
+            </form>
+
+            <div class="modal-action">
+                <button id="bulk-edit-cancel" class="btn">Отмена</button>
+                <button id="bulk-edit-apply" class="btn btn-primary" disabled>
+                    Применить изменения
+                </button>
+            </div>
+        </div>
+        <form method="dialog" class="modal-backdrop">
+            <button id="modal-backdrop-close" aria-label="Закрыть модальное окно">close</button>
+        </form>
+    </dialog>
+
+    <style>
+        /* Modal backdrop for bulk edit modal */
+        #bulk-edit-modal::backdrop {
+            background-color: rgba(0, 0, 0, 0.5) !important;
+        }
+
+        /* Ensure modal-box has proper background */
+        #bulk-edit-modal .modal-box {
+            background-color: hsl(var(--b1)) !important;
+            max-height: 90vh;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5) !important;
+        }
+    </style>
+
+    <script src="assets/js/utils/state.js"></script>
+    <script src="assets/js/utils/theme.js"></script>
+    <script src="assets/js/utils/router.js"></script>
+    <script src="assets/js/services/api.js?v=1"></script>
+    <script src="assets/js/services/websocket.js?v=1"></script>
+    <script src="assets/js/components/navbar.js?v=1"></script>
+    <script src="assets/js/components/sidebar.js?v=2"></script>
+    <script src="assets/js/components/toast.js?v=1"></script>
+    <script src="assets/js/components/modal.js?v=1"></script>
+    <script src="assets/js/components/column-manager.js?v=1"></script>
+    <script src="assets/js/components/table.js?v=1"></script>
+    <script src="assets/js/components/lists-manager.js?v=3"></script>
+    <script src="assets/js/main.js?v=1"></script>
+
+    <!-- Loading Overlay -->
+    <div id="loading-overlay" class="hidden fixed inset-0 bg-black/50 z-50 flex items-center justify-center">
+        <div class="bg-base-100 rounded-lg p-6 shadow-xl flex items-center gap-4 animate-fade-in">
+            <span class="loading loading-spinner loading-lg text-primary"></span>
+            <div>
+                <p class="font-semibold text-lg" id="loading-text">Загрузка...</p>
+                <p class="text-sm text-base-content/60" id="loading-subtext"></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Screen Reader Only Class -->
+    <style>
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border-width: 0;
+        }
+    </style>
+</body>
+</html>

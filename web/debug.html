@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Checker - Debug Console</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/webp" href="assets/images/logo.webp">
+    <link rel="apple-touch-icon" href="assets/images/logo.webp">
+
+    <style>
+        body {
+            font-family: monospace;
+            background: #1e293b;
+            color: #e2e8f0;
+            margin: 0;
+            padding: 20px;
+        }
+        #console {
+            border: 1px solid #64748b;
+            border-radius: 8px;
+            padding: 15px;
+            background: #0f172a;
+            max-height: 500px;
+            overflow-y: auto;
+            margin-bottom: 20px;
+        }
+        .log { color: #e2e8f0; padding: 5px 0; }
+        .error { color: #ef4444; padding: 5px 0; font-weight: bold; }
+        .warn { color: #f59e0b; padding: 5px 0; }
+        .success { color: #10b981; padding: 5px 0; }
+        .info { color: #3b82f6; padding: 5px 0; }
+        #status {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .status-box {
+            border: 1px solid #64748b;
+            border-radius: 8px;
+            padding: 15px;
+            background: #1e293b;
+        }
+        .status-box h3 { margin: 0 0 10px 0; }
+        .status-value { font-size: 14px; }
+        button {
+            padding: 10px 20px;
+            background: #3b82f6;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px 5px 5px 0;
+        }
+        button:hover { background: #2563eb; }
+    </style>
+</head>
+<body>
+    <h1>🔧 Email Checker - Debug Console</h1>
+
+    <div id="console" class="info">Загрузка...</div>
+
+    <div>
+        <button onclick="loadMainApp()">Загрузить основное приложение</button>
+        <button onclick="testAPI()">Протестировать API</button>
+        <button onclick="clearConsole()">Очистить</button>
+    </div>
+
+    <div id="status">
+        <div class="status-box">
+            <h3>📋 Состояние скриптов</h3>
+            <div class="status-value">
+                store: <span id="store-status">❓</span><br>
+                themeManager: <span id="theme-status">❓</span><br>
+                router: <span id="router-status">❓</span><br>
+                api: <span id="api-status">❓</span><br>
+                toast: <span id="toast-status">❓</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const consoleOutput = document.getElementById('console');
+
+        // Перехватываем console.log
+        const originalLog = console.log;
+        const originalError = console.error;
+        const originalWarn = console.warn;
+
+        function addLog(type, message) {
+            const line = document.createElement('div');
+            line.className = type;
+            const now = new Date().toLocaleTimeString();
+            line.textContent = `[${now}] ${message}`;
+            consoleOutput.appendChild(line);
+            consoleOutput.scrollTop = consoleOutput.scrollHeight;
+        }
+
+        console.log = function(...args) {
+            originalLog(...args);
+            addLog('log', args.map(a => typeof a === 'object' ? JSON.stringify(a) : a).join(' '));
+        };
+
+        console.error = function(...args) {
+            originalError(...args);
+            addLog('error', '❌ ' + args.map(a => typeof a === 'object' ? JSON.stringify(a) : a).join(' '));
+        };
+
+        console.warn = function(...args) {
+            originalWarn(...args);
+            addLog('warn', '⚠️ ' + args.map(a => typeof a === 'object' ? JSON.stringify(a) : a).join(' '));
+        };
+
+        // Перехватываем ошибки
+        window.addEventListener('error', (event) => {
+            addLog('error', `Uncaught Error: ${event.message} at ${event.filename}:${event.lineno}`);
+        });
+
+        window.addEventListener('unhandledrejection', (event) => {
+            addLog('error', `Unhandled Promise Rejection: ${event.reason}`);
+        });
+
+        function checkScripts() {
+            addLog('info', '🔍 Проверка загруженных скриптов...');
+
+            const checks = {
+                'store-status': typeof window.store !== 'undefined' ? '✅' : '❌',
+                'theme-status': typeof window.themeManager !== 'undefined' ? '✅' : '❌',
+                'router-status': typeof window.router !== 'undefined' ? '✅' : '❌',
+                'api-status': typeof window.api !== 'undefined' ? '✅' : '❌',
+                'toast-status': typeof window.toast !== 'undefined' ? '✅' : '❌',
+            };
+
+            for (const [id, status] of Object.entries(checks)) {
+                document.getElementById(id).textContent = status;
+            }
+
+            if (Object.values(checks).every(s => s === '✅')) {
+                addLog('success', '✅ Все скрипты загружены успешно!');
+            } else {
+                addLog('warn', '⚠️ Некоторые скрипты не загружены');
+            }
+        }
+
+        function loadMainApp() {
+            // Проверяем есть ли уже загруженные скрипты
+            if (typeof window.store !== 'undefined' && typeof window.api !== 'undefined') {
+                addLog('info', '📦 Скрипты уже загружены! Используем существующие...');
+                checkScripts();
+                return;
+            }
+
+            addLog('info', '📦 Загрузка основного приложения...');
+            const scripts = [
+                'assets/js/utils/state.js',
+                'assets/js/utils/theme.js',
+                'assets/js/utils/router.js',
+                'assets/js/services/api.js',
+                'assets/js/services/websocket.js',
+                'assets/js/components/toast.js',
+                'assets/js/components/modal.js',
+                'assets/js/components/table.js',
+                'assets/js/components/lazy-loader.js',
+                'assets/js/components/performance-monitor.js',
+                'assets/js/components/navbar-init.js',
+                'assets/js/components/sidebar-init.js',
+                'assets/js/components/dashboard.js',
+                'assets/js/components/lists-manager.js',
+                'assets/js/main.js'
+            ];
+
+            let loaded = 0;
+            scripts.forEach(src => {
+                const script = document.createElement('script');
+                script.src = src + '?t=' + Date.now(); // Cache busting
+                script.onload = () => {
+                    loaded++;
+                    addLog('success', `✅ Загружен: ${src}`);
+                    if (loaded === scripts.length) {
+                        addLog('success', '✅ Все скрипты загружены!');
+                        checkScripts();
+                    }
+                };
+                script.onerror = () => {
+                    addLog('error', `❌ Ошибка загрузки: ${src}`);
+                };
+                document.head.appendChild(script);
+            });
+        }
+
+        function testAPI() {
+            addLog('info', '🧪 Тестирование API...');
+            fetch('/api/lists')
+                .then(r => r.json())
+                .then(data => {
+                    addLog('success', '✅ API работает: ' + JSON.stringify(data).substring(0, 100));
+                })
+                .catch(e => {
+                    addLog('error', `❌ API ошибка: ${e.message}`);
+                });
+        }
+
+        function clearConsole() {
+            consoleOutput.innerHTML = '';
+        }
+
+        // Инициализация
+        addLog('info', '🚀 Debug Console инициализирована');
+        checkScripts();
+    </script>
+</body>
+</html>

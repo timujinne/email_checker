@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Column Manager Demo - Email Checker</title>
+
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/webp" href="assets/images/logo.webp">
+    <link rel="apple-touch-icon" href="assets/images/logo.webp">
+
+    <!-- Tailwind CSS + daisyUI -->
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.4.19/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        /* Custom styles for drag & drop */
+        .column-item {
+            transition: all 0.2s ease;
+        }
+
+        .column-item:hover {
+            transform: translateX(2px);
+        }
+
+        .column-item[draggable="true"]:active {
+            cursor: grabbing;
+        }
+
+        .drag-handle:hover {
+            opacity: 1 !important;
+        }
+
+        /* Table responsive */
+        .demo-table {
+            font-size: 0.875rem;
+        }
+
+        /* Mobile adjustments */
+        @media (max-width: 768px) {
+            .demo-table {
+                font-size: 0.75rem;
+            }
+
+            .demo-table th,
+            .demo-table td {
+                padding: 0.5rem 0.25rem;
+            }
+        }
+    </style>
+</head>
+<body class="bg-base-100">
+    <div class="container mx-auto p-4 max-w-7xl">
+        <!-- Header -->
+        <div class="mb-6">
+            <h1 class="text-3xl font-bold mb-2">Column Manager Demo</h1>
+            <p class="opacity-70">
+                Toggle column visibility and drag to reorder. Changes persist in localStorage.
+            </p>
+        </div>
+
+        <!-- Toolbar -->
+        <div class="flex items-center justify-between mb-4 flex-wrap gap-4">
+            <div class="flex gap-2">
+                <button class="btn btn-primary btn-sm" onclick="addSampleRow()">
+                    ➕ Add Row
+                </button>
+                <button class="btn btn-secondary btn-sm" onclick="clearTable()">
+                    🗑️ Clear Table
+                </button>
+            </div>
+
+            <!-- Column Manager Container -->
+            <div id="column-manager-container"></div>
+
+            <!-- Theme Toggle -->
+            <button class="btn btn-ghost btn-sm" onclick="toggleTheme()">
+                🌓 Toggle Theme
+            </button>
+        </div>
+
+        <!-- Stats -->
+        <div class="stats shadow mb-4 w-full">
+            <div class="stat">
+                <div class="stat-title">Total Rows</div>
+                <div class="stat-value text-primary" id="total-rows">5</div>
+            </div>
+            <div class="stat">
+                <div class="stat-title">Visible Columns</div>
+                <div class="stat-value text-secondary" id="visible-columns">7</div>
+            </div>
+            <div class="stat">
+                <div class="stat-title">Hidden Columns</div>
+                <div class="stat-value text-accent" id="hidden-columns">2</div>
+            </div>
+        </div>
+
+        <!-- Table Container -->
+        <div class="card bg-base-200 shadow-xl">
+            <div class="card-body">
+                <div id="table-container" class="overflow-x-auto">
+                    <!-- Table will be rendered here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Debug Info -->
+        <div class="mt-6 card bg-base-300">
+            <div class="card-body">
+                <h3 class="card-title text-sm">Debug Info</h3>
+                <div class="text-xs opacity-70">
+                    <p>Open browser console to see logs.</p>
+                    <p>LocalStorage key: <code class="badge badge-sm">email-checker-column-preferences</code></p>
+                    <button class="btn btn-xs btn-error mt-2" onclick="clearLocalStorage()">
+                        Clear LocalStorage
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div class="toast toast-top toast-end" id="toast-container"></div>
+
+    <!-- Scripts -->
+    <script src="assets/js/components/column-manager.js"></script>
+
+    <script>
+        // Sample data
+        let demoData = [
+            { id: 1, filename: 'italy_contacts.txt', display_name: 'Italian Contacts', country: 'Italy', category: 'Automotive', priority: 'High', processed: true, date_added: '2025-10-15', file_type: 'TXT', description: 'Italian automotive industry contacts' },
+            { id: 2, filename: 'germany_leads.lvp', display_name: 'German Leads', country: 'Germany', category: 'Manufacturing', priority: 'Medium', processed: true, date_added: '2025-10-18', file_type: 'LVP', description: 'German manufacturing leads' },
+            { id: 3, filename: 'france_prospects.txt', display_name: 'French Prospects', country: 'France', category: 'Agriculture', priority: 'Low', processed: false, date_added: '2025-10-20', file_type: 'TXT', description: 'French agriculture prospects' },
+            { id: 4, filename: 'spain_companies.lvp', display_name: 'Spanish Companies', country: 'Spain', category: 'Retail', priority: 'High', processed: true, date_added: '2025-10-22', file_type: 'LVP', description: 'Spanish retail companies' },
+            { id: 5, filename: 'poland_enterprises.txt', display_name: 'Polish Enterprises', country: 'Poland', category: 'Technology', priority: 'Medium', processed: false, date_added: '2025-10-25', file_type: 'TXT', description: 'Polish tech enterprises' }
+        ];
+
+        // Column configuration
+        const defaultColumns = [
+            { id: 'id', label: 'ID', visible: true, locked: true },
+            { id: 'filename', label: 'Filename', visible: true, locked: false },
+            { id: 'display_name', label: 'Display Name', visible: true, locked: false },
+            { id: 'country', label: 'Country', visible: true, locked: false },
+            { id: 'category', label: 'Category', visible: true, locked: false },
+            { id: 'priority', label: 'Priority', visible: true, locked: false },
+            { id: 'processed', label: 'Processed', visible: true, locked: false },
+            { id: 'date_added', label: 'Date Added', visible: false, locked: false },
+            { id: 'file_type', label: 'Type', visible: false, locked: false },
+            { id: 'description', label: 'Description', visible: false, locked: false }
+        ];
+
+        // Initialize Column Manager
+        let columnManager;
+        let visibleColumns;
+
+        function initColumnManager() {
+            columnManager = new ColumnManager(
+                'column-manager-container',
+                defaultColumns,
+                (columns) => {
+                    console.log('Visible columns changed:', columns);
+                    visibleColumns = columns;
+                    renderTable();
+                    updateStats();
+                    showToast('Columns updated', 'success');
+                }
+            );
+
+            columnManager.init();
+            visibleColumns = columnManager.getVisibleColumns();
+        }
+
+        // Render table
+        function renderTable() {
+            const container = document.getElementById('table-container');
+
+            if (demoData.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-12 opacity-70">
+                        <p class="text-lg">📋 No data to display</p>
+                        <button class="btn btn-primary btn-sm mt-4" onclick="resetData()">
+                            Reset Sample Data
+                        </button>
+                    </div>
+                `;
+                return;
+            }
+
+            // Build header
+            let headerHtml = '';
+            visibleColumns.forEach(colId => {
+                const column = defaultColumns.find(c => c.id === colId);
+                headerHtml += `<th>${column.label}</th>`;
+            });
+
+            // Build rows
+            let rowsHtml = '';
+            demoData.forEach((row, index) => {
+                rowsHtml += '<tr class="hover">';
+                visibleColumns.forEach(colId => {
+                    let cellContent = row[colId];
+
+                    // Format specific columns
+                    if (colId === 'processed') {
+                        const badgeClass = cellContent ? 'badge-success' : 'badge-warning';
+                        const text = cellContent ? '✓ Yes' : '⏳ No';
+                        cellContent = `<span class="badge ${badgeClass} badge-sm">${text}</span>`;
+                    } else if (colId === 'file_type') {
+                        cellContent = `<span class="badge badge-primary badge-sm">${cellContent}</span>`;
+                    } else if (colId === 'country') {
+                        cellContent = `<span class="badge badge-secondary badge-sm">${cellContent}</span>`;
+                    } else if (colId === 'category') {
+                        cellContent = `<span class="badge badge-accent badge-sm">${cellContent}</span>`;
+                    } else if (colId === 'priority') {
+                        const priorityClass = {
+                            'High': 'badge-error',
+                            'Medium': 'badge-warning',
+                            'Low': 'badge-info'
+                        }[cellContent] || 'badge-ghost';
+                        cellContent = `<span class="badge ${priorityClass} badge-sm">${cellContent}</span>`;
+                    } else if (colId === 'description') {
+                        cellContent = `<span class="text-xs opacity-70">${cellContent}</span>`;
+                    }
+
+                    rowsHtml += `<td>${cellContent}</td>`;
+                });
+                rowsHtml += '</tr>';
+            });
+
+            container.innerHTML = `
+                <table class="table table-zebra table-pin-rows w-full demo-table">
+                    <thead>
+                        <tr>${headerHtml}</tr>
+                    </thead>
+                    <tbody>
+                        ${rowsHtml}
+                    </tbody>
+                </table>
+            `;
+        }
+
+        // Update stats
+        function updateStats() {
+            document.getElementById('total-rows').textContent = demoData.length;
+            document.getElementById('visible-columns').textContent = visibleColumns.length;
+            document.getElementById('hidden-columns').textContent = defaultColumns.length - visibleColumns.length;
+        }
+
+        // Add sample row
+        function addSampleRow() {
+            const newId = Math.max(...demoData.map(r => r.id)) + 1;
+            const countries = ['Italy', 'Germany', 'France', 'Spain', 'Poland'];
+            const categories = ['Automotive', 'Manufacturing', 'Agriculture', 'Retail', 'Technology'];
+            const priorities = ['High', 'Medium', 'Low'];
+
+            const newRow = {
+                id: newId,
+                filename: `sample_${newId}.txt`,
+                display_name: `Sample ${newId}`,
+                country: countries[Math.floor(Math.random() * countries.length)],
+                category: categories[Math.floor(Math.random() * categories.length)],
+                priority: priorities[Math.floor(Math.random() * priorities.length)],
+                processed: Math.random() > 0.5,
+                date_added: new Date().toISOString().split('T')[0],
+                file_type: Math.random() > 0.5 ? 'TXT' : 'LVP',
+                description: `Sample description for row ${newId}`
+            };
+
+            demoData.push(newRow);
+            renderTable();
+            updateStats();
+            showToast('Row added', 'success');
+        }
+
+        // Clear table
+        function clearTable() {
+            if (confirm('Clear all rows?')) {
+                demoData = [];
+                renderTable();
+                updateStats();
+                showToast('Table cleared', 'info');
+            }
+        }
+
+        // Reset data
+        function resetData() {
+            demoData = [
+                { id: 1, filename: 'italy_contacts.txt', display_name: 'Italian Contacts', country: 'Italy', category: 'Automotive', priority: 'High', processed: true, date_added: '2025-10-15', file_type: 'TXT', description: 'Italian automotive industry contacts' },
+                { id: 2, filename: 'germany_leads.lvp', display_name: 'German Leads', country: 'Germany', category: 'Manufacturing', priority: 'Medium', processed: true, date_added: '2025-10-18', file_type: 'LVP', description: 'German manufacturing leads' },
+                { id: 3, filename: 'france_prospects.txt', display_name: 'French Prospects', country: 'France', category: 'Agriculture', priority: 'Low', processed: false, date_added: '2025-10-20', file_type: 'TXT', description: 'French agriculture prospects' },
+                { id: 4, filename: 'spain_companies.lvp', display_name: 'Spanish Companies', country: 'Spain', category: 'Retail', priority: 'High', processed: true, date_added: '2025-10-22', file_type: 'LVP', description: 'Spanish retail companies' },
+                { id: 5, filename: 'poland_enterprises.txt', display_name: 'Polish Enterprises', country: 'Poland', category: 'Technology', priority: 'Medium', processed: false, date_added: '2025-10-25', file_type: 'TXT', description: 'Polish tech enterprises' }
+            ];
+            renderTable();
+            updateStats();
+            showToast('Data reset', 'info');
+        }
+
+        // Clear localStorage
+        function clearLocalStorage() {
+            if (confirm('Clear column preferences from localStorage?')) {
+                localStorage.removeItem('email-checker-column-preferences');
+                location.reload();
+            }
+        }
+
+        // Toggle theme
+        function toggleTheme() {
+            const html = document.documentElement;
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            html.setAttribute('data-theme', newTheme);
+            showToast(`Theme: ${newTheme}`, 'info');
+        }
+
+        // Show toast notification
+        function showToast(message, type = 'info') {
+            const container = document.getElementById('toast-container');
+            const alertClass = {
+                'success': 'alert-success',
+                'error': 'alert-error',
+                'warning': 'alert-warning',
+                'info': 'alert-info'
+            }[type] || 'alert-info';
+
+            const toast = document.createElement('div');
+            toast.className = `alert ${alertClass} shadow-lg`;
+            toast.innerHTML = `
+                <div>
+                    <span>${message}</span>
+                </div>
+            `;
+
+            container.appendChild(toast);
+
+            setTimeout(() => {
+                toast.remove();
+            }, 3000);
+        }
+
+        // Initialize on load
+        document.addEventListener('DOMContentLoaded', () => {
+            initColumnManager();
+            renderTable();
+            updateStats();
+            console.log('✅ Demo initialized');
+        });
+    </script>
+</body>
+</html>

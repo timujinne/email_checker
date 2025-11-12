@@ -1,0 +1,89 @@
+{
+  "template_name": "Hydraulic Equipment",
+  "template_version": "1.0.0",
+  "applicable_industries": [
+    "hydraulics",
+    "fluid_power",
+    "hydraulic_cylinders",
+    "hydraulic_pumps",
+    "hydraulic_systems"
+  ],
+  "description": "Template for hydraulic equipment manufacturers and suppliers",
+  "common_keywords": {
+    "products": [
+      "cylinder",
+      "pump",
+      "valve",
+      "motor",
+      "power unit",
+      "actuator",
+      "servo",
+      "proportional",
+      "cartridge"
+    ],
+    "applications": [
+      "construction",
+      "agriculture",
+      "industrial",
+      "mobile",
+      "marine",
+      "lifting",
+      "pressing"
+    ],
+    "components": [
+      "piston",
+      "rod",
+      "seal",
+      "hose",
+      "fitting",
+      "manifold",
+      "accumulator",
+      "filter"
+    ],
+    "oem_indicators": [
+      "manufacturer",
+      "producer",
+      "OEM",
+      "fabricator",
+      "custom",
+      "engineered"
+    ]
+  },
+  "scoring_recommendations": {
+    "weights": {
+      "email_quality": 0.10,
+      "company_relevance": 0.45,
+      "geographic_priority": 0.30,
+      "engagement": 0.15
+    },
+    "thresholds": {
+      "high_priority": 100,
+      "medium_priority": 50,
+      "low_priority": 10
+    },
+    "bonus_multipliers": {
+      "oem_manufacturer": 1.3,
+      "target_geography": 2.0,
+      "domain_match": 1.5
+    }
+  },
+  "exclusion_recommendations": {
+    "exclude_retail": true,
+    "exclude_hr_agencies": true,
+    "exclude_education": true,
+    "exclude_media": true,
+    "exclude_finance": false,
+    "exclude_tourism": true
+  },
+  "domain_patterns": [
+    "hydraul",
+    "pump",
+    "cylinder",
+    "valve",
+    "fluid",
+    "power",
+    "oleod",
+    "idraul"
+  ],
+  "notes": "Hydraulics is a specialized B2B industry. Focus on manufacturers, OEMs, and component suppliers. Retail and end-user companies should be excluded."
+}

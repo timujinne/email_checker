@@ -1,0 +1,160 @@
+{
+  "name": "frontend-build-project",
+  "version": "1.0.0",
+  "description": "Frontend project with Webpack 5 and Tailwind CSS",
+  "main": "src/index.js",
+  "type": "module",
+  "scripts": {
+    "//": "=== DEVELOPMENT SCRIPTS ===",
+    "dev": "npm-run-all --parallel dev:css dev:js",
+    "dev:css": "tailwindcss -i ./src/styles.css -o ./dist/styles.css --watch",
+    "dev:js": "webpack serve --mode development",
+    "start": "npm run dev",
+
+    "//": "=== PRODUCTION BUILD ===",
+    "build": "npm-run-all clean build:css build:js",
+    "build:css": "tailwindcss -i ./src/styles.css -o ./dist/styles.css --minify",
+    "build:js": "cross-env NODE_ENV=production webpack --mode production",
+
+    "//": "=== UTILITY SCRIPTS ===",
+    "clean": "rimraf dist",
+    "analyze": "cross-env NODE_ENV=production webpack --mode production --profile --json > stats.json && webpack-bundle-analyzer stats.json",
+    "size": "size-limit",
+
+    "//": "=== TESTING ===",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+
+    "//": "=== CODE QUALITY ===",
+    "lint": "eslint src/**/*.js",
+    "lint:fix": "eslint src/**/*.js --fix",
+    "format": "prettier --write 'src/**/*.{js,css,html}'",
+
+    "//": "=== PRE/POST HOOKS ===",
+    "prebuild": "npm run clean",
+    "postbuild": "npm run size"
+  },
+  "keywords": [
+    "webpack",
+    "tailwind",
+    "vanilla-js"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/core": "^7.23.0",
+    "@babel/preset-env": "^7.23.0",
+    "autoprefixer": "^10.4.16",
+    "babel-loader": "^9.1.3",
+    "core-js": "^3.33.0",
+    "cross-env": "^7.0.3",
+    "css-loader": "^6.8.1",
+    "css-minimizer-webpack-plugin": "^5.0.1",
+    "daisyui": "^4.0.0",
+    "html-webpack-plugin": "^5.5.3",
+    "mini-css-extract-plugin": "^2.7.6",
+    "npm-run-all": "^4.1.5",
+    "postcss": "^8.4.31",
+    "postcss-loader": "^7.3.3",
+    "rimraf": "^5.0.5",
+    "style-loader": "^3.3.3",
+    "tailwindcss": "^3.3.5",
+    "terser-webpack-plugin": "^5.3.9",
+    "webpack": "^5.89.0",
+    "webpack-bundle-analyzer": "^4.10.1",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^4.15.1"
+  },
+  "dependencies": {},
+  "browserslist": [
+    "> 0.5%",
+    "last 2 versions",
+    "not dead"
+  ],
+  "size-limit": [
+    {
+      "path": "dist/main.*.js",
+      "limit": "200 KB"
+    },
+    {
+      "path": "dist/main.*.css",
+      "limit": "50 KB"
+    }
+  ]
+}
+
+/*
+ * Script Explanations:
+ *
+ * DEVELOPMENT:
+ * - dev: Run CSS and JS watchers in parallel
+ * - dev:css: Watch Tailwind CSS for changes
+ * - dev:js: Start webpack dev server with HMR
+ * - start: Alias for dev
+ *
+ * PRODUCTION:
+ * - build: Clean, then build CSS and JS
+ * - build:css: Build and minify Tailwind CSS
+ * - build:js: Build webpack bundle in production mode
+ *
+ * UTILITY:
+ * - clean: Remove dist directory
+ * - analyze: Generate bundle size report
+ * - size: Check if bundle meets size limits
+ *
+ * TESTING:
+ * - test: Run Jest tests
+ * - test:watch: Run tests in watch mode
+ * - test:coverage: Run tests with coverage report
+ *
+ * CODE QUALITY:
+ * - lint: Check code with ESLint
+ * - lint:fix: Auto-fix ESLint issues
+ * - format: Format code with Prettier
+ *
+ * HOOKS:
+ * - prebuild: Runs before build (cleans dist/)
+ * - postbuild: Runs after build (checks size)
+ *
+ *
+ * Installation:
+ *
+ * npm install
+ *
+ * Or install dependencies individually:
+ *
+ * # Core
+ * npm install -D webpack webpack-cli webpack-dev-server
+ * npm install -D tailwindcss postcss autoprefixer
+ *
+ * # Loaders
+ * npm install -D babel-loader @babel/core @babel/preset-env
+ * npm install -D css-loader style-loader postcss-loader
+ *
+ * # Plugins
+ * npm install -D html-webpack-plugin
+ * npm install -D mini-css-extract-plugin
+ * npm install -D css-minimizer-webpack-plugin
+ * npm install -D terser-webpack-plugin
+ *
+ * # Utilities
+ * npm install -D cross-env npm-run-all rimraf
+ * npm install -D daisyui  # Optional
+ *
+ * # Analysis
+ * npm install -D webpack-bundle-analyzer size-limit
+ *
+ *
+ * Usage:
+ *
+ * Development:
+ * npm run dev
+ * # Or: npm start
+ *
+ * Production:
+ * npm run build
+ *
+ * Analysis:
+ * npm run analyze
+ */

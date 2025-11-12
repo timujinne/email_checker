@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Form Validation Template - daisyUI</title>
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@4.4.19/dist/full.min.css" rel="stylesheet" type="text/css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-base-200 min-h-screen flex items-center justify-center p-4">
+  <div class="card bg-base-100 shadow-xl w-full max-w-2xl">
+    <div class="card-body">
+      <h2 class="card-title text-2xl mb-4">Process Email List</h2>
+      <p class="text-base-content/70 mb-6">Upload and configure your email list for validation.</p>
+
+      <form id="emailForm" novalidate class="space-y-6">
+        <!-- List Name -->
+        <div class="form-control">
+          <label class="label">
+            <span class="label-text font-semibold">List Name <span class="text-error">*</span></span>
+          </label>
+          <input 
+            type="text" 
+            id="listName"
+            class="input input-bordered" 
+            placeholder="e.g., Italy Contacts 2025"
+            required
+            minlength="3"
+            maxlength="50"
+            aria-describedby="listNameError" />
+          <label class="label">
+            <span id="listNameError" class="label-text-alt text-error hidden" role="alert"></span>
+          </label>
+        </div>
+
+        <!-- Email Address -->
+        <div class="form-control">
+          <label class="label">
+            <span class="label-text font-semibold">Contact Email <span class="text-error">*</span></span>
+          </label>
+          <input 
+            type="email" 
+            id="email"
+            class="input input-bordered" 
+            placeholder="your.email@example.com"
+            required
+            pattern="[^@\s]+@[^@\s]+\.[^@\s]+"
+            aria-describedby="emailError emailHelp" />
+          <label class="label">
+            <span id="emailHelp" class="label-text-alt">We'll send the results to this email</span>
+            <span id="emailError" class="label-text-alt text-error hidden" role="alert"></span>
+          </label>
+        </div>
+
+        <!-- File Upload -->
+        <div class="form-control">
+          <label class="label">
+            <span class="label-text font-semibold">Upload Email List <span class="text-error">*</span></span>
+          </label>
+          <input 
+            type="file" 
+            id="fileUpload"
+            class="file-input file-input-bordered w-full" 
+            accept=".txt,.lvp,.csv"
+            required
+            aria-describedby="fileError fileHelp" />
+          <label class="label">
+            <span id="fileHelp" class="label-text-alt">Accepted: TXT, LVP, CSV (max 10MB)</span>
+            <span id="fileError" class="label-text-alt text-error hidden" role="alert"></span>
+          </label>
+          <div id="filePreview" class="hidden mt-2 p-3 bg-base-200 rounded-lg">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-2">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                </svg>
+                <span id="fileName" class="font-medium"></span>
+                <span id="fileSize" class="text-sm text-base-content/70"></span>
+              </div>
+              <button type="button" id="removeFile" class="btn btn-ghost btn-xs">✕</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Category -->
+        <div class="form-control">
+          <label class="label">
+            <span class="label-text font-semibold">Category</span>
+          </label>
+          <select id="category" class="select select-bordered">
+            <option value="">Select category (optional)</option>
+            <option>Automotive</option>
+            <option>Agriculture</option>
+            <option>Manufacturing</option>
+            <option>Technology</option>
+            <option>Healthcare</option>
+            <option>Other</option>
+          </select>
+        </div>
+
+        <!-- Processing Options -->
+        <fieldset class="form-control border border-base-300 rounded-lg p-4">
+          <legend class="label px-2">
+            <span class="label-text font-semibold">Processing Options</span>
+          </legend>
+          <label class="label cursor-pointer justify-start gap-2">
+            <input type="checkbox" id="excludeDupes" class="checkbox" checked />
+            <span class="label-text">Exclude duplicates</span>
+          </label>
+          <label class="label cursor-pointer justify-start gap-2">
+            <input type="checkbox" id="generateReport" class="checkbox" checked />
+            <span class="label-text">Generate HTML report</span>
+          </label>
+          <label class="label cursor-pointer justify-start gap-2">
+            <input type="checkbox" id="enrichMetadata" class="checkbox" />
+            <span class="label-text">Enrich with metadata (slower)</span>
+          </label>
+        </fieldset>
+
+        <!-- Terms and Conditions -->
+        <div class="form-control">
+          <label class="label cursor-pointer justify-start gap-2">
+            <input 
+              type="checkbox" 
+              id="terms"
+              class="checkbox" 
+              required
+              aria-describedby="termsError" />
+            <span class="label-text">
+              I agree to the <a href="#" class="link link-primary">terms and conditions</a> <span class="text-error">*</span>
+            </span>
+          </label>
+          <label class="label">
+            <span id="termsError" class="label-text-alt text-error hidden" role="alert"></span>
+          </label>
+        </div>
+
+        <!-- Form-level feedback -->
+        <div id="formFeedback" class="hidden" role="alert" aria-live="polite"></div>
+
+        <!-- Submit Button -->
+        <div class="card-actions justify-end">
+          <button type="reset" class="btn btn-ghost">Reset</button>
+          <button type="submit" class="btn btn-primary" id="submitBtn">
+            <span id="submitText">Process List</span>
+            <span id="submitSpinner" class="loading loading-spinner loading-sm hidden"></span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // Get form elements
+    const form = document.getElementById('emailForm');
+    const listNameInput = document.getElementById('listName');
+    const emailInput = document.getElementById('email');
+    const fileUpload = document.getElementById('fileUpload');
+    const termsCheckbox = document.getElementById('terms');
+    const submitBtn = document.getElementById('submitBtn');
+    const submitText = document.getElementById('submitText');
+    const submitSpinner = document.getElementById('submitSpinner');
+
+    // Validation functions
+    function validateListName() {
+      const value = listNameInput.value.trim();
+      const errorSpan = document.getElementById('listNameError');
+
+      if (!value) {
+        showError(listNameInput, errorSpan, 'List name is required');
+        return false;
+      }
+      if (value.length < 3) {
+        showError(listNameInput, errorSpan, 'List name must be at least 3 characters');
+        return false;
+      }
+      if (value.length > 50) {
+        showError(listNameInput, errorSpan, 'List name must not exceed 50 characters');
+        return false;
+      }
+
+      clearError(listNameInput, errorSpan);
+      return true;
+    }
+
+    function validateEmail() {
+      const value = emailInput.value.trim();
+      const errorSpan = document.getElementById('emailError');
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+      if (!value) {
+        showError(emailInput, errorSpan, 'Email address is required');
+        return false;
+      }
+      if (!emailRegex.test(value)) {
+        showError(emailInput, errorSpan, 'Please enter a valid email address (e.g., user@example.com)');
+        return false;
+      }
+
+      clearError(emailInput, errorSpan);
+      return true;
+    }
+
+    function validateFile() {
+      const errorSpan = document.getElementById('fileError');
+
+      if (!fileUpload.files.length) {
+        showError(fileUpload, errorSpan, 'Please select a file to upload');
+        return false;
+      }
+
+      const file = fileUpload.files[0];
+      const maxSize = 10 * 1024 * 1024; // 10MB
+
+      if (file.size > maxSize) {
+        showError(fileUpload, errorSpan, 'File size must not exceed 10MB');
+        return false;
+      }
+
+      const allowedExtensions = ['.txt', '.lvp', '.csv'];
+      const fileName = file.name.toLowerCase();
+      const hasValidExtension = allowedExtensions.some(ext => fileName.endsWith(ext));
+
+      if (!hasValidExtension) {
+        showError(fileUpload, errorSpan, 'Invalid file type. Please upload TXT, LVP, or CSV file');
+        return false;
+      }
+
+      clearError(fileUpload, errorSpan);
+      return true;
+    }
+
+    function validateTerms() {
+      const errorSpan = document.getElementById('termsError');
+
+      if (!termsCheckbox.checked) {
+        showError(termsCheckbox, errorSpan, 'You must agree to the terms and conditions');
+        return false;
+      }
+
+      clearError(termsCheckbox, errorSpan);
+      return true;
+    }
+
+    // Helper functions
+    function showError(input, errorSpan, message) {
+      input.classList.add('input-error');
+      input.setAttribute('aria-invalid', 'true');
+      errorSpan.textContent = message;
+      errorSpan.classList.remove('hidden');
+    }
+
+    function clearError(input, errorSpan) {
+      input.classList.remove('input-error');
+      input.setAttribute('aria-invalid', 'false');
+      errorSpan.textContent = '';
+      errorSpan.classList.add('hidden');
+    }
+
+    function showFormFeedback(message, type) {
+      const feedback = document.getElementById('formFeedback');
+      feedback.className = `alert alert-${type}`;
+      feedback.innerHTML = `
+        <svg class="stroke-current flex-shrink-0 w-6 h-6" fill="none" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="${type === 'success' ? 'M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z' : 'M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z'}"/>
+        </svg>
+        <span>${message}</span>
+      `;
+      feedback.classList.remove('hidden');
+    }
+
+    function hideFormFeedback() {
+      document.getElementById('formFeedback').classList.add('hidden');
+    }
+
+    // File preview
+    const filePreview = document.getElementById('filePreview');
+    const fileNameSpan = document.getElementById('fileName');
+    const fileSizeSpan = document.getElementById('fileSize');
+    const removeFileBtn = document.getElementById('removeFile');
+
+    fileUpload.addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if (file) {
+        fileNameSpan.textContent = file.name;
+        fileSizeSpan.textContent = formatFileSize(file.size);
+        filePreview.classList.remove('hidden');
+        validateFile();
+      }
+    });
+
+    removeFileBtn.addEventListener('click', () => {
+      fileUpload.value = '';
+      filePreview.classList.add('hidden');
+      clearError(fileUpload, document.getElementById('fileError'));
+    });
+
+    function formatFileSize(bytes) {
+      if (bytes < 1024) return bytes + ' B';
+      if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
+      return (bytes / (1024 * 1024)).toFixed(1) + ' MB';
+    }
+
+    // Real-time validation
+    listNameInput.addEventListener('blur', validateListName);
+    emailInput.addEventListener('blur', validateEmail);
+    fileUpload.addEventListener('change', validateFile);
+    termsCheckbox.addEventListener('change', validateTerms);
+
+    // Form submission
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      hideFormFeedback();
+
+      // Validate all fields
+      const isListNameValid = validateListName();
+      const isEmailValid = validateEmail();
+      const isFileValid = validateFile();
+      const areTermsValid = validateTerms();
+
+      if (!isListNameValid || !isEmailValid || !isFileValid || !areTermsValid) {
+        showFormFeedback('Please fix the errors above before submitting', 'error');
+        return;
+      }
+
+      // Show loading state
+      submitBtn.disabled = true;
+      submitText.classList.add('hidden');
+      submitSpinner.classList.remove('hidden');
+
+      try {
+        // Simulate API call
+        await new Promise(resolve => setTimeout(resolve, 2500));
+
+        // Success
+        showFormFeedback('Processing started! We\'ll email you when it\'s complete.', 'success');
+
+        // Reset form after delay
+        setTimeout(() => {
+          form.reset();
+          filePreview.classList.add('hidden');
+          hideFormFeedback();
+        }, 3000);
+
+      } catch (error) {
+        showFormFeedback('Failed to submit form. Please try again.', 'error');
+      } finally {
+        // Reset button state
+        submitBtn.disabled = false;
+        submitText.classList.remove('hidden');
+        submitSpinner.classList.add('hidden');
+      }
+    });
+
+    // Reset handler
+    form.addEventListener('reset', () => {
+      // Clear all errors
+      document.querySelectorAll('.input-error').forEach(input => {
+        input.classList.remove('input-error');
+        input.setAttribute('aria-invalid', 'false');
+      });
+      document.querySelectorAll('.label-text-alt.text-error').forEach(span => {
+        span.textContent = '';
+        span.classList.add('hidden');
+      });
+      filePreview.classList.add('hidden');
+      hideFormFeedback();
+    });
+  </script>
+</body>
+</html>

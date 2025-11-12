@@ -1,0 +1,395 @@
+{
+  "language": "en",
+  "language_name": "English",
+  "industries": {
+    "hydraulics": {
+      "primary": [
+        "hydraulic cylinder",
+        "hydraulic cylinders",
+        "hydraulic pump",
+        "hydraulic pumps",
+        "hydraulic motor",
+        "hydraulic motors",
+        "hydraulic valve",
+        "hydraulic valves",
+        "power unit",
+        "power units",
+        "hydraulic power pack",
+        "servo valve",
+        "servo valves",
+        "proportional valve",
+        "directional valve",
+        "pressure valve",
+        "flow control valve",
+        "cartridge valve",
+        "hydraulic actuator",
+        "hydraulic piston"
+      ],
+      "secondary": [
+        "hydraulic system",
+        "hydraulic systems",
+        "hydraulic circuit",
+        "hydraulic oil",
+        "hydraulic fluid",
+        "hydraulic hose",
+        "hydraulic tubing",
+        "hydraulic filtration",
+        "hydraulic pressure",
+        "hydraulic power",
+        "mobile hydraulics",
+        "industrial hydraulics",
+        "high pressure hydraulics",
+        "hydraulic control",
+        "hydraulic drive"
+      ],
+      "oem_indicators": [
+        "manufacturer",
+        "producer",
+        "maker",
+        "fabricator",
+        "production",
+        "factory",
+        "plant",
+        "facility",
+        "OEM",
+        "original equipment manufacturer",
+        "supplier",
+        "component supplier",
+        "tier 1",
+        "tier 2"
+      ],
+      "applications": [
+        "construction equipment",
+        "agricultural machinery",
+        "industrial machines",
+        "mobile equipment",
+        "earthmoving equipment",
+        "material handling",
+        "presses",
+        "lifting equipment"
+      ]
+    },
+    "earthmoving": {
+      "primary": [
+        "excavator",
+        "excavators",
+        "backhoe",
+        "backhoes",
+        "backhoe loader",
+        "wheel loader",
+        "wheel loaders",
+        "track loader",
+        "crawler loader",
+        "skid steer",
+        "skid steer loader",
+        "bulldozer",
+        "bulldozers",
+        "motor grader",
+        "grader",
+        "graders",
+        "compactor",
+        "compactors",
+        "roller",
+        "rollers",
+        "road roller",
+        "mini excavator",
+        "mini digger"
+      ],
+      "secondary": [
+        "earthmoving",
+        "construction equipment",
+        "heavy machinery",
+        "heavy equipment",
+        "bucket",
+        "buckets",
+        "boom",
+        "stick",
+        "arm",
+        "tracks",
+        "crawler",
+        "undercarriage",
+        "hydraulics",
+        "attachment",
+        "attachments",
+        "quick coupler"
+      ],
+      "oem_indicators": [
+        "equipment manufacturer",
+        "machinery manufacturer",
+        "construction equipment manufacturer",
+        "OEM",
+        "producer",
+        "factory"
+      ],
+      "applications": [
+        "construction",
+        "earthmoving",
+        "excavation",
+        "mining",
+        "quarrying",
+        "demolition",
+        "road construction",
+        "civil engineering"
+      ]
+    },
+    "automotive": {
+      "primary": [
+        "automotive",
+        "automobile",
+        "motor vehicle",
+        "automotive industry",
+        "automotive parts",
+        "auto parts",
+        "vehicle components",
+        "automotive components",
+        "automotive supplier"
+      ],
+      "secondary": [
+        "engine",
+        "engines",
+        "transmission",
+        "gearbox",
+        "chassis",
+        "body",
+        "suspension",
+        "brakes",
+        "steering",
+        "powertrain",
+        "automotive electronics"
+      ],
+      "oem_indicators": [
+        "automotive manufacturer",
+        "vehicle manufacturer",
+        "OEM",
+        "tier 1",
+        "tier 2",
+        "automotive supplier"
+      ],
+      "applications": [
+        "passenger cars",
+        "commercial vehicles",
+        "trucks",
+        "vans",
+        "buses"
+      ]
+    },
+    "construction": {
+      "primary": [
+        "construction equipment",
+        "construction machinery",
+        "building equipment",
+        "construction tools"
+      ],
+      "secondary": [
+        "concrete mixer",
+        "vibrator",
+        "rammer",
+        "compactor",
+        "scaffold",
+        "scaffolding",
+        "formwork",
+        "crane",
+        "hoist"
+      ],
+      "oem_indicators": [
+        "equipment manufacturer",
+        "machinery manufacturer",
+        "construction equipment manufacturer"
+      ],
+      "applications": [
+        "building construction",
+        "civil engineering",
+        "road construction",
+        "bridge construction",
+        "infrastructure"
+      ]
+    },
+    "manufacturing": {
+      "primary": [
+        "machine tools",
+        "manufacturing equipment",
+        "production equipment",
+        "industrial machinery",
+        "processing machines",
+        "production machines"
+      ],
+      "secondary": [
+        "CNC machines",
+        "lathe",
+        "lathes",
+        "milling machine",
+        "grinding machine",
+        "drilling machine",
+        "machining center",
+        "automation",
+        "robotics",
+        "material handling",
+        "assembly equipment",
+        "conveyor",
+        "industrial robot"
+      ],
+      "oem_indicators": [
+        "machinery manufacturer",
+        "equipment manufacturer",
+        "machine builder",
+        "system integrator",
+        "OEM"
+      ],
+      "applications": [
+        "metal working",
+        "metal fabrication",
+        "plastic processing",
+        "wood working",
+        "mass production",
+        "manufacturing"
+      ]
+    }
+  },
+  "geographic": {
+    "country_names": [
+      "United States",
+      "USA",
+      "US",
+      "United Kingdom",
+      "UK",
+      "Great Britain",
+      "England",
+      "Ireland",
+      "Canada",
+      "Australia",
+      "New Zealand"
+    ],
+    "major_cities": [],
+    "regions": []
+  },
+  "exclusions": {
+    "personal_domains": [
+      "gmail.com",
+      "googlemail.com",
+      "yahoo.com",
+      "hotmail.com",
+      "outlook.com",
+      "live.com",
+      "icloud.com",
+      "me.com",
+      "mac.com",
+      "aol.com",
+      "msn.com",
+      "protonmail.com",
+      "zoho.com"
+    ],
+    "hr_prefixes": [
+      "hr@",
+      "jobs@",
+      "job@",
+      "career@",
+      "careers@",
+      "recruitment@",
+      "recruiter@",
+      "hiring@",
+      "vacancy@",
+      "vacancies@",
+      "work@",
+      "employment@",
+      "staff@",
+      "personnel@",
+      "resume@",
+      "cv@",
+      "talent@",
+      "headhunter@"
+    ],
+    "excluded_industries": {
+      "education": [
+        "school",
+        "college",
+        "university",
+        "academy",
+        "institute",
+        "education",
+        "training",
+        "learning",
+        "course",
+        "lesson",
+        "seminar",
+        "student",
+        "pupil",
+        "teacher",
+        "professor",
+        "lecturer"
+      ],
+      "tourism": [
+        "hotel",
+        "motel",
+        "hostel",
+        "resort",
+        "accommodation",
+        "tourism",
+        "travel",
+        "vacation",
+        "holiday",
+        "restaurant",
+        "café",
+        "catering",
+        "hospitality",
+        "camping",
+        "ski",
+        "wellness",
+        "spa"
+      ],
+      "retail": [
+        "retail",
+        "shop",
+        "store",
+        "boutique",
+        "e-commerce",
+        "online shop",
+        "webshop",
+        "supermarket",
+        "department store"
+      ],
+      "media": [
+        "newspaper",
+        "magazine",
+        "journal",
+        "publisher",
+        "press",
+        "television",
+        "tv",
+        "radio",
+        "broadcasting",
+        "advertising",
+        "marketing",
+        "agency",
+        "media",
+        "communication"
+      ],
+      "finance": [
+        "bank",
+        "banking",
+        "financial institution",
+        "insurance",
+        "assurance",
+        "financing",
+        "credit",
+        "loan",
+        "mortgage",
+        "leasing",
+        "factoring",
+        "investment",
+        "stock exchange",
+        "trading",
+        "broker"
+      ],
+      "hr_agencies": [
+        "staffing agency",
+        "recruitment agency",
+        "temp agency",
+        "employment agency",
+        "headhunter",
+        "hr agency",
+        "personnel agency",
+        "job agency"
+      ]
+    }
+  }
+}

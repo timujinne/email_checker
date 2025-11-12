@@ -1,0 +1,160 @@
+# Frontend Build Project .gitignore Template
+
+# === DEPENDENCIES ===
+node_modules/
+jspm_packages/
+
+# === BUILD OUTPUT ===
+dist/
+build/
+out/
+
+# === CACHE ===
+.cache/
+.parcel-cache/
+.webpack/
+.eslintcache
+*.tsbuildinfo
+
+# === ENVIRONMENT ===
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# === LOGS ===
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+.pnpm-debug.log*
+
+# === EDITOR / IDE ===
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# === TESTING ===
+coverage/
+.nyc_output/
+
+# === SOURCE MAPS (optional - uncomment to gitignore) ===
+# *.map
+
+# === BUNDLE ANALYSIS ===
+stats.json
+bundle-report.html
+
+# === WEBPACK ===
+.webpack-cache/
+webpack.config.*.js.map
+
+# === TAILWIND ===
+.tailwindcss/
+
+# === TEMPORARY FILES ===
+*.tmp
+*.temp
+tmp/
+temp/
+
+# === OS FILES ===
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# === PACKAGE MANAGERS ===
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# === OPTIONAL: Uncomment if using ===
+# .pnp.*
+# .yarn/*
+# !.yarn/patches
+# !.yarn/plugins
+# !.yarn/releases
+# !.yarn/sdks
+# !.yarn/versions
+
+/*
+ * What to commit:
+ *
+ * DO commit:
+ * - Source files (src/)
+ * - Configuration files (webpack.config.js, tailwind.config.js, etc.)
+ * - package.json
+ * - README.md
+ * - .gitignore
+ *
+ * DO NOT commit:
+ * - node_modules/ (dependencies)
+ * - dist/ or build/ (build output)
+ * - .env files (environment variables with secrets)
+ * - Editor/IDE settings (.vscode/, .idea/)
+ * - Log files
+ * - Cache directories
+ *
+ *
+ * Project Structure Example:
+ *
+ * project/
+ * ├── src/                 # Source files (COMMIT)
+ * │   ├── index.js
+ * │   ├── styles.css
+ * │   └── components/
+ * ├── dist/                # Build output (IGNORE)
+ * ├── node_modules/        # Dependencies (IGNORE)
+ * ├── webpack.config.js    # Config (COMMIT)
+ * ├── tailwind.config.js   # Config (COMMIT)
+ * ├── package.json         # Dependencies list (COMMIT)
+ * ├── .gitignore           # This file (COMMIT)
+ * └── README.md            # Documentation (COMMIT)
+ *
+ *
+ * Usage:
+ *
+ * 1. Copy this file to project root as .gitignore
+ * 2. Review and uncomment sections as needed
+ * 3. Add project-specific ignores
+ * 4. Commit: git add .gitignore && git commit -m "Add gitignore"
+ *
+ *
+ * Common Customizations:
+ *
+ * # Commit source maps for debugging
+ * Remove: # *.map
+ *
+ * # Ignore specific build output directories
+ * Add: /public/assets/
+ * Add: /static/dist/
+ *
+ * # Keep package-lock.json for consistent installs
+ * Remove: package-lock.json
+ *
+ * # Project-specific files
+ * Add: /uploads/
+ * Add: /data/*.csv
+ *
+ *
+ * Verification:
+ *
+ * # Check what would be ignored
+ * git status --ignored
+ *
+ * # Check if specific file is ignored
+ * git check-ignore -v filename
+ *
+ * # Remove already-tracked files from git
+ * git rm -r --cached node_modules
+ * git rm --cached .env
+ */

@@ -1,0 +1,87 @@
+{
+  "template_name": "Earthmoving Equipment",
+  "template_version": "1.0.0",
+  "applicable_industries": [
+    "earthmoving",
+    "construction_equipment",
+    "heavy_machinery",
+    "excavators",
+    "loaders"
+  ],
+  "description": "Template for earthmoving and construction equipment manufacturers",
+  "common_keywords": {
+    "products": [
+      "excavator",
+      "loader",
+      "bulldozer",
+      "grader",
+      "compactor",
+      "backhoe",
+      "roller",
+      "skid steer",
+      "dump truck"
+    ],
+    "applications": [
+      "construction",
+      "mining",
+      "quarry",
+      "demolition",
+      "road construction",
+      "earthmoving",
+      "excavation"
+    ],
+    "components": [
+      "bucket",
+      "boom",
+      "stick",
+      "tracks",
+      "undercarriage",
+      "hydraulics",
+      "engine",
+      "attachment"
+    ],
+    "oem_indicators": [
+      "manufacturer",
+      "equipment manufacturer",
+      "OEM",
+      "producer",
+      "factory"
+    ]
+  },
+  "scoring_recommendations": {
+    "weights": {
+      "email_quality": 0.10,
+      "company_relevance": 0.45,
+      "geographic_priority": 0.30,
+      "engagement": 0.15
+    },
+    "thresholds": {
+      "high_priority": 100,
+      "medium_priority": 50,
+      "low_priority": 10
+    },
+    "bonus_multipliers": {
+      "oem_manufacturer": 1.3,
+      "target_geography": 2.0,
+      "domain_match": 1.5
+    }
+  },
+  "exclusion_recommendations": {
+    "exclude_retail": true,
+    "exclude_hr_agencies": true,
+    "exclude_education": true,
+    "exclude_media": true,
+    "exclude_finance": false,
+    "exclude_tourism": true
+  },
+  "domain_patterns": [
+    "excavat",
+    "bagger",
+    "loader",
+    "construction",
+    "earthmov",
+    "machinery",
+    "equipment"
+  ],
+  "notes": "Focus on manufacturers and suppliers of construction/earthmoving equipment. Exclude rental companies unless they're also dealers/suppliers."
+}

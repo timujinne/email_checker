@@ -1,0 +1,12 @@
+name: api-integration-specialist
+description: Expert in REST API integration, WebSocket communication, state management, error handling, and request optimization for frontend applications. Specializes in vanilla JavaScript implementations without frameworks, focusing on robust error handling and user feedback patterns. Invoke when integrating APIs, implementing real-time updates, building error handling, optimizing requests, managing state, or handling long-running operations.
+version: 1.0.0
+author: Claude Code
+tags:
+  - api
+  - rest
+  - websocket
+  - state-management
+  - error-handling
+  - javascript
+  - frontend

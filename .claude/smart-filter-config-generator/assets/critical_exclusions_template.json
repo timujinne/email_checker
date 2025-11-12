@@ -1,0 +1,1485 @@
+{
+  "_comment": "Critical Exclusions Template v2.0 - MANDATORY for all smart filter configurations",
+  "_version": "2.0",
+  "_last_updated": "2025-10-30",
+  "_reference": "See .claude/smart-filter-config-generator/references/critical_exclusions_guide.md",
+
+  "critical_exclusions": {
+
+    "medical_domain_patterns": {
+      "_description": "Patterns to detect healthcare organizations in domain names",
+      "universal": [
+        "hospital",
+        "clinic",
+        "medical",
+        "health",
+        ".med.",
+        "diagnostic",
+        "healthcare"
+      ],
+      "cs": [
+        "nemocnice",
+        "poliklinika",
+        "zdravotní",
+        "zdravotnický",
+        "klinika",
+        "lécebna",
+        "sanatorium",
+        "diagnostika"
+      ],
+      "pl": [
+        "szpital",
+        "przychodnia",
+        "klinika",
+        "placówka",
+        "poliklinika",
+        "diagnostyka",
+        "lecznica",
+        "sanatorium",
+        "onkologia"
+      ],
+      "es": [
+        "hospital",
+        "clínica",
+        "salud",
+        "médico",
+        "sanitario",
+        "policlínica",
+        "diagnóstico"
+      ],
+      "it": [
+        "ospedale",
+        "clinica",
+        "sanitario",
+        "medico",
+        "policlinico",
+        "diagnostica"
+      ],
+      "fr": [
+        "hôpital",
+        "hopital",
+        "clinique",
+        "santé",
+        "sante",
+        "médical",
+        "medical",
+        "polyclinique",
+        "diagnostic"
+      ],
+      "de": [
+        "krankenhaus",
+        "klinik",
+        "gesundheit",
+        "medizinisch",
+        "poliklinik",
+        "diagnostik"
+      ],
+      "pt": [
+        "hospital",
+        "clínica",
+        "saúde",
+        "saude",
+        "médico",
+        "medico",
+        "policlínica",
+        "diagnóstico"
+      ]
+    },
+
+    "medical_prefixes": {
+      "_description": "Email prefixes for healthcare services",
+      "universal": [
+        "patient@",
+        "reception@",
+        "diagnosis@",
+        "laboratory@",
+        "lab@"
+      ],
+      "cs": [
+        "pacient@",
+        "registrace@",
+        "recepce@",
+        "ambulance@",
+        "laborator@"
+      ],
+      "pl": [
+        "pacjent@",
+        "rejestracja@",
+        "recepcja@",
+        "diagnostyka@",
+        "chirurgia@",
+        "onkologia@",
+        "rehabilitacja@",
+        "laboratorium@"
+      ],
+      "es": [
+        "paciente@",
+        "recepción@",
+        "recepcion@",
+        "diagnóstico@",
+        "diagnostico@"
+      ],
+      "it": [
+        "paziente@",
+        "ricevimento@",
+        "diagnostica@",
+        "laboratorio@"
+      ],
+      "fr": [
+        "patient@",
+        "réception@",
+        "reception@",
+        "accueil@",
+        "diagnostic@",
+        "laboratoire@"
+      ],
+      "de": [
+        "patient@",
+        "empfang@",
+        "diagnostik@",
+        "labor@"
+      ],
+      "pt": [
+        "paciente@",
+        "receção@",
+        "recepcao@",
+        "diagnóstico@",
+        "diagnostico@"
+      ]
+    },
+
+    "educational_domain_patterns": {
+      "_description": "Patterns to detect educational institutions in domain names",
+      "universal": [
+        "university",
+        "school",
+        ".edu",
+        ".ac.",
+        "institute",
+        "academy",
+        "college",
+        "polytechnic"
+      ],
+      "cs": [
+        "univerzita",
+        "škola",
+        "skola",
+        "vysoká škola",
+        "vysoka skola",
+        "akademie",
+        "institut"
+      ],
+      "pl": [
+        "uniwersytet",
+        "szkoła",
+        "szkola",
+        "akademia",
+        "instytut",
+        "politechnika",
+        "uczelnia"
+      ],
+      "es": [
+        "universidad",
+        "escuela",
+        "colegio",
+        "academia",
+        "instituto"
+      ],
+      "it": [
+        "università",
+        "universita",
+        "scuola",
+        "istituto",
+        "accademia",
+        "politecnico"
+      ],
+      "fr": [
+        "université",
+        "universite",
+        "école",
+        "ecole",
+        "institut",
+        "académie",
+        "academie",
+        "polytechnique"
+      ],
+      "de": [
+        "universität",
+        "universitat",
+        "schule",
+        "institut",
+        "akademie",
+        "hochschule"
+      ],
+      "pt": [
+        "universidade",
+        "escola",
+        "instituto",
+        "academia",
+        "politécnico",
+        "politecnico"
+      ]
+    },
+
+    "government_domain_patterns": {
+      "_description": "Patterns to detect government organizations in domain names",
+      "universal": [
+        ".gov",
+        ".gov.",
+        ".gouv",
+        ".gob",
+        "ministry",
+        "government",
+        "administration",
+        "municipality",
+        "office"
+      ],
+      "cs": [
+        "ministerstvo",
+        "úřad",
+        "urad",
+        "správa",
+        "sprava",
+        "město",
+        "mesto",
+        "obecní",
+        "obecni",
+        "městský",
+        "mestsky"
+      ],
+      "pl": [
+        "ministerstwo",
+        "urząd",
+        "urzad",
+        "administracja",
+        "gmina",
+        "miasto",
+        "gminny",
+        "miejski",
+        "powiat"
+      ],
+      "es": [
+        "ministerio",
+        "ayuntamiento",
+        "gobierno",
+        "administración",
+        "administracion",
+        "municipal"
+      ],
+      "it": [
+        "ministero",
+        "comune",
+        "governo",
+        "amministrazione",
+        "municipio"
+      ],
+      "fr": [
+        "ministère",
+        "ministere",
+        "mairie",
+        "préfecture",
+        "prefecture",
+        "gouvernement",
+        "administration",
+        "collectivité",
+        "collectivite",
+        "municipalité",
+        "municipalite"
+      ],
+      "de": [
+        "ministerium",
+        "regierung",
+        "verwaltung",
+        "gemeinde",
+        "stadt",
+        "behörde",
+        "behorde"
+      ],
+      "pt": [
+        "ministério",
+        "ministerio",
+        "câmara",
+        "camara",
+        "governo",
+        "administração",
+        "administracao",
+        "municipal"
+      ]
+    },
+
+    "government_prefixes": {
+      "_description": "Email prefixes for government services",
+      "universal": [
+        "office@",
+        "ministry@",
+        "administration@",
+        "municipality@"
+      ],
+      "cs": [
+        "urad@",
+        "úřad@",
+        "ministerstvo@",
+        "sprava@",
+        "správa@",
+        "mesto@",
+        "město@",
+        "obecni@",
+        "obecní@"
+      ],
+      "pl": [
+        "urzad@",
+        "urząd@",
+        "ministerstwo@",
+        "administracja@",
+        "gmina@",
+        "miasto@",
+        "powiat@"
+      ],
+      "es": [
+        "ministerio@",
+        "ayuntamiento@",
+        "gobierno@",
+        "administración@",
+        "administracion@"
+      ],
+      "it": [
+        "ministero@",
+        "comune@",
+        "governo@",
+        "amministrazione@"
+      ],
+      "fr": [
+        "ministere@",
+        "ministère@",
+        "mairie@",
+        "prefecture@",
+        "préfecture@",
+        "administration@",
+        "collectivite@",
+        "collectivité@"
+      ],
+      "de": [
+        "ministerium@",
+        "regierung@",
+        "verwaltung@",
+        "gemeinde@",
+        "behorde@",
+        "behörde@"
+      ],
+      "pt": [
+        "ministerio@",
+        "ministério@",
+        "camara@",
+        "câmara@",
+        "governo@",
+        "administracao@",
+        "administração@"
+      ]
+    },
+
+    "pharmacy_domain_patterns": {
+      "_description": "Patterns to detect pharmacies in domain names (NEW v2.0)",
+      "universal": [
+        "pharmacy",
+        "drugstore",
+        "pharmaceutical"
+      ],
+      "cs": [
+        "lékárna",
+        "lekarna",
+        "lékárník",
+        "lekarnik",
+        "farmaceutický",
+        "farmaceuticky"
+      ],
+      "pl": [
+        "apteka",
+        "farmaceuta",
+        "farmaceutyczny",
+        "lekarnia"
+      ],
+      "es": [
+        "farmacia",
+        "farmacéutico",
+        "farmaceutico",
+        "botica"
+      ],
+      "it": [
+        "farmacia",
+        "farmaceutico",
+        "farmacista"
+      ],
+      "fr": [
+        "pharmacie",
+        "pharmacien",
+        "pharmaceutique"
+      ],
+      "de": [
+        "apotheke",
+        "apotheker",
+        "pharmazie",
+        "pharmazeutisch"
+      ],
+      "pt": [
+        "farmácia",
+        "farmacia",
+        "farmacêutico",
+        "farmaceutico"
+      ]
+    },
+
+    "pharmacy_prefixes": {
+      "_description": "Email prefixes for pharmacy services (NEW v2.0)",
+      "universal": [
+        "pharmacy@",
+        "prescription@"
+      ],
+      "cs": [
+        "lekarna@",
+        "lékárna@",
+        "lekarnik@",
+        "lékárník@",
+        "recept@"
+      ],
+      "pl": [
+        "apteka@",
+        "farmaceuta@",
+        "recept@"
+      ],
+      "es": [
+        "farmacia@",
+        "receta@"
+      ],
+      "it": [
+        "farmacia@",
+        "farmacista@",
+        "ricetta@"
+      ],
+      "fr": [
+        "pharmacie@",
+        "pharmacien@",
+        "ordonnance@"
+      ],
+      "de": [
+        "apotheke@",
+        "apotheker@",
+        "rezept@"
+      ],
+      "pt": [
+        "farmacia@",
+        "farmácia@",
+        "receita@"
+      ]
+    },
+
+    "legal_domain_patterns": {
+      "_description": "Patterns to detect legal services in domain names (NEW v2.0)",
+      "universal": [
+        "lawyer",
+        "attorney",
+        "notary",
+        "legal",
+        "law firm",
+        "law-firm",
+        "lawfirm"
+      ],
+      "cs": [
+        "notář",
+        "notar",
+        "notariát",
+        "notariat",
+        "právník",
+        "pravnik",
+        "advokát",
+        "advokat",
+        "advokátní kancelář",
+        "advokatni kancelar",
+        "právní",
+        "pravni"
+      ],
+      "pl": [
+        "notariusz",
+        "notariat",
+        "prawnik",
+        "adwokat",
+        "kancelaria prawna",
+        "prawny"
+      ],
+      "es": [
+        "notario",
+        "notaría",
+        "notaria",
+        "abogado",
+        "bufete",
+        "despacho",
+        "jurídico",
+        "juridico"
+      ],
+      "it": [
+        "notaio",
+        "notariato",
+        "avvocato",
+        "studio legale",
+        "legale"
+      ],
+      "fr": [
+        "notaire",
+        "notariat",
+        "avocat",
+        "cabinet d'avocat",
+        "juridique"
+      ],
+      "de": [
+        "notar",
+        "notariat",
+        "rechtsanwalt",
+        "anwalt",
+        "kanzlei",
+        "rechtlich"
+      ],
+      "pt": [
+        "notário",
+        "notario",
+        "notariado",
+        "advogado",
+        "escritório",
+        "escritorio",
+        "jurídico",
+        "juridico"
+      ]
+    },
+
+    "legal_prefixes": {
+      "_description": "Email prefixes for legal services (NEW v2.0)",
+      "universal": [
+        "lawyer@",
+        "attorney@",
+        "notary@",
+        "legal@"
+      ],
+      "cs": [
+        "notar@",
+        "notář@",
+        "pravnik@",
+        "právník@",
+        "advokat@",
+        "advokát@",
+        "pravni@",
+        "právní@"
+      ],
+      "pl": [
+        "notariusz@",
+        "prawnik@",
+        "adwokat@",
+        "prawny@"
+      ],
+      "es": [
+        "notario@",
+        "notaria@",
+        "notaría@",
+        "abogado@",
+        "juridico@",
+        "jurídico@"
+      ],
+      "it": [
+        "notaio@",
+        "avvocato@",
+        "legale@"
+      ],
+      "fr": [
+        "notaire@",
+        "avocat@",
+        "juridique@"
+      ],
+      "de": [
+        "notar@",
+        "anwalt@",
+        "rechtsanwalt@",
+        "rechtlich@"
+      ],
+      "pt": [
+        "notario@",
+        "notário@",
+        "advogado@",
+        "juridico@",
+        "jurídico@"
+      ]
+    },
+
+    "tourism_domain_patterns": {
+      "_description": "Patterns to detect travel/tourism in domain names (NEW v2.0)",
+      "universal": [
+        "travel",
+        "tourism",
+        "tourist",
+        "tour",
+        "hotel",
+        "booking",
+        "vacation",
+        "holiday"
+      ],
+      "cs": [
+        "cestovní",
+        "cestovni",
+        "turismus",
+        "turista",
+        "zájezd",
+        "zajezd",
+        "ubytování",
+        "ubytovani",
+        "dovolená",
+        "dovolena"
+      ],
+      "pl": [
+        "podróże",
+        "podroze",
+        "turystyka",
+        "turysta",
+        "wycieczka",
+        "zakwaterowanie",
+        "wakacje",
+        "urlop"
+      ],
+      "es": [
+        "viaje",
+        "turismo",
+        "turista",
+        "gira",
+        "alojamiento",
+        "vacaciones"
+      ],
+      "it": [
+        "viaggio",
+        "turismo",
+        "turista",
+        "tour",
+        "albergo",
+        "alloggio",
+        "vacanza"
+      ],
+      "fr": [
+        "voyage",
+        "tourisme",
+        "touriste",
+        "excursion",
+        "hébergement",
+        "hebergement",
+        "vacances"
+      ],
+      "de": [
+        "reise",
+        "tourismus",
+        "tourist",
+        "tour",
+        "unterkunft",
+        "urlaub",
+        "ferien"
+      ],
+      "pt": [
+        "viagem",
+        "turismo",
+        "turista",
+        "passeio",
+        "alojamento",
+        "férias",
+        "ferias"
+      ]
+    },
+
+    "tourism_prefixes": {
+      "_description": "Email prefixes for travel/tourism services (NEW v2.0)",
+      "universal": [
+        "travel@",
+        "tourism@",
+        "booking@",
+        "tour@",
+        "reservation@"
+      ],
+      "cs": [
+        "cestovni@",
+        "cestovní@",
+        "turismus@",
+        "rezervace@",
+        "zajezd@",
+        "zájezd@"
+      ],
+      "pl": [
+        "podroze@",
+        "podróże@",
+        "turystyka@",
+        "rezerwacja@",
+        "wycieczka@"
+      ],
+      "es": [
+        "viaje@",
+        "viajes@",
+        "turismo@",
+        "reserva@",
+        "gira@"
+      ],
+      "it": [
+        "viaggio@",
+        "turismo@",
+        "prenotazione@",
+        "tour@"
+      ],
+      "fr": [
+        "voyage@",
+        "tourisme@",
+        "réservation@",
+        "reservation@",
+        "excursion@"
+      ],
+      "de": [
+        "reise@",
+        "tourismus@",
+        "buchung@",
+        "tour@"
+      ],
+      "pt": [
+        "viagem@",
+        "turismo@",
+        "reserva@",
+        "passeio@"
+      ]
+    },
+
+    "research_ngo_domain_patterns": {
+      "_description": "Patterns to detect research institutes and NGOs in domain names",
+      "universal": [
+        "research",
+        "laboratory",
+        "r&d",
+        "foundation",
+        "fund",
+        "association",
+        "ngo",
+        "charity"
+      ],
+      "cs": [
+        "výzkum",
+        "vyzkum",
+        "výzkumný",
+        "vyzkumny",
+        "laboratoř",
+        "laborator",
+        "nadace",
+        "fond",
+        "společnost",
+        "spolecnost"
+      ],
+      "pl": [
+        "badania",
+        "badawczy",
+        "instytut badawczy",
+        "laboratorium",
+        "fundacja",
+        "fundusz",
+        "stowarzyszenie"
+      ],
+      "es": [
+        "investigación",
+        "investigacion",
+        "laboratorio",
+        "fundación",
+        "fundacion",
+        "fondo",
+        "asociación",
+        "asociacion"
+      ],
+      "it": [
+        "ricerca",
+        "laboratorio",
+        "fondazione",
+        "fondo",
+        "associazione"
+      ],
+      "fr": [
+        "recherche",
+        "laboratoire",
+        "fondation",
+        "fonds",
+        "association"
+      ],
+      "de": [
+        "forschung",
+        "labor",
+        "stiftung",
+        "fonds",
+        "verein"
+      ],
+      "pt": [
+        "pesquisa",
+        "investigação",
+        "investigacao",
+        "laboratório",
+        "laboratorio",
+        "fundação",
+        "fundacao",
+        "fundo",
+        "associação",
+        "associacao"
+      ]
+    },
+
+    "research_prefixes": {
+      "_description": "Email prefixes for research/NGO services",
+      "universal": [
+        "research@",
+        "lab@",
+        "laboratory@",
+        "foundation@",
+        "fund@"
+      ],
+      "cs": [
+        "vyzkum@",
+        "výzkum@",
+        "laborator@",
+        "laboratoř@",
+        "nadace@",
+        "fond@"
+      ],
+      "pl": [
+        "badania@",
+        "laboratorium@",
+        "fundacja@",
+        "fundusz@",
+        "stowarzyszenie@"
+      ],
+      "es": [
+        "investigacion@",
+        "investigación@",
+        "laboratorio@",
+        "fundacion@",
+        "fundación@"
+      ],
+      "it": [
+        "ricerca@",
+        "laboratorio@",
+        "fondazione@"
+      ],
+      "fr": [
+        "recherche@",
+        "laboratoire@",
+        "fondation@"
+      ],
+      "de": [
+        "forschung@",
+        "labor@",
+        "stiftung@"
+      ],
+      "pt": [
+        "pesquisa@",
+        "investigacao@",
+        "investigação@",
+        "laboratorio@",
+        "laboratório@",
+        "fundacao@",
+        "fundação@"
+      ]
+    }
+  },
+
+  "excluded_industries_critical": {
+    "_description": "MANDATORY industry exclusion keywords for all configurations",
+
+    "healthcare": {
+      "_minimum_keywords": 15,
+      "universal": [
+        "hospital",
+        "clinic",
+        "medical",
+        "healthcare",
+        "diagnostics",
+        "surgery",
+        "oncology",
+        "rehabilitation",
+        "doctor",
+        "nurse",
+        "patient"
+      ],
+      "cs": [
+        "nemocnice",
+        "klinika",
+        "poliklinika",
+        "zdravotní",
+        "zdravotnický",
+        "diagnostika",
+        "chirurgie",
+        "onkologie",
+        "rehabilitace",
+        "lékař",
+        "lékárna",
+        "pacient"
+      ],
+      "pl": [
+        "szpital",
+        "klinika",
+        "przychodnia",
+        "diagnostyka",
+        "chirurgia",
+        "onkologia",
+        "rehabilitacja",
+        "lekarz",
+        "apteka",
+        "pacjent"
+      ],
+      "es": [
+        "hospital",
+        "clínica",
+        "médico",
+        "salud",
+        "diagnóstico",
+        "cirugía",
+        "oncología",
+        "rehabilitación"
+      ],
+      "it": [
+        "ospedale",
+        "clinica",
+        "medico",
+        "sanitario",
+        "diagnostica",
+        "chirurgia",
+        "oncologia",
+        "riabilitazione"
+      ],
+      "fr": [
+        "hôpital",
+        "clinique",
+        "médical",
+        "santé",
+        "diagnostic",
+        "chirurgie",
+        "oncologie",
+        "rééducation"
+      ],
+      "de": [
+        "krankenhaus",
+        "klinik",
+        "medizinisch",
+        "gesundheit",
+        "diagnostik",
+        "chirurgie",
+        "onkologie",
+        "rehabilitation"
+      ],
+      "pt": [
+        "hospital",
+        "clínica",
+        "médico",
+        "saúde",
+        "diagnóstico",
+        "cirurgia",
+        "oncologia",
+        "reabilitação"
+      ]
+    },
+
+    "government_public": {
+      "_minimum_keywords": 10,
+      "universal": [
+        "ministry",
+        "government",
+        "administration",
+        "municipality",
+        "public sector",
+        "state",
+        "municipal",
+        "office"
+      ],
+      "cs": [
+        "ministerstvo",
+        "úřad",
+        "správa",
+        "město",
+        "veřejná správa",
+        "státní",
+        "obecní",
+        "městský"
+      ],
+      "pl": [
+        "ministerstwo",
+        "urząd",
+        "administracja",
+        "gmina",
+        "miasto",
+        "administracja publiczna",
+        "państwowy",
+        "gminny",
+        "miejski"
+      ],
+      "es": [
+        "ministerio",
+        "gobierno",
+        "administración",
+        "ayuntamiento",
+        "sector público",
+        "estatal",
+        "municipal"
+      ],
+      "it": [
+        "ministero",
+        "governo",
+        "amministrazione",
+        "comune",
+        "settore pubblico",
+        "statale",
+        "municipale"
+      ],
+      "fr": [
+        "ministère",
+        "gouvernement",
+        "administration",
+        "mairie",
+        "secteur public",
+        "état",
+        "municipal"
+      ],
+      "de": [
+        "ministerium",
+        "regierung",
+        "verwaltung",
+        "gemeinde",
+        "öffentlicher sektor",
+        "staatlich",
+        "kommunal"
+      ],
+      "pt": [
+        "ministério",
+        "governo",
+        "administração",
+        "câmara",
+        "setor público",
+        "estatal",
+        "municipal"
+      ]
+    },
+
+    "education": {
+      "_minimum_keywords": 10,
+      "universal": [
+        "university",
+        "school",
+        "college",
+        "academy",
+        "education",
+        "teaching",
+        "training",
+        "student",
+        "study",
+        "course"
+      ],
+      "cs": [
+        "univerzita",
+        "škola",
+        "vysoká škola",
+        "akademie",
+        "vzdělávání",
+        "výuka",
+        "školení",
+        "student",
+        "studium"
+      ],
+      "pl": [
+        "uniwersytet",
+        "szkoła",
+        "uczelnia",
+        "akademia",
+        "edukacja",
+        "nauczanie",
+        "szkolenie",
+        "student",
+        "studia"
+      ],
+      "es": [
+        "universidad",
+        "escuela",
+        "colegio",
+        "academia",
+        "educación",
+        "enseñanza",
+        "formación",
+        "estudiante",
+        "estudios"
+      ],
+      "it": [
+        "università",
+        "scuola",
+        "accademia",
+        "educazione",
+        "insegnamento",
+        "formazione",
+        "studente",
+        "studio"
+      ],
+      "fr": [
+        "université",
+        "école",
+        "académie",
+        "éducation",
+        "enseignement",
+        "formation",
+        "étudiant",
+        "études"
+      ],
+      "de": [
+        "universität",
+        "schule",
+        "akademie",
+        "bildung",
+        "unterricht",
+        "ausbildung",
+        "student",
+        "studium"
+      ],
+      "pt": [
+        "universidade",
+        "escola",
+        "academia",
+        "educação",
+        "ensino",
+        "formação",
+        "estudante",
+        "estudos"
+      ]
+    },
+
+    "pharmacy": {
+      "_minimum_keywords": 8,
+      "_added_version": "2.0",
+      "universal": [
+        "pharmacy",
+        "drugstore",
+        "pharmaceutical",
+        "medicine",
+        "prescription",
+        "pharmacist"
+      ],
+      "cs": [
+        "lékárna",
+        "lékárník",
+        "farmaceutický",
+        "lék",
+        "předpis",
+        "recept"
+      ],
+      "pl": [
+        "apteka",
+        "farmaceuta",
+        "farmaceutyczny",
+        "lek",
+        "recept",
+        "lekarnia"
+      ],
+      "es": [
+        "farmacia",
+        "farmacéutico",
+        "medicina",
+        "receta",
+        "botica"
+      ],
+      "it": [
+        "farmacia",
+        "farmacista",
+        "farmaceutico",
+        "medicina",
+        "ricetta"
+      ],
+      "fr": [
+        "pharmacie",
+        "pharmacien",
+        "pharmaceutique",
+        "médicament",
+        "ordonnance"
+      ],
+      "de": [
+        "apotheke",
+        "apotheker",
+        "pharmazeutisch",
+        "medikament",
+        "rezept"
+      ],
+      "pt": [
+        "farmácia",
+        "farmacêutico",
+        "medicina",
+        "receita"
+      ]
+    },
+
+    "legal_services": {
+      "_minimum_keywords": 8,
+      "_added_version": "2.0",
+      "universal": [
+        "lawyer",
+        "attorney",
+        "notary",
+        "legal services",
+        "law firm",
+        "litigation",
+        "contract law",
+        "corporate law"
+      ],
+      "cs": [
+        "právník",
+        "advokát",
+        "notář",
+        "právní služby",
+        "advokátní kancelář",
+        "soudní spor",
+        "smluvní právo"
+      ],
+      "pl": [
+        "prawnik",
+        "adwokat",
+        "notariusz",
+        "usługi prawne",
+        "kancelaria prawna",
+        "postępowanie sądowe",
+        "prawo umów"
+      ],
+      "es": [
+        "abogado",
+        "notario",
+        "servicios jurídicos",
+        "bufete",
+        "litigio",
+        "derecho contractual"
+      ],
+      "it": [
+        "avvocato",
+        "notaio",
+        "servizi legali",
+        "studio legale",
+        "contenzioso",
+        "diritto contrattuale"
+      ],
+      "fr": [
+        "avocat",
+        "notaire",
+        "services juridiques",
+        "cabinet d'avocat",
+        "litige",
+        "droit des contrats"
+      ],
+      "de": [
+        "rechtsanwalt",
+        "anwalt",
+        "notar",
+        "rechtsdienstleistungen",
+        "kanzlei",
+        "rechtsstreit",
+        "vertragsrecht"
+      ],
+      "pt": [
+        "advogado",
+        "notário",
+        "serviços jurídicos",
+        "escritório de advocacia",
+        "litígio",
+        "direito contratual"
+      ]
+    },
+
+    "tourism_travel": {
+      "_minimum_keywords": 10,
+      "_added_version": "2.0",
+      "universal": [
+        "travel agency",
+        "tour operator",
+        "tourism",
+        "tourist",
+        "tour",
+        "vacation",
+        "holiday",
+        "hotel",
+        "accommodation",
+        "booking"
+      ],
+      "cs": [
+        "cestovní kancelář",
+        "touroperátor",
+        "turismus",
+        "turista",
+        "zájezd",
+        "dovolená",
+        "prázdniny",
+        "ubytování",
+        "rezervace"
+      ],
+      "pl": [
+        "biuro podróży",
+        "organizator turystyki",
+        "turystyka",
+        "turysta",
+        "wycieczka",
+        "wakacje",
+        "urlop",
+        "zakwaterowanie",
+        "rezerwacja"
+      ],
+      "es": [
+        "agencia de viajes",
+        "operador turístico",
+        "turismo",
+        "turista",
+        "gira",
+        "vacaciones",
+        "alojamiento",
+        "reserva"
+      ],
+      "it": [
+        "agenzia di viaggi",
+        "tour operator",
+        "turismo",
+        "turista",
+        "tour",
+        "vacanza",
+        "alloggio",
+        "prenotazione"
+      ],
+      "fr": [
+        "agence de voyage",
+        "tour-opérateur",
+        "tourisme",
+        "touriste",
+        "excursion",
+        "vacances",
+        "hébergement",
+        "réservation"
+      ],
+      "de": [
+        "reisebüro",
+        "reiseveranstalter",
+        "tourismus",
+        "tourist",
+        "tour",
+        "urlaub",
+        "ferien",
+        "unterkunft",
+        "buchung"
+      ],
+      "pt": [
+        "agência de viagens",
+        "operador turístico",
+        "turismo",
+        "turista",
+        "passeio",
+        "férias",
+        "alojamento",
+        "reserva"
+      ]
+    },
+
+    "research_ngo": {
+      "_minimum_keywords": 8,
+      "universal": [
+        "research institute",
+        "research",
+        "laboratory",
+        "r&d",
+        "foundation",
+        "fund",
+        "association",
+        "non-profit",
+        "ngo",
+        "charity"
+      ],
+      "cs": [
+        "výzkumný ústav",
+        "výzkum",
+        "laboratoř",
+        "vývoj",
+        "nadace",
+        "fond",
+        "společnost",
+        "nezisková"
+      ],
+      "pl": [
+        "instytut badawczy",
+        "badania",
+        "laboratorium",
+        "rozwój",
+        "fundacja",
+        "fundusz",
+        "stowarzyszenie",
+        "organizacja pozarządowa"
+      ],
+      "es": [
+        "instituto de investigación",
+        "investigación",
+        "laboratorio",
+        "i+d",
+        "fundación",
+        "fondo",
+        "asociación",
+        "sin fines de lucro"
+      ],
+      "it": [
+        "istituto di ricerca",
+        "ricerca",
+        "laboratorio",
+        "r&s",
+        "fondazione",
+        "fondo",
+        "associazione",
+        "senza scopo di lucro"
+      ],
+      "fr": [
+        "institut de recherche",
+        "recherche",
+        "laboratoire",
+        "r&d",
+        "fondation",
+        "fonds",
+        "association",
+        "sans but lucratif"
+      ],
+      "de": [
+        "forschungsinstitut",
+        "forschung",
+        "labor",
+        "f&e",
+        "stiftung",
+        "fonds",
+        "verein",
+        "gemeinnützig"
+      ],
+      "pt": [
+        "instituto de pesquisa",
+        "pesquisa",
+        "laboratório",
+        "p&d",
+        "fundação",
+        "fundo",
+        "associação",
+        "sem fins lucrativos"
+      ]
+    }
+  },
+
+  "usage_instructions": {
+    "how_to_use": "Copy the relevant sections from this template into your smart filter configuration JSON",
+    "mandatory_categories": 7,
+    "categories": [
+      "medical (healthcare)",
+      "educational",
+      "government_public",
+      "pharmacy (NEW v2.0)",
+      "legal_services (NEW v2.0)",
+      "tourism_travel (NEW v2.0)",
+      "research_ngo"
+    ],
+    "implementation_notes": [
+      "Select language-specific patterns based on target country",
+      "Include 'universal' patterns for all configurations",
+      "Minimum keyword counts must be met for each category",
+      "Domain patterns checked BEFORE industry keywords",
+      "Email prefixes have CRITICAL severity",
+      "Exclusion threshold must be >= 1 keyword (not >= 2)"
+    ],
+    "reference_guide": ".claude/smart-filter-config-generator/references/critical_exclusions_guide.md",
+    "test_script": "test_powder_filters.py"
+  }
+}

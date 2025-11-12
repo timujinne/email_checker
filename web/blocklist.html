@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blocklist Manager - Email Checker</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/webp" href="assets/images/logo.webp">
+    <link rel="apple-touch-icon" href="assets/images/logo.webp">
+
+    <link href="https://cdn.tailwindcss.com" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@latest/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --primary: #1e40af;
+            --secondary: #991b1b;
+            --success: #065f46;
+        }
+
+        .blocklist-manager {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            background: var(--bg-primary, white);
+            color: var(--text-primary, black);
+        }
+
+        .blocklist-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .blocklist-header h1 {
+            margin: 0;
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+
+        .header-stats {
+            display: flex;
+            gap: 1rem;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .blocklist-toolbar {
+            padding: 1rem;
+            background: rgba(0,0,0,0.02);
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+        }
+
+        .search-group {
+            flex: 1;
+            min-width: 250px;
+            display: flex;
+            align-items: center;
+        }
+
+        .search-input {
+            flex: 1;
+            padding: 0.5rem 1rem;
+            border: 1px solid rgba(0,0,0,0.2);
+            border-radius: 0.375rem;
+            font-size: 0.9rem;
+        }
+
+        .filter-group {
+            display: flex;
+            align-items: center;
+        }
+
+        .filter-select {
+            padding: 0.5rem 1rem;
+            border: 1px solid rgba(0,0,0,0.2);
+            border-radius: 0.375rem;
+            font-size: 0.9rem;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 0.375rem;
+            cursor: pointer;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.2s;
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-secondary {
+            background: rgba(0,0,0,0.1);
+            color: var(--text-primary);
+        }
+
+        .btn-ghost {
+            background: transparent;
+            color: var(--text-primary);
+        }
+
+        .btn:hover:not(:disabled) {
+            opacity: 0.9;
+            transform: translateY(-1px);
+        }
+
+        .blocklist-content {
+            flex: 1;
+            display: flex;
+            gap: 1rem;
+            padding: 1rem;
+            overflow: hidden;
+        }
+
+        .table-panel {
+            flex: 2;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid rgba(0,0,0,0.1);
+            border-radius: 0.5rem;
+            overflow: hidden;
+            background: white;
+        }
+
+        .virtual-table-wrapper {
+            flex: 1;
+            overflow: hidden;
+        }
+
+        .virtual-table-container {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .virtual-table-header table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #f3f4f6;
+        }
+
+        .virtual-table-header th {
+            padding: 0.75rem;
+            text-align: left;
+            font-weight: 600;
+            font-size: 0.875rem;
+            color: #374151;
+            border-bottom: 2px solid #e5e7eb;
+            cursor: pointer;
+        }
+
+        .virtual-table-viewport {
+            flex: 1;
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+
+        .virtual-table-viewport table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .virtual-table-viewport td {
+            padding: 0.75rem;
+            font-size: 0.875rem;
+            border-bottom: 1px solid #f3f4f6;
+        }
+
+        .virtual-table-viewport tr.striped {
+            background: #f9fafb;
+        }
+
+        .virtual-table-viewport tr.hoverable:hover {
+            background: #eff6ff;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 0.25rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .badge-info {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+
+        .badge-success {
+            background: #dcfce7;
+            color: #065f46;
+        }
+
+        .badge-error {
+            background: #fee2e2;
+            color: #7f1d1d;
+        }
+
+        .badge-warning {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .details-panel {
+            flex: 1;
+            border: 1px solid rgba(0,0,0,0.1);
+            border-radius: 0.5rem;
+            padding: 1rem;
+            background: white;
+            overflow-y: auto;
+        }
+
+        .details-placeholder {
+            text-align: center;
+            color: var(--text-secondary);
+            padding: 2rem;
+        }
+
+        .details-card {
+            padding: 1rem;
+        }
+
+        .details-card h3 {
+            margin: 0 0 1rem 0;
+            font-size: 1.1rem;
+            color: var(--primary);
+        }
+
+        .detail-rows {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .detail-row {
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+        }
+
+        .detail-label {
+            min-width: 100px;
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+
+        .detail-value {
+            flex: 1;
+            color: var(--text-primary);
+        }
+
+        .detail-tags {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            background: rgba(30, 64, 175, 0.1);
+            color: var(--primary);
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+            font-size: 0.75rem;
+        }
+
+        .detail-actions {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .blocklist-footer {
+            padding: 1rem;
+            background: rgba(0,0,0,0.02);
+            border-top: 1px solid rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .bulk-ops-buttons {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.open {
+            display: flex;
+        }
+
+        /* Dark theme */
+        html[data-theme="dark"] {
+            --bg-primary: #0f172a;
+            --bg-secondary: #1e293b;
+            --text-primary: #f1f5f9;
+            --text-secondary: #cbd5e1;
+        }
+
+        html[data-theme="dark"] .search-input,
+        html[data-theme="dark"] .filter-select {
+            background: #1e293b;
+            color: #f1f5f9;
+            border-color: #334155;
+        }
+
+        html[data-theme="dark"] .virtual-table-header {
+            background: #1e293b;
+        }
+
+        html[data-theme="dark"] .virtual-table-viewport {
+            background: #0f172a;
+        }
+
+        html[data-theme="dark"] .details-panel,
+        html[data-theme="dark"] .table-panel {
+            background: #1e293b;
+            border-color: #334155;
+        }
+
+        @media (max-width: 768px) {
+            .blocklist-content {
+                flex-direction: column;
+            }
+
+            .table-panel {
+                flex: 1;
+            }
+
+            .details-panel {
+                flex: 0 200px;
+            }
+
+            .action-buttons {
+                flex-wrap: wrap;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="blocklist-manager-root"></div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+    <script src="assets/js/components/virtual-table.js"></script>
+    <script src="assets/js/components/blocklist-search.js"></script>
+    <script src="assets/js/components/bulk-operations.js"></script>
+    <script src="assets/js/components/undo-redo-manager.js"></script>
+    <script src="assets/js/components/csv-import-wizard.js"></script>
+    <script src="assets/js/components/stats-dashboard.js"></script>
+    <script src="assets/js/components/export-manager.js"></script>
+    <script src="assets/js/components/blocklist-manager.js"></script>
+
+    <script>
+        // Initialize Blocklist Manager
+        document.addEventListener('DOMContentLoaded', () => {
+            const manager = new BlocklistManager('blocklist-manager-root', {
+                enableUndo: true,
+                enableBulkOps: true,
+                enableStats: true,
+                enableCsvImport: true
+            });
+
+            // Load sample data (replace with API call)
+            const sampleData = [
+                { email: 'spam1@spam.com', domain: 'spam.com', status: 'blocked', source: 'CSV', importedAt: new Date().toISOString() },
+                { email: 'user@gmail.com', domain: 'gmail.com', status: 'allowed', source: 'Manual', importedAt: new Date().toISOString() },
+                { email: 'invalid@test.org', domain: 'test.org', status: 'new', source: 'API', importedAt: new Date().toISOString() },
+            ];
+
+            manager.loadItems(sampleData);
+
+            // Subscribe to events
+            manager.subscribe((event, data) => {
+                console.log(`📋 Event: ${event}`, data);
+            });
+
+            // Make accessible globally for debugging
+            window.blocklistManager = manager;
+        });
+    </script>
+</body>
+</html>

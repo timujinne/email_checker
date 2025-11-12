@@ -1,0 +1,735 @@
+/* ============================================
+   TAILWIND CSS 4.x IMPORT WITH DAISYUI 5.x
+   ============================================ */
+@import "tailwindcss";
+@plugin "daisyui" {
+  themes: light --default, dark --prefers-dark;
+}
+
+/* ============================================
+   CUSTOM STYLES - Email Checker Web UI
+   ============================================ */
+
+/* ============================================
+   COLOR VARIABLES
+   ============================================ */
+:root {
+    /* Primary Colors - Dark Blue */
+    --primary: #1e40af;        /* Blue-900 */
+    --primary-dark: #1e3a8a;   /* Blue-800 */
+    --primary-light: #3b82f6;  /* Blue-500 */
+
+    /* Secondary Colors - Dark Red */
+    --secondary: #991b1b;       /* Red-900 */
+    --secondary-dark: #7f1d1d;  /* Red-800 */
+    --secondary-light: #f87171; /* Red-400 */
+
+    /* Success Colors */
+    --success: #065f46;         /* Emerald-900 */
+    --success-light: #10b981;   /* Emerald-500 */
+
+    /* Warning Colors */
+    --warning: #92400e;         /* Amber-900 */
+    --warning-light: #f59e0b;   /* Amber-400 */
+
+    /* Neutral Colors */
+    --gray-50: #f8fafc;
+    --gray-100: #f1f5f9;
+    --gray-200: #e2e8f0;
+    --gray-300: #cbd5e1;
+    --gray-400: #94a3b8;
+    --gray-500: #64748b;
+    --gray-600: #475569;
+    --gray-700: #334155;
+    --gray-800: #1e293b;
+    --gray-900: #0f172a;
+}
+
+/* ============================================
+   LIGHT THEME
+   ============================================ */
+html[data-theme="light"] {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f8fafc;      /* Slate-50 */
+    --bg-tertiary: #f1f5f9;       /* Slate-100 */
+    --text-primary: #0f172a;      /* Slate-950 */
+    --text-secondary: #475569;    /* Slate-600 */
+    --border-color: #e2e8f0;      /* Slate-200 */
+    --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+}
+
+/* ============================================
+   DARK THEME
+   ============================================ */
+html[data-theme="dark"] {
+    --bg-primary: #0f172a;        /* Slate-950 */
+    --bg-secondary: #1e293b;      /* Slate-900 */
+    --bg-tertiary: #334155;       /* Slate-700 */
+    --text-primary: #f1f5f9;      /* Slate-100 */
+    --text-secondary: #cbd5e1;    /* Slate-300 */
+    --border-color: #334155;      /* Slate-700 */
+    --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3);
+}
+
+/* ============================================
+   GLOBAL STYLES
+   ============================================ */
+* {
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+        'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+        sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* ============================================
+   BUTTONS
+   ============================================ */
+.btn-primary {
+    @apply bg-primary hover:bg-primary/90 text-primary-content border-0;
+    transition: all 0.2s ease;
+}
+
+.btn-primary:hover:not(:disabled) {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+}
+
+.btn-primary:active {
+    @apply bg-primary/90;
+    transform: translateY(0);
+}
+
+.btn-secondary {
+    @apply bg-error hover:bg-error/90 text-error-content border-0;
+    transition: all 0.2s ease;
+}
+
+.btn-secondary:hover:not(:disabled) {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+}
+
+.btn-secondary:active {
+    @apply bg-error/90;
+    transform: translateY(0);
+}
+
+.btn-success {
+    @apply bg-success hover:bg-success/90 text-success-content border-0;
+    transition: all 0.2s ease;
+}
+
+.btn-success:hover:not(:disabled) {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+}
+
+.btn-outline-primary {
+    @apply border-2 border-primary text-primary hover:bg-primary/10;
+}
+
+.btn-outline-secondary {
+    @apply border-2 border-error text-error hover:bg-error/10;
+}
+
+.btn {
+    transition: all 0.2s ease;
+}
+
+/* ============================================
+   CARDS
+   ============================================ */
+.card {
+    @apply bg-base-100 rounded-lg shadow border border-base-300;
+}
+
+.card-elevated {
+    @apply card shadow-lg;
+}
+
+.card-compact {
+    @apply card p-4;
+}
+
+/* ============================================
+   FORMS
+   ============================================ */
+.form-input,
+.form-select,
+.form-textarea {
+    @apply bg-base-100 text-base-content border border-base-300;
+    @apply focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent;
+}
+
+.form-label {
+    @apply block text-sm font-semibold text-base-content opacity-80 mb-2;
+}
+
+/* ============================================
+   TABLES
+   ============================================ */
+.table-custom {
+    @apply w-full border-collapse;
+}
+
+.table-custom thead {
+    @apply bg-base-200 border-b border-base-300;
+}
+
+.table-custom th {
+    @apply px-6 py-3 text-left text-sm font-semibold text-base-content;
+}
+
+.table-custom tbody tr {
+    @apply border-b border-base-300 hover:bg-base-200 transition-colors;
+}
+
+.table-custom td {
+    @apply px-6 py-4 text-sm text-base-content;
+}
+
+/* Row hover effect */
+tr:hover {
+    background-color: hsl(var(--b2));
+    transition: background-color 0.15s ease;
+}
+
+/* Checkbox animation */
+.checkbox {
+    transition: all 0.15s ease;
+}
+
+/* ============================================
+   BADGES
+   ============================================ */
+/* Using daisyUI native badge classes - custom overrides removed to prevent conflicts */
+
+.badge {
+    transition: all 0.2s ease;
+}
+
+/* Responsive badge sizing */
+@media (max-width: 768px) {
+    .badge {
+        @apply text-[0.65rem] px-2 py-0.5;
+    }
+}
+
+@media (min-width: 769px) {
+    .badge {
+        @apply text-xs;
+    }
+}
+
+/* ============================================
+   ALERTS
+   ============================================ */
+.alert {
+    @apply p-4 rounded-lg border;
+}
+
+.alert-primary {
+    @apply bg-primary/10 border-primary text-primary;
+}
+
+.alert-secondary {
+    @apply bg-secondary/10 border-secondary text-secondary;
+}
+
+.alert-success {
+    @apply bg-success/10 border-success text-success;
+}
+
+.alert-warning {
+    @apply bg-warning/10 border-warning text-warning;
+}
+
+/* ============================================
+   LOADING STATES
+   ============================================ */
+.skeleton {
+    @apply animate-pulse bg-base-300 rounded;
+}
+
+.spinner {
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-top: 3px solid #1e40af;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* ============================================
+   SCROLLBAR STYLING
+   ============================================ */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    @apply bg-base-200;
+}
+
+::-webkit-scrollbar-thumb {
+    @apply bg-base-300 rounded hover:bg-base-content/30;
+}
+
+/* ============================================
+   UTILITY CLASSES
+   ============================================ */
+/* Using daisyUI theme colors - no custom overrides needed */
+
+/* ============================================
+   ANIMATIONS
+   ============================================ */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(-10px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-fade-in {
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.animate-slide-in {
+    animation: slideIn 0.3s ease-in-out;
+}
+
+/* Modal animations */
+.modal {
+    animation: fadeIn 0.2s ease;
+}
+
+.modal-box {
+    animation: slideUp 0.3s ease;
+}
+
+/* Loading overlay fade */
+#loading-overlay {
+    animation: fadeIn 0.2s ease;
+}
+
+/* Success animation for updated rows */
+@keyframes successFlash {
+    0% {
+        background-color: transparent;
+    }
+    50% {
+        background-color: hsl(var(--su) / 0.2);
+    }
+    100% {
+        background-color: transparent;
+    }
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+
+/* Mobile Optimizations */
+@media (max-width: 768px) {
+    .sidebar-hidden {
+        @apply hidden;
+    }
+
+    .main-full {
+        @apply w-full;
+    }
+
+    /* Toolbar stacking */
+    .lists-toolbar {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    /* Smaller buttons on mobile */
+    .lists-toolbar .btn {
+        font-size: 0.875rem;
+        padding: 0.5rem 0.75rem;
+    }
+
+    /* Modal full width on mobile */
+    #bulk-edit-modal .modal-box {
+        max-width: 95vw;
+        margin: 1rem;
+    }
+
+    /* Table horizontal scroll */
+    .table-container {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    /* Column Manager dropdown left aligned on mobile */
+    #column-manager-container .dropdown {
+        dropdown-end: dropdown-start;
+    }
+}
+
+/* Tablet Optimizations */
+@media (min-width: 769px) and (max-width: 1024px) {
+    #bulk-edit-modal .modal-box {
+        max-width: 90vw;
+    }
+}
+
+/* ============================================
+   PRINT STYLES
+   ============================================ */
+@media print {
+    .no-print {
+        @apply hidden;
+    }
+
+    body {
+        @apply bg-base-100 text-base-content;
+    }
+}
+
+/* ============================================
+   DASHBOARD SPECIFIC STYLES
+   ============================================ */
+
+/* KPI Stats Hover Effects */
+.dashboard-stats .stat {
+    position: relative;
+    overflow: hidden;
+}
+
+.dashboard-stats .stat::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transition: left 0.5s ease;
+}
+
+.dashboard-stats .stat:hover::before {
+    left: 100%;
+}
+
+/* Loading Skeleton Animation */
+@keyframes shimmer {
+    0% {
+        opacity: 0.6;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0.6;
+    }
+}
+
+.loading-skeleton {
+    animation: shimmer 1.5s ease-in-out infinite;
+}
+
+/* Activity Feed Scrollbar */
+.activity-feed-scroll::-webkit-scrollbar {
+    width: 6px;
+}
+
+.activity-feed-scroll::-webkit-scrollbar-track {
+    @apply bg-base-200 rounded;
+}
+
+.activity-feed-scroll::-webkit-scrollbar-thumb {
+    @apply bg-base-300 rounded;
+    transition: background-color 0.2s ease;
+}
+
+.activity-feed-scroll::-webkit-scrollbar-thumb:hover {
+    @apply bg-primary;
+}
+
+/* Empty State Animation */
+.empty-state {
+    animation: fadeIn 0.5s ease;
+}
+
+.empty-state svg {
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 0.2;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.4;
+        transform: scale(1.05);
+    }
+}
+
+/* Status Indicator Pulse */
+@keyframes statusPulse {
+    0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.6;
+        transform: scale(1.2);
+    }
+}
+
+#ws-indicator {
+    animation: statusPulse 2s ease-in-out infinite;
+}
+
+/* Glass Morphism Effect (Dark Mode) */
+html[data-theme="dark"] .card {
+    backdrop-filter: blur(10px);
+    background-color: rgba(15, 23, 42, 0.8);
+}
+
+html[data-theme="dark"] .card:hover {
+    background-color: rgba(15, 23, 42, 0.9);
+}
+
+/* Chart Card Enhancements */
+.card canvas {
+    transition: opacity 0.3s ease;
+}
+
+.card:hover canvas {
+    opacity: 1;
+}
+
+/* Badge Animations */
+.badge {
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.badge:hover {
+    transform: scale(1.05);
+}
+
+/* Divider Styling */
+.divider {
+    @apply opacity-30;
+}
+
+/* System Status Cards */
+#system-status .card {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+#system-status .card:hover {
+    transform: translateY(-2px);
+}
+
+/* Gradient Header Animation */
+.bg-gradient-to-r {
+    background-size: 200% 100%;
+    animation: gradientFlow 3s ease infinite;
+}
+
+@keyframes gradientFlow {
+    0%, 100% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+}
+
+/* Responsive Chart Heights */
+@media (max-width: 640px) {
+    .card canvas {
+        height: 220px !important;
+    }
+}
+
+@media (min-width: 641px) and (max-width: 1024px) {
+    .card canvas {
+        height: 250px !important;
+    }
+}
+
+/* Touch Feedback for Mobile */
+@media (hover: none) and (pointer: coarse) {
+    .dashboard-stats .stat:active {
+        transform: scale(0.98);
+        transition: transform 0.1s ease;
+    }
+
+    .card:active {
+        transform: scale(0.99);
+        transition: transform 0.1s ease;
+    }
+}
+
+/* ============================================
+   MODAL Z-INDEX FIX
+   ============================================
+   CRITICAL FIX: Ensure modals are always on top of all content
+   Including sidebar (z-40), toast (z-50), loading overlay (z-50)
+   ============================================ */
+
+dialog.modal,
+dialog.modal[open] {
+    z-index: 9999 !important;
+    position: fixed !important;
+    inset: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    display: grid !important;
+    place-items: center !important;
+    background: transparent !important;
+}
+
+dialog.modal::backdrop {
+    z-index: 9998 !important;
+    background-color: rgba(0, 0, 0, 0.5) !important;
+}
+
+/* Ensure modal-box is visible and interactive */
+dialog.modal .modal-box {
+    position: relative !important;
+    z-index: 10000 !important;
+    max-width: 32rem !important;
+    background-color: hsl(var(--b1)) !important;
+    border-radius: var(--rounded-box, 1rem) !important;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25) !important;
+}
+
+/* Prevent stacking context issues */
+#app,
+#main-content,
+.drawer-side {
+    transform: none !important;
+    filter: none !important;
+    perspective: none !important;
+    will-change: auto !important;
+}
+
+/* Ensure modal backdrop is clickable to close */
+dialog.modal[open]::backdrop {
+    cursor: pointer !important;
+}
+
+/* Modal box hover state */
+dialog.modal .modal-box:hover {
+    cursor: default !important;
+}
+
+/* ============================================
+   MODAL BACKGROUND FIX - Override Glass Morphism
+   ============================================
+   Ensures modal background is fully opaque for readability
+   ============================================ */
+
+/* Dark theme - solid background */
+html[data-theme="dark"] dialog.modal .modal-box {
+    background-color: hsl(var(--b1)) !important;
+    backdrop-filter: none !important;
+    opacity: 1 !important;
+}
+
+/* Light theme - solid background */
+html[data-theme="light"] dialog.modal .modal-box {
+    background-color: hsl(var(--b1)) !important;
+    opacity: 1 !important;
+}
+
+/* ============================================
+   DIV-BASED MODAL STYLES (modal.js component)
+   ============================================ */
+
+/* Modal container - transparent background, no gray overlay */
+.modal.fixed.inset-0 {
+    background-color: transparent !important;
+    backdrop-filter: none !important;
+}
+
+/* Modal content box - solid background */
+.modal-content {
+    background-color: hsl(var(--b1)) !important;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5) !important;
+}
+
+/* Dark theme modal content */
+html[data-theme="dark"] .modal-content {
+    background-color: hsl(var(--b1)) !important;
+    backdrop-filter: none !important;
+    opacity: 1 !important;
+}
+
+/* Light theme modal content */
+html[data-theme="light"] .modal-content {
+    background-color: hsl(var(--b1)) !important;
+    opacity: 1 !important;
+}
+
+/* ============================================
+   GLOBAL MODAL-BOX STYLES
+   ============================================
+   Ensure all modal-box elements (including dynamic) have theme background
+   ============================================ */
+
+.modal-box {
+    background-color: hsl(var(--b1)) !important;
+}
+
+/* Dark theme modal-box */
+html[data-theme="dark"] .modal-box {
+    background-color: hsl(var(--b1)) !important;
+    opacity: 1 !important;
+}
+
+/* Light theme modal-box */
+html[data-theme="light"] .modal-box {
+    background-color: hsl(var(--b1)) !important;
+    opacity: 1 !important;
+}

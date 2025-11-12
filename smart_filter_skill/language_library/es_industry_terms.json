@@ -1,0 +1,271 @@
+{
+  "language": "es",
+  "country_code": "ES",
+  "description": "Spanish industry terminology for agriculture, machinery, automotive, and earthmoving equipment",
+  "version": "1.0.0",
+  "term_count": 1000,
+
+  "industries": {
+    "hydraulics": {
+      "primary": [
+        "cilindro hidráulico", "bomba hidráulica", "válvula hidráulica",
+        "motor hidráulico", "grupo hidráulico", "central hidráulica",
+        "pistón hidráulico", "aceite hidráulico", "manguera hidráulica",
+        "racor hidráulico", "hidráulica", "oleohidráulica"
+      ],
+      "secondary": [
+        "sistema hidráulico", "componente hidráulico", "prensa hidráulica",
+        "elevador hidráulico", "acumulador hidráulico", "filtro hidráulico",
+        "distribuidor hidráulico", "multiplicador", "servo", "proporcional"
+      ],
+      "oem_indicators": [
+        "fabricante", "productor", "manufacturador", "OEM",
+        "constructor", "ensamblador", "diseño personalizado"
+      ],
+      "applications": [
+        "construcción", "agricultura", "industrial", "móvil",
+        "marino", "elevación", "prensado", "movimiento de tierras"
+      ]
+    },
+
+    "earthmoving": {
+      "primary": [
+        "excavadora", "pala cargadora", "bulldozer", "retroexcavadora",
+        "niveladora", "compactadora", "rodillo", "dumper",
+        "minicargadora", "miniexcavadora", "excavadora de cadenas"
+      ],
+      "secondary": [
+        "maquinaria de construcción", "equipo de movimiento de tierras",
+        "maquinaria pesada", "equipo de excavación", "máquina de obra",
+        "cuchara", "brazo", "pluma", "tren de rodaje", "oruga"
+      ],
+      "oem_indicators": [
+        "fabricante", "productor", "constructor de maquinaria",
+        "ensamblador", "OEM", "casa matriz"
+      ],
+      "applications": [
+        "construcción", "minería", "cantera", "demolición",
+        "obra civil", "movimiento de tierras", "excavación", "carreteras"
+      ]
+    },
+
+    "automotive": {
+      "primary": [
+        "automóvil", "camión", "vehículo", "autobús", "furgoneta",
+        "tractor", "remolque", "semirremolque", "carretilla elevadora",
+        "motor", "transmisión", "chasis", "carrocería"
+      ],
+      "secondary": [
+        "recambios", "repuestos", "automoción", "vehículo industrial",
+        "camión pesado", "vehículo comercial", "maquinaria agrícola",
+        "tractores agrícolas", "cosechadora", "pulverizador"
+      ],
+      "oem_indicators": [
+        "fabricante de vehículos", "constructor de automóviles",
+        "ensamblador", "OEM", "marca original", "casa madre"
+      ],
+      "applications": [
+        "transporte", "logística", "agricultura", "construcción",
+        "minería", "servicios", "distribución", "carga"
+      ]
+    },
+
+    "agriculture": {
+      "primary": [
+        "tractor agrícola", "cosechadora", "pulverizador", "sembradora",
+        "arado", "cultivador", "rastrillo", "empacadora", "segadora",
+        "atomizador", "abonadora", "remolque agrícola", "apero"
+      ],
+      "secondary": [
+        "maquinaria agrícola", "equipo agrícola", "agricultura de precisión",
+        "implemento agrícola", "tractor de viñedo", "tractor frutero",
+        "cosecha", "siembra", "tratamiento fitosanitario"
+      ],
+      "oem_indicators": [
+        "fabricante agrícola", "constructor de maquinaria",
+        "productor de equipos", "OEM", "casa matriz"
+      ],
+      "applications": [
+        "cereales", "viñedo", "fruticultura", "horticultura",
+        "olivar", "ganadería", "forraje", "agricultura ecológica"
+      ]
+    },
+
+    "manufacturing": {
+      "primary": [
+        "máquina herramienta", "torno", "fresadora", "taladro",
+        "prensa", "robot industrial", "automatización", "CNC",
+        "mecanizado", "soldadura", "corte láser", "plegadora"
+      ],
+      "secondary": [
+        "fabricación", "producción industrial", "proceso de fabricación",
+        "línea de producción", "industria 4.0", "manufactura",
+        "taller mecánico", "mecanizado de precisión"
+      ],
+      "oem_indicators": [
+        "fabricante industrial", "productor", "constructor de máquinas",
+        "OEM", "ensamblador", "integrador de sistemas"
+      ],
+      "applications": [
+        "metal", "plástico", "madera", "composites",
+        "aeronáutica", "automoción", "electrónica", "médico"
+      ]
+    }
+  },
+
+  "geographic": {
+    "country_names": [
+      "España", "Spain", "Espagne", "Spagna", "Spanien",
+      "español", "española", "ibérico", "ibérica", "peninsular"
+    ],
+    "major_cities": [
+      "Madrid", "Barcelona", "Valencia", "Sevilla", "Zaragoza",
+      "Málaga", "Murcia", "Palma", "Las Palmas", "Bilbao",
+      "Alicante", "Córdoba", "Valladolid", "Vigo", "Gijón",
+      "Hospitalet", "Vitoria", "Granada", "Elche", "Oviedo",
+      "Badalona", "Cartagena", "Terrassa", "Jerez", "Sabadell"
+    ],
+    "regions": [
+      "Cataluña", "Catalunya", "Andalucía", "Comunidad de Madrid",
+      "Comunidad Valenciana", "Galicia", "Castilla y León",
+      "País Vasco", "Euskadi", "Castilla-La Mancha", "Canarias",
+      "Región de Murcia", "Aragón", "Baleares", "Extremadura",
+      "Asturias", "Navarra", "Cantabria", "La Rioja"
+    ],
+    "autonomous_cities": [
+      "Ceuta", "Melilla"
+    ],
+    "industrial_regions": [
+      "Barcelona", "Madrid", "Valencia", "Bilbao", "Zaragoza",
+      "Sevilla", "Valladolid", "Vigo", "Gijón", "Santander",
+      "País Vasco", "Cataluña", "Comunidad de Madrid"
+    ]
+  },
+
+  "exclusions": {
+    "personal_domains": [
+      "hotmail.es", "yahoo.es", "gmail.com", "outlook.es",
+      "telefonica.net", "ya.com", "terra.es", "ono.com",
+      "jazztel.es", "vodafone.es", "orange.es", "movistar.es"
+    ],
+    "free_email_indicators": [
+      "@hotmail", "@yahoo", "@gmail", "@outlook", "@live",
+      "@icloud", "@aol", "@protonmail", "@tutanota"
+    ],
+    "hr_prefixes": [
+      "rrhh@", "rh@", "recursos.humanos@", "recursoshumanos@",
+      "empleo@", "trabajo@", "seleccion@", "personal@",
+      "hr@", "jobs@", "careers@", "talento@", "nominas@"
+    ],
+    "service_prefixes": [
+      "noreply@", "no-reply@", "noresponder@", "donotreply@",
+      "marketing@", "publicidad@", "prensa@", "comunicacion@",
+      "info@", "informacion@", "soporte@", "support@",
+      "ayuda@", "servicio@", "atencion@", "contacto@"
+    ],
+    "excluded_industries": {
+      "retail": [
+        "tienda", "shop", "boutique", "almacén", "centro comercial",
+        "supermercado", "hipermercado", "outlet", "retail",
+        "venta al por menor", "comercio minorista"
+      ],
+      "tourism": [
+        "hotel", "hostal", "pensión", "apartamento", "camping",
+        "turismo", "viajes", "agencia de viajes", "tour",
+        "restaurante", "bar", "cafetería", "hostelería"
+      ],
+      "education": [
+        "escuela", "colegio", "instituto", "universidad",
+        "centro educativo", "academia", "formación profesional",
+        "fp", "educación", "estudiante", "alumno"
+      ],
+      "healthcare": [
+        "hospital", "clínica", "centro médico", "consultorio",
+        "farmacia", "centro de salud", "ambulatorio",
+        "sanitario", "médico", "doctor", "enfermería"
+      ],
+      "finance": [
+        "banco", "caja", "entidad financiera", "aseguradora",
+        "seguro", "banca", "financiera", "crédito"
+      ],
+      "government": [
+        "ayuntamiento", "diputación", "junta", "gobierno",
+        "ministerio", "consejería", "administración pública",
+        "organismo público", "entidad pública"
+      ]
+    },
+    "excluded_tlds": [
+      ".ru", ".cn", ".in", ".pk", ".bd", ".vn", ".th", ".id", ".my", ".ph",
+      ".tr", ".ua", ".by", ".kz", ".uz", ".az", ".ge", ".am"
+    ],
+    "excluded_countries": [
+      "China", "India", "Rusia", "Turquía", "Pakistán", "Bangladesh",
+      "Vietnam", "Tailandia", "Indonesia", "Malasia", "Filipinas",
+      "Bielorrusia", "Ucrania"
+    ],
+    "suspicious_patterns": [
+      "temp", "temporal", "desechable", "disposable", "throw",
+      "guerrilla", "fake", "falso", "test", "prueba", "spam"
+    ]
+  },
+
+  "corporate_indicators": {
+    "legal_forms": [
+      "S.L.", "SL", "S.A.", "SA", "S.L.U.", "SLU", "S.A.U.", "SAU",
+      "S.Coop", "Coop", "Cooperativa", "S.L.L.", "SLL",
+      "Sociedad Limitada", "Sociedad Anónima", "Limitada", "Anónima"
+    ],
+    "business_terms": [
+      "empresa", "compañía", "corporación", "grupo empresarial",
+      "industria", "industrial", "fabricante", "manufacturador",
+      "distribuidor", "proveedor", "suministrador", "comercial"
+    ],
+    "domain_patterns": [
+      ".es", ".cat", ".gal", ".eus",
+      "empresa", "company", "industrial", "group", "grupo"
+    ]
+  },
+
+  "email_patterns": {
+    "preferred_prefixes": [
+      "ventas@", "comercial@", "export@", "exportacion@",
+      "internacional@", "pedidos@", "compras@", "administracion@",
+      "administracio@", "admon@", "adm@", "direccion@",
+      "gerencia@", "produccion@", "fabrica@", "taller@"
+    ],
+    "technical_prefixes": [
+      "ingenieria@", "tecnico@", "servicio.tecnico@",
+      "asistencia@", "postventa@", "servicio@", "taller@",
+      "mantenimiento@", "reparaciones@"
+    ],
+    "contact_types": {
+      "sales": ["ventas", "comercial", "export", "exportacion", "internacional"],
+      "purchasing": ["compras", "aprovisionamiento", "suministros"],
+      "administration": ["administracion", "administracio", "admon", "adm", "contabilidad"],
+      "management": ["direccion", "gerencia", "director", "presidente"],
+      "production": ["produccion", "fabrica", "taller", "planta"],
+      "technical": ["ingenieria", "tecnico", "asistencia", "servicio"]
+    }
+  },
+
+  "scoring_hints": {
+    "high_value_terms": [
+      "fabricante", "manufacturador", "productor", "constructor",
+      "OEM", "casa matriz", "ensamblador", "integrador",
+      "ingeniería", "diseño", "desarrollo", "I+D", "innovación"
+    ],
+    "medium_value_terms": [
+      "distribuidor oficial", "representante", "concesionario",
+      "proveedor especializado", "suministrador industrial",
+      "almacén técnico", "recambios originales"
+    ],
+    "low_value_terms": [
+      "taller", "reparación", "servicio postventa", "mantenimiento",
+      "instalación", "montaje", "asistencia técnica"
+    ],
+    "negative_terms": [
+      "venta al público", "retail", "consumidor final", "particular",
+      "segunda mano", "usado", "ocasión", "alquiler", "rent"
+    ]
+  }
+}

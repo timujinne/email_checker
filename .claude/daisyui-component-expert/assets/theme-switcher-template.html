@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Theme Switcher Component - daisyUI</title>
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@4.4.19/dist/full.min.css" rel="stylesheet" type="text/css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-base-200 min-h-screen">
+  <!-- Navbar with theme switcher -->
+  <div class="navbar bg-base-100 shadow-lg">
+    <div class="flex-1">
+      <a class="btn btn-ghost text-xl">Email Checker</a>
+    </div>
+    <div class="flex-none gap-2">
+      <!-- Theme Switcher Dropdown -->
+      <div class="dropdown dropdown-end">
+        <button tabindex="0" class="btn btn-ghost btn-circle" aria-label="Change theme">
+          <svg id="themeIcon" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+          </svg>
+        </button>
+        <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52 mt-4 max-h-96 overflow-y-auto">
+          <li class="menu-title"><span>Choose Theme</span></li>
+          <li><button data-theme="light" class="theme-btn" onclick="setTheme('light')">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+            Light
+            <svg class="w-4 h-4 ml-auto theme-check hidden" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+          </button></li>
+          <li><button data-theme="dark" class="theme-btn" onclick="setTheme('dark')">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
+            Dark
+            <svg class="w-4 h-4 ml-auto theme-check hidden" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+          </button></li>
+          <li><button data-theme="cupcake" class="theme-btn" onclick="setTheme('cupcake')">
+            <span class="badge badge-sm" style="background: #ff69b4; border: none;"></span>
+            Cupcake
+            <svg class="w-4 h-4 ml-auto theme-check hidden" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+          </button></li>
+          <li><button data-theme="bumblebee" class="theme-btn" onclick="setTheme('bumblebee')">
+            <span class="badge badge-sm" style="background: #fcd34d; border: none;"></span>
+            Bumblebee
+            <svg class="w-4 h-4 ml-auto theme-check hidden" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+          </button></li>
+          <li><button data-theme="emerald" class="theme-btn" onclick="setTheme('emerald')">
+            <span class="badge badge-sm" style="background: #34d399; border: none;"></span>
+            Emerald
+            <svg class="w-4 h-4 ml-auto theme-check hidden" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+          </button></li>
+          <li><button data-theme="corporate" class="theme-btn" onclick="setTheme('corporate')">
+            <span class="badge badge-sm" style="background: #6b7280; border: none;"></span>
+            Corporate
+            <svg class="w-4 h-4 ml-auto theme-check hidden" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+          </button></li>
+          <li><button data-theme="synthwave" class="theme-btn" onclick="setTheme('synthwave')">
+            <span class="badge badge-sm" style="background: #e779c1; border: none;"></span>
+            Synthwave
+            <svg class="w-4 h-4 ml-auto theme-check hidden" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+          </button></li>
+          <li><button data-theme="retro" class="theme-btn" onclick="setTheme('retro')">
+            <span class="badge badge-sm" style="background: #ef9995; border: none;"></span>
+            Retro
+            <svg class="w-4 h-4 ml-auto theme-check hidden" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+          </button></li>
+          <li><button data-theme="cyberpunk" class="theme-btn" onclick="setTheme('cyberpunk')">
+            <span class="badge badge-sm" style="background: #ffee00; border: none;"></span>
+            Cyberpunk
+            <svg class="w-4 h-4 ml-auto theme-check hidden" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+          </button></li>
+          <li><button data-theme="valentine" class="theme-btn" onclick="setTheme('valentine')">
+            <span class="badge badge-sm" style="background: #ff85cb; border: none;"></span>
+            Valentine
+            <svg class="w-4 h-4 ml-auto theme-check hidden" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+          </button></li>
+          <li><button data-theme="aqua" class="theme-btn" onclick="setTheme('aqua')">
+            <span class="badge badge-sm" style="background: #09ecf3; border: none;"></span>
+            Aqua
+            <svg class="w-4 h-4 ml-auto theme-check hidden" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+          </button></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Content Area -->
+  <div class="container mx-auto p-8">
+    <div class="card bg-base-100 shadow-xl">
+      <div class="card-body">
+        <h2 class="card-title">Theme Switcher Demo</h2>
+        <p class="text-base-content/70">
+          Use the theme switcher in the navbar to change the appearance. Your selection is saved to localStorage.
+        </p>
+        
+        <div class="divider">Component Preview</div>
+
+        <!-- Sample components to show theme -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div class="stat bg-base-200 rounded-lg">
+            <div class="stat-title">Total Lists</div>
+            <div class="stat-value text-primary">12</div>
+            <div class="stat-desc">5 active</div>
+          </div>
+
+          <div class="stat bg-base-200 rounded-lg">
+            <div class="stat-title">Clean Emails</div>
+            <div class="stat-value text-success">4,890</div>
+            <div class="stat-desc">↗︎ 12% increase</div>
+          </div>
+
+          <div class="stat bg-base-200 rounded-lg">
+            <div class="stat-title">Blocked</div>
+            <div class="stat-value text-error">344</div>
+            <div class="stat-desc">↘︎ 5% decrease</div>
+          </div>
+        </div>
+
+        <div class="divider">Buttons</div>
+        
+        <div class="flex flex-wrap gap-2">
+          <button class="btn btn-primary">Primary</button>
+          <button class="btn btn-secondary">Secondary</button>
+          <button class="btn btn-accent">Accent</button>
+          <button class="btn btn-info">Info</button>
+          <button class="btn btn-success">Success</button>
+          <button class="btn btn-warning">Warning</button>
+          <button class="btn btn-error">Error</button>
+        </div>
+
+        <div class="divider">Badges</div>
+
+        <div class="flex flex-wrap gap-2">
+          <span class="badge badge-primary">Primary</span>
+          <span class="badge badge-secondary">Secondary</span>
+          <span class="badge badge-accent">Accent</span>
+          <span class="badge badge-success">Clean</span>
+          <span class="badge badge-error">Blocked</span>
+          <span class="badge badge-warning">Invalid</span>
+        </div>
+
+        <div class="divider">Alerts</div>
+
+        <div class="space-y-2">
+          <div class="alert alert-info">
+            <svg class="stroke-current shrink-0 w-6 h-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            <span>Info: Processing in progress</span>
+          </div>
+          <div class="alert alert-success">
+            <svg class="stroke-current shrink-0 w-6 h-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            <span>Success: Processing completed</span>
+          </div>
+          <div class="alert alert-warning">
+            <svg class="stroke-current shrink-0 w-6 h-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+            <span>Warning: Some emails may be invalid</span>
+          </div>
+          <div class="alert alert-error">
+            <svg class="stroke-current shrink-0 w-6 h-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            <span>Error: Processing failed</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Current theme display -->
+    <div class="text-center mt-8 text-base-content/70">
+      Current theme: <span id="currentTheme" class="font-bold">light</span>
+    </div>
+  </div>
+
+  <script>
+    // Theme management
+    function setTheme(themeName) {
+      document.documentElement.setAttribute('data-theme', themeName);
+      localStorage.setItem('theme', themeName);
+      updateThemeUI(themeName);
+    }
+
+    function updateThemeUI(themeName) {
+      // Update current theme display
+      document.getElementById('currentTheme').textContent = themeName;
+
+      // Update checkmarks
+      document.querySelectorAll('.theme-btn').forEach(btn => {
+        const check = btn.querySelector('.theme-check');
+        if (btn.dataset.theme === themeName) {
+          check.classList.remove('hidden');
+        } else {
+          check.classList.add('hidden');
+        }
+      });
+
+      // Update theme icon (moon for dark themes, sun for light)
+      const darkThemes = ['dark', 'synthwave', 'halloween', 'forest', 'black', 'luxury', 'dracula', 'night', 'coffee'];
+      const themeIcon = document.getElementById('themeIcon');
+      
+      if (darkThemes.includes(themeName)) {
+        themeIcon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>';
+      } else {
+        themeIcon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>';
+      }
+    }
+
+    // Load theme on page load
+    function loadTheme() {
+      // Check localStorage first
+      let savedTheme = localStorage.getItem('theme');
+      
+      // If no saved theme, check system preference
+      if (!savedTheme) {
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        savedTheme = prefersDark ? 'dark' : 'light';
+      }
+      
+      setTheme(savedTheme);
+    }
+
+    // Listen for system theme changes (if no saved preference)
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+      if (!localStorage.getItem('theme')) {
+        setTheme(e.matches ? 'dark' : 'light');
+      }
+    });
+
+    // Initialize theme
+    loadTheme();
+
+    // Smooth transitions for theme changes
+    document.documentElement.style.transition = 'background-color 0.3s ease, color 0.3s ease';
+  </script>
+</body>
+</html>

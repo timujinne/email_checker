@@ -1,0 +1,18 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "email-checker-mcp"
+version = "1.0.0"
+description = "MCP server for email validation and processing functionality"
+authors = [
+    {name = "Email Checker Project", email = "noreply@example.com"}
+]
+dependencies = [
+    "mcp>=1.0.0"
+]
+requires-python = ">=3.8"
+
+[project.scripts]
+email-checker-mcp = "email_checker_mcp:main"

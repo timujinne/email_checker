@@ -1,0 +1,175 @@
+{
+  "europe": {
+    "DE": {
+      "name": "Germany",
+      "tlds": [".de"],
+      "priority": "varies",
+      "languages": ["de", "en"],
+      "major_cities": ["Berlin", "München", "Hamburg", "Frankfurt", "Köln", "Stuttgart", "Düsseldorf"],
+      "industrial_regions": ["Baden-Württemberg", "Bayern", "Nordrhein-Westfalen"],
+      "corporate_patterns": [".de", "gmbh", "ag"],
+      "free_providers": ["gmx.de", "web.de", "t-online.de", "freenet.de"]
+    },
+    "FR": {
+      "name": "France",
+      "tlds": [".fr"],
+      "priority": "varies",
+      "languages": ["fr", "en"],
+      "major_cities": ["Paris", "Lyon", "Marseille", "Toulouse", "Lille", "Nice"],
+      "industrial_regions": ["Île-de-France", "Auvergne-Rhône-Alpes", "Hauts-de-France"],
+      "corporate_patterns": [".fr", "sa", "sarl", "sas"],
+      "free_providers": ["orange.fr", "free.fr", "wanadoo.fr", "laposte.net"]
+    },
+    "IT": {
+      "name": "Italy",
+      "tlds": [".it"],
+      "priority": "varies",
+      "languages": ["it", "en"],
+      "major_cities": ["Milano", "Roma", "Torino", "Bologna", "Brescia", "Vicenza", "Bergamo"],
+      "industrial_regions": ["Lombardia", "Veneto", "Emilia-Romagna", "Piemonte"],
+      "corporate_patterns": [".it", "srl", "spa", "snc"],
+      "free_providers": ["libero.it", "virgilio.it", "tin.it", "tiscali.it", "alice.it"]
+    },
+    "ES": {
+      "name": "Spain",
+      "tlds": [".es"],
+      "priority": "varies",
+      "languages": ["es", "en"],
+      "major_cities": ["Madrid", "Barcelona", "Valencia", "Sevilla", "Bilbao", "Zaragoza"],
+      "industrial_regions": ["Cataluña", "País Vasco", "Comunidad de Madrid"],
+      "corporate_patterns": [".es", "sl", "sa"],
+      "free_providers": ["hotmail.es", "yahoo.es", "gmail.com"]
+    },
+    "PL": {
+      "name": "Poland",
+      "tlds": [".pl"],
+      "priority": "varies",
+      "languages": ["pl", "en"],
+      "major_cities": ["Warszawa", "Kraków", "Wrocław", "Poznań", "Gdańsk", "Łódź"],
+      "industrial_regions": ["Śląskie", "Mazowieckie", "Wielkopolskie"],
+      "corporate_patterns": [".pl", "sp. z o.o.", "s.a."],
+      "free_providers": ["interia.pl", "onet.pl", "wp.pl", "o2.pl"]
+    },
+    "CH": {
+      "name": "Switzerland",
+      "tlds": [".ch"],
+      "priority": "varies",
+      "languages": ["de", "fr", "it", "en"],
+      "major_cities": ["Zürich", "Genève", "Basel", "Bern", "Lausanne", "Luzern", "Lugano"],
+      "industrial_regions": ["German-speaking", "French-speaking", "Italian-speaking"],
+      "corporate_patterns": [".ch", "ag", "sa", "gmbh"],
+      "free_providers": ["bluewin.ch", "gmx.ch", "swissonline.ch"]
+    },
+    "AT": {
+      "name": "Austria",
+      "tlds": [".at"],
+      "priority": "varies",
+      "languages": ["de", "en"],
+      "major_cities": ["Wien", "Graz", "Linz", "Salzburg", "Innsbruck"],
+      "industrial_regions": ["Wien", "Oberösterreich", "Steiermark"],
+      "corporate_patterns": [".at", "gmbh", "ag"],
+      "free_providers": ["gmx.at", "aon.at", "chello.at"]
+    },
+    "NL": {
+      "name": "Netherlands",
+      "tlds": [".nl"],
+      "priority": "varies",
+      "languages": ["nl", "en"],
+      "major_cities": ["Amsterdam", "Rotterdam", "Den Haag", "Utrecht", "Eindhoven"],
+      "industrial_regions": ["Noord-Holland", "Zuid-Holland", "Noord-Brabant"],
+      "corporate_patterns": [".nl", "bv", "nv"],
+      "free_providers": ["ziggo.nl", "xs4all.nl", "planet.nl"]
+    },
+    "BE": {
+      "name": "Belgium",
+      "tlds": [".be"],
+      "priority": "varies",
+      "languages": ["nl", "fr", "en"],
+      "major_cities": ["Bruxelles", "Antwerpen", "Gent", "Charleroi", "Liège"],
+      "industrial_regions": ["Vlaanderen", "Wallonie", "Bruxelles"],
+      "corporate_patterns": [".be", "sa", "bv", "nv"],
+      "free_providers": ["skynet.be", "telenet.be", "proximus.be"]
+    },
+    "PT": {
+      "name": "Portugal",
+      "tlds": [".pt"],
+      "priority": "varies",
+      "languages": ["pt", "en"],
+      "major_cities": ["Lisboa", "Porto", "Braga", "Coimbra", "Setúbal"],
+      "industrial_regions": ["Norte", "Centro", "Lisboa"],
+      "corporate_patterns": [".pt", "lda", "sa"],
+      "free_providers": ["sapo.pt", "clix.pt", "gmail.com"]
+    }
+  },
+  "excluded_regions": {
+    "CN": {
+      "name": "China",
+      "tlds": [".cn", ".com.cn", ".hk", ".tw"],
+      "reason": "geographic_restriction",
+      "typical_free_providers": ["163.com", "126.com", "qq.com", "sina.com"]
+    },
+    "IN": {
+      "name": "India",
+      "tlds": [".in", ".co.in"],
+      "reason": "geographic_restriction",
+      "major_cities": ["Mumbai", "Delhi", "Bangalore", "Pune", "Chennai", "Hyderabad"]
+    },
+    "TR": {
+      "name": "Turkey",
+      "tlds": [".tr", ".com.tr"],
+      "reason": "geographic_restriction",
+      "major_cities": ["Istanbul", "Ankara", "Izmir"]
+    },
+    "RU": {
+      "name": "Russia",
+      "tlds": [".ru", ".su"],
+      "reason": "geographic_restriction",
+      "typical_free_providers": ["mail.ru", "yandex.ru"]
+    },
+    "BY": {
+      "name": "Belarus",
+      "tlds": [".by"],
+      "reason": "geographic_restriction"
+    },
+    "UA": {
+      "name": "Ukraine",
+      "tlds": [".ua"],
+      "reason": "geographic_restriction"
+    },
+    "PK": {
+      "name": "Pakistan",
+      "tlds": [".pk"],
+      "reason": "geographic_restriction"
+    },
+    "BD": {
+      "name": "Bangladesh",
+      "tlds": [".bd"],
+      "reason": "geographic_restriction"
+    },
+    "VN": {
+      "name": "Vietnam",
+      "tlds": [".vn"],
+      "reason": "geographic_restriction"
+    },
+    "TH": {
+      "name": "Thailand",
+      "tlds": [".th"],
+      "reason": "geographic_restriction"
+    },
+    "ID": {
+      "name": "Indonesia",
+      "tlds": [".id"],
+      "reason": "geographic_restriction"
+    },
+    "MY": {
+      "name": "Malaysia",
+      "tlds": [".my"],
+      "reason": "geographic_restriction"
+    },
+    "PH": {
+      "name": "Philippines",
+      "tlds": [".ph"],
+      "reason": "geographic_restriction"
+    }
+  }
+}

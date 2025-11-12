@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>API Test - Email Checker</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/webp" href="assets/images/logo.webp">
+    <link rel="apple-touch-icon" href="assets/images/logo.webp">
+
+    <style>
+        body {
+            font-family: monospace;
+            padding: 20px;
+            background: #1e1e1e;
+            color: #d4d4d4;
+        }
+        .test-result {
+            margin: 20px 0;
+            padding: 15px;
+            border: 2px solid #4a4a4a;
+            border-radius: 8px;
+            background: #2d2d2d;
+        }
+        .test-result.success {
+            border-color: #4caf50;
+            background: #1b5e20;
+        }
+        .test-result.error {
+            border-color: #f44336;
+            background: #5e1b1b;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            background: #0066cc;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        button:hover {
+            background: #0052a3;
+        }
+        pre {
+            background: #1a1a1a;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        .info {
+            background: #0066cc;
+            color: white;
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>🧪 Email Checker API Test Page</h1>
+
+    <div class="info">
+        <strong>Информация:</strong><br>
+        Текущий URL: <span id="current-url"></span><br>
+        API Base URL: <span id="api-base-url"></span>
+    </div>
+
+    <div>
+        <button onclick="testEmailsEndpoint()">Test GET /api/emails</button>
+        <button onclick="testEmailCount()">Test GET /api/emails/count</button>
+        <button onclick="testLVPSources()">Test GET /api/lvp-sources</button>
+        <button onclick="testMetadata()">Test GET /api/metadata</button>
+        <button onclick="clearResults()">Clear Results</button>
+    </div>
+
+    <div id="results"></div>
+
+    <script>
+        // Display current URLs
+        document.getElementById('current-url').textContent = window.location.href;
+        document.getElementById('api-base-url').textContent = window.location.origin;
+
+        // Simple API client
+        async function apiRequest(endpoint) {
+            const url = window.location.origin + endpoint;
+            console.log('📡 Request:', url);
+
+            try {
+                const response = await fetch(url);
+                console.log('📥 Response status:', response.status);
+
+                const text = await response.text();
+                console.log('📄 Response text:', text.substring(0, 200));
+
+                let data;
+                try {
+                    data = JSON.parse(text);
+                } catch (e) {
+                    throw new Error(`Invalid JSON: ${text.substring(0, 100)}`);
+                }
+
+                return {
+                    success: true,
+                    status: response.status,
+                    data: data
+                };
+            } catch (error) {
+                console.error('❌ Error:', error);
+                return {
+                    success: false,
+                    error: error.message
+                };
+            }
+        }
+
+        function displayResult(testName, result) {
+            const resultsDiv = document.getElementById('results');
+            const testDiv = document.createElement('div');
+            testDiv.className = 'test-result ' + (result.success ? 'success' : 'error');
+
+            const timestamp = new Date().toLocaleTimeString();
+
+            let html = `<h3>${result.success ? '✅' : '❌'} ${testName} - ${timestamp}</h3>`;
+
+            if (result.success) {
+                html += `<p><strong>Status:</strong> ${result.status}</p>`;
+                html += `<p><strong>Response:</strong></p>`;
+                html += `<pre>${JSON.stringify(result.data, null, 2)}</pre>`;
+            } else {
+                html += `<p><strong>Error:</strong> ${result.error}</p>`;
+            }
+
+            testDiv.innerHTML = html;
+            resultsDiv.insertBefore(testDiv, resultsDiv.firstChild);
+        }
+
+        async function testEmailsEndpoint() {
+            const result = await apiRequest('/api/emails?page=1&page_size=5');
+            displayResult('GET /api/emails', result);
+        }
+
+        async function testEmailCount() {
+            const result = await apiRequest('/api/emails/count');
+            displayResult('GET /api/emails/count', result);
+        }
+
+        async function testLVPSources() {
+            const result = await apiRequest('/api/lvp-sources');
+            displayResult('GET /api/lvp-sources', result);
+        }
+
+        async function testMetadata() {
+            const result = await apiRequest('/api/metadata');
+            displayResult('GET /api/metadata', result);
+        }
+
+        function clearResults() {
+            document.getElementById('results').innerHTML = '';
+        }
+
+        // Auto-test on load
+        window.addEventListener('load', () => {
+            console.log('🚀 API Test Page loaded');
+            console.log('📍 Current URL:', window.location.href);
+            console.log('🌐 API Base:', window.location.origin);
+
+            // Auto-run first test
+            setTimeout(() => {
+                console.log('🔄 Running auto-test...');
+                testEmailsEndpoint();
+            }, 500);
+        });
+    </script>
+</body>
+</html>

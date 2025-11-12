@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Filter Wizard Integration Test</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .score-display {
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+        .score-high { background: #dcfce7; color: #166534; }
+        .score-medium { background: #fef3c7; color: #92400e; }
+        .score-low { background: #fed7aa; color: #7c2d12; }
+        .score-excluded { background: #fee2e2; color: #991b1b; }
+
+        .wizard-steps {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        .step-indicator {
+            flex: 1;
+            padding: 1rem;
+            background: #f1f5f9;
+            border-radius: 0.5rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .step-indicator.active {
+            background: #3b82f6;
+            color: white;
+        }
+        .step-indicator.completed {
+            background: #10b981;
+            color: white;
+        }
+        .step-number {
+            display: inline-block;
+            width: 2rem;
+            height: 2rem;
+            border-radius: 50%;
+            background: white;
+            color: #1e293b;
+            line-height: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        .step-indicator.active .step-number,
+        .step-indicator.completed .step-number {
+            background: rgba(255, 255, 255, 0.3);
+            color: white;
+        }
+    </style>
+</head>
+<body class="bg-slate-100 p-8">
+    <div class="max-w-4xl mx-auto">
+        <h1 class="text-3xl font-bold mb-6">Filter Wizard Integration Test</h1>
+
+        <div class="bg-white rounded-lg shadow-lg p-6">
+            <div id="wizard-container"></div>
+        </div>
+
+        <div class="mt-6 p-4 bg-blue-50 rounded-lg">
+            <h2 class="font-bold mb-2">Integration Status:</h2>
+            <div id="status" class="text-sm"></div>
+        </div>
+    </div>
+
+    <!-- Toast notification container -->
+    <div id="toast-container" class="fixed top-4 right-4 z-50"></div>
+
+    <!-- Mock Toast System -->
+    <script>
+        window.toast = {
+            success: (msg) => console.log('✅ SUCCESS:', msg),
+            error: (msg) => console.error('❌ ERROR:', msg),
+            info: (msg) => console.log('ℹ️ INFO:', msg)
+        };
+    </script>
+
+    <!-- Load dependencies -->
+    <script src="web/assets/js/services/api.js"></script>
+    <script src="web/assets/js/components/filter-config.js"></script>
+    <script src="web/assets/js/components/filter-scorer.js"></script>
+    <script src="web/assets/js/components/filter-wizard.js"></script>
+
+    <script>
+        // Test initialization
+        const statusEl = document.getElementById('status');
+
+        function updateStatus(message, type = 'info') {
+            const timestamp = new Date().toLocaleTimeString();
+            const color = type === 'error' ? 'text-red-600' : type === 'success' ? 'text-green-600' : 'text-blue-600';
+            statusEl.innerHTML += `<div class="${color}">[${timestamp}] ${message}</div>`;
+        }
+
+        // Check if all dependencies loaded
+        updateStatus('Checking dependencies...');
+
+        if (typeof window.api === 'undefined') {
+            updateStatus('❌ API service not loaded', 'error');
+        } else {
+            updateStatus('✅ API service loaded', 'success');
+        }
+
+        if (typeof FilterConfig === 'undefined') {
+            updateStatus('❌ FilterConfig not loaded', 'error');
+        } else {
+            updateStatus('✅ FilterConfig loaded', 'success');
+        }
+
+        if (typeof FilterScorer === 'undefined') {
+            updateStatus('❌ FilterScorer not loaded', 'error');
+        } else {
+            updateStatus('✅ FilterScorer loaded', 'success');
+        }
+
+        if (typeof FilterWizard === 'undefined') {
+            updateStatus('❌ FilterWizard not loaded', 'error');
+        } else {
+            updateStatus('✅ FilterWizard loaded', 'success');
+        }
+
+        // Initialize wizard
+        try {
+            updateStatus('Initializing FilterWizard...');
+
+            const wizard = new FilterWizard('wizard-container', (result) => {
+                updateStatus(`Wizard completed! Config: ${result.config.filter_name}, Export: ${result.exportType}`, 'success');
+                console.log('Wizard result:', result);
+            });
+
+            updateStatus('✅ FilterWizard initialized successfully', 'success');
+            updateStatus('ℹ️ Loading lists from API...', 'info');
+
+            // Test API connection
+            setTimeout(() => {
+                if (wizard.state.loading) {
+                    updateStatus('⏳ Still loading lists...', 'info');
+                } else if (wizard.state.error) {
+                    updateStatus(`❌ API Error: ${wizard.state.error}`, 'error');
+                    updateStatus('ℹ️ Make sure web server is running: python3 web_server.py', 'info');
+                } else {
+                    updateStatus(`✅ Loaded ${wizard.state.lists.length} lists from API`, 'success');
+                }
+            }, 2000);
+
+        } catch (error) {
+            updateStatus(`❌ Failed to initialize: ${error.message}`, 'error');
+            console.error('Initialization error:', error);
+        }
+
+        // Add keyboard shortcuts for testing
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'r' && e.ctrlKey) {
+                e.preventDefault();
+                location.reload();
+            }
+        });
+
+        updateStatus('ℹ️ Press Ctrl+R to reload test', 'info');
+    </script>
+</body>
+</html>
