@@ -541,12 +541,12 @@ class ColumnManager {
 
     /**
      * Get visible columns in current order
-     * @returns {Array} Array of visible column IDs
+     * @returns {Array} Array of visible column objects with full config
      */
     getVisibleColumns() {
         return this.columns
             .filter(col => col.visible)
-            .map(col => col.id);
+            .map(col => col.id);  // Return array of IDs, not full objects
     }
 
     /**

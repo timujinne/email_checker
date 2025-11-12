@@ -586,17 +586,23 @@
                     </div>
 
                     <!-- Action Bar -->
-                    <div class="bg-base-100 rounded-lg shadow p-6 mb-6 flex items-center gap-4">
-                        <button onclick="listsManager.uploadFile()" class="px-6 py-2 bg-blue-900 hover:bg-blue-800 text-white rounded-lg transition-colors font-medium">
-                            ⬆️ Загрузить файл
-                        </button>
-                        <button onclick="listsManager.processSelected()" class="px-6 py-2 bg-emerald-900 hover:bg-emerald-800 text-white rounded-lg transition-colors font-medium">
-                            ▶️ Обработать выбранные
-                        </button>
-                        <button onclick="location.reload()" class="px-6 py-2 bg-base-200 hover:bg-base-300 rounded-lg transition-colors font-medium">
-                            🔄 Обновить
-                        </button>
-                        <input type="file" id="file-input" style="display: none;" accept=".txt,.lvp" multiple>
+                    <div class="bg-base-100 rounded-lg shadow p-6 mb-6 flex items-center justify-between gap-4">
+                        <!-- Left: Action Buttons -->
+                        <div class="flex items-center gap-4">
+                            <button onclick="listsManager.uploadFile()" class="px-6 py-2 bg-blue-900 hover:bg-blue-800 text-white rounded-lg transition-colors font-medium">
+                                ⬆️ Загрузить файл
+                            </button>
+                            <button onclick="listsManager.processSelected()" class="px-6 py-2 bg-emerald-900 hover:bg-emerald-800 text-white rounded-lg transition-colors font-medium">
+                                ▶️ Обработать выбранные
+                            </button>
+                            <button onclick="location.reload()" class="px-6 py-2 bg-base-200 hover:bg-base-300 rounded-lg transition-colors font-medium">
+                                🔄 Обновить
+                            </button>
+                            <input type="file" id="file-input" style="display: none;" accept=".txt,.lvp" multiple>
+                        </div>
+
+                        <!-- Right: Column Manager -->
+                        <div id="column-manager-container"></div>
                     </div>
 
                     <!-- Filters Bar -->
@@ -634,11 +640,6 @@
                                 <option value="pending">⏳ Ожидает</option>
                             </select>
                         </div>
-                    </div>
-
-                    <!-- Column Manager Bar -->
-                    <div class="bg-base-100 rounded-lg shadow p-4 mb-6 flex justify-end">
-                        <div id="column-manager-container"></div>
                     </div>
 
                     <!-- Table Container -->
@@ -1216,8 +1217,8 @@
     <!-- Page Components -->
     <script src="assets/js/components/dashboard.js?v=11"></script>
     <!-- Column Manager - Required by Lists Manager -->
-    <script src="assets/js/components/column-manager.js?v=1"></script>
-    <script src="assets/js/components/lists-manager.js?v=12"></script>
+    <script src="assets/js/components/column-manager.js?v=2"></script>
+    <script src="assets/js/components/lists-manager.js?v=14"></script>
     <!-- Email List Manager Components (NEW) -->
     <script src="assets/js/components/multi-select-filter.js?v=1"></script>
     <script src="assets/js/components/email-list-view.js?v=33"></script>

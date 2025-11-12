@@ -1,0 +1,2067 @@
+{
+  "builtin": {
+    "czech_powder_metal": {
+      "metadata": {
+        "id": "czech_powder_metal",
+        "name": "Czech Republic - Powder Metallurgy",
+        "description": "",
+        "version": "1.0",
+        "author": "system",
+        "created": "2025-11-12T11:45:29.918076",
+        "updated": "2025-11-12T11:45:29.918095"
+      },
+      "target": {
+        "country": "Czech Republic",
+        "industry": "powder_metallurgy",
+        "languages": [
+          "cs",
+          "en"
+        ]
+      },
+      "scoring": {
+        "weights": {
+          "email_quality": 0.1,
+          "company_relevance": 0.45,
+          "geographic_priority": 0.3,
+          "engagement": 0.15
+        },
+        "thresholds": {
+          "high_priority": 100,
+          "medium_priority": 50,
+          "low_priority": 10,
+          "exclude": 0
+        }
+      },
+      "company_keywords": {
+        "primary_keywords": {
+          "positive": [
+            {
+              "term": "prášková metalurgie",
+              "weight": 1.0
+            },
+            {
+              "term": "práškové kovy",
+              "weight": 1.0
+            },
+            {
+              "term": "práškový kov",
+              "weight": 1.0
+            },
+            {
+              "term": "slinutí",
+              "weight": 1.0
+            },
+            {
+              "term": "slinování",
+              "weight": 1.0
+            },
+            {
+              "term": "sintrování",
+              "weight": 1.0
+            },
+            {
+              "term": "sinter",
+              "weight": 1.0
+            },
+            {
+              "term": "práškování",
+              "weight": 1.0
+            },
+            {
+              "term": "powder metallurgy",
+              "weight": 1.0
+            },
+            {
+              "term": "powder metal",
+              "weight": 1.0
+            }
+          ],
+          "negative": [
+            {
+              "term": "škola",
+              "weight": 0.5
+            },
+            {
+              "term": "školy",
+              "weight": 0.5
+            },
+            {
+              "term": "základní škola",
+              "weight": 0.5
+            },
+            {
+              "term": "střední škola",
+              "weight": 0.5
+            },
+            {
+              "term": "gymnázium",
+              "weight": 0.5
+            },
+            {
+              "term": "univerzita",
+              "weight": 0.5
+            },
+            {
+              "term": "vysoká škola",
+              "weight": 0.5
+            },
+            {
+              "term": "fakulta",
+              "weight": 0.5
+            },
+            {
+              "term": "vzdělávání",
+              "weight": 0.5
+            },
+            {
+              "term": "vzdělání",
+              "weight": 0.5
+            }
+          ]
+        },
+        "secondary_keywords": {
+          "positive": [
+            "automobilový průmysl",
+            "automotive",
+            "automotive industry",
+            "letecký průmysl",
+            "aerospace",
+            "letectví",
+            "aviation",
+            "elektrotechnika",
+            "electronics",
+            "elektronika"
+          ],
+          "negative": []
+        }
+      },
+      "geographic_rules": {
+        "target_regions": [
+          "česká republika",
+          "czech republic",
+          "czechia",
+          "česko",
+          ".cz",
+          "czech",
+          "praha",
+          "prague",
+          "brno",
+          "ostrava",
+          "plzeň",
+          "pilsen",
+          "liberec",
+          "olomouc",
+          "ústí nad labem",
+          "české budějovice",
+          "hradec králové",
+          "pardubice",
+          "zlín",
+          "havířov"
+        ],
+        "exclude_regions": [
+          ".cn",
+          ".com.cn",
+          ".hk",
+          ".tw",
+          ".in",
+          ".co.in",
+          ".ru",
+          ".by",
+          ".ua",
+          ".kz",
+          ".uz",
+          ".tr",
+          ".com.tr",
+          ".br",
+          ".com.br",
+          ".au",
+          ".com.au",
+          ".za",
+          ".co.za",
+          ".pk"
+        ],
+        "multipliers": {
+          "Czech Republic": 2.0,
+          "EU": 1.2,
+          "Others": 0.3
+        }
+      },
+      "email_quality": {
+        "corporate_domains": true,
+        "free_email_penalty": -0.3,
+        "structure_quality": true,
+        "suspicious_patterns": []
+      },
+      "domain_rules": {
+        "oemEquipment": {
+          "keywords": [
+            "výrobce",
+            "producent",
+            "továrna",
+            "závod",
+            "výroba",
+            "dodavatel",
+            "subdodavatel",
+            "kontraktní výroba",
+            "zpracovatel",
+            "zpracování"
+          ],
+          "multiplier": 1.3
+        }
+      }
+    },
+    "dutch_powder_metallurgy": {
+      "metadata": {
+        "id": "dutch_powder_metallurgy",
+        "name": "dutch_powder_metallurgy",
+        "description": "Smart filter for Dutch and Belgian powder metallurgy and transmission components with NL+FR+EN language support",
+        "version": "1.0.0",
+        "author": "system",
+        "created": "2025-11-12T11:45:29.918522",
+        "updated": "2025-11-12T11:45:29.918525"
+      },
+      "target": {
+        "country": "Unknown",
+        "industry": "powder_metallurgy",
+        "languages": [
+          "en"
+        ]
+      },
+      "scoring": {
+        "weights": {
+          "email_quality": 0.1,
+          "company_relevance": 0.45,
+          "geographic_priority": 0.3,
+          "engagement": 0.15
+        },
+        "thresholds": {
+          "high_priority": 100,
+          "medium_priority": 50,
+          "low_priority": 10
+        }
+      },
+      "company_keywords": {
+        "primary_keywords": {
+          "positive": [],
+          "negative": [
+            {
+              "term": "dutch",
+              "weight": 0.5
+            },
+            {
+              "term": "french",
+              "weight": 0.5
+            },
+            {
+              "term": "english",
+              "weight": 0.5
+            },
+            {
+              "term": "dutch",
+              "weight": 0.5
+            },
+            {
+              "term": "french",
+              "weight": 0.5
+            },
+            {
+              "term": "english",
+              "weight": 0.5
+            },
+            {
+              "term": "dutch",
+              "weight": 0.5
+            },
+            {
+              "term": "french",
+              "weight": 0.5
+            },
+            {
+              "term": "english",
+              "weight": 0.5
+            },
+            {
+              "term": "dutch",
+              "weight": 0.5
+            }
+          ]
+        },
+        "secondary_keywords": {
+          "positive": [],
+          "negative": []
+        }
+      },
+      "geographic_rules": {
+        "target_regions": [
+          "nederland",
+          "netherlands",
+          ".nl",
+          "holland",
+          "belgië",
+          "belgique",
+          "belgium",
+          ".be",
+          "amsterdam",
+          "rotterdam",
+          "eindhoven",
+          "utrecht",
+          "tilburg",
+          "breda",
+          "brussel",
+          "brussels",
+          "bruxelles",
+          "antwerpen",
+          "antwerp",
+          "gent"
+        ],
+        "exclude_regions": [
+          ".cn",
+          ".com.cn",
+          ".hk",
+          ".tw",
+          ".in",
+          ".co.in",
+          ".tr",
+          ".com.tr",
+          ".pl",
+          ".ru",
+          ".by",
+          ".ua",
+          ".pk",
+          ".bd",
+          ".vn",
+          ".th",
+          ".id",
+          ".my",
+          ".ph",
+          ".edu"
+        ],
+        "multipliers": {
+          "Unknown": 2.0,
+          "EU": 1.2,
+          "Others": 0.3
+        }
+      },
+      "email_quality": {
+        "corporate_domains": true,
+        "free_email_penalty": -0.3,
+        "structure_quality": true,
+        "suspicious_patterns": []
+      },
+      "domain_rules": {
+        "oemEquipment": {
+          "keywords": [],
+          "multiplier": 1.3
+        }
+      }
+    },
+    "france_powder_metal": {
+      "metadata": {
+        "id": "france_powder_metal",
+        "name": "France Powder Metallurgy Filter",
+        "description": "Smart filter for French powder metallurgy market",
+        "version": "1.0.0",
+        "author": "system",
+        "created": "2025-11-12T11:45:29.918779",
+        "updated": "2025-11-12T11:45:29.918781"
+      },
+      "target": {
+        "country": "France",
+        "industry": "powder_metal",
+        "languages": [
+          "fr",
+          "en"
+        ]
+      },
+      "scoring": {
+        "weights": {
+          "email_quality": 0.1,
+          "company_relevance": 0.45,
+          "geographic_priority": 0.3,
+          "engagement": 0.15
+        },
+        "thresholds": {
+          "high_priority": 110,
+          "medium_priority": 50,
+          "low_priority": 10
+        }
+      },
+      "company_keywords": {
+        "primary_keywords": {
+          "positive": [],
+          "negative": []
+        },
+        "secondary_keywords": {
+          "positive": [],
+          "negative": []
+        }
+      },
+      "geographic_rules": {
+        "target_regions": [
+          "france",
+          ".fr",
+          "france",
+          "paris",
+          "lyon",
+          "marseille",
+          "toulouse",
+          "nice",
+          "saint-étienne",
+          "grenoble",
+          "nantes",
+          "strasbourg",
+          "région parisienne",
+          "auvergne-rhône-alpes",
+          "provence-alpes-côte d'azur"
+        ],
+        "exclude_regions": [
+          ".cn",
+          ".com.cn",
+          ".ru",
+          ".by",
+          ".ua",
+          ".in",
+          ".co.in",
+          ".tr",
+          ".com.tr",
+          ".br",
+          ".com.br",
+          ".hk",
+          ".tw"
+        ],
+        "multipliers": {
+          "France": 2.0,
+          "EU": 1.2,
+          "Others": 0.3
+        }
+      },
+      "email_quality": {
+        "corporate_domains": true,
+        "free_email_penalty": -0.3,
+        "structure_quality": true,
+        "suspicious_patterns": []
+      },
+      "domain_rules": {
+        "oemEquipment": {
+          "keywords": [],
+          "multiplier": 1.3
+        }
+      }
+    },
+    "italy_hydraulics": {
+      "metadata": {
+        "id": "italy_hydraulics",
+        "name": "Italy - Hydraulic Cylinders",
+        "description": "",
+        "version": "1.0",
+        "author": "system",
+        "created": "2025-11-12T11:45:29.919015",
+        "updated": "2025-11-12T11:45:29.919019"
+      },
+      "target": {
+        "country": "Italy",
+        "industry": "hydraulic_cylinders",
+        "languages": [
+          "it",
+          "en"
+        ]
+      },
+      "scoring": {
+        "weights": {
+          "email_quality": 0.1,
+          "company_relevance": 0.45,
+          "geographic_priority": 0.3,
+          "engagement": 0.15
+        },
+        "thresholds": {
+          "high_priority": 100,
+          "medium_priority": 50,
+          "low_priority": 10,
+          "exclude": 0
+        }
+      },
+      "company_keywords": {
+        "primary_keywords": {
+          "positive": [
+            {
+              "term": "cilindri idraulici",
+              "weight": 1.0
+            },
+            {
+              "term": "cilindro idraulico",
+              "weight": 1.0
+            },
+            {
+              "term": "attuatori idraulici",
+              "weight": 1.0
+            },
+            {
+              "term": "attuatore idraulico",
+              "weight": 1.0
+            },
+            {
+              "term": "pistoni idraulici",
+              "weight": 1.0
+            },
+            {
+              "term": "pistone idraulico",
+              "weight": 1.0
+            },
+            {
+              "term": "martinetti idraulici",
+              "weight": 1.0
+            },
+            {
+              "term": "martinetto idraulico",
+              "weight": 1.0
+            },
+            {
+              "term": "attuatori oleodinamici",
+              "weight": 1.0
+            },
+            {
+              "term": "attuatore oleodinamico",
+              "weight": 1.0
+            }
+          ],
+          "negative": [
+            {
+              "term": "scuola",
+              "weight": 0.5
+            },
+            {
+              "term": "scuole",
+              "weight": 0.5
+            },
+            {
+              "term": "universita",
+              "weight": 0.5
+            },
+            {
+              "term": "università",
+              "weight": 0.5
+            },
+            {
+              "term": "college",
+              "weight": 0.5
+            },
+            {
+              "term": "istituto",
+              "weight": 0.5
+            },
+            {
+              "term": "istituti",
+              "weight": 0.5
+            },
+            {
+              "term": "formazione",
+              "weight": 0.5
+            },
+            {
+              "term": "corsi",
+              "weight": 0.5
+            },
+            {
+              "term": "accademia",
+              "weight": 0.5
+            }
+          ]
+        },
+        "secondary_keywords": {
+          "positive": [
+            "macchinario agricolo",
+            "macchine agricole",
+            "movimento terra",
+            "movimentazione terra",
+            "industria pesante",
+            "industrie pesanti",
+            "costruzioni",
+            "edilizia",
+            "movimentazione materiali",
+            "sollevamento"
+          ],
+          "negative": []
+        }
+      },
+      "geographic_rules": {
+        "target_regions": [
+          "italia",
+          "italy",
+          "it",
+          ".it",
+          "milano",
+          "milan",
+          "roma",
+          "rome",
+          "torino",
+          "turin",
+          "bologna",
+          "napoli",
+          "naples",
+          "firenze",
+          "florence",
+          "genova",
+          "genoa",
+          "palermo",
+          "catania",
+          "bari"
+        ],
+        "exclude_regions": [
+          ".cn",
+          ".com.cn",
+          ".hk",
+          ".tw",
+          ".in",
+          ".co.in",
+          ".tr",
+          ".de",
+          ".fr",
+          ".es",
+          ".pt",
+          ".nl",
+          ".cz",
+          ".hu",
+          ".ro",
+          ".jp",
+          ".kr",
+          ".th",
+          ".vn",
+          ".id"
+        ],
+        "multipliers": {
+          "Italy": 2.0,
+          "EU": 1.2,
+          "Others": 0.3
+        }
+      },
+      "email_quality": {
+        "corporate_domains": true,
+        "free_email_penalty": -0.3,
+        "structure_quality": true,
+        "suspicious_patterns": []
+      },
+      "domain_rules": {
+        "oemEquipment": {
+          "keywords": [
+            "produttore",
+            "produttrice",
+            "costruttore",
+            "costruttrice",
+            "fabbrica",
+            "stabilimento",
+            "impianto",
+            "officina",
+            "laboratorio",
+            "manufacturing"
+          ],
+          "multiplier": 1.3
+        }
+      }
+    },
+    "italy_powder_metallurgy": {
+      "metadata": {
+        "id": "italy_powder_metallurgy",
+        "name": "italy_powder_metallurgy",
+        "description": "Smart filter for Italian powder metallurgy and transmission components with IT+EN language support",
+        "version": "1.0.0",
+        "author": "system",
+        "created": "2025-11-12T11:45:29.919340",
+        "updated": "2025-11-12T11:45:29.919342"
+      },
+      "target": {
+        "country": "Unknown",
+        "industry": "powder_metallurgy",
+        "languages": [
+          "en"
+        ]
+      },
+      "scoring": {
+        "weights": {
+          "email_quality": 0.1,
+          "company_relevance": 0.45,
+          "geographic_priority": 0.3,
+          "engagement": 0.15
+        },
+        "thresholds": {
+          "high_priority": 100,
+          "medium_priority": 50,
+          "low_priority": 10
+        }
+      },
+      "company_keywords": {
+        "primary_keywords": {
+          "positive": [],
+          "negative": [
+            {
+              "term": "italian",
+              "weight": 0.5
+            },
+            {
+              "term": "english",
+              "weight": 0.5
+            },
+            {
+              "term": "italian",
+              "weight": 0.5
+            },
+            {
+              "term": "english",
+              "weight": 0.5
+            },
+            {
+              "term": "italian",
+              "weight": 0.5
+            },
+            {
+              "term": "english",
+              "weight": 0.5
+            },
+            {
+              "term": "italian",
+              "weight": 0.5
+            },
+            {
+              "term": "english",
+              "weight": 0.5
+            },
+            {
+              "term": "italian",
+              "weight": 0.5
+            },
+            {
+              "term": "english",
+              "weight": 0.5
+            }
+          ]
+        },
+        "secondary_keywords": {
+          "positive": [],
+          "negative": []
+        }
+      },
+      "geographic_rules": {
+        "target_regions": [
+          "italia",
+          "italy",
+          ".it",
+          "milano",
+          "milan",
+          "torino",
+          "turin",
+          "bologna",
+          "brescia",
+          "vicenza",
+          "bergamo",
+          "verona",
+          "padova",
+          "modena",
+          "reggio emilia",
+          "parma",
+          "piacenza",
+          "cremona",
+          "mantova",
+          "como"
+        ],
+        "exclude_regions": [
+          ".cn",
+          ".com.cn",
+          ".hk",
+          ".tw",
+          ".in",
+          ".co.in",
+          ".tr",
+          ".com.tr",
+          ".pl",
+          ".ru",
+          ".by",
+          ".ua",
+          ".pk",
+          ".bd",
+          ".vn",
+          ".th",
+          ".id",
+          ".my",
+          ".ph",
+          ".edu"
+        ],
+        "multipliers": {
+          "Unknown": 2.0,
+          "EU": 1.2,
+          "Others": 0.3
+        }
+      },
+      "email_quality": {
+        "corporate_domains": true,
+        "free_email_penalty": -0.3,
+        "structure_quality": true,
+        "suspicious_patterns": []
+      },
+      "domain_rules": {
+        "oemEquipment": {
+          "keywords": [],
+          "multiplier": 1.3
+        }
+      }
+    },
+    "poland_powder_metal": {
+      "metadata": {
+        "id": "poland_powder_metal",
+        "name": "Poland - Powder Metallurgy",
+        "description": "",
+        "version": "1.0",
+        "author": "system",
+        "created": "2025-11-12T11:45:29.919685",
+        "updated": "2025-11-12T11:45:29.919687"
+      },
+      "target": {
+        "country": "Poland",
+        "industry": "powder_metallurgy",
+        "languages": [
+          "pl",
+          "en"
+        ]
+      },
+      "scoring": {
+        "weights": {
+          "email_quality": 0.1,
+          "company_relevance": 0.45,
+          "geographic_priority": 0.3,
+          "engagement": 0.15
+        },
+        "thresholds": {
+          "high_priority": 100,
+          "medium_priority": 50,
+          "low_priority": 10,
+          "exclude": 0
+        }
+      },
+      "company_keywords": {
+        "primary_keywords": {
+          "positive": [
+            {
+              "term": "metalurgia proszków",
+              "weight": 1.0
+            },
+            {
+              "term": "proszki metalowe",
+              "weight": 1.0
+            },
+            {
+              "term": "proszek metalowy",
+              "weight": 1.0
+            },
+            {
+              "term": "spiekanie",
+              "weight": 1.0
+            },
+            {
+              "term": "technologia proszkowa",
+              "weight": 1.0
+            },
+            {
+              "term": "metalurgia proszkowa",
+              "weight": 1.0
+            },
+            {
+              "term": "proszki",
+              "weight": 1.0
+            },
+            {
+              "term": "powder metallurgy",
+              "weight": 1.0
+            },
+            {
+              "term": "powder metal",
+              "weight": 1.0
+            },
+            {
+              "term": "sintering",
+              "weight": 1.0
+            }
+          ],
+          "negative": [
+            {
+              "term": "szkoła",
+              "weight": 0.5
+            },
+            {
+              "term": "szkoły",
+              "weight": 0.5
+            },
+            {
+              "term": "szkoła podstawowa",
+              "weight": 0.5
+            },
+            {
+              "term": "liceum",
+              "weight": 0.5
+            },
+            {
+              "term": "gimnazjum",
+              "weight": 0.5
+            },
+            {
+              "term": "uniwersytet",
+              "weight": 0.5
+            },
+            {
+              "term": "politechnika",
+              "weight": 0.5
+            },
+            {
+              "term": "wyższa szkoła",
+              "weight": 0.5
+            },
+            {
+              "term": "uczelnia",
+              "weight": 0.5
+            },
+            {
+              "term": "wydział",
+              "weight": 0.5
+            }
+          ]
+        },
+        "secondary_keywords": {
+          "positive": [
+            "przemysł motoryzacyjny",
+            "motoryzacja",
+            "automotive",
+            "samochodowy",
+            "przemysł lotniczy",
+            "aerospace",
+            "lotnictwo",
+            "aviation",
+            "elektrotechnika",
+            "electronics"
+          ],
+          "negative": []
+        }
+      },
+      "geographic_rules": {
+        "target_regions": [
+          "polska",
+          "poland",
+          "polska republika",
+          ".pl",
+          "polish",
+          "warszawa",
+          "warsaw",
+          "kraków",
+          "cracow",
+          "wrocław",
+          "wroclaw",
+          "poznań",
+          "poznan",
+          "gdańsk",
+          "gdansk",
+          "danzig",
+          "szczecin",
+          "łódź",
+          "lodz",
+          "katowice"
+        ],
+        "exclude_regions": [
+          ".cn",
+          ".com.cn",
+          ".hk",
+          ".tw",
+          ".in",
+          ".co.in",
+          ".ru",
+          ".by",
+          ".ua",
+          ".kz",
+          ".uz",
+          ".tr",
+          ".com.tr",
+          ".br",
+          ".com.br",
+          ".au",
+          ".com.au",
+          ".za",
+          ".co.za",
+          ".pk"
+        ],
+        "multipliers": {
+          "Poland": 2.0,
+          "EU": 1.2,
+          "Others": 0.3
+        }
+      },
+      "email_quality": {
+        "corporate_domains": true,
+        "free_email_penalty": -0.3,
+        "structure_quality": true,
+        "suspicious_patterns": []
+      },
+      "domain_rules": {
+        "oemEquipment": {
+          "keywords": [
+            "producent",
+            "wytwórca",
+            "fabryka",
+            "zakład",
+            "produkcja",
+            "dostawca",
+            "poddostawca",
+            "podwykonawca",
+            "produkcja kontraktowa",
+            "przetwórca"
+          ],
+          "multiplier": 1.3
+        }
+      }
+    },
+    "portugal_agriculture_hydraulics": {
+      "metadata": {
+        "id": "portugal_agriculture_hydraulics",
+        "name": "Portugal - Agricultural Machinery & Hydraulic Equipment",
+        "description": "",
+        "version": "1.0",
+        "author": "system",
+        "created": "2025-11-12T11:45:29.920089",
+        "updated": "2025-11-12T11:45:29.920092"
+      },
+      "target": {
+        "country": "Portugal",
+        "industry": "agricultural_machinery_hydraulics_hybrid",
+        "languages": [
+          "pt",
+          "en"
+        ]
+      },
+      "scoring": {
+        "weights": {
+          "email_quality": 0.1,
+          "company_relevance": 0.45,
+          "geographic_priority": 0.3,
+          "engagement": 0.15
+        },
+        "thresholds": {
+          "high_priority": 100,
+          "medium_priority": 50,
+          "low_priority": 10,
+          "exclude": 0
+        }
+      },
+      "company_keywords": {
+        "primary_keywords": {
+          "positive": [
+            {
+              "term": "tratores",
+              "weight": 1.0
+            },
+            {
+              "term": "trator",
+              "weight": 1.0
+            },
+            {
+              "term": "colheitadeira",
+              "weight": 1.0
+            },
+            {
+              "term": "colheitadeiras",
+              "weight": 1.0
+            },
+            {
+              "term": "combine harvester",
+              "weight": 1.0
+            },
+            {
+              "term": "máquinas agrícolas",
+              "weight": 1.0
+            },
+            {
+              "term": "maquinas agricolas",
+              "weight": 1.0
+            },
+            {
+              "term": "agricultural machinery",
+              "weight": 1.0
+            },
+            {
+              "term": "alfaias agrícolas",
+              "weight": 1.0
+            },
+            {
+              "term": "alfaias agricolas",
+              "weight": 1.0
+            }
+          ],
+          "negative": [
+            {
+              "term": "escola",
+              "weight": 0.5
+            },
+            {
+              "term": "escolas",
+              "weight": 0.5
+            },
+            {
+              "term": "universidade",
+              "weight": 0.5
+            },
+            {
+              "term": "universidades",
+              "weight": 0.5
+            },
+            {
+              "term": "faculdade",
+              "weight": 0.5
+            },
+            {
+              "term": "instituto",
+              "weight": 0.5
+            },
+            {
+              "term": "institutos",
+              "weight": 0.5
+            },
+            {
+              "term": "formação",
+              "weight": 0.5
+            },
+            {
+              "term": "formacao",
+              "weight": 0.5
+            },
+            {
+              "term": "cursos",
+              "weight": 0.5
+            }
+          ]
+        },
+        "secondary_keywords": {
+          "positive": [
+            "agricultura",
+            "agriculture",
+            "agrícola",
+            "agricola",
+            "agricultural",
+            "exploração agrícola",
+            "exploracao agricola",
+            "farm",
+            "campo",
+            "field"
+          ],
+          "negative": []
+        }
+      },
+      "geographic_rules": {
+        "target_regions": [
+          "portugal",
+          ".pt",
+          "português",
+          "portugues",
+          "portuguese",
+          "lisboa",
+          "lisbon",
+          "porto",
+          "oporto",
+          "coimbra",
+          "braga",
+          "faro",
+          "funchal",
+          "aveiro",
+          "setúbal",
+          "setubal",
+          "évora",
+          "evora",
+          "viseu",
+          "guimarães"
+        ],
+        "exclude_regions": [
+          ".cn",
+          ".com.cn",
+          ".hk",
+          ".tw",
+          ".in",
+          ".co.in",
+          ".tr",
+          ".de",
+          ".it",
+          ".nl",
+          ".cz",
+          ".hu",
+          ".ro",
+          ".jp",
+          ".kr",
+          ".th",
+          ".vn",
+          ".id",
+          ".my",
+          ".ph"
+        ],
+        "multipliers": {
+          "Portugal": 2.0,
+          "EU": 1.2,
+          "Others": 0.3
+        }
+      },
+      "email_quality": {
+        "corporate_domains": true,
+        "free_email_penalty": -0.3,
+        "structure_quality": true,
+        "suspicious_patterns": []
+      },
+      "domain_rules": {
+        "oemEquipment": {
+          "keywords": [
+            "fabricante",
+            "manufacturer",
+            "indústria",
+            "industria",
+            "industry",
+            "produtor",
+            "producer",
+            "concessionário oficial",
+            "concessionario oficial",
+            "official dealer"
+          ],
+          "multiplier": 1.3
+        }
+      }
+    },
+    "spain_agriculture": {
+      "metadata": {
+        "id": "spain_agriculture",
+        "name": "Spain - Agricultural Machinery & Equipment",
+        "description": "",
+        "version": "1.0",
+        "author": "system",
+        "created": "2025-11-12T11:45:29.920394",
+        "updated": "2025-11-12T11:45:29.920397"
+      },
+      "target": {
+        "country": "Spain",
+        "industry": "agricultural_machinery",
+        "languages": [
+          "es",
+          "en"
+        ]
+      },
+      "scoring": {
+        "weights": {
+          "email_quality": 0.1,
+          "company_relevance": 0.45,
+          "geographic_priority": 0.3,
+          "engagement": 0.15
+        },
+        "thresholds": {
+          "high_priority": 100,
+          "medium_priority": 50,
+          "low_priority": 10,
+          "exclude": 0
+        }
+      },
+      "company_keywords": {
+        "primary_keywords": {
+          "positive": [
+            {
+              "term": "tractores",
+              "weight": 1.0
+            },
+            {
+              "term": "tractor",
+              "weight": 1.0
+            },
+            {
+              "term": "cosechadora",
+              "weight": 1.0
+            },
+            {
+              "term": "combine harvester",
+              "weight": 1.0
+            },
+            {
+              "term": "sembradora",
+              "weight": 1.0
+            },
+            {
+              "term": "seeder",
+              "weight": 1.0
+            },
+            {
+              "term": "arado",
+              "weight": 1.0
+            },
+            {
+              "term": "plough",
+              "weight": 1.0
+            },
+            {
+              "term": "plow",
+              "weight": 1.0
+            },
+            {
+              "term": "cultivador",
+              "weight": 1.0
+            }
+          ],
+          "negative": [
+            {
+              "term": "escuela",
+              "weight": 0.5
+            },
+            {
+              "term": "escuelas",
+              "weight": 0.5
+            },
+            {
+              "term": "universidad",
+              "weight": 0.5
+            },
+            {
+              "term": "universidades",
+              "weight": 0.5
+            },
+            {
+              "term": "college",
+              "weight": 0.5
+            },
+            {
+              "term": "instituto",
+              "weight": 0.5
+            },
+            {
+              "term": "institutos",
+              "weight": 0.5
+            },
+            {
+              "term": "formación",
+              "weight": 0.5
+            },
+            {
+              "term": "formacion",
+              "weight": 0.5
+            },
+            {
+              "term": "cursos",
+              "weight": 0.5
+            }
+          ]
+        },
+        "secondary_keywords": {
+          "positive": [
+            "agricultura",
+            "agriculture",
+            "agrícola",
+            "agricultural",
+            "explotación agrícola",
+            "farm",
+            "campo",
+            "field",
+            "cultivo",
+            "cultivation"
+          ],
+          "negative": []
+        }
+      },
+      "geographic_rules": {
+        "target_regions": [
+          "españa",
+          "spain",
+          "es",
+          ".es",
+          "spanish",
+          "madrid",
+          "barcelona",
+          "valencia",
+          "sevilla",
+          "seville",
+          "zaragoza",
+          "málaga",
+          "malaga",
+          "bilbao",
+          "murcia",
+          "palma",
+          "las palmas",
+          "alicante",
+          "córdoba",
+          "cordoba"
+        ],
+        "exclude_regions": [
+          ".cn",
+          ".com.cn",
+          ".hk",
+          ".tw",
+          ".in",
+          ".co.in",
+          ".tr",
+          ".de",
+          ".it",
+          ".nl",
+          ".cz",
+          ".hu",
+          ".ro",
+          ".jp",
+          ".kr",
+          ".th",
+          ".vn",
+          ".id",
+          ".my",
+          ".ph"
+        ],
+        "multipliers": {
+          "Spain": 2.0,
+          "EU": 1.2,
+          "Others": 0.3
+        }
+      },
+      "email_quality": {
+        "corporate_domains": true,
+        "free_email_penalty": -0.3,
+        "structure_quality": true,
+        "suspicious_patterns": []
+      },
+      "domain_rules": {
+        "oemEquipment": {
+          "keywords": [
+            "fabricante",
+            "manufacturer",
+            "productor",
+            "producer",
+            "concesionario oficial",
+            "official dealer",
+            "distribuidor autorizado",
+            "authorized distributor",
+            "distribuidor oficial",
+            "official distributor"
+          ],
+          "multiplier": 1.3
+        }
+      }
+    },
+    "spain_powder_metal": {
+      "metadata": {
+        "id": "spain_powder_metal",
+        "name": "Spain - Powder Metallurgy",
+        "description": "",
+        "version": "1.0",
+        "author": "system",
+        "created": "2025-11-12T11:45:29.920680",
+        "updated": "2025-11-12T11:45:29.920683"
+      },
+      "target": {
+        "country": "Spain",
+        "industry": "powder_metallurgy",
+        "languages": [
+          "es",
+          "en"
+        ]
+      },
+      "scoring": {
+        "weights": {
+          "email_quality": 0.1,
+          "company_relevance": 0.45,
+          "geographic_priority": 0.3,
+          "engagement": 0.15
+        },
+        "thresholds": {
+          "high_priority": 100,
+          "medium_priority": 50,
+          "low_priority": 10,
+          "exclude": 0
+        }
+      },
+      "company_keywords": {
+        "primary_keywords": {
+          "positive": [
+            {
+              "term": "metalurgia de polvos",
+              "weight": 1.0
+            },
+            {
+              "term": "pulvimetalurgia",
+              "weight": 1.0
+            },
+            {
+              "term": "polvos metálicos",
+              "weight": 1.0
+            },
+            {
+              "term": "polvo metálico",
+              "weight": 1.0
+            },
+            {
+              "term": "sinterización",
+              "weight": 1.0
+            },
+            {
+              "term": "sinterizado",
+              "weight": 1.0
+            },
+            {
+              "term": "tecnología de polvos",
+              "weight": 1.0
+            },
+            {
+              "term": "powder metallurgy",
+              "weight": 1.0
+            },
+            {
+              "term": "powder metal",
+              "weight": 1.0
+            },
+            {
+              "term": "sintering",
+              "weight": 1.0
+            }
+          ],
+          "negative": [
+            {
+              "term": "escuela",
+              "weight": 0.5
+            },
+            {
+              "term": "escuelas",
+              "weight": 0.5
+            },
+            {
+              "term": "colegio",
+              "weight": 0.5
+            },
+            {
+              "term": "instituto",
+              "weight": 0.5
+            },
+            {
+              "term": "institutos",
+              "weight": 0.5
+            },
+            {
+              "term": "universidad",
+              "weight": 0.5
+            },
+            {
+              "term": "universidades",
+              "weight": 0.5
+            },
+            {
+              "term": "facultad",
+              "weight": 0.5
+            },
+            {
+              "term": "college",
+              "weight": 0.5
+            },
+            {
+              "term": "educación",
+              "weight": 0.5
+            }
+          ]
+        },
+        "secondary_keywords": {
+          "positive": [
+            "industria automotriz",
+            "automoción",
+            "automotive",
+            "automóvil",
+            "automotor",
+            "industria aeroespacial",
+            "aerospace",
+            "aeronáutica",
+            "aviación",
+            "electrotecnia"
+          ],
+          "negative": []
+        }
+      },
+      "geographic_rules": {
+        "target_regions": [
+          "españa",
+          "spain",
+          "espana",
+          ".es",
+          "spanish",
+          "español",
+          "madrid",
+          "barcelona",
+          "valencia",
+          "sevilla",
+          "seville",
+          "zaragoza",
+          "málaga",
+          "malaga",
+          "murcia",
+          "palma",
+          "bilbao",
+          "alicante",
+          "córdoba",
+          "cordoba"
+        ],
+        "exclude_regions": [
+          ".cn",
+          ".com.cn",
+          ".hk",
+          ".tw",
+          ".in",
+          ".co.in",
+          ".ru",
+          ".by",
+          ".ua",
+          ".kz",
+          ".uz",
+          ".tr",
+          ".com.tr",
+          ".br",
+          ".com.br",
+          ".au",
+          ".com.au",
+          ".za",
+          ".co.za",
+          ".pk"
+        ],
+        "multipliers": {
+          "Spain": 2.0,
+          "EU": 1.2,
+          "Others": 0.3
+        }
+      },
+      "email_quality": {
+        "corporate_domains": true,
+        "free_email_penalty": -0.3,
+        "structure_quality": true,
+        "suspicious_patterns": []
+      },
+      "domain_rules": {
+        "oemEquipment": {
+          "keywords": [
+            "fabricante",
+            "productor",
+            "fábrica",
+            "planta",
+            "producción",
+            "proveedor",
+            "subcontratista",
+            "fabricación por contrato",
+            "procesador",
+            "procesamiento"
+          ],
+          "multiplier": 1.3
+        }
+      }
+    },
+    "swiss_machinery": {
+      "metadata": {
+        "id": "swiss_machinery",
+        "name": "Switzerland - Machinery & Equipment",
+        "description": "",
+        "version": "1.0",
+        "author": "system",
+        "created": "2025-11-12T11:45:29.920969",
+        "updated": "2025-11-12T11:45:29.920973"
+      },
+      "target": {
+        "country": "Switzerland",
+        "industry": "machinery",
+        "languages": [
+          "de",
+          "fr",
+          "it",
+          "en"
+        ]
+      },
+      "scoring": {
+        "weights": {
+          "email_quality": 0.1,
+          "company_relevance": 0.45,
+          "geographic_priority": 0.3,
+          "engagement": 0.15
+        },
+        "thresholds": {
+          "high_priority": 100,
+          "medium_priority": 50,
+          "low_priority": 10,
+          "exclude": 0
+        }
+      },
+      "company_keywords": {
+        "primary_keywords": {
+          "positive": [
+            {
+              "term": "maschinen",
+              "weight": 1.0
+            },
+            {
+              "term": "baumaschinen",
+              "weight": 1.0
+            },
+            {
+              "term": "anlagen",
+              "weight": 1.0
+            },
+            {
+              "term": "geräte",
+              "weight": 1.0
+            },
+            {
+              "term": "ausrüstung",
+              "weight": 1.0
+            },
+            {
+              "term": "machines",
+              "weight": 1.0
+            },
+            {
+              "term": "engins de chantier",
+              "weight": 1.0
+            },
+            {
+              "term": "équipement",
+              "weight": 1.0
+            },
+            {
+              "term": "matériel",
+              "weight": 1.0
+            },
+            {
+              "term": "macchine",
+              "weight": 1.0
+            }
+          ],
+          "negative": [
+            {
+              "term": "schule",
+              "weight": 0.5
+            },
+            {
+              "term": "gymnasium",
+              "weight": 0.5
+            },
+            {
+              "term": "universität",
+              "weight": 0.5
+            },
+            {
+              "term": "hochschule",
+              "weight": 0.5
+            },
+            {
+              "term": "fachhochschule",
+              "weight": 0.5
+            },
+            {
+              "term": "bildung",
+              "weight": 0.5
+            },
+            {
+              "term": "ausbildung",
+              "weight": 0.5
+            },
+            {
+              "term": "weiterbildung",
+              "weight": 0.5
+            },
+            {
+              "term": "fortbildung",
+              "weight": 0.5
+            },
+            {
+              "term": "kurs",
+              "weight": 0.5
+            }
+          ]
+        },
+        "secondary_keywords": {
+          "positive": [
+            "baumaschinen",
+            "landmaschinen",
+            "industriemaschinen",
+            "engins de chantier",
+            "machines agricoles",
+            "machines industrielles",
+            "macchine da costruzione",
+            "macchine agricole",
+            "macchine industriali",
+            "construction machinery"
+          ],
+          "negative": []
+        }
+      },
+      "geographic_rules": {
+        "target_regions": [
+          "schweiz",
+          "switzerland",
+          "suisse",
+          "svizzera",
+          ".ch",
+          "swiss",
+          "zürich",
+          "zurich",
+          "genève",
+          "geneva",
+          "ginevra",
+          "basel",
+          "bâle",
+          "basilea",
+          "bern",
+          "berne",
+          "lausanne",
+          "luzern",
+          "lucerne",
+          "lugano"
+        ],
+        "exclude_regions": [
+          ".cn",
+          ".com.cn",
+          ".hk",
+          ".tw",
+          ".in",
+          ".co.in",
+          ".ru",
+          ".by",
+          ".ua",
+          ".kz",
+          ".uz",
+          ".tr",
+          ".com.tr",
+          ".br",
+          ".com.br",
+          ".au",
+          ".com.au",
+          ".za",
+          ".co.za",
+          ".pk"
+        ],
+        "multipliers": {
+          "Switzerland": 2.0,
+          "EU": 1.2,
+          "Others": 0.3
+        }
+      },
+      "email_quality": {
+        "corporate_domains": true,
+        "free_email_penalty": -0.3,
+        "structure_quality": true,
+        "suspicious_patterns": []
+      },
+      "domain_rules": {
+        "oemEquipment": {
+          "keywords": [
+            "hersteller",
+            "produzent",
+            "fabrikant",
+            "fertigung",
+            "produktion",
+            "fabrik",
+            "werk",
+            "fabricant",
+            "producteur",
+            "constructeur"
+          ],
+          "multiplier": 1.3
+        }
+      }
+    },
+    "uk_business_exclusions": {
+      "metadata": {
+        "id": "uk_business_exclusions",
+        "name": "UK - Business (Exclusion Filter)",
+        "description": "",
+        "version": "1.0",
+        "author": "system",
+        "created": "2025-11-12T11:45:29.921246",
+        "updated": "2025-11-12T11:45:29.921248"
+      },
+      "target": {
+        "country": "United Kingdom",
+        "industry": "general_business",
+        "languages": [
+          "en"
+        ]
+      },
+      "scoring": {
+        "weights": {
+          "email_quality": 0.15,
+          "company_relevance": 0.35,
+          "geographic_priority": 0.25,
+          "engagement": 0.25
+        },
+        "thresholds": {
+          "high_priority": 100,
+          "medium_priority": 50,
+          "low_priority": 10,
+          "exclude": 0
+        }
+      },
+      "company_keywords": {
+        "primary_keywords": {
+          "positive": [
+            {
+              "term": "manufacturer",
+              "weight": 1.0
+            },
+            {
+              "term": "manufacturing",
+              "weight": 1.0
+            },
+            {
+              "term": "factory",
+              "weight": 1.0
+            },
+            {
+              "term": "production facility",
+              "weight": 1.0
+            },
+            {
+              "term": "industrial equipment",
+              "weight": 1.0
+            },
+            {
+              "term": "machinery",
+              "weight": 1.0
+            },
+            {
+              "term": "machine tools",
+              "weight": 1.0
+            },
+            {
+              "term": "automation",
+              "weight": 1.0
+            },
+            {
+              "term": "robotics",
+              "weight": 1.0
+            },
+            {
+              "term": "assembly",
+              "weight": 1.0
+            }
+          ],
+          "negative": [
+            {
+              "term": "travel agency",
+              "weight": 0.5
+            },
+            {
+              "term": "travel agent",
+              "weight": 0.5
+            },
+            {
+              "term": "tour operator",
+              "weight": 0.5
+            },
+            {
+              "term": "tourism",
+              "weight": 0.5
+            },
+            {
+              "term": "holiday",
+              "weight": 0.5
+            },
+            {
+              "term": "holidays",
+              "weight": 0.5
+            },
+            {
+              "term": "vacation",
+              "weight": 0.5
+            },
+            {
+              "term": "vacations",
+              "weight": 0.5
+            },
+            {
+              "term": "cruise",
+              "weight": 0.5
+            },
+            {
+              "term": "flight booking",
+              "weight": 0.5
+            }
+          ]
+        },
+        "secondary_keywords": {
+          "positive": [
+            "construction equipment",
+            "building materials",
+            "construction machinery",
+            "civil engineering",
+            "structural engineering",
+            "contractor",
+            "construction company",
+            "building contractor",
+            "main contractor",
+            "specialist contractor"
+          ],
+          "negative": []
+        }
+      },
+      "geographic_rules": {
+        "target_regions": [
+          "united kingdom",
+          "uk",
+          "gb",
+          ".uk",
+          ".co.uk",
+          "london",
+          "manchester",
+          "birmingham",
+          "leeds",
+          "glasgow",
+          "sheffield",
+          "liverpool",
+          "edinburgh",
+          "bristol",
+          "cardiff",
+          "belfast",
+          "newcastle",
+          "nottingham",
+          "southampton",
+          "portsmouth"
+        ],
+        "exclude_regions": [
+          ".cn",
+          ".com.cn",
+          ".hk",
+          ".tw",
+          ".in",
+          ".co.in",
+          ".tr",
+          ".com.tr",
+          ".ru",
+          ".by",
+          ".ua",
+          ".pk",
+          ".bd",
+          ".vn",
+          ".th",
+          ".id",
+          ".my",
+          ".ph"
+        ],
+        "multipliers": {
+          "United Kingdom": 2.0,
+          "EU": 1.2,
+          "Others": 0.3
+        }
+      },
+      "email_quality": {
+        "corporate_domains": true,
+        "free_email_penalty": -0.3,
+        "structure_quality": true,
+        "suspicious_patterns": []
+      },
+      "domain_rules": {
+        "oemEquipment": {
+          "keywords": [
+            "manufacturer",
+            "producer",
+            "maker",
+            "factory",
+            "plant",
+            "production",
+            "OEM",
+            "OEM supplier",
+            "OEM manufacturer",
+            "fabricator"
+          ],
+          "multiplier": 1.3
+        }
+      }
+    }
+  },
+  "user": {}
+}

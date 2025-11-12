@@ -535,6 +535,39 @@ class EmailCheckerWebHandler(BaseHTTPRequestHandler):
         except Exception as e:
             print(f"Error sending JSON response: {e}")
 
+    def count_lines_in_file(self, file_path):
+        """Подсчет строк в файле"""
+        try:
+            if not file_path.exists():
+                return 0
+            with open(file_path, 'r', encoding='utf-8', errors='ignore') as f:
+                return sum(1 for line in f if line.strip())
+        except Exception as e:
+            print(f"Error counting lines in {file_path}: {e}")
+            return 0
+
+    def count_lines_in_output(self, filename_base):
+        """Подсчет строк в файлах output для данного списка"""
+        try:
+            output_dir = self.base_dir / "output"
+            if not output_dir.exists():
+                return 0, 0
+
+            clean_count = 0
+            blocked_count = 0
+
+            # Ищем файлы clean и blocked для этого списка
+            for output_file in output_dir.glob(f"{filename_base}_clean_*.txt"):
+                clean_count += self.count_lines_in_file(output_file)
+
+            for output_file in output_dir.glob(f"{filename_base}_blocked_*.txt"):
+                blocked_count += self.count_lines_in_file(output_file)
+
+            return clean_count, blocked_count
+        except Exception as e:
+            print(f"Error counting output lines for {filename_base}: {e}")
+            return 0, 0
+
     def handle_get_lists(self):
         """Безопасное получение списка email файлов"""
         try:
@@ -549,6 +582,23 @@ class EmailCheckerWebHandler(BaseHTTPRequestHandler):
                 with open(config_file, 'r', encoding='utf-8') as f:
                     config = json.load(f)
                     lists_data = config.get("lists", [])
+
+            # Добавляем статистику для каждого списка
+            input_dir = self.base_dir / "input"
+            for list_item in lists_data:
+                filename = list_item.get("filename", "")
+                if not filename:
+                    continue
+
+                # Подсчет общего количества email в input файле
+                input_file = input_dir / filename
+                list_item["emails"] = self.count_lines_in_file(input_file)
+
+                # Подсчет clean и blocked из output файлов
+                filename_base = filename.rsplit('.', 1)[0]  # Убираем расширение
+                clean_count, blocked_count = self.count_lines_in_output(filename_base)
+                list_item["clean"] = clean_count
+                list_item["blocked"] = blocked_count
 
             self.send_json_response({"lists": lists_data})
         except json.JSONDecodeError as e:
@@ -672,6 +722,33 @@ class EmailCheckerWebHandler(BaseHTTPRequestHandler):
             except ValueError as e:
                 self.send_json_response({"error": f"Invalid filename: {str(e)}"}, 400)
                 return
+
+            # Проверяем статус обработки в lists_config.json
+            force_reprocess = data.get("force_reprocess", False)
+            config_file = self.base_dir / "lists_config.json"
+
+            if config_file.exists():
+                try:
+                    with open(config_file, 'r', encoding='utf-8') as f:
+                        config = json.load(f)
+                        lists = config.get("lists", [])
+
+                        # Находим список по имени файла
+                        list_entry = next((l for l in lists if l.get("filename") == filename), None)
+
+                        if list_entry and list_entry.get("processed") == True:
+                            # Список уже обработан
+                            if not force_reprocess:
+                                self.send_json_response({
+                                    "error": "Список уже обработан. Используйте force_reprocess=true для повторной обработки.",
+                                    "already_processed": True
+                                }, 400)
+                                return
+                            else:
+                                print(f"⚠️ Принудительная переобработка списка: {filename}")
+                except Exception as e:
+                    print(f"⚠️ Ошибка чтения lists_config.json: {e}")
+                    # Продолжаем обработку, если не удалось прочитать конфиг
 
             # Проверка существования файла
             input_file = self.base_dir / "input" / filename
@@ -1497,12 +1574,19 @@ class EmailCheckerWebHandler(BaseHTTPRequestHandler):
 
             target_path = input_dir / filename
 
+            # Проверка параметра overwrite
+            overwrite = form.getvalue('overwrite', 'false').lower() == 'true'
+
             # Проверка на перезапись
-            if target_path.exists():
+            if target_path.exists() and not overwrite:
                 self.send_json_response({
                     "error": f"File {filename} already exists. Please rename or delete the existing file first."
                 }, 409)
                 return
+
+            # Если перезапись разрешена, логируем
+            if target_path.exists() and overwrite:
+                print(f"⚠️ Overwriting existing file: {filename}")
 
             # Сохранение файла
             with open(target_path, 'wb') as f:
@@ -3484,24 +3568,201 @@ class EmailCheckerWebHandler(BaseHTTPRequestHandler):
 
     # ===== TEMPLATE API HANDLERS =====
 
+    def convert_old_to_new_format(self, old_config, config_name):
+        """
+        Convert old Python backend format to new frontend format
+
+        Args:
+            old_config (dict): Old format config from configs/*.json
+            config_name (str): Config filename (without .json)
+
+        Returns:
+            dict: New format config compatible with frontend
+        """
+        from datetime import datetime
+
+        # Extract data from actual config format
+        # Handle both 'display_name' and 'config_name'
+        filter_name = old_config.get('display_name', old_config.get('config_name', config_name))
+        version = old_config.get('version', '1.0')
+        description = old_config.get('description', '')
+
+        # Handle nested target_market structure
+        target_market = old_config.get('target_market', {})
+        target_country = target_market.get('country_name', 'Unknown')
+        languages = target_market.get('language_codes', ['en'])
+
+        target_industry = old_config.get('target_industry', 'Unknown')
+
+        # Geographic data - handle both old and new formats
+        geographic = old_config.get('geographic', {})
+        geographic_priorities = old_config.get('geographic_priorities', {})
+
+        # Use geographic_priorities if available (new format)
+        priority_high = geographic_priorities.get('high', geographic.get('priority_high', []))
+        priority_medium = geographic_priorities.get('medium', geographic.get('priority_medium', []))
+
+        # Handle exclusions - new format uses nested structure
+        exclusions = old_config.get('exclusions', {})
+        excluded = exclusions.get('excluded_country_domains', geographic.get('excluded_countries', []))
+
+        # Industry keywords - handle both old and new formats
+        industry_kw = old_config.get('industry_keywords', {})
+        keywords = old_config.get('keywords', {})
+
+        # Map new keywords format to old format
+        if keywords and not industry_kw:
+            # Get first category as primary keywords (e.g., 'hydraulic_cylinders')
+            categories = list(keywords.keys())
+            primary_category = categories[0] if categories else None
+
+            if primary_category and primary_category != 'oem_indicators':
+                industry_kw['primary_positive'] = keywords.get(primary_category, [])
+
+            # Get 'applications' or second category as secondary
+            if 'applications' in keywords:
+                industry_kw['secondary_positive'] = keywords.get('applications', [])
+            elif len(categories) > 1:
+                industry_kw['secondary_positive'] = keywords.get(categories[1], [])
+
+            # Get OEM indicators
+            if 'oem_indicators' in keywords:
+                industry_kw['oem_indicators'] = keywords.get('oem_indicators', [])
+
+        # Negative keywords - extract from exclusions.excluded_industries
+        negative_kw = old_config.get('negative_keywords', [])
+        if not negative_kw and 'excluded_industries' in exclusions:
+            # Flatten all excluded industry keywords
+            for category, terms in exclusions['excluded_industries'].items():
+                negative_kw.extend(terms)
+
+        # Get scoring config - use from config if available, otherwise defaults
+        scoring_config = old_config.get('scoring', {})
+        weights = scoring_config.get('weights', {
+            "email_quality": 0.10,
+            "company_relevance": 0.45,
+            "geographic_priority": 0.30,
+            "engagement": 0.15
+        })
+        thresholds = scoring_config.get('thresholds', {
+            "high_priority": 100,
+            "medium_priority": 50,
+            "low_priority": 10
+        })
+
+        # Convert to new format
+        new_config = {
+            "metadata": {
+                "id": config_name,
+                "name": filter_name,
+                "description": description,
+                "version": version,
+                "author": "system",
+                "created": datetime.now().isoformat(),
+                "updated": datetime.now().isoformat()
+            },
+            "target": {
+                "country": target_country,
+                "industry": target_industry,
+                "languages": languages
+            },
+            "scoring": {
+                "weights": weights,
+                "thresholds": thresholds
+            },
+            "company_keywords": {
+                "primary_keywords": {
+                    "positive": [
+                        {"term": term, "weight": 1.0}
+                        for term in industry_kw.get('primary_positive', [])[:10]  # Limit to 10
+                    ],
+                    "negative": [
+                        {"term": term, "weight": 0.5}
+                        for term in (industry_kw.get('primary_negative', []) + negative_kw)[:10]
+                    ]
+                },
+                "secondary_keywords": {
+                    "positive": industry_kw.get('secondary_positive', [])[:10],
+                    "negative": industry_kw.get('secondary_negative', [])[:10]
+                }
+            },
+            "geographic_rules": {
+                "target_regions": priority_high[:20],  # Limit to 20
+                "exclude_regions": excluded[:20],
+                "multipliers": {
+                    # Default multipliers
+                    target_country: 2.0,
+                    "EU": 1.2,
+                    "Others": 0.3
+                }
+            },
+            "email_quality": {
+                "corporate_domains": True,
+                "free_email_penalty": -0.3,
+                "structure_quality": True,
+                "suspicious_patterns": []
+            },
+            "domain_rules": {
+                "oemEquipment": {
+                    "keywords": industry_kw.get('oem_indicators', [])[:10],
+                    "multiplier": 1.3
+                }
+            }
+        }
+
+        return new_config
+
     def handle_get_templates(self):
         """Get all templates (built-in + user templates)"""
         try:
-            # Load built-in templates from filter-config.js
-            # (not parsed here, will be loaded on frontend)
-            builtin_templates = {
-                "italy_hydraulics": {"source": "builtin"},
-                "germany_manufacturing": {"source": "builtin"},
-                "generic": {"source": "builtin"}
-            }
+            # Load ALL configs from configs/ directory
+            builtin_templates = {}
+            configs_dir = Path('configs')
+
+            if configs_dir.exists():
+                print(f"📂 Loading templates from {configs_dir}...")
+                for config_file in configs_dir.glob('*.json'):
+                    try:
+                        config_name = config_file.stem  # filename without .json
+
+                        # Skip user_templates.json (will be loaded separately)
+                        if config_name == 'user_templates':
+                            continue
+
+                        with open(config_file, 'r', encoding='utf-8') as f:
+                            old_config = json.load(f)
+
+                        # Convert old format to new format
+                        new_config = self.convert_old_to_new_format(old_config, config_name)
+                        builtin_templates[config_name] = new_config
+
+                        print(f"  ✅ Loaded: {new_config['metadata']['name']}")
+
+                    except Exception as e:
+                        print(f"  ⚠️ Failed to load {config_file}: {e}")
+                        continue
+
+                print(f"✅ Loaded {len(builtin_templates)} built-in templates")
+            else:
+                print(f"⚠️ Configs directory not found: {configs_dir}")
+                # Fallback to hardcoded templates
+                builtin_templates = {
+                    "italy_hydraulics": {"source": "builtin", "metadata": {"name": "Italy Hydraulics"}},
+                    "germany_manufacturing": {"source": "builtin", "metadata": {"name": "Germany Manufacturing"}},
+                    "generic": {"source": "builtin", "metadata": {"name": "Generic Template"}}
+                }
 
             # Load user templates from config/user_templates.json
             user_templates_file = Path('config/user_templates.json')
             user_templates = {}
 
             if user_templates_file.exists():
-                with open(user_templates_file, 'r', encoding='utf-8') as f:
-                    user_templates = json.load(f)
+                try:
+                    with open(user_templates_file, 'r', encoding='utf-8') as f:
+                        user_templates = json.load(f)
+                    print(f"✅ Loaded {len(user_templates)} user templates")
+                except Exception as e:
+                    print(f"⚠️ Failed to load user templates: {e}")
 
             # Combine both
             all_templates = {
@@ -3520,7 +3781,7 @@ class EmailCheckerWebHandler(BaseHTTPRequestHandler):
             })
 
         except Exception as e:
-            print(f"Error getting templates: {e}")
+            print(f"❌ Error getting templates: {e}")
             import traceback
             traceback.print_exc()
             self.send_json_response({"error": str(e)}, 500)

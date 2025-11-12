@@ -87,8 +87,17 @@ class ListsManagerComponent {
         if (!container) {
             console.log('ℹ️ Column Manager container not found - using default columns');
             // Set default visible columns when Column Manager is not available
-            this.visibleColumns = ['select', 'filename', 'display_name', 'country', 'category',
-                                   'file_type', 'statistics', 'processed', 'actions'];
+            this.visibleColumns = [
+                { id: 'select', label: 'Выбор', visible: true, locked: true },
+                { id: 'filename', label: 'Название файла', visible: true, locked: true },
+                { id: 'display_name', label: 'Отображаемое имя', visible: true, locked: false },
+                { id: 'country', label: 'Страна', visible: true, locked: false },
+                { id: 'category', label: 'Категория', visible: true, locked: false },
+                { id: 'file_type', label: 'Тип файла', visible: true, locked: false },
+                { id: 'statistics', label: 'Статистика', visible: true, locked: false },
+                { id: 'processed', label: 'Обработан', visible: true, locked: false },
+                { id: 'actions', label: 'Действия', visible: true, locked: true }
+            ];
             console.log('  - Default visible columns set:', this.visibleColumns);
             return;
         }
@@ -578,7 +587,7 @@ class ListsManagerComponent {
                 file_type: list.file_type || 'TXT',
                 country: list.country || 'Unknown',
                 category: list.category || 'General',
-                processed: list.processed || false,
+                processed: list.processed ?? false,  // Используем ?? для булевых значений
                 priority: list.priority || 100,
                 date_added: list.date_added || new Date().toISOString().split('T')[0],
                 description: list.description || ''
@@ -930,11 +939,13 @@ class ListsManagerComponent {
 
         // Build table header dynamically with fixed widths
         let headerHTML = '<thead><tr>';
-        this.visibleColumns.forEach(colId => {
-            const col = this.getColumnConfig(colId);
-            const widthStyle = col.width ? `style="width: ${col.width}; min-width: ${col.width};"` : '';
-            const alignClass = col.align === 'center' ? 'text-center' :
-                               col.align === 'right' ? 'text-right' : 'text-left';
+        this.visibleColumns.forEach(col => {
+            // Получаем ID колонки (поддерживаем как объекты, так и строковые ID для обратной совместимости)
+            const colId = typeof col === 'string' ? col : col.id;
+            const config = this.getColumnConfig(colId);
+            const widthStyle = config.width ? `style="width: ${config.width}; min-width: ${config.width};"` : '';
+            const alignClass = config.align === 'center' ? 'text-center' :
+                               config.align === 'right' ? 'text-right' : 'text-left';
 
             // Special handling for select column with header checkbox
             if (colId === 'select') {
@@ -950,7 +961,7 @@ class ListsManagerComponent {
                     </th>
                 `;
             } else {
-                headerHTML += `<th class="text-base-content ${alignClass}" ${widthStyle}>${col.label}</th>`;
+                headerHTML += `<th class="text-base-content ${alignClass}" ${widthStyle}>${config.label}</th>`;
             }
         });
         headerHTML += '</tr></thead>';
@@ -959,10 +970,12 @@ class ListsManagerComponent {
         let bodyHTML = '<tbody>';
         lists.forEach(list => {
             bodyHTML += '<tr class="hover">';
-            this.visibleColumns.forEach(colId => {
-                const col = this.getColumnConfig(colId);
-                const alignClass = col.align === 'center' ? 'text-center' :
-                                   col.align === 'right' ? 'text-right' : 'text-left';
+            this.visibleColumns.forEach(col => {
+                // Получаем ID колонки (поддерживаем как объекты, так и строковые ID)
+                const colId = typeof col === 'string' ? col : col.id;
+                const config = this.getColumnConfig(colId);
+                const alignClass = config.align === 'center' ? 'text-center' :
+                                   config.align === 'right' ? 'text-right' : 'text-left';
                 bodyHTML += `<td class="${alignClass}">${this.renderCell(list, colId)}</td>`;
             });
             bodyHTML += '</tr>';
@@ -1629,7 +1642,44 @@ class ListsManagerComponent {
 
             if (!response.ok) {
                 const errorData = await response.json();
-                throw new Error(errorData.error || `HTTP error! status: ${response.status}`);
+
+                // Handle 409 Conflict - file already exists
+                if (response.status === 409) {
+                    const action = await this.showFileConflictDialog(file.name);
+
+                    if (action === 'overwrite') {
+                        // Retry upload with overwrite flag
+                        formData.append('overwrite', 'true');
+                        const retryResponse = await fetch('/api/upload-file', {
+                            method: 'POST',
+                            body: formData
+                        });
+
+                        if (!retryResponse.ok) {
+                            const retryError = await retryResponse.json();
+                            throw new Error(retryError.error || 'Overwrite failed');
+                        }
+
+                        const retryResult = await retryResponse.json();
+                        if (retryResult.success) {
+                            toast.success(`Файл ${file.name} перезаписан!`);
+                            await this.loadLists();
+                            this.renderTable();
+                            this.highlightNewFiles([{ filename: retryResult.filename || file.name }]);
+                        }
+                        return;
+
+                    } else if (action === 'skip') {
+                        toast.info(`Пропущен: ${file.name}`);
+                        return;
+
+                    } else if (action === 'cancel') {
+                        toast.info('Загрузка отменена');
+                        return;
+                    }
+                } else {
+                    throw new Error(errorData.error || `HTTP error! status: ${response.status}`);
+                }
             }
 
             const result = await response.json();
@@ -1657,17 +1707,114 @@ class ListsManagerComponent {
     }
 
     /**
+     * Show dialog when file already exists
+     * @param {string} filename - Conflicting filename
+     * @returns {Promise<string>} Action: 'overwrite', 'skip', or 'cancel'
+     */
+    showFileConflictDialog(filename) {
+        return new Promise((resolve) => {
+            const content = `
+                <div class="space-y-4">
+                    <p class="text-base-content/80">
+                        Файл <strong class="text-warning">${filename}</strong> уже существует.
+                    </p>
+                    <p class="text-base-content/70 text-sm">
+                        Что вы хотите сделать?
+                    </p>
+                </div>
+            `;
+
+            const modal = new Modal('⚠️ Файл уже существует', content, {
+                size: 'small',
+                closable: true,
+                buttons: [
+                    {
+                        label: 'Отмена',
+                        type: 'secondary',
+                        onClick: () => {
+                            resolve('cancel');
+                        }
+                    },
+                    {
+                        label: 'Пропустить',
+                        type: 'secondary',
+                        onClick: () => {
+                            resolve('skip');
+                        }
+                    },
+                    {
+                        label: 'Перезаписать',
+                        type: 'danger',
+                        onClick: () => {
+                            resolve('overwrite');
+                        }
+                    }
+                ]
+            });
+
+            modal.open();
+        });
+    }
+
+    /**
      * Process selected lists
      */
-    processSelected() {
+    async processSelected() {
         const selected = this.getSelectedFilenames();
         if (selected.length === 0) {
             toast.warning('Выберите хотя бы один список');
             return;
         }
 
-        console.log('Processing lists:', selected);
-        toast.success(`Обработка ${selected.length} списков запущена...`);
+        console.log('🔄 Processing selected lists:', selected);
+
+        // Спрашиваем подтверждение через модальное окно (как в Smart Filter)
+        ModalService.confirm(
+            'Обработка списков',
+            `Обработать ${selected.length} ${this.pluralizeFiles(selected.length)}?`,
+            async () => {
+                try {
+                    // Показываем loading overlay
+                    this.showLoadingIndicator(`Запуск обработки ${selected.length} списков...`);
+
+                    // Вызываем API для обработки
+                    const response = await fetch('/api/process', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            mode: 'check-all-incremental',
+                            exclude_duplicates: true,
+                            generate_html: true
+                        })
+                    });
+
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+
+                    const result = await response.json();
+
+                    if (result.success) {
+                        toast.success('✅ Обработка запущена!');
+                        console.log('✅ Processing started:', result);
+
+                        // Переход на Processing Queue для отслеживания прогресса
+                        setTimeout(() => {
+                            window.location.href = '/processing-queue.html';
+                        }, 2000);
+                    } else {
+                        throw new Error(result.error || 'Ошибка запуска обработки');
+                    }
+                } catch (error) {
+                    console.error('❌ Processing failed:', error);
+                    toast.error(`Ошибка: ${error.message}`);
+                } finally {
+                    this.hideLoadingIndicator();
+                }
+            }
+        );
     }
 
     /**
@@ -1680,10 +1827,87 @@ class ListsManagerComponent {
             return;
         }
 
-        console.log('🔄 Processing list:', filename);
-        toast.info(`Обработка ${list.display_name || filename}...`);
+        // Проверяем, обработан ли список
+        if (list.processed) {
+            // Список уже обработан - предупреждаем пользователя
+            ModalService.confirm(
+                'Список уже обработан',
+                `Список "${list.display_name || filename}" уже обработан. Обработать повторно?`,
+                async () => {
+                    await this.executeProcessOne(filename, true);  // force_reprocess = true
+                }
+            );
+        } else {
+            // Список не обработан - обычное подтверждение
+            ModalService.confirm(
+                'Обработка списка',
+                `Обработать список "${list.display_name || filename}"?`,
+                async () => {
+                    await this.executeProcessOne(filename, false);  // force_reprocess = false
+                }
+            );
+        }
+    }
 
-        // TODO: Implement actual API call
+    /**
+     * Execute processing for one list
+     * @param {string} filename - Имя файла
+     * @param {boolean} forceReprocess - Принудительная переобработка
+     */
+    async executeProcessOne(filename, forceReprocess = false) {
+        try {
+            const list = this.lists.find(l => l.filename === filename);
+            if (!list) {
+                toast.error('Список не найден');
+                return;
+            }
+
+            this.showLoadingIndicator(`Запуск обработки ${list.display_name || filename}...`);
+
+            const response = await fetch('/api/process_one', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    filename: filename,
+                    exclude_duplicates: true,
+                    generate_html: true,
+                    force_reprocess: forceReprocess  // Новый параметр
+                })
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json().catch(() => ({}));
+
+                // Если список уже обработан и пользователь не подтвердил переобработку
+                if (response.status === 400 && errorData.already_processed) {
+                    toast.warning(errorData.error || 'Список уже обработан');
+                    return;
+                }
+
+                throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+            }
+
+            const result = await response.json();
+
+            if (result.success) {
+                toast.success(`✅ Обработка "${list.display_name || filename}" запущена!`);
+
+                // Перенаправление на страницу очереди обработки через 2 секунды
+                setTimeout(() => {
+                    window.location.href = '/processing-queue.html';
+                }, 2000);
+            } else {
+                throw new Error(result.error || 'Неизвестная ошибка');
+            }
+
+        } catch (error) {
+            console.error('Ошибка обработки списка:', error);
+            toast.error(`Ошибка: ${error.message}`);
+        } finally {
+            this.hideLoadingIndicator();
+        }
     }
 
     /**
@@ -1697,32 +1921,34 @@ class ListsManagerComponent {
         }
 
         console.log('👁️ Viewing details:', filename);
+        console.log('📊 List data:', list);
+        console.log('🔍 Checking ModalService:', typeof ModalService, typeof window.ModalService, typeof window.modal);
 
         const details = `
             <div class="space-y-4">
                 <div>
-                    <label class="block text-sm font-semibold mb-2">Файл</label>
-                    <p>${list.filename}</p>
+                    <label class="block text-sm font-semibold mb-2 text-base-content">Файл</label>
+                    <p class="text-base-content">${list.filename}</p>
                 </div>
                 <div>
-                    <label class="block text-sm font-semibold mb-2">Тип</label>
-                    <p>${(list.file_type || 'TXT').toUpperCase()}</p>
+                    <label class="block text-sm font-semibold mb-2 text-base-content">Тип</label>
+                    <p class="text-base-content">${(list.file_type || 'TXT').toUpperCase()}</p>
                 </div>
                 <div>
-                    <label class="block text-sm font-semibold mb-2">Страна</label>
-                    <p>${list.country || 'Unknown'}</p>
+                    <label class="block text-sm font-semibold mb-2 text-base-content">Страна</label>
+                    <p class="text-base-content">${list.country || 'Unknown'}</p>
                 </div>
                 <div>
-                    <label class="block text-sm font-semibold mb-2">Категория</label>
-                    <p>${list.category || 'General'}</p>
+                    <label class="block text-sm font-semibold mb-2 text-base-content">Категория</label>
+                    <p class="text-base-content">${list.category || 'General'}</p>
                 </div>
                 <div>
-                    <label class="block text-sm font-semibold mb-2">Приоритет</label>
-                    <p>${list.priority || 100}</p>
+                    <label class="block text-sm font-semibold mb-2 text-base-content">Приоритет</label>
+                    <p class="text-base-content">${list.priority || 100}</p>
                 </div>
                 <div>
-                    <label class="block text-sm font-semibold mb-2">Статистика</label>
-                    <div class="space-y-1">
+                    <label class="block text-sm font-semibold mb-2 text-base-content">Статистика</label>
+                    <div class="space-y-1 text-base-content">
                         <div>📧 Всего: ${list.emails || 0}</div>
                         <div>✅ Чистые: ${list.clean || 0}</div>
                         <div>🚫 Заблокированы: ${list.blocked || 0}</div>
@@ -1730,15 +1956,37 @@ class ListsManagerComponent {
                 </div>
                 ${list.description ? `
                     <div>
-                        <label class="block text-sm font-semibold mb-2">Описание</label>
-                        <p>${list.description}</p>
+                        <label class="block text-sm font-semibold mb-2 text-base-content">Описание</label>
+                        <p class="text-base-content">${list.description}</p>
                     </div>
                 ` : ''}
             </div>
         `;
 
-        // Show in simple alert for now (can be replaced with modal component)
-        alert(`${list.display_name || filename}\n\n${details.replace(/<[^>]*>/g, '\n')}`);
+        // Show modal using ModalService (как в smart-filter.js)
+        try {
+            console.log('🚀 Attempting to show modal...');
+
+            // Используем window.ModalService напрямую, как в smart-filter
+            if (typeof window.ModalService !== 'undefined') {
+                console.log('✅ Using window.ModalService.show()');
+
+                // ВАЖНО: Передаём пустой массив [] для buttons, чтобы использовать дефолтную кнопку "Закрыть"
+                window.ModalService.show(
+                    `📋 ${list.display_name || filename}`,
+                    details,
+                    [],  // Пустой массив buttons - будет добавлена дефолтная кнопка "Закрыть"
+                    { size: 'medium', closable: true }
+                );
+            } else {
+                console.error('❌ ModalService not loaded!');
+                console.error('window.ModalService:', typeof window.ModalService);
+                toast.error('Модальное окно недоступно. Проверьте загрузку modal.js');
+            }
+        } catch (error) {
+            console.error('❌ Error showing modal:', error);
+            toast.error(`Ошибка модального окна: ${error.message}`);
+        }
     }
 }
 

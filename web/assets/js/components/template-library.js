@@ -318,10 +318,10 @@ class TemplateLibrary {
         overlay.style.cssText = 'position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; z-index: 1000; padding: 1rem;';
 
         overlay.innerHTML = `
-            <div style="background: white; border-radius: 0.5rem; width: 100%; max-width: 600px; max-height: 80vh; overflow-y: auto; padding: 1.5rem;">
+            <div class="bg-base-100 text-base-content" style="border-radius: 0.5rem; width: 100%; max-width: 600px; max-height: 80vh; overflow-y: auto; padding: 1.5rem;">
                 <h3 style="font-size: 1.125rem; font-weight: 600; margin-bottom: 1rem;">${template.metadata.name}</h3>
-                <pre style="background: #f8fafc; padding: 1rem; border-radius: 0.375rem; overflow-x: auto; font-size: 0.875rem;">${json}</pre>
-                <button onclick="this.closest('div').parentElement.remove()" style="width: 100%; padding: 0.75rem; background: #1e40af; color: white; border: none; border-radius: 0.375rem; cursor: pointer; margin-top: 1rem;">
+                <pre class="bg-base-200" style="padding: 1rem; border-radius: 0.375rem; overflow-x: auto; font-size: 0.875rem;">${json}</pre>
+                <button onclick="this.closest('div').parentElement.remove()" class="btn btn-primary w-full" style="margin-top: 1rem;">
                     Close
                 </button>
             </div>

@@ -210,10 +210,10 @@ class SmartFilter {
             const json = JSON.stringify(this.currentConfig, null, 2);
             previewEl.innerHTML = `
                 <h3 class="text-lg font-semibold mb-3">📄 JSON Preview</h3>
-                <pre style="background: #f8fafc; padding: 1rem; border-radius: 0.5rem; overflow-x: auto; font-size: 0.875rem; max-height: 400px; overflow-y: auto;">
+                <pre class="bg-base-200 text-base-content p-4 rounded-lg overflow-x-auto overflow-y-auto font-mono text-sm" style="max-height: 400px;">
 ${json}
                 </pre>
-                <button id="btn-copy-json" style="width: 100%; padding: 0.5rem; margin-top: 1rem; background: #1e40af; color: white; border: none; border-radius: 0.375rem; cursor: pointer;">
+                <button id="btn-copy-json" class="btn btn-primary w-full mt-4">
                     📋 Copy JSON
                 </button>
             `;

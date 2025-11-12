@@ -247,6 +247,7 @@ class ModalService {
 
 // Export to window for browser environment
 window.modal = ModalService;
+window.ModalService = ModalService;  // Экспортируем также как ModalService
 
 // Export for use in other modules
 if (typeof module !== 'undefined' && module.exports) {

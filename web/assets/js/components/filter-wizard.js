@@ -58,7 +58,10 @@ if (typeof FilterWizard === 'undefined') {
         this.render();
     }
 
-    render() {
+    async render() {
+        // Get step content (may be async for step 2)
+        const stepContent = await this.getStepContent();
+
         const html = `
             <!-- Step Indicators -->
             <div class="wizard-steps" id="wizard-steps">
@@ -67,7 +70,7 @@ if (typeof FilterWizard === 'undefined') {
 
             <!-- Step Content -->
             <div id="wizard-content" class="bg-base-100 rounded-lg shadow p-6 mb-6">
-                ${this.getStepContent()}
+                ${stepContent}
             </div>
 
             <!-- Navigation Buttons -->
@@ -111,10 +114,14 @@ if (typeof FilterWizard === 'undefined') {
         return html;
     }
 
-    getStepContent() {
+    async getStepContent() {
+        // Step 2 is async, others are sync
+        if (this.currentStep === 2) {
+            return await this.getStep2Content();
+        }
+
         const steps = {
             1: this.getStep1Content(),
-            2: this.getStep2Content(),
             3: this.getStep3Content(),
             4: this.getStep4Content(),
             5: this.getStep5Content()
@@ -187,42 +194,96 @@ if (typeof FilterWizard === 'undefined') {
         `;
     }
 
-    getStep2Content() {
+    async getStep2Content() {
+        // Load templates dynamically
+        let templates = { builtin: {}, user: {} };
+        let loading = false;
+
+        if (window.templateService) {
+            try {
+                loading = true;
+                templates = await window.templateService.getAllTemplates();
+                console.log(`Loaded templates: ${Object.keys(templates.builtin).length} builtin, ${Object.keys(templates.user).length} user`);
+            } catch (error) {
+                console.error('Failed to load templates:', error);
+            }
+        }
+
+        // Build builtin template options
+        const builtinOptions = Object.entries(templates.builtin).map(([key, tmpl], index) => {
+            const name = tmpl.metadata?.name || key;
+            const description = tmpl.metadata?.description || 'Built-in template';
+            const country = tmpl.target?.country || '';
+            const industry = tmpl.target?.industry || '';
+
+            return `
+                <label class="flex items-center gap-3 p-3 border border-base-300 rounded-lg cursor-pointer hover:bg-base-200 transition-colors">
+                    <input type="radio" name="config" value="${key}" class="w-4 h-4" ${index === 0 ? 'checked' : ''}
+                           onchange="window.currentWizard?.onConfigSelect('${key}')">
+                    <div class="flex-1">
+                        <div class="font-medium text-base-content">${name}</div>
+                        <div class="text-sm text-base-content/70">${description}</div>
+                        ${country || industry ? `
+                            <div class="text-xs text-base-content/60 mt-1">
+                                ${country ? `🌍 ${country}` : ''}
+                                ${industry ? `• 🏭 ${industry}` : ''}
+                            </div>
+                        ` : ''}
+                    </div>
+                </label>
+            `;
+        }).join('');
+
+        // Build user template options (if any)
+        const userTemplatesCount = Object.keys(templates.user).length;
+        const userOptions = userTemplatesCount > 0 ? `
+            <h4 class="font-medium text-base-content mt-6 mb-2">⭐ Your Custom Templates</h4>
+            ${Object.entries(templates.user).map(([key, tmpl]) => {
+                const name = tmpl.metadata?.name || key;
+                const description = tmpl.metadata?.description || 'Custom template';
+
+                return `
+                    <label class="flex items-center gap-3 p-3 border-2 border-success rounded-lg cursor-pointer hover:bg-base-200 transition-colors">
+                        <input type="radio" name="config" value="${key}" class="w-4 h-4"
+                               onchange="window.currentWizard?.onConfigSelect('${key}')">
+                        <div class="flex-1">
+                            <div class="font-medium text-base-content">⭐ ${name}</div>
+                            <div class="text-sm text-base-content/70">${description}</div>
+                        </div>
+                    </label>
+                `;
+            }).join('')}
+        ` : '';
+
         return `
             <h2 class="text-xl font-bold mb-4">⚙️ Choose Configuration</h2>
             <p class="text-slate-600 dark:text-slate-400 mb-4">Select a template or create new from scratch</p>
 
-            <!-- Load Template Button -->
-            <div class="mb-4">
-                <button onclick="window.currentWizard?.showTemplateModal()"
-                        class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-sm transition-colors">
-                    📚 Load Template
-                </button>
-            </div>
+            ${Object.keys(templates.builtin).length > 0 ? `
+                <div id="config-selector" class="space-y-2">
+                    <h4 class="font-medium text-base-content mb-2">📚 Built-in Templates (${Object.keys(templates.builtin).length})</h4>
+                    ${builtinOptions}
 
-            <div id="config-selector" class="space-y-2">
-                <label class="flex items-center gap-3 p-3 border rounded-lg cursor-pointer hover:bg-base-200">
-                    <input type="radio" name="config" value="italy_hydraulics" class="w-4 h-4" checked>
-                    <div>
-                        <div class="font-medium">Italy Hydraulics (Template)</div>
-                        <div class="text-sm text-slate-500">Predefined: Italian hydraulic equipment companies</div>
+                    ${userOptions}
+
+                    <h4 class="font-medium text-base-content mt-6 mb-2">✨ Custom</h4>
+                    <label class="flex items-center gap-3 p-3 border border-base-300 rounded-lg cursor-pointer hover:bg-base-200 transition-colors">
+                        <input type="radio" name="config" value="custom" class="w-4 h-4"
+                               onchange="window.currentWizard?.onConfigSelect('custom')">
+                        <div>
+                            <div class="font-medium text-base-content">Create from Scratch</div>
+                            <div class="text-sm text-base-content/70">Build custom configuration in next steps</div>
+                        </div>
+                    </label>
+                </div>
+            ` : `
+                <div class="p-4 bg-yellow-50 dark:bg-yellow-900/20 rounded-lg border border-yellow-200 dark:border-yellow-800">
+                    <div class="font-medium text-yellow-900 dark:text-yellow-400">⚠️ No templates loaded</div>
+                    <div class="text-sm text-yellow-800 dark:text-yellow-300">
+                        Unable to load templates. You can still create a custom configuration.
                     </div>
-                </label>
-                <label class="flex items-center gap-3 p-3 border rounded-lg cursor-pointer hover:bg-base-200">
-                    <input type="radio" name="config" value="generic" class="w-4 h-4">
-                    <div>
-                        <div class="font-medium">Generic Template</div>
-                        <div class="text-sm text-slate-500">Start with default configuration</div>
-                    </div>
-                </label>
-                <label class="flex items-center gap-3 p-3 border rounded-lg cursor-pointer hover:bg-base-200">
-                    <input type="radio" name="config" value="custom" class="w-4 h-4">
-                    <div>
-                        <div class="font-medium">Create Custom</div>
-                        <div class="text-sm text-slate-500">Build from scratch in next steps</div>
-                    </div>
-                </label>
-            </div>
+                </div>
+            `}
         `;
     }
 
@@ -679,6 +740,34 @@ if (typeof FilterWizard === 'undefined') {
         if (list) {
             this.state.selectedList = list;
             console.log('Selected list:', list);
+        }
+    }
+
+    /**
+     * Handle config selection in Step 2
+     */
+    async onConfigSelect(configKey) {
+        console.log(`Config selected: ${configKey}`);
+        this.state.selectedConfig = configKey;
+
+        // If not "custom", load the template config
+        if (configKey !== 'custom' && window.templateService) {
+            try {
+                const templates = await window.templateService.getAllTemplates();
+
+                // Check builtin templates first
+                if (templates.builtin && templates.builtin[configKey]) {
+                    this.config = templates.builtin[configKey];
+                    console.log(`Loaded builtin template: ${this.config.metadata?.name}`);
+                }
+                // Then check user templates
+                else if (templates.user && templates.user[configKey]) {
+                    this.config = templates.user[configKey];
+                    console.log(`Loaded user template: ${this.config.metadata?.name}`);
+                }
+            } catch (error) {
+                console.error('Failed to load config:', error);
+            }
         }
     }
 
