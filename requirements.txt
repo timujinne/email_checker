@@ -1,0 +1,23 @@
+# Email Checker - Python Dependencies
+# Python 3.6+ required
+
+# Core dependencies
+# Most functionality uses Python standard library only
+
+# WebSocket support for real-time updates
+websockets==11.0.3
+
+# Development dependencies (optional)
+# Uncomment for development environment
+
+# Testing
+# pytest==7.4.3
+# pytest-asyncio==0.21.1
+
+# Code quality
+# black==23.12.1
+# pylint==3.0.3
+# flake8==6.1.0
+
+# Type checking
+# mypy==1.7.1
