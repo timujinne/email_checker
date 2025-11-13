@@ -361,6 +361,7 @@ if (typeof AnalyticsDashboard === 'undefined') {
 
     /**
      * Load and display saved reports
+     * Security: Fixed XSS vulnerability by using textContent and event listeners
      */
     loadSavedReports() {
         const savedReports = JSON.parse(localStorage.getItem('saved_reports') || '[]');
@@ -371,33 +372,68 @@ if (typeof AnalyticsDashboard === 'undefined') {
             return;
         }
 
-        listEl.innerHTML = `
-            <div class="reports-table">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Created</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        ${savedReports.map(report => `
-                            <tr>
-                                <td>${report.name}</td>
-                                <td>${new Date(report.created).toLocaleDateString()}</td>
-                                <td>
-                                    <button class="btn btn-sm" onclick="alert('Load report: ${report.id}')">Load</button>
-                                    <button class="btn btn-sm btn-danger" onclick="this.parentElement.parentElement.parentElement.parentElement.analyticsInstance?.deleteReport('${report.id}')">Delete</button>
-                                </td>
-                            </tr>
-                        `).join('')}
-                    </tbody>
-                </table>
-            </div>
-        `;
+        // Create table structure safely
+        const tableDiv = document.createElement('div');
+        tableDiv.className = 'reports-table';
 
-        this.element.analyticsInstance = this;
+        const table = document.createElement('table');
+
+        // Create thead
+        const thead = document.createElement('thead');
+        const headerRow = document.createElement('tr');
+        ['Name', 'Created', 'Actions'].forEach(header => {
+            const th = document.createElement('th');
+            th.textContent = header;
+            headerRow.appendChild(th);
+        });
+        thead.appendChild(headerRow);
+        table.appendChild(thead);
+
+        // Create tbody with safe data binding
+        const tbody = document.createElement('tbody');
+        savedReports.forEach(report => {
+            const row = document.createElement('tr');
+
+            // Name column (safe from XSS)
+            const nameCell = document.createElement('td');
+            nameCell.textContent = report.name;
+            row.appendChild(nameCell);
+
+            // Date column
+            const dateCell = document.createElement('td');
+            dateCell.textContent = new Date(report.created).toLocaleDateString();
+            row.appendChild(dateCell);
+
+            // Actions column with safe event listeners
+            const actionsCell = document.createElement('td');
+
+            const loadBtn = document.createElement('button');
+            loadBtn.className = 'btn btn-sm';
+            loadBtn.textContent = 'Load';
+            loadBtn.addEventListener('click', () => {
+                alert(`Load report: ${report.id}`);
+            });
+
+            const deleteBtn = document.createElement('button');
+            deleteBtn.className = 'btn btn-sm btn-danger';
+            deleteBtn.textContent = 'Delete';
+            deleteBtn.addEventListener('click', () => {
+                this.deleteReport(report.id);
+            });
+
+            actionsCell.appendChild(loadBtn);
+            actionsCell.appendChild(deleteBtn);
+            row.appendChild(actionsCell);
+
+            tbody.appendChild(row);
+        });
+
+        table.appendChild(tbody);
+        tableDiv.appendChild(table);
+
+        // Clear and append
+        listEl.innerHTML = '';
+        listEl.appendChild(tableDiv);
     }
 
     /**
