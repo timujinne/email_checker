@@ -269,7 +269,7 @@ class FilterGenerator:
                 print(f"   • {warning}")
 
         print(f"\n📝 Next Steps:")
-        print(f"   1. Review config: smart_filters/configs/{filter_name}_config.json")
+        print(f"   1. Review config: smart_filters/configs/{filter_name}.json")
         print(f"   2. Test with sample: python3 filter_validator.py --test {filter_name}")
         print(f"   3. Apply to list: python3 email_checker.py smart-filter <file> --config {filter_name}")
         print(f"   4. Monitor quality: python3 scripts/monitor_quality.py --config {filter_name}")
@@ -373,7 +373,7 @@ class FilterGenerator:
             template=template
         )
 
-        config_file = self.configs_dir / f"{filter_name}_config.json"
+        config_file = self.configs_dir / f"{filter_name}.json"
         with open(config_file, 'w', encoding='utf-8') as f:
             json.dump(config, f, ensure_ascii=False, indent=2)
 

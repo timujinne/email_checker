@@ -247,6 +247,11 @@ python3 ../email_checker.py smart-filter-batch --pattern "output/*Germany*_clean
 
 ### Output Structure
 ```
+smart_filters/configs/
+├── germany_hydraulics.json          # Config files (UNIFIED location)
+├── poland_powder_metal.json
+└── ...
+
 output/
 ├── Germany_Hydraulics_20241215_HIGH_PRIORITY.txt
 ├── Germany_Hydraulics_20241215_MEDIUM_PRIORITY.txt

@@ -3624,7 +3624,7 @@ class EmailCheckerWebHandler(BaseHTTPRequestHandler):
         Convert old Python backend format to new frontend format
 
         Args:
-            old_config (dict): Old format config from configs/*.json
+            old_config (dict): Old format config from smart_filters/configs/*.json
             config_name (str): Config filename (without .json)
 
         Returns:
@@ -3766,9 +3766,9 @@ class EmailCheckerWebHandler(BaseHTTPRequestHandler):
     def handle_get_templates(self):
         """Get all templates (built-in + user templates)"""
         try:
-            # Load ALL configs from configs/ directory
+            # Load ALL configs from smart_filters/configs/ directory (UNIFIED)
             builtin_templates = {}
-            configs_dir = Path('configs')
+            configs_dir = Path('smart_filters/configs')
 
             if configs_dir.exists():
                 print(f"📂 Loading templates from {configs_dir}...")

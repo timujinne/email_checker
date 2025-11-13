@@ -90,8 +90,13 @@ python3 smart_filter.py output/list_clean.txt --config italy_hydraulics
 python3 smart_filter.py --list-configs
 ```
 
-**Available Filters:**
+**Available Filters (16 конфигов в smart_filters/configs/):**
 - `italy_hydraulics` - Italian hydraulic equipment companies (IT+EN terms, geographic scoring)
+- `germany_hydraulics` - German hydraulic equipment
+- `poland_powder_metal` - Polish powder metallurgy
+- `switzerland_hydraulics` - Swiss hydraulics (4 languages: DE/FR/IT/EN)
+- `austria_hydraulics` - Austrian hydraulic equipment
+- И еще 11 конфигов для разных стран/индустрий
 
 **Output Files:**
 - `*_HIGH_PRIORITY_*.txt/csv/json` - Score >= 100 (top leads)
@@ -307,6 +312,13 @@ email_checker/
 ├── blocklists/                     # Blocklists for filtering
 │   ├── blocked_emails.txt          # Individual blocked emails (22K+)
 │   └── blocked_domains.txt         # Blocked domains (700+)
+├── smart_filters/                  # Smart filter module (UNIFIED)
+│   ├── configs/                    # ✅ ЕДИНАЯ директория для конфигов (16 файлов)
+│   │   ├── poland_powder_metal.json
+│   │   ├── italy_hydraulics.json
+│   │   ├── germany_hydraulics.json
+│   │   └── ... (13 остальных)
+│   └── *.py                        # Filter implementations
 ├── output/                         # Processing results
 │   ├── *_clean_*.txt               # Valid, non-blocked emails
 │   ├── *_metadata_*.csv/json       # Full metadata from LVP files
@@ -738,7 +750,15 @@ python3 email_checker.py smart-filter-batch --pattern "output/*Italy*_clean_*.tx
 
 ### Creating Custom Smart Filter
 
-1. **Create config** in `smart_filters/configs/your_filter_config.json`:
+**⚠️ ВАЖНО: Унифицированная структура конфигов**
+
+Все конфиги Smart Filters теперь находятся в **единой директории**: `smart_filters/configs/`
+
+- ✅ **Создавать**: `smart_filters/configs/your_filter.json` (без суффикса `_config`)
+- ❌ **НЕ создавать**: `configs/*.json` (старая директория удалена)
+- Skills автоматически сохраняют конфиги в правильное место
+
+1. **Create config** in `smart_filters/configs/your_filter.json`:
 ```json
 {
   "filter_name": "Your Filter Name",

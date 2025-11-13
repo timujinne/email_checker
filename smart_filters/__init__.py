@@ -15,12 +15,12 @@ from pathlib import Path
 import json
 from typing import List, Dict, Optional
 
-# Путь к конфигурациям (корневая директория configs/)
-CONFIGS_DIR = Path(__file__).parent.parent / "configs"
+# Путь к конфигурациям (UNIFIED: smart_filters/configs/)
+CONFIGS_DIR = Path(__file__).parent / "configs"
 
 def list_available_filters() -> List[Dict[str, str]]:
     """
-    Динамически сканирует configs/ директорию и возвращает список доступных фильтров
+    Динамически сканирует smart_filters/configs/ директорию и возвращает список доступных фильтров
 
     Returns:
         List[Dict]: Список словарей с информацией о конфигах:
