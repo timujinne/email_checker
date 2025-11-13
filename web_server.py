@@ -1557,6 +1557,20 @@ class EmailCheckerWebHandler(BaseHTTPRequestHandler):
         try:
             import cgi
 
+            # SECURITY: Проверка размера ПЕРЕД чтением в память
+            max_size = 100 * 1024 * 1024  # 100MB
+            content_length = int(self.headers.get('Content-Length', 0))
+
+            if content_length > max_size:
+                self.send_json_response({
+                    "error": f"File too large: {content_length / (1024*1024):.1f}MB. Max: {max_size / (1024*1024):.0f}MB"
+                }, 413)
+                return
+
+            if content_length == 0:
+                self.send_json_response({"error": "Content-Length is 0 or missing"}, 400)
+                return
+
             # Получаем Content-Type header
             content_type = self.headers.get('Content-Type', '')
 
