@@ -90,13 +90,23 @@ python3 smart_filter.py output/list_clean.txt --config italy_hydraulics
 python3 smart_filter.py --list-configs
 ```
 
-**Available Filters (16 конфигов в smart_filters/configs/):**
+**Available Filters:**
+
+**Universal Template (NEW!):**
+- `universal_exclusion_template` - Multilingual universal exclusion template (EN/DE/FR)
+  - 13 exclusion categories (healthcare, education, finance, legal, IT, tourism, etc.)
+  - 200+ keywords across 3 languages
+  - Use as standalone filter or as base for custom filters
+  - See [UNIVERSAL_FILTER_GUIDE.md](UNIVERSAL_FILTER_GUIDE.md) for details
+
+**Industry-Specific Filters (в smart_filters/configs/):**
 - `italy_hydraulics` - Italian hydraulic equipment companies (IT+EN terms, geographic scoring)
 - `germany_hydraulics` - German hydraulic equipment
 - `poland_powder_metal` - Polish powder metallurgy
 - `switzerland_hydraulics` - Swiss hydraulics (4 languages: DE/FR/IT/EN)
 - `austria_hydraulics` - Austrian hydraulic equipment
-- И еще 11 конфигов для разных стран/индустрий
+- `czech_powder_metal` - Czech powder metallurgy
+- `france_powder_metal` - French powder metallurgy
 
 **Output Files:**
 - `*_HIGH_PRIORITY_*.txt/csv/json` - Score >= 100 (top leads)

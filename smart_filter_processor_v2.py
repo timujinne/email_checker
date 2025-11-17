@@ -715,7 +715,8 @@ class SmartFilterProcessor:
     def _load_config(self, filter_name: str) -> Optional[Dict]:
         """Загружает конфигурацию"""
         try:
-            config_path = Path("configs") / f"{filter_name}.json"
+            # Use unified configs directory: smart_filters/configs/
+            config_path = Path("smart_filters") / "configs" / f"{filter_name}.json"
             if not config_path.exists():
                 self.logger.error(f"Configuration file not found: {config_path}")
                 return None
