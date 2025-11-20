@@ -50,6 +50,12 @@
         html[data-theme="dark"] .modal-backdrop {
             background-color: rgba(0, 0, 0, 0.7) !important;
         }
+
+        /* Hide WebSocket indicator on standalone page */
+        #ws-indicator,
+        #ws-text {
+            display: none !important;
+        }
     </style>
 </head>
 <body class="bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100">
@@ -59,6 +65,10 @@
             <aside id="sidebar-container" class="w-64 bg-base-100 border-r border-base-300"></aside>
             <main id="main-content" class="flex-1 p-8 overflow-auto">
                 <div class="mb-8">
+                    <div class="alert alert-info mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-current shrink-0 w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        <span><strong>✅ bulk-lists.html загружен!</strong> URL параметры обрабатываются автоматически.</span>
+                    </div>
                     <h1 class="text-4xl font-bold text-base-content">📧 Email List Management</h1>
                     <p class="text-base-content opacity-70 mt-2">Управление индивидуальными email адресами и их метаданными</p>
                 </div>
@@ -418,19 +428,33 @@
     <script>
         // Initialize components
         document.addEventListener('DOMContentLoaded', async () => {
-            // Initialize navbar and sidebar
-            const navbar = new Navbar('navbar-container');
-            navbar.init();
+            console.log('🚀 Page loaded, initializing components...');
 
-            const sidebar = new Sidebar('sidebar-container');
-            sidebar.init();
+            // Navbar and Sidebar are Web Components with auto-render
+            // They auto-inject themselves into #navbar-container and #sidebar-container
 
             // Initialize theme manager
-            themeManager.init();
+            if (typeof themeManager !== 'undefined') {
+                themeManager.init();
+                console.log('✅ Theme manager initialized');
+            } else {
+                console.warn('⚠️ themeManager not found');
+            }
+
+            // Disable WebSocket for standalone page (not critical for functionality)
+            if (typeof ws !== 'undefined' && ws) {
+                ws.enabled = false;
+                console.log('ℹ️ WebSocket disabled for standalone page');
+            }
+
+            // Small delay to ensure Web Components are rendered
+            await new Promise(resolve => setTimeout(resolve, 100));
 
             // Initialize email list view
+            console.log('📧 Initializing EmailListViewComponent...');
             window.emailListView = new EmailListViewComponent();
             await emailListView.init();
+            console.log('✅ EmailListViewComponent initialized');
         });
     </script>
 </body>
