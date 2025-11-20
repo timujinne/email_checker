@@ -90,3 +90,11 @@ fix_*.py
 migrate_*.py
 remove_*.py
 nul
+
+# Claude Code local settings
+.claude/*.local.json
+.claude/settings.local.json
+
+# Test reports with potentially sensitive data
+*TEST_REPORT*.md
+*_REPORT_*.md
