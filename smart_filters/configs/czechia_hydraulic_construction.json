@@ -1,0 +1,320 @@
+{
+  "filter_name": "Czech Hydraulic Construction Equipment",
+  "target_country": "CZ",
+  "target_industry": "hydraulic_construction_equipment",
+  "description": "Exclusion-focused filter for Czech hydraulic construction equipment manufacturers and distributors. Aggressively filters out construction services, rental-only, personal emails, and non-relevant industries.",
+
+  "languages": ["cs", "en"],
+
+  "industry_keywords": {
+    "hydraulics_primary": {
+      "primary": [
+        "hydraulika", "hydraulický", "hydraulics", "hydraulic",
+        "hydropohon", "hydromotor", "hydraulické systémy", "hydraulic systems"
+      ],
+      "secondary": [
+        "hydraulické komponenty", "hydraulic components",
+        "čerpadla", "pumps", "ventily", "valves",
+        "válce", "cylinders", "agregáty", "power units"
+      ],
+      "score": 100
+    },
+
+    "construction_equipment": {
+      "primary": [
+        "stavební stroje", "construction equipment", "construction machinery",
+        "minibagry", "mini excavator", "excavator", "bagr",
+        "nakladač", "loader", "buldozer", "bulldozer",
+        "těžká technika", "heavy machinery", "kompaktní stroje", "compact equipment"
+      ],
+      "secondary": [
+        "manipulační technika", "handling equipment",
+        "hutnicí technika", "compaction equipment",
+        "zemní stroje", "earthmoving equipment"
+      ],
+      "score": 90
+    },
+
+    "oem_manufacturing": {
+      "primary": [
+        "výrobce", "manufacturer", "producent", "producer",
+        "továrna", "factory", "distributor", "dealer"
+      ],
+      "secondary": [
+        "oficiální zastoupení", "official dealer",
+        "autorizovaný dealer", "authorized dealer",
+        "výhradní dovozce", "exclusive importer",
+        "import", "importer"
+      ],
+      "score": 120
+    },
+
+    "equipment_sales": {
+      "primary": [
+        "prodej", "sales", "obchod", "commerce",
+        "dodávka", "supply", "distribuce", "distribution"
+      ],
+      "secondary": [
+        "nové stroje", "new equipment",
+        "použité stroje", "used equipment",
+        "zánovní", "like new"
+      ],
+      "score": 70
+    },
+
+    "components_parts": {
+      "primary": [
+        "náhradní díly", "spare parts", "parts",
+        "součástky", "components", "příslušenství", "accessories"
+      ],
+      "secondary": [
+        "servis", "service", "opravy", "repairs",
+        "údržba", "maintenance"
+      ],
+      "score": 50
+    }
+  },
+
+  "negative_keywords": {
+    "personal_email_domains": {
+      "patterns": [
+        "seznam.cz", "email.cz", "centrum.cz", "volny.cz", "atlas.cz",
+        "post.cz", "quick.cz", "azet.sk", "zoznam.sk",
+        "gmail.com", "yahoo.com", "hotmail.com", "outlook.com",
+        "icloud.com", "live.com", "mail.ru", "yandex.ru"
+      ],
+      "score_penalty": -100,
+      "description": "Free personal email domains - instant exclusion"
+    },
+
+    "hr_recruitment_prefixes": {
+      "patterns": [
+        "hr@", "jobs@", "kariera@", "career@", "recruitment@",
+        "personalni@", "personal@", "hiring@"
+      ],
+      "score_penalty": -100,
+      "description": "HR/recruitment contacts - not decision makers"
+    },
+
+    "service_system_prefixes": {
+      "patterns": [
+        "noreply@", "no-reply@", "admin@", "webmaster@",
+        "postmaster@", "info@info", "contact@contact",
+        "support@", "help@", "helpdesk@"
+      ],
+      "score_penalty": -80,
+      "description": "Automated/system email addresses"
+    },
+
+    "search_directory_domains": {
+      "patterns": [
+        "search.brave.com", "google.com", "bing.com",
+        "firmy.cz", "firmy.net", "sbazar.cz", "bazos.cz",
+        "najisto.centrum.cz", "katalog", "directory"
+      ],
+      "score_penalty": -100,
+      "description": "Search engines and directory sites"
+    },
+
+    "construction_services_only": {
+      "patterns": [
+        "zemní práce", "excavation services", "výkopové práce", "digging services",
+        "demolice", "demolition", "bourací práce",
+        "terénní úpravy", "landscaping", "demolition contractor"
+      ],
+      "score_penalty": -70,
+      "description": "Construction services without equipment sales"
+    },
+
+    "rental_only": {
+      "patterns": [
+        "půjčovna", "rental only", "pronájem", "hire",
+        "zapůjčení", "lending", "rent a ", "rental services"
+      ],
+      "score_penalty": -60,
+      "description": "Rental-only without sales (unless also 'prodej')"
+    },
+
+    "healthcare_medical": {
+      "patterns": [
+        "nemocnice", "hospital", "klinika", "clinic",
+        "lékař", "doctor", "zdravotnictví", "healthcare",
+        "zdraví", "health", "medical", "pharmaceutical"
+      ],
+      "score_penalty": -100,
+      "description": "Healthcare industry"
+    },
+
+    "government_public": {
+      "patterns": [
+        "ministerstvo", "ministry", "úřad", "office",
+        "správa", "administration", "město", "municipality",
+        "kraj", "region", "obec", "commune",
+        "státní", "state", "vláda", "government"
+      ],
+      "score_penalty": -100,
+      "description": "Government and public sector"
+    },
+
+    "education": {
+      "patterns": [
+        "škola", "school", "univerzita", "university",
+        "vysoká škola", "college", "vzdělávání", "education",
+        "akademie", "academy", "institut", "institute"
+      ],
+      "score_penalty": -100,
+      "description": "Educational institutions"
+    },
+
+    "tourism_hospitality": {
+      "patterns": [
+        "hotel", "restaurace", "restaurant", "penzion", "guesthouse",
+        "turismus", "tourism", "cestování", "travel",
+        "ubytování", "accommodation", "stravování", "catering"
+      ],
+      "score_penalty": -100,
+      "description": "Tourism and hospitality"
+    },
+
+    "retail_ecommerce": {
+      "patterns": [
+        "e-shop", "eshop", "online shop", "internet obchod",
+        "retail", "maloobchod", "spotřební zboží", "consumer goods"
+      ],
+      "score_penalty": -70,
+      "description": "General retail/e-commerce (not equipment-specific)"
+    },
+
+    "media_advertising": {
+      "patterns": [
+        "reklama", "advertising", "média", "media",
+        "noviny", "newspaper", "časopis", "magazine",
+        "tisk", "press", "vydavatelství", "publishing"
+      ],
+      "score_penalty": -90,
+      "description": "Media and advertising"
+    },
+
+    "finance_insurance": {
+      "patterns": [
+        "banka", "bank", "pojišťovna", "insurance",
+        "finance", "finanční", "financial", "úvěr", "loan",
+        "leasing", "investice", "investment"
+      ],
+      "score_penalty": -100,
+      "description": "Finance and insurance"
+    },
+
+    "legal_services": {
+      "patterns": [
+        "právník", "lawyer", "advokát", "attorney",
+        "notář", "notary", "právní služby", "legal services",
+        "soud", "court"
+      ],
+      "score_penalty": -100,
+      "description": "Legal services"
+    },
+
+    "hr_agencies": {
+      "patterns": [
+        "personální agentura", "recruitment agency",
+        "pracovní", "jobs", "zaměstnání", "employment",
+        "temp agency", "staffing"
+      ],
+      "score_penalty": -100,
+      "description": "HR and recruitment agencies"
+    }
+  },
+
+  "geographic_priority": {
+    "high": {
+      "countries": ["CZ", "Czech Republic", "Česká republika", "Česko"],
+      "regions": ["Praha", "Brno", "Ostrava", "Plzeň", "Liberec", "Olomouc", "České Budějovice", "Hradec Králové", "Ústí nad Labem", "Pardubice"],
+      "score": 100
+    },
+    "medium": {
+      "countries": ["SK", "Slovakia", "Slovensko", "PL", "Poland", "Polsko", "AT", "Austria", "Rakousko", "DE", "Germany", "Německo"],
+      "regions": [],
+      "score": 60
+    },
+    "low": {
+      "countries": ["HU", "Hungary", "Maďarsko"],
+      "regions": [],
+      "score": 30
+    }
+  },
+
+  "domain_keywords": {
+    "highly_relevant": [
+      "hydraul", "bagr", "excavat", "stroj", "machinery",
+      "technika", "equipment", "loader", "nakladac"
+    ],
+    "relevant": [
+      "pump", "cerpadl", "ventil", "valve", "motor"
+    ]
+  },
+
+  "email_source_patterns": {
+    "high_value": [
+      "sales@", "prodej@", "obchod@", "export@", "info@",
+      "contact@", "kontakt@"
+    ],
+    "medium_value": [
+      "servis@", "service@", "support@", "podpora@"
+    ],
+    "low_value": [
+      "office@", "admin@", "recepce@", "reception@"
+    ]
+  },
+
+  "scoring": {
+    "weights": {
+      "email_quality": 0.05,
+      "company_relevance": 0.50,
+      "geographic_priority": 0.25,
+      "engagement": 0.20
+    },
+
+    "thresholds": {
+      "high_priority": 120,
+      "medium_priority": 60,
+      "low_priority": 20,
+      "exclude": 0
+    },
+
+    "bonus_multipliers": {
+      "oem_manufacturer": 1.5,
+      "czech_company": 1.3,
+      "target_geography": 2.0,
+      "technical_domain": 1.2,
+      "distributor": 1.4,
+      "multi_brand": 1.3
+    }
+  },
+
+  "exclusion_rules": {
+    "hard_exclusions": [
+      "Free personal email domain (seznam.cz, gmail.com, etc.)",
+      "HR/recruitment prefix (hr@, jobs@, kariera@)",
+      "System/noreply email addresses",
+      "Search engine or directory domain",
+      "Government/public sector",
+      "Healthcare/medical",
+      "Education institution",
+      "Finance/insurance/legal services"
+    ],
+    "soft_exclusions": [
+      "Construction services without equipment keywords",
+      "Rental-only without sales indicators",
+      "General e-commerce without equipment focus",
+      "Media/advertising companies"
+    ],
+    "exclusion_logic": "If ANY hard_exclusion matches → score = 0 (EXCLUDED). Soft exclusions apply score penalties."
+  },
+
+  "notes": {
+    "purpose": "Aggressive filtering for Czech hydraulic construction equipment market. Goal: Exclude 75-85% of contacts, keeping only genuine OEM manufacturers, distributors, and dealers.",
+    "target_output": "HIGH: 2-3% (60-90 contacts), MEDIUM: 5-8% (150-230), LOW: 10-15% (290-435), EXCLUDED: 75-85% (2000+)",
+    "optimization": "Emphasizes company_relevance (50%) and negative keywords to maximize exclusion while preserving top leads."
+  }
+}

@@ -715,7 +715,7 @@ class EmailCheckerWebHandler(BaseHTTPRequestHandler):
 
                     # Получаем метаданные с авто-определением
                     try:
-                        metadata = checker._get_list_metadata(filename)
+                        metadata = checker.config_manager.get_list_metadata(filename, checker.output_dir)
 
                         # Добавляем file_type если отсутствует
                         if 'file_type' not in metadata:
