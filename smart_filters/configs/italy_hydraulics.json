@@ -1,0 +1,240 @@
+{
+  "config_name": "italy_hydraulics",
+  "display_name": "Italy - Hydraulic Cylinders",
+  "version": "1.0",
+  "target_market": {
+    "country_code": "IT",
+    "country_name": "Italy",
+    "language_codes": ["it", "en"],
+    "primary_language": "it"
+  },
+
+  "scoring": {
+    "weights": {
+      "email_quality": 0.10,
+      "company_relevance": 0.45,
+      "geographic_priority": 0.30,
+      "engagement": 0.15
+    },
+    "thresholds": {
+      "high_priority": 100,
+      "medium_priority": 50,
+      "low_priority": 10,
+      "exclude": 0
+    }
+  },
+
+  "target_industry": "hydraulic_cylinders",
+
+  "keywords": {
+    "hydraulic_cylinders": [
+      "cilindri idraulici",
+      "cilindro idraulico",
+      "attuatori idraulici",
+      "attuatore idraulico",
+      "pistoni idraulici",
+      "pistone idraulico",
+      "martinetti idraulici",
+      "martinetto idraulico",
+      "attuatori oleodinamici",
+      "attuatore oleodinamico",
+      "cilindri oleodinamici",
+      "cilindro oleodinamico",
+      "hydrocilindri",
+      "hydrocilindro",
+      "servocilindri",
+      "servocilindro",
+      "cilindri telescopici",
+      "cilindro telescopico"
+    ],
+
+    "applications": [
+      "macchinario agricolo",
+      "macchine agricole",
+      "movimento terra",
+      "movimentazione terra",
+      "industria pesante",
+      "industrie pesanti",
+      "costruzioni",
+      "edilizia",
+      "movimentazione materiali",
+      "sollevamento",
+      "spinta",
+      "piegatura",
+      "pressatura"
+    ],
+
+    "components": [
+      "guarnizioni",
+      "tenute",
+      "olii idraulici",
+      "olio idraulico",
+      "centraline idrauliche",
+      "centralina idraulica",
+      "valvole",
+      "pompe idrauliche",
+      "pompa idraulica",
+      "motori idraulici",
+      "motore idraulico",
+      "distributori",
+      "collettori",
+      "tubi idraulici",
+      "tubo idraulico",
+      "raccordi",
+      "flessibili"
+    ],
+
+    "oem_indicators": [
+      "produttore",
+      "produttrice",
+      "costruttore",
+      "costruttrice",
+      "fabbrica",
+      "stabilimento",
+      "impianto",
+      "officina",
+      "laboratorio",
+      "manufacturing",
+      "produzione",
+      "fornitore",
+      "fornitrice",
+      "esportatore",
+      "esportatrice",
+      "distributore",
+      "distributrice",
+      "rivenditore",
+      "rivenditrice",
+      "concessionario",
+      "concessionaria"
+    ]
+  },
+
+  "geographic_priorities": {
+    "high": [
+      "italia", "italy", "it", ".it",
+      "milano", "milan", "roma", "rome", "torino", "turin",
+      "bologna", "napoli", "naples", "firenze", "florence",
+      "genova", "genoa", "palermo", "catania", "bari",
+      "venezia", "venice", "verona", "padova", "padua",
+      "trieste", "trento", "bolzano", "bressanone", "brunico",
+      "bergamo", "brescia", "modena", "reggio emilia", "parma",
+      "pavia", "vicenza", "treviso", "ravenna", "sassari",
+      "cagliari", "messina", "pisa", "lugano", "belluno"
+    ],
+
+    "medium": [
+      "san marino", ".sm", "vaticano", ".va", "citta del vaticano",
+      "svizzera", "switzerland", "ch", ".ch", "ticino", "zurigo",
+      "francia", "france", "fr", ".fr", "nice", "marseille",
+      "austria", "austria", "at", ".at", "vienna", "innsbruck"
+    ],
+
+    "regions": [
+      "lombardia", "lombardy", "piemonte", "piedmont", "veneto",
+      "emilia romagna", "toscana", "tuscany", "liguria", "lazio",
+      "campania", "sicilia", "sicily", "puglia", "calabria",
+      "sardegna", "sardinia", "trentino alto adige", "friuli venezia giulia",
+      "marche", "abruzzo", "molise", "basilicata", "umbria", "valle d'aosta"
+    ]
+  },
+
+  "exclusions": {
+    "personal_domains": [
+      "gmail.com", "yahoo.com", "hotmail.com", "outlook.com",
+      "live.com", "icloud.com", "libero.it", "virgilio.it",
+      "tim.it", "vodafone.it", "wind.it", "tiscali.it",
+      "alice.it", "tin.it", "poste.it", "email.it"
+    ],
+
+    "hr_prefixes": [
+      "hr@", "jobs@", "career@", "careers@", "recruitment@",
+      "recruiter@", "vacancy@", "vacancies@", "work@",
+      "employment@", "staff@", "personnel@", "resume@",
+      "cv@", "hiring@", "talent@", "headhunter@",
+      "lavoro@", "lavori@", "impiego@", "impieghi@",
+      "carriera@", "carriere@", "selezione@", "risorse@",
+      "umane@", "personale@"
+    ],
+
+    "service_prefixes": [
+      "example@", "test@", "demo@", "sample@", "noreply@",
+      "donotreply@", "no-reply@", "info@example", "contact@domain",
+      "webmaster@", "admin@", "support@", "help@", "assistenza@"
+    ],
+
+    "suspicious_domains": [
+      "sentry.io", "panjiva.com", "temp-mail.org", "10minutemail.com",
+      "guerrillamail.com", "mailinator.com", "throwaway.email"
+    ],
+
+    "excluded_country_domains": [
+      ".cn", ".com.cn", ".hk", ".tw", ".in", ".co.in", ".tr",
+      ".de", ".fr", ".es", ".pt", ".nl", ".cz",
+      ".hu", ".ro", ".jp", ".kr", ".th", ".vn", ".id", ".my",
+      ".ph", ".ar", ".mx", ".co", ".pe", ".cl", ".sg", ".ae",
+      ".pl", ".ru", ".ua", ".by", ".kz", ".uz"
+    ],
+
+    "excluded_industries": {
+      "education": [
+        "scuola", "scuole", "universita", "università", "college",
+        "istituto", "istituti", "formazione", "corsi", "accademia",
+        "school", "university", "college", "education", "learning"
+      ],
+      "media": [
+        "giornale", "giornali", "rivista", "riviste", "televisione",
+        "radio", "media", "pubblicita", "editore", "editoria",
+        "newspaper", "magazine", "television", "radio", "media", "advertising"
+      ],
+      "finance": [
+        "banca", "banche", "assicurazione", "assicurazioni", "finanza",
+        "credito", "prestito", "mutuo", "investimento",
+        "bank", "insurance", "finance", "credit", "loan", "investment"
+      ],
+      "retail": [
+        "negozio", "negozi", "negozianti", "vendita", "venditore",
+        "supermercato", "supermercati", "centro commerciale",
+        "shop", "store", "retail", "shopping", "mall"
+      ]
+    },
+
+    "suspicious_patterns": [
+      "^[a-f0-9]{20,}@",
+      "^[a-z0-9]{15,}@",
+      "[\\u4e00-\\u9fff]",
+      "[\\u0590-\\u05FF]",
+      "[\\u0600-\\u06FF]"
+    ]
+  },
+
+  "domain_patterns": {
+    "relevant_patterns": [
+      "idraulico", "idraulica", "oleodinamico", "oleodinamica",
+      "cilindro", "cilindri", "pistone", "pistoni", "martinetto",
+      "attuatore", "attuatori", "industria", "industriale",
+      "macchinario", "macchine", "movimento", "movimentazione",
+      "costruzioni", "edilizia", "meccanica", "meccanico"
+    ],
+    "high_value_domains": [
+      "spa", "srl", "snc", "sapa", "sas", "group", "engineering",
+      "manufacturing", "systems", "solutions", "technology"
+    ]
+  },
+
+  "processing": {
+    "batch_size": 100,
+    "max_retries": 3,
+    "processing_delay": 50,
+    "backup_original": true,
+    "preserve_metadata": true,
+    "generate_reports": true
+  },
+
+  "output": {
+    "prefix": "smart_filtered_",
+    "include_metadata": true,
+    "metadata_format": "csv",
+    "generate_statistics": true,
+    "create_backup": true
+  }
+}

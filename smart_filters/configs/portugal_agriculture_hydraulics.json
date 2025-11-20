@@ -1,0 +1,319 @@
+{
+  "config_name": "portugal_agriculture_hydraulics",
+  "display_name": "Portugal - Agricultural Machinery & Hydraulic Equipment",
+  "version": "1.0",
+  "target_market": {
+    "country_code": "PT",
+    "country_name": "Portugal",
+    "language_codes": ["pt", "en"],
+    "primary_language": "pt"
+  },
+
+  "scoring": {
+    "weights": {
+      "email_quality": 0.10,
+      "company_relevance": 0.45,
+      "geographic_priority": 0.30,
+      "engagement": 0.15
+    },
+    "thresholds": {
+      "high_priority": 100,
+      "medium_priority": 50,
+      "low_priority": 10,
+      "exclude": 0
+    }
+  },
+
+  "target_industry": "agricultural_machinery_hydraulics_hybrid",
+
+  "keywords": {
+    "hydraulic_cylinders": [
+      "tratores",
+      "trator",
+      "colheitadeira",
+      "colheitadeiras",
+      "combine harvester",
+      "máquinas agrícolas",
+      "maquinas agricolas",
+      "agricultural machinery",
+      "alfaias agrícolas",
+      "alfaias agricolas",
+      "agricultural implements",
+      "reboques agrícolas",
+      "reboques agricolas",
+      "agricultural trailers",
+      "equipamentos agrícolas",
+      "equipamentos agricolas",
+      "farm equipment",
+      "semeadora",
+      "seeder",
+      "arado",
+      "plough",
+      "plow",
+      "cultivador",
+      "cultivator",
+      "grade",
+      "harrow",
+      "pulverizador",
+      "sprayer",
+      "distribuidor",
+      "spreader",
+      "cilindros hidráulicos",
+      "cilindros hidraulicos",
+      "hydraulic cylinders",
+      "pistões hidráulicos",
+      "pistoes hidraulicos",
+      "hydraulic pistons",
+      "sistemas hidráulicos",
+      "sistemas hidraulicos",
+      "hydraulic systems",
+      "óleos hidráulicos",
+      "oleos hidraulicos",
+      "hydraulic oils",
+      "bombas hidráulicas",
+      "bombas hidraulicas",
+      "hydraulic pumps",
+      "motores hidráulicos",
+      "motores hidraulicos",
+      "hydraulic motors"
+    ],
+
+    "applications": [
+      "agricultura",
+      "agriculture",
+      "agrícola",
+      "agricola",
+      "agricultural",
+      "exploração agrícola",
+      "exploracao agricola",
+      "farm",
+      "campo",
+      "field",
+      "cultivo",
+      "cultivation",
+      "colheita",
+      "harvest",
+      "pecuária",
+      "pecuaria",
+      "livestock",
+      "vinha",
+      "vineyard",
+      "olival",
+      "olive grove",
+      "hidráulica industrial",
+      "hidraulica industrial",
+      "industrial hydraulics",
+      "construção civil",
+      "construcao civil",
+      "construction",
+      "movimentação terra",
+      "movimentacao terra",
+      "earthmoving"
+    ],
+
+    "components": [
+      "peças",
+      "pecas",
+      "spare parts",
+      "componentes",
+      "components",
+      "manutenção",
+      "manutencao",
+      "maintenance",
+      "reparação",
+      "reparacao",
+      "repair",
+      "assistência técnica",
+      "assistencia tecnica",
+      "technical service",
+      "oficina",
+      "workshop",
+      "válvulas",
+      "valvulas",
+      "valves",
+      "mangueiras hidráulicas",
+      "mangueiras hidraulicas",
+      "hydraulic hoses",
+      "filtros",
+      "filters",
+      "vedantes",
+      "seals",
+      "uniões",
+      "unioes",
+      "fittings"
+    ],
+
+    "oem_indicators": [
+      "fabricante",
+      "manufacturer",
+      "indústria",
+      "industria",
+      "industry",
+      "produtor",
+      "producer",
+      "concessionário oficial",
+      "concessionario oficial",
+      "official dealer",
+      "distribuidor autorizado",
+      "authorized distributor",
+      "distribuidor oficial",
+      "official distributor",
+      "oficina especializada",
+      "specialized workshop",
+      "serviço oficial",
+      "servico oficial",
+      "official service",
+      "representante",
+      "representative",
+      "importador",
+      "importer",
+      "agente",
+      "agent",
+      "fornecedor",
+      "supplier"
+    ]
+  },
+
+  "geographic_priorities": {
+    "high": [
+      "portugal", ".pt", "português", "portugues", "portuguese",
+      "lisboa", "lisbon", "porto", "oporto", "coimbra", "braga",
+      "faro", "funchal", "aveiro", "setúbal", "setubal", "évora", "evora",
+      "viseu", "guimarães", "guimaraes", "leiria", "vila nova de gaia",
+      "amadora", "matosinhos", "almada", "gondomar", "loures",
+      "odivelas", "sintra", "cascais", "oeiras", "queluz",
+      "alentejo", "algarve", "minho", "douro", "beiras",
+      "ribatejo", "trás-os-montes", "tras-os-montes", "estremadura",
+      "açores", "acores", "azores", "madeira", "ponta delgada",
+      "angra heroísmo", "angra heroismo", "horta", "ponta do sol",
+      "santarém", "santarem", "portalegre", "beja", "castelo branco",
+      "guarda", "viana do castelo", "bragança", "braganca", "vila real"
+    ],
+
+    "medium": [
+      "espanha", "spain", ".es", "españa", "spanish", "español", "espanol",
+      "galiza", "galicia", "vigo", "pontevedra", "ourense", "orense",
+      "la coruña", "a coruna", "santiago compostela", "lugo",
+      "badajoz", "extremadura", "salamanca", "cáceres", "caceres",
+      "zamora", "huelva", "sevilla", "seville"
+    ],
+
+    "low": [
+      "frança", "france", "bordeaux", "perpignan", "toulouse",
+      "bayonne", "biarritz", "pau", "montpellier"
+    ]
+  },
+
+  "exclusions": {
+    "personal_domains": [
+      "gmail.com", "yahoo.com", "yahoo.pt", "hotmail.com", "hotmail.pt",
+      "outlook.com", "outlook.pt", "live.com", "live.pt", "icloud.com",
+      "sapo.pt", "clix.pt", "netcabo.pt", "iol.pt",
+      "mail.pt", "portugalmail.pt", "vodafone.pt", "meo.pt"
+    ],
+
+    "hr_prefixes": [
+      "hr@", "jobs@", "emprego@", "trabalho@", "rh@",
+      "recursos@", "humanos@", "recrutamento@",
+      "career@", "careers@", "recruitment@",
+      "recruiter@", "vacancy@", "vacancies@", "work@",
+      "employment@", "staff@", "personnel@", "resume@",
+      "cv@", "hiring@", "talent@", "headhunter@",
+      "ofertas@", "candidatura@", "selecao@", "seleção@"
+    ],
+
+    "service_prefixes": [
+      "example@", "test@", "demo@", "sample@", "noreply@",
+      "donotreply@", "no-reply@", "info@example", "contact@domain",
+      "webmaster@", "admin@", "support@", "help@", "ajuda@",
+      "suporte@", "assistencia@", "assistência@"
+    ],
+
+    "suspicious_domains": [
+      "sentry.io", "panjiva.com", "temp-mail.org", "10minutemail.com",
+      "guerrillamail.com", "mailinator.com", "throwaway.email"
+    ],
+
+    "excluded_country_domains": [
+      ".cn", ".com.cn", ".hk", ".tw", ".in", ".co.in", ".tr",
+      ".de", ".it", ".nl", ".cz", ".hu", ".ro", ".jp", ".kr",
+      ".th", ".vn", ".id", ".my", ".ph", ".ar", ".mx", ".co",
+      ".pe", ".cl", ".sg", ".ae", ".pl", ".ru", ".ua", ".by",
+      ".kz", ".uz", ".br"
+    ],
+
+    "excluded_industries": {
+      "education": [
+        "escola", "escolas", "universidade", "universidades", "faculdade",
+        "instituto", "institutos", "formação", "formacao", "cursos",
+        "academia", "school", "university", "college", "education",
+        "learning", "educação", "educacao", "ensino"
+      ],
+      "media": [
+        "jornal", "jornais", "diário", "diario", "revista", "revistas",
+        "televisão", "televisao", "rádio", "radio", "media", "medios",
+        "publicidade", "editorial", "editora",
+        "newspaper", "magazine", "television", "radio", "advertising"
+      ],
+      "finance": [
+        "banco", "bancos", "caixa", "seguros", "seguradora",
+        "finança", "finanças", "financas", "crédito", "credito",
+        "empréstimo", "emprestimo", "hipoteca", "investimento",
+        "bank", "insurance", "finance", "credit", "loan", "investment"
+      ],
+      "retail": [
+        "loja", "lojas", "comércio", "comercio", "venda", "vendas",
+        "supermercado", "supermercados", "centro comercial",
+        "shop", "store", "retail", "shopping", "mall", "hypermarket"
+      ],
+      "government": [
+        "câmara municipal", "camara municipal", "junta freguesia",
+        "ministério", "ministerio", "governo", "government",
+        "prefeitura", "municipal", "município", "municipio",
+        "secretaria", "assembleia", "estado"
+      ]
+    },
+
+    "suspicious_patterns": [
+      "^[a-f0-9]{20,}@",
+      "^[a-z0-9]{15,}@",
+      "[\\u4e00-\\u9fff]",
+      "[\\u0590-\\u05FF]",
+      "[\\u0600-\\u06FF]"
+    ]
+  },
+
+  "domain_patterns": {
+    "relevant_patterns": [
+      "agricola", "agro", "trator", "maquinaria", "maquinas",
+      "colheitadeira", "equipamento", "alfaia", "hidraulico",
+      "hidraulica", "reboque", "cisterna", "industrial",
+      "metalurgica", "mecanica", "farm", "machinery", "hydraulic",
+      "equipment", "implements", "tractor"
+    ],
+    "high_value_domains": [
+      "lda", "s.a.", "unipessoal", "industria", "indústria",
+      "fabricante", "concessionario", "concessionário",
+      "distribuidor", "tecnologia", "sistemas", "solucoes",
+      "soluções", "engenharia", "group", "grupo", "manufacturing",
+      "industrial", "comercial"
+    ]
+  },
+
+  "processing": {
+    "batch_size": 100,
+    "max_retries": 3,
+    "processing_delay": 50,
+    "backup_original": true,
+    "preserve_metadata": true,
+    "generate_reports": true
+  },
+
+  "output": {
+    "prefix": "smart_filtered_",
+    "include_metadata": true,
+    "metadata_format": "csv",
+    "generate_statistics": true,
+    "create_backup": true
+  }
+}

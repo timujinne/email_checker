@@ -1,0 +1,442 @@
+{
+  "filter_name": "Swiss Machinery B2B Filter",
+  "version": "1.0.0",
+  "description": "Smart filter for Swiss machinery and industrial equipment market with DE/FR/IT/EN language support",
+  "target_country": "CH",
+  "target_industry": "machinery",
+  "languages": ["de", "fr", "it", "en"],
+
+  "geographic": {
+    "priority_high": [
+      "schweiz", "switzerland", "suisse", "svizzera", ".ch", "swiss",
+      "zürich", "zurich", "genève", "geneva", "ginevra", "basel", "bâle", "basilea",
+      "bern", "berne", "lausanne", "luzern", "lucerne", "lugano",
+      "st. gallen", "winterthur", "thun", "fribourg", "freiburg", "neuchâtel",
+      "schaffhausen", "chur", "coira", "ticino", "tessin", "graubünden", "grigioni"
+    ],
+    "priority_medium": [
+      "deutschland", "germany", "allemagne", "germania", ".de",
+      "österreich", "austria", "autriche", ".at",
+      "liechtenstein", ".li",
+      "europa", "europe", "eu", "european union", "union européenne"
+    ],
+    "excluded_countries": [
+      ".cn", ".com.cn", ".hk", ".tw",
+      ".in", ".co.in",
+      ".ru", ".by", ".ua", ".kz",
+      ".tr", ".com.tr",
+      ".br", ".com.br",
+      ".au", ".com.au",
+      ".za", ".co.za",
+      ".pk", ".bd",
+      ".vn", ".th", ".id", ".my", ".ph",
+      ".ke", ".tz", ".ug"
+    ],
+    "excluded_cities": [
+      "mumbai", "delhi", "bangalore", "pune", "chennai", "hyderabad",
+      "beijing", "shanghai", "guangzhou", "shenzhen", "hangzhou",
+      "moskau", "moscow", "moscou", "mosca", "petersburg", "kiev", "kyiv",
+      "istanbul", "ankara", "izmir",
+      "são paulo", "rio de janeiro", "brasilia",
+      "nairobi", "dar es salaam", "kampala", "lagos",
+      "manila", "jakarta", "bangkok", "ho chi minh", "hanoi"
+    ]
+  },
+
+  "hard_exclusions": {
+    "personal_domains": [
+      "gmail.com", "googlemail.com",
+      "yahoo.com", "yahoo.de", "yahoo.fr", "yahoo.it",
+      "hotmail.com", "hotmail.de", "hotmail.fr", "hotmail.it",
+      "outlook.com", "outlook.de", "outlook.fr", "outlook.it",
+      "live.com", "live.de", "live.fr", "live.it",
+      "gmx.de", "gmx.ch", "gmx.at", "gmx.net",
+      "web.de", "t-online.de", "freenet.de",
+      "bluewin.ch", "swissonline.ch",
+      "libero.it", "virgilio.it", "tin.it", "tiscali.it",
+      "orange.fr", "wanadoo.fr", "free.fr", "laposte.net",
+      "icloud.com", "me.com", "mac.com",
+      "mail.ru", "yandex.ru", "yandex.com",
+      "163.com", "126.com", "qq.com", "sina.com"
+    ],
+
+    "hr_prefixes": {
+      "german": [
+        "hr@", "jobs@", "job@", "karriere@", "karrieren@", "career@", "careers@",
+        "personal@", "personalabteilung@", "bewerbung@", "bewerbungen@",
+        "stellenangebote@", "stellenangebot@", "recruiting@", "recruitment@",
+        "ausbildung@", "lehrstellen@", "praktikum@"
+      ],
+      "french": [
+        "emploi@", "emplois@", "recrutement@", "carriere@", "carrieres@",
+        "rh@", "ressourceshumaines@", "travail@",
+        "candidature@", "candidatures@", "embauche@",
+        "stage@", "stages@", "apprentissage@"
+      ],
+      "italian": [
+        "lavoro@", "carriere@", "risorse@", "risorseumane@",
+        "assunzioni@", "recruiting@", "selezione@", "ricerca@",
+        "personale@", "occupazione@"
+      ],
+      "english": [
+        "jobs@", "job@", "career@", "careers@", "recruitment@",
+        "recruiter@", "hiring@", "vacancy@", "vacancies@",
+        "work@", "employment@", "staff@", "personnel@",
+        "resume@", "cv@", "talent@", "headhunter@"
+      ]
+    },
+
+    "service_prefixes": [
+      "noreply@", "no-reply@", "donotreply@", "do-not-reply@",
+      "info@example", "contact@domain", "test@", "demo@", "sample@",
+      "webmaster@", "admin@", "postmaster@", "mailer-daemon@",
+      "datenschutz@", "dpo@", "privacy@", "legal@",
+      "cert@", "security@", "abuse@", "reportphishing@",
+      "compliance@", "audit@"
+    ],
+
+    "financial_prefixes": [
+      "investors@", "investor@", "investor-relations@", "ir@",
+      "finance@", "finanzen@", "finances@", "finanza@",
+      "accounting@", "buchhaltung@", "comptabilité@", "contabilità@"
+    ],
+
+    "excluded_industries": {
+      "education": {
+        "german": [
+          "schule", "gymnasium", "universität", "hochschule", "fachhochschule",
+          "bildung", "ausbildung", "weiterbildung", "fortbildung",
+          "kurs", "kurse", "seminar", "schulung", "training",
+          "student", "studenten", "schüler", "lehrer", "dozent", "professor"
+        ],
+        "french": [
+          "école", "collège", "lycée", "université", "haute école",
+          "éducation", "formation", "enseignement",
+          "cours", "séminaire", "stage",
+          "étudiant", "élève", "professeur", "enseignant"
+        ],
+        "italian": [
+          "scuola", "liceo", "università", "politecnico",
+          "educazione", "formazione", "istruzione",
+          "corso", "corsi", "seminario",
+          "studente", "alunno", "insegnante", "docente", "professore"
+        ],
+        "english": [
+          "school", "college", "university", "academy", "institute",
+          "education", "training", "learning",
+          "course", "lesson", "seminar",
+          "student", "pupil", "teacher", "professor", "lecturer"
+        ]
+      },
+      "tourism_hospitality": {
+        "german": [
+          "hotel", "gasthof", "pension", "resort", "unterkunft",
+          "tourismus", "reise", "reisen", "ferien", "urlaub",
+          "restaurant", "café", "gastronomie", "catering",
+          "camping", "campingplatz", "jugendherberge",
+          "ski", "wellness", "spa", "thermal"
+        ],
+        "french": [
+          "hôtel", "auberge", "pension", "hébergement",
+          "tourisme", "voyage", "voyages", "vacances",
+          "restaurant", "café", "gastronomie", "traiteur",
+          "camping", "auberge de jeunesse",
+          "ski", "wellness", "spa", "thermal"
+        ],
+        "italian": [
+          "hotel", "albergo", "pensione", "ostello",
+          "turismo", "viaggio", "viaggi", "vacanza", "vacanze",
+          "ristorante", "caffè", "gastronomia", "catering",
+          "campeggio", "ostello della gioventù",
+          "sci", "wellness", "spa", "terme"
+        ],
+        "english": [
+          "hotel", "motel", "hostel", "resort", "accommodation",
+          "tourism", "travel", "vacation", "holiday",
+          "restaurant", "café", "catering", "hospitality",
+          "camping", "campsite", "youth hostel",
+          "ski", "wellness", "spa", "thermal"
+        ]
+      },
+      "retail_consumer": {
+        "german": [
+          "einzelhandel", "laden", "geschäft", "shop",
+          "e-commerce", "online-shop", "webshop",
+          "supermarkt", "kaufhaus", "warenhaus",
+          "mode", "bekleidung", "kleidung",
+          "möbel", "einrichtung", "dekoration"
+        ],
+        "french": [
+          "commerce de détail", "magasin", "boutique",
+          "e-commerce", "boutique en ligne",
+          "supermarché", "grand magasin",
+          "mode", "vêtements", "habillement",
+          "meubles", "ameublement", "décoration"
+        ],
+        "italian": [
+          "commercio al dettaglio", "negozio", "bottega",
+          "e-commerce", "negozio online",
+          "supermercato", "grande magazzino",
+          "moda", "abbigliamento", "vestiti",
+          "mobili", "arredamento", "decorazione"
+        ],
+        "english": [
+          "retail", "shop", "store", "boutique",
+          "e-commerce", "online shop", "webshop",
+          "supermarket", "department store",
+          "fashion", "clothing", "apparel",
+          "furniture", "home decor", "decoration"
+        ]
+      },
+      "media_advertising": {
+        "german": [
+          "zeitung", "zeitschrift", "magazin", "verlag", "presse",
+          "fernsehen", "tv", "radio", "rundfunk",
+          "werbung", "marketing", "agentur", "werbeagentur",
+          "medien", "kommunikation", "public relations", "pr"
+        ],
+        "french": [
+          "journal", "magazine", "revue", "édition", "presse",
+          "télévision", "tv", "radio", "radiodiffusion",
+          "publicité", "marketing", "agence", "agence de publicité",
+          "médias", "communication", "relations publiques"
+        ],
+        "italian": [
+          "giornale", "rivista", "magazine", "editore", "stampa",
+          "televisione", "tv", "radio", "radiodiffusione",
+          "pubblicità", "marketing", "agenzia", "agenzia pubblicitaria",
+          "media", "comunicazione", "relazioni pubbliche"
+        ],
+        "english": [
+          "newspaper", "magazine", "journal", "publisher", "press",
+          "television", "tv", "radio", "broadcasting",
+          "advertising", "marketing", "agency", "ad agency",
+          "media", "communication", "public relations", "pr"
+        ]
+      },
+      "finance_insurance": {
+        "german": [
+          "bank", "sparkasse", "kreditinstitut", "finanzinstitut",
+          "versicherung", "assekuranz", "rückversicherung",
+          "finanzierung", "kredit", "darlehen", "hypothek",
+          "leasing", "factoring", "investition",
+          "börse", "trading", "broker", "makler"
+        ],
+        "french": [
+          "banque", "établissement financier", "institut financier",
+          "assurance", "réassurance",
+          "financement", "crédit", "prêt", "hypothèque",
+          "leasing", "crédit-bail", "affacturage", "investissement",
+          "bourse", "trading", "courtier"
+        ],
+        "italian": [
+          "banca", "istituto finanziario",
+          "assicurazione", "riassicurazione",
+          "finanziamento", "credito", "prestito", "mutuo", "ipoteca",
+          "leasing", "factoring", "investimento",
+          "borsa", "trading", "broker", "mediatore"
+        ],
+        "english": [
+          "bank", "banking", "financial institution",
+          "insurance", "reinsurance", "assurance",
+          "financing", "credit", "loan", "mortgage",
+          "leasing", "factoring", "investment",
+          "stock exchange", "trading", "broker"
+        ]
+      },
+      "hr_agencies": {
+        "german": [
+          "personalvermittlung", "arbeitsvermittlung", "zeitarbeit",
+          "personaldienstleistung", "headhunter", "headhunting",
+          "personalberatung", "personalsuche"
+        ],
+        "french": [
+          "agence de placement", "agence d'intérim", "travail temporaire",
+          "recrutement", "chasseur de têtes", "cabinet de recrutement"
+        ],
+        "italian": [
+          "agenzia di lavoro", "agenzia interinale", "lavoro temporaneo",
+          "agenzia di recruiting", "head hunter", "ricerca personale"
+        ],
+        "english": [
+          "staffing agency", "recruitment agency", "temp agency",
+          "employment agency", "headhunter", "hr agency",
+          "personnel agency", "job agency"
+        ]
+      }
+    }
+  },
+
+  "industry_keywords": {
+    "machinery_german": {
+      "primary": [
+        "maschinen", "baumaschinen", "anlagen", "geräte", "ausrüstung",
+        "bagger", "kran", "lader", "radlader", "baggerlader",
+        "hydraulikzylinder", "hydraulikpumpe", "hydraulikmotor", "hydraulikventil",
+        "industrieausrüstung", "produktionsanlagen", "fertigungsanlagen"
+      ],
+      "secondary": [
+        "werkzeugmaschinen", "bearbeitungsmaschinen", "montageanlagen",
+        "fördertechnik", "hebetechnik", "lagertechnik",
+        "hydraulik", "pneumatik", "antriebstechnik",
+        "automatisierung", "steuerungstechnik", "regelungstechnik",
+        "komponenten", "ersatzteile", "zubehör"
+      ],
+      "oem_indicators": [
+        "hersteller", "produzent", "fabrikant", "fertigung",
+        "produktion", "fabrik", "werk", "herstellung",
+        "OEM", "erstausrüster", "zulieferer", "komponentenhersteller"
+      ],
+      "applications": [
+        "baumaschinen", "landmaschinen", "nutzfahrzeuge",
+        "industriemaschinen", "fertigungsmaschinen",
+        "mobile arbeitsmaschinen", "stationäre maschinen"
+      ]
+    },
+
+    "machinery_french": {
+      "primary": [
+        "machines", "engins de chantier", "équipement", "matériel",
+        "excavateur", "pelle", "grue", "chargeuse", "chargeuse-pelleteuse",
+        "vérin hydraulique", "pompe hydraulique", "moteur hydraulique", "distributeur hydraulique",
+        "équipement industriel", "installations de production"
+      ],
+      "secondary": [
+        "machines-outils", "machines d'usinage", "installations de montage",
+        "manutention", "levage", "stockage",
+        "hydraulique", "pneumatique", "transmission",
+        "automatisation", "contrôle", "régulation",
+        "composants", "pièces de rechange", "accessoires"
+      ],
+      "oem_indicators": [
+        "fabricant", "producteur", "constructeur", "fabrication",
+        "production", "usine", "manufacture",
+        "OEM", "équipementier", "fournisseur", "sous-traitant"
+      ],
+      "applications": [
+        "engins de chantier", "machines agricoles", "véhicules utilitaires",
+        "machines industrielles", "machines de production",
+        "machines mobiles", "machines stationnaires"
+      ]
+    },
+
+    "machinery_italian": {
+      "primary": [
+        "macchine", "macchinari", "macchine da costruzione", "attrezzature", "apparecchiature",
+        "escavatore", "escavatrici", "gru", "pala", "pale caricatrici",
+        "cilindro idraulico", "pompa idraulica", "motore idraulico", "valvola idraulica",
+        "attrezzature industriali", "impianti di produzione"
+      ],
+      "secondary": [
+        "macchine utensili", "macchine per lavorazione", "impianti di montaggio",
+        "movimentazione", "sollevamento", "magazzinaggio",
+        "idraulica", "pneumatica", "trasmissione",
+        "automazione", "controllo", "regolazione",
+        "componenti", "ricambi", "accessori"
+      ],
+      "oem_indicators": [
+        "produttore", "fabbricante", "costruttore", "fabbricazione",
+        "produzione", "fabbrica", "stabilimento", "impianto",
+        "OEM", "fornitore OEM", "componentistica"
+      ],
+      "applications": [
+        "macchine da costruzione", "macchine agricole", "veicoli commerciali",
+        "macchine industriali", "macchine di produzione",
+        "macchine mobili", "macchine stazionarie"
+      ]
+    },
+
+    "machinery_english": {
+      "primary": [
+        "machinery", "equipment", "machines", "apparatus",
+        "construction equipment", "excavator", "crane", "loader", "backhoe",
+        "hydraulic cylinder", "hydraulic pump", "hydraulic motor", "hydraulic valve",
+        "industrial equipment", "production equipment", "manufacturing equipment"
+      ],
+      "secondary": [
+        "machine tools", "processing machines", "assembly equipment",
+        "material handling", "lifting equipment", "storage systems",
+        "hydraulics", "pneumatics", "drive technology",
+        "automation", "control systems", "regulation",
+        "components", "spare parts", "accessories"
+      ],
+      "oem_indicators": [
+        "manufacturer", "producer", "maker", "fabricator",
+        "production", "factory", "plant", "facility",
+        "OEM", "original equipment manufacturer", "supplier", "component supplier"
+      ],
+      "applications": [
+        "construction machinery", "agricultural machinery", "commercial vehicles",
+        "industrial machinery", "production machines",
+        "mobile equipment", "stationary machines"
+      ]
+    },
+
+    "negative_keywords": [
+      "headhunting", "recruitment agency", "staffing",
+      "personalvermittlung", "zeitarbeit",
+      "agence de recrutement", "intérim",
+      "agenzia di lavoro temporaneo",
+      "student", "schüler", "étudiant", "studente",
+      "university", "universität", "université", "università",
+      "hotel", "restaurant", "café",
+      "retail", "einzelhandel", "commerce de détail", "commercio al dettaglio"
+    ]
+  },
+
+  "domain_patterns": {
+    "machinery_de": [
+      "maschinen", "baumaschinen", "bagger", "kran", "hydraulik",
+      "anlagen", "geraete", "ausruestung", "technik"
+    ],
+    "machinery_fr": [
+      "machines", "engins", "materiel", "equipement", "hydraulique",
+      "technique", "industrie"
+    ],
+    "machinery_it": [
+      "macchine", "macchinari", "escavator", "idraulic", "attrezzature",
+      "apparecchiature", "tecnica", "industria"
+    ],
+    "machinery_en": [
+      "machinery", "equipment", "hydraulic", "cylinder", "pump", "valve",
+      "excavator", "crane", "loader", "industrial", "manufacturing"
+    ],
+    "general_industrial": [
+      "industry", "industrial", "manufacture", "engineering",
+      "industrie", "ingenieur", "technik", "technique",
+      "fabbrica", "stabilimento"
+    ]
+  },
+
+  "scoring": {
+    "weights": {
+      "email_quality": 0.10,
+      "company_relevance": 0.45,
+      "geographic_priority": 0.30,
+      "engagement": 0.15
+    },
+    "thresholds": {
+      "high_priority": 100,
+      "medium_priority": 50,
+      "low_priority": 10
+    },
+    "bonus_multipliers": {
+      "oem_manufacturer": 1.3,
+      "target_geography": 2.0,
+      "domain_match": 1.5
+    }
+  },
+
+  "output_settings": {
+    "filename_prefix": "Swiss_Machinery",
+    "categories": {
+      "high": "HIGH_PRIORITY",
+      "medium": "MEDIUM_PRIORITY",
+      "low": "LOW_PRIORITY",
+      "excluded": "EXCLUDED"
+    },
+    "include_metadata": true,
+    "generate_html_report": true,
+    "generate_exclusion_report": true
+  }
+}

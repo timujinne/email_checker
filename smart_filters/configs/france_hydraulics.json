@@ -1,0 +1,601 @@
+{
+  "filter_name": "France Hydraulic Cylinders Filter",
+  "version": "1.0.0",
+  "description": "Comprehensive smart filter for French hydraulic cylinders industry with FR/EN bilingual support targeting mobile hydraulics, construction equipment, and industrial machinery manufacturers",
+  "target_country": "FR",
+  "target_industry": "hydraulic_cylinders",
+  "languages": ["fr", "en"],
+
+  "geographic": {
+    "priority_high": [
+      "france", "français", "francais", ".fr", "french",
+      "paris", "île-de-france", "idf",
+      "lyon", "rhône", "auvergne-rhône-alpes",
+      "marseille", "provence", "paca", "provence-alpes-côte d'azur",
+      "toulouse", "occitanie", "haute-garonne",
+      "lille", "hauts-de-france", "nord",
+      "bordeaux", "nouvelle-aquitaine", "gironde",
+      "nantes", "pays de la loire", "loire-atlantique",
+      "strasbourg", "grand est", "bas-rhin",
+      "montpellier", "hérault", "herault",
+      "rennes", "bretagne", "ille-et-vilaine",
+      "grenoble", "isère", "isere",
+      "dijon", "bourgogne-franche-comté", "côte-d'or",
+      "angers", "maine-et-loire",
+      "saint-étienne", "saint-etienne", "loire",
+      "clermont-ferrand", "puy-de-dôme",
+      "nice", "alpes-maritimes",
+      "nîmes", "nimes", "gard",
+      "aix-en-provence", "bouches-du-rhône",
+      "tours", "centre-val de loire", "indre-et-loire",
+      "limoges", "haute-vienne",
+      "reims", "marne",
+      "nancy", "meurthe-et-moselle",
+      "metz", "moselle",
+      "besançon", "besancon", "doubs",
+      "orléans", "orleans", "loiret",
+      "rouen", "normandie", "seine-maritime",
+      "caen", "calvados",
+      "mulhouse", "haut-rhin",
+      "amiens", "somme",
+      "brest", "finistère", "finistere",
+      "perpignan", "pyrénées-orientales"
+    ],
+    "regions": [
+      "île-de-france", "idf", "paris region",
+      "auvergne-rhône-alpes", "rhone-alpes",
+      "hauts-de-france", "nord-pas-de-calais",
+      "grand est", "alsace", "lorraine", "champagne-ardenne",
+      "nouvelle-aquitaine", "aquitaine", "poitou-charentes", "limousin",
+      "occitanie", "languedoc-roussillon", "midi-pyrénées",
+      "provence-alpes-côte d'azur", "paca", "provence",
+      "pays de la loire",
+      "bretagne", "brittany",
+      "normandie", "normandy",
+      "bourgogne-franche-comté", "burgundy",
+      "centre-val de loire"
+    ],
+    "priority_medium": [
+      "belgium", "belgique", "belgië", ".be",
+      "switzerland", "suisse", "schweiz", ".ch",
+      "luxembourg", "luxemburg", ".lu",
+      "monaco", ".mc",
+      "canada", "québec", "quebec", ".ca"
+    ],
+    "excluded_countries": [
+      ".cn", ".com.cn", ".hk", ".tw",
+      ".in", ".co.in",
+      ".ru", ".by", ".ua", ".kz",
+      ".tr", ".com.tr",
+      ".br", ".com.br",
+      ".au", ".com.au",
+      ".za", ".co.za",
+      ".pk", ".bd",
+      ".vn", ".th", ".id", ".my", ".ph",
+      ".ke", ".tz", ".ug", ".ng",
+      ".ar", ".mx", ".co", ".pe", ".cl"
+    ],
+    "excluded_cities": [
+      "mumbai", "delhi", "bangalore", "pune", "chennai", "hyderabad", "kolkata",
+      "beijing", "shanghai", "guangzhou", "shenzhen", "hangzhou", "chengdu",
+      "moscow", "moscou", "moskau", "mosca", "petersburg", "kiev", "kyiv", "kiew",
+      "istanbul", "ankara", "izmir",
+      "são paulo", "rio de janeiro", "brasilia",
+      "nairobi", "dar es salaam", "kampala", "lagos", "johannesburg",
+      "manila", "jakarta", "bangkok", "ho chi minh", "hanoi"
+    ]
+  },
+
+  "hard_exclusions": {
+    "personal_domains": [
+      "orange.fr", "wanadoo.fr", "free.fr", "laposte.net", "sfr.fr",
+      "bouyguestel.fr", "neuf.fr", "voila.fr", "numericable.fr",
+      "bbox.fr", "aliceadsl.fr", "cegetel.net",
+      "gmail.com", "googlemail.com",
+      "hotmail.fr", "hotmail.com", "outlook.fr", "outlook.com",
+      "yahoo.fr", "yahoo.com",
+      "live.fr", "live.com",
+      "icloud.com", "me.com", "mac.com",
+      "mail.ru", "yandex.ru", "yandex.com",
+      "163.com", "126.com", "qq.com", "sina.com"
+    ],
+
+    "hr_prefixes": {
+      "french": [
+        "emploi@", "emplois@", "recrutement@", "carriere@", "carrieres@",
+        "rh@", "ressourceshumaines@", "travail@",
+        "candidature@", "candidatures@", "embauche@",
+        "stage@", "stages@", "apprentissage@", "formation@"
+      ],
+      "english": [
+        "jobs@", "job@", "career@", "careers@", "recruitment@",
+        "recruiter@", "hiring@", "vacancy@", "vacancies@",
+        "work@", "employment@", "staff@", "personnel@",
+        "resume@", "cv@", "talent@", "headhunter@",
+        "hr@", "humanresources@"
+      ]
+    },
+
+    "service_prefixes": [
+      "noreply@", "no-reply@", "donotreply@", "do-not-reply@",
+      "info@example", "contact@domain", "test@", "demo@", "sample@",
+      "webmaster@", "admin@", "postmaster@", "mailer-daemon@",
+      "privacy@", "legal@", "juridique@", "juridisch@", "legale@",
+      "cert@", "security@", "abuse@", "reportphishing@",
+      "compliance@", "audit@", "revision@"
+    ],
+
+    "financial_prefixes": [
+      "investors@", "investor@", "investor-relations@", "ir@",
+      "finance@", "finanzen@", "finances@", "financien@", "finanza@",
+      "accounting@", "buchhaltung@", "comptabilité@", "boekhouding@", "comptabilite@",
+      "treasury@", "tresorerie@", "schatkist@"
+    ],
+
+    "excluded_industries": {
+      "education": {
+        "french": [
+          "école", "écoles", "ecole", "ecoles", "collège", "college", "lycée", "lycee",
+          "université", "universite", "haute école", "haute ecole",
+          "éducation", "education", "enseignement", "formation",
+          "cours", "séminaire", "seminaire", "stage", "formation professionnelle",
+          "étudiant", "étudiants", "etudiant", "etudiants", "élève", "eleve",
+          "professeur", "enseignant",
+          "académie", "academie", "centre de formation"
+        ],
+        "english": [
+          "school", "college", "university", "academy", "institute",
+          "education", "training", "learning",
+          "course", "lesson", "seminar", "workshop",
+          "student", "pupil", "teacher", "professor"
+        ]
+      },
+
+      "media": {
+        "french": [
+          "journal", "magazine", "revue", "édition", "edition", "presse",
+          "télévision", "television", "tv", "radio", "radiodiffusion", "chaîne", "chaine",
+          "publicité", "publicite", "marketing", "agence", "agence de publicité", "agence de publicite",
+          "médias", "medias", "communication", "relations publiques",
+          "marketing digital", "médias sociaux", "medias sociaux"
+        ],
+        "english": [
+          "newspaper", "magazine", "journal", "publisher", "press",
+          "television", "tv", "radio", "broadcasting",
+          "advertising", "marketing", "agency", "ad agency",
+          "media", "communication", "public relations"
+        ]
+      },
+
+      "finance": {
+        "french": [
+          "banque", "établissement financier", "etablissement financier", "institut financier",
+          "assurance", "réassurance", "reassurance", "compagnie d'assurance",
+          "financement", "crédit", "credit", "prêt", "pret", "hypothèque", "hypotheque",
+          "leasing", "crédit-bail", "credit-bail", "affacturage", "investissement",
+          "bourse", "trading", "courtier",
+          "fiduciaire", "conseil financier"
+        ],
+        "english": [
+          "bank", "banking", "financial institution",
+          "insurance", "reinsurance", "assurance",
+          "financing", "credit", "loan", "mortgage",
+          "leasing", "factoring", "investment",
+          "stock exchange", "trading", "broker"
+        ]
+      },
+
+      "legal": {
+        "french": [
+          "notaire", "étude notariale", "etude notariale",
+          "avocat", "cabinet d'avocats", "cabinet juridique",
+          "conseil juridique", "juriste",
+          "conseil en brevets", "expert-comptable"
+        ],
+        "english": [
+          "notary", "notary public", "notary office",
+          "lawyer", "attorney", "law firm",
+          "legal services", "legal counsel",
+          "patent attorney", "accountant"
+        ]
+      },
+
+      "tourism": {
+        "french": [
+          "hôtel", "hotel", "auberge", "pension", "hébergement", "hebergement",
+          "tourisme", "voyage", "voyages", "vacances",
+          "restaurant", "café", "cafe", "gastronomie", "traiteur",
+          "camping", "auberge de jeunesse",
+          "ski", "station de ski", "wellness", "spa",
+          "agence de voyages", "tour-opérateur", "tour-operateur"
+        ],
+        "english": [
+          "hotel", "motel", "hostel", "resort",
+          "tourism", "travel", "vacation", "holiday",
+          "restaurant", "café", "cafe", "catering",
+          "camping", "campsite",
+          "ski", "ski resort", "wellness", "spa",
+          "travel agency", "tour operator"
+        ]
+      },
+
+      "healthcare": {
+        "french": [
+          "hôpital", "hopital", "clinique", "établissement de santé", "etablissement de sante",
+          "médecin", "medecin", "cabinet médical", "cabinet medical", "santé", "sante", "médecine", "medecine",
+          "soins", "maison de retraite",
+          "thérapie", "therapie", "physiothérapie", "physiotherapie", "ergothérapie", "ergotherapie",
+          "dentiste", "clinique dentaire"
+        ],
+        "english": [
+          "hospital", "clinic", "medical center",
+          "doctor", "physician", "health", "medicine",
+          "care", "nursing home", "retirement home",
+          "therapy", "physiotherapy", "physical therapy",
+          "dentist", "dental clinic"
+        ]
+      },
+
+      "pharmacy": {
+        "french": [
+          "pharmacie", "pharmaceutique", "entreprise pharmaceutique",
+          "médicament", "medicament", "produit pharmaceutique", "ordonnance"
+        ],
+        "english": [
+          "pharmacy", "pharmaceutical", "pharma company",
+          "medication", "medicine", "prescription"
+        ]
+      },
+
+      "retail": {
+        "french": [
+          "commerce de détail", "commerce de detail", "magasin", "boutique",
+          "e-commerce", "boutique en ligne",
+          "supermarché", "supermarche", "grand magasin",
+          "mode", "vêtements", "vetements", "textiles",
+          "meubles", "ameublement", "décoration", "decoration",
+          "magasin de vélos", "magasin de velos", "vélo", "velo"
+        ],
+        "english": [
+          "retail", "shop", "store", "boutique",
+          "e-commerce", "online shop", "webshop",
+          "supermarket", "department store",
+          "fashion", "clothing", "textiles",
+          "furniture", "home decor"
+        ]
+      },
+
+      "logistics": {
+        "french": [
+          "entreprise de transport", "transport de marchandises",
+          "logistique", "services logistiques", "expédition", "expedition",
+          "location de voiture", "location de véhicules", "location de vehicules",
+          "fret", "transporteur", "coursier"
+        ],
+        "english": [
+          "trucking company", "freight transport",
+          "logistics", "logistics services", "forwarding",
+          "car rental", "van rental", "vehicle rental",
+          "freight", "carrier", "courier"
+        ]
+      },
+
+      "hr_agencies": {
+        "french": [
+          "agence de placement", "agence d'intérim", "agence d'interim", "travail temporaire",
+          "recrutement", "chasseur de têtes", "chasseur de tetes", "cabinet de recrutement",
+          "agence de personnel", "intérim", "interim"
+        ],
+        "english": [
+          "staffing agency", "recruitment agency", "temp agency",
+          "employment agency", "headhunter", "hr agency",
+          "temporary work agency", "placement agency"
+        ]
+      },
+
+      "government": {
+        "french": [
+          "autorité", "autorite", "commune", "ville", "province", "région", "region",
+          "ministère", "ministere", "fédéral", "federal", "flamand", "wallon",
+          "préfecture", "prefecture", "mairie", "conseil général", "conseil general",
+          "police", "pompiers", "services de secours"
+        ],
+        "english": [
+          "authority", "municipality", "city", "province", "region",
+          "ministry", "federal", "prefecture", "town hall",
+          "police", "fire department", "emergency services"
+        ]
+      },
+
+      "research_ngo": {
+        "french": [
+          "recherche", "institut de recherche", "scientifique",
+          "association", "fondation", "organisation humanitaire", "ong",
+          "aide au développement", "aide au developpement", "charité", "charite", "sans but lucratif"
+        ],
+        "english": [
+          "research", "research institute", "scientific",
+          "association", "foundation", "humanitarian", "ngo",
+          "development aid", "charity", "non-profit"
+        ]
+      }
+    }
+  },
+
+  "industry_keywords": {
+    "hydraulic_cylinders_french": {
+      "primary": [
+        "vérin hydraulique", "vérins hydrauliques",
+        "verin hydraulique", "verins hydrauliques",
+        "cylindre hydraulique", "cylindres hydrauliques",
+        "actionneur hydraulique", "actionneurs hydrauliques",
+        "piston hydraulique", "pistons hydrauliques",
+        "pompe hydraulique", "pompes hydrauliques",
+        "moteur hydraulique", "moteurs hydrauliques",
+        "hydromoteur", "hydromoteurs",
+        "entraînement hydraulique", "entraînements hydrauliques",
+        "entrainement hydraulique", "entrainements hydrauliques",
+        "vérin télescopique", "vérins télescopiques",
+        "verin telescopique", "verins telescopiques",
+        "vérin double effet", "vérin simple effet",
+        "verin double effet", "verin simple effet",
+        "vérin grande capacité", "vérin mobile",
+        "verin grande capacite", "verin mobile"
+      ],
+      "secondary": [
+        "système hydraulique", "systèmes hydrauliques",
+        "systeme hydraulique", "systemes hydrauliques",
+        "installation hydraulique", "installations hydrauliques",
+        "centrale hydraulique", "centrales hydrauliques",
+        "groupe hydraulique", "groupes hydrauliques",
+        "circuit hydraulique", "circuits hydrauliques",
+        "oléohydraulique", "oleodynamique", "commande hydraulique",
+        "tige de piston", "tube de cylindre", "joints", "joints toriques",
+        "huile hydraulique", "fluide hydraulique", "huile de pression",
+        "transmission hydraulique", "servo-commande"
+      ],
+      "parts_and_service": [
+        "pièces détachées", "pieces detachees", "pièces de rechange", "pieces de rechange",
+        "pièces hydrauliques", "pieces hydrauliques", "pièces pour engins", "pieces pour engins",
+        "accessoires hydrauliques", "composants hydrauliques",
+        "spare parts", "aftermarket parts",
+        "entretien hydraulique", "maintenance hydraulique", "maintenance préventive", "maintenance preventive",
+        "réparation hydraulique", "reparation hydraulique", "service de réparation", "service de reparation",
+        "dépannage hydraulique", "depannage hydraulique", "service de dépannage", "service de depannage",
+        "réparation sur site", "reparation sur site", "intervention rapide",
+        "service technique", "service après-vente", "service apres-vente", "SAV",
+        "assistance technique", "support technique"
+      ],
+      "rental_leasing": [
+        "location de matériel", "location de materiel", "location d'engins", "location de machines",
+        "location hydraulique", "location d'équipements", "location d'equipements",
+        "location d'engins de chantier", "location de pelles", "location de grues",
+        "location avec opérateur", "location avec operateur",
+        "leasing matériel", "leasing materiel", "leasing", "service de location"
+      ],
+      "btp_construction": [
+        "BTP", "bâtiment et travaux publics", "batiment et travaux publics",
+        "travaux publics", "génie civil", "genie civil",
+        "terrassement hydraulique", "travaux de terrassement",
+        "engins de chantier hydrauliques", "équipements BTP", "equipements BTP",
+        "matériel de chantier", "materiel de chantier",
+        "construction hydraulique", "TP"
+      ],
+      "irrigation_agriculture": [
+        "irrigation hydraulique", "système d'irrigation", "systeme d'irrigation",
+        "pompage agricole", "station de pompage",
+        "arrosage hydraulique", "pivot d'irrigation", "pivot irrigation",
+        "irrigation par aspersion", "goutte-à-goutte", "goutte-a-goutte",
+        "matériel d'irrigation", "materiel d'irrigation",
+        "équipement agricole hydraulique", "equipement agricole hydraulique"
+      ],
+      "oem_indicators": [
+        "fabricant", "producteur", "constructeur", "fournisseur",
+        "fabrication", "production", "manufacture",
+        "usine", "atelier", "site de production",
+        "OEM", "équipementier", "equipementier", "fournisseur OEM",
+        "production en série", "production en serie", "fabrication spéciale", "fabrication speciale",
+        "sur mesure", "industriel", "ingénierie", "ingenierie"
+      ],
+      "applications": [
+        "machines agricoles", "engins agricoles", "agriculture",
+        "tracteur agricole", "moissonneuse", "pulvérisateur", "pulverisateur",
+        "engins de chantier", "machines de terrassement", "pelle hydraulique",
+        "excavateur", "excavatrice", "chargeuse", "pelleteuse",
+        "bulldozer", "niveleuse", "compacteur",
+        "manutention", "chariots élévateurs", "chariots elevateurs",
+        "transpalettes", "gerbeurs", "transpalette",
+        "levage", "élévation", "elevation", "grues", "nacelles élévatrices", "nacelles elevatrices",
+        "plateformes", "plateforme élévatrice", "plateforme elevatrice",
+        "hydraulique mobile", "hydraulique véhicules", "hydraulique vehicules",
+        "machines industrielles", "machines-outils", "presses hydrauliques",
+        "presse à forger", "presse a forger", "presse d'emboutissage",
+        "benne", "camion-benne", "benne basculante", "malaxeur béton", "malaxeur beton",
+        "bétonnière", "betonniere", "toupie béton", "toupie beton",
+        "camion à ordures", "camion a ordures", "benne à ordures", "benne a ordures",
+        "dépanneuse", "depanneuse", "grue mobile", "grue auxiliaire",
+        "container", "système de levage", "systeme de levage", "vérin de benne", "verin de benne"
+      ]
+    },
+
+    "hydraulic_cylinders_english": {
+      "primary": [
+        "hydraulic cylinder", "hydraulic cylinders",
+        "hydraulic actuator", "hydraulic actuators",
+        "hydraulic piston", "hydraulic pistons",
+        "hydraulic pump", "hydraulic pumps",
+        "hydraulic motor", "hydraulic motors",
+        "hydraulic drive", "hydraulic drives",
+        "telescopic cylinder", "telescoping cylinder",
+        "double-acting cylinder", "single-acting cylinder",
+        "heavy-duty cylinder", "mobile cylinder"
+      ],
+      "secondary": [
+        "hydraulic system", "hydraulic systems",
+        "hydraulic installation", "hydraulic installations",
+        "hydraulic power unit", "hydraulic power pack",
+        "oleodynamic", "oleodynamics", "hydraulic control",
+        "piston rod", "cylinder tube", "seals", "o-rings",
+        "hydraulic oil", "hydraulic fluid", "pressure oil",
+        "hydrostatic transmission", "hydrostatic drive"
+      ],
+      "parts_and_service": [
+        "spare parts", "replacement parts", "hydraulic parts",
+        "hydraulic accessories", "hydraulic components",
+        "parts for equipment", "aftermarket parts",
+        "hydraulic maintenance", "maintenance service", "preventive maintenance",
+        "hydraulic repair", "repair service",
+        "hydraulic breakdown service", "emergency service", "on-site repair",
+        "technical service", "after-sales service", "customer service",
+        "service department", "technical support"
+      ],
+      "rental_leasing": [
+        "equipment rental", "machinery rental", "hydraulic equipment rental",
+        "construction equipment rental", "excavator rental", "crane rental",
+        "rental with operator", "operated rental",
+        "machine hire", "rental service",
+        "leasing", "equipment leasing"
+      ],
+      "btp_construction": [
+        "civil engineering", "public works",
+        "earthmoving hydraulic", "earthwork equipment",
+        "construction hydraulic equipment", "construction machinery",
+        "site equipment", "building equipment"
+      ],
+      "irrigation_agriculture": [
+        "hydraulic irrigation", "irrigation system",
+        "agricultural pumping", "pumping station",
+        "hydraulic watering", "irrigation pivot",
+        "sprinkler irrigation", "drip irrigation",
+        "irrigation equipment", "agricultural hydraulic equipment"
+      ],
+      "oem_indicators": [
+        "manufacturer", "producer", "maker", "supplier",
+        "manufacturing", "production", "fabrication",
+        "factory", "plant", "production facility",
+        "OEM", "original equipment manufacturer", "component supplier",
+        "series production", "custom manufacturing", "made-to-order",
+        "industrial", "engineering"
+      ],
+      "applications": [
+        "agricultural machinery", "farm equipment", "agriculture",
+        "tractor", "harvester", "combine", "sprayer",
+        "construction equipment", "earthmoving equipment", "excavator", "loader",
+        "bulldozer", "grader", "compactor",
+        "material handling", "forklifts", "pallet jacks",
+        "lifting equipment", "hoisting", "cranes", "aerial platforms",
+        "aerial work platform", "scissor lift", "boom lift",
+        "mobile hydraulics", "vehicle hydraulics",
+        "industrial machinery", "machine tools", "presses",
+        "forging press", "stamping press",
+        "dump body", "dump truck", "tipper", "concrete mixer",
+        "concrete truck", "mixer truck",
+        "garbage truck", "refuse truck", "waste truck",
+        "tow truck", "wrecker", "recovery vehicle",
+        "container", "container handling", "lifting system"
+      ]
+    },
+
+    "mobile_hydraulics_keywords": {
+      "french": [
+        "tracteurs routiers à système hydraulique",
+        "tracteurs routiers a systeme hydraulique",
+        "semi-remorques à systèmes hydrauliques",
+        "semi-remorques a systemes hydrauliques",
+        "camions-bennes à systèmes hydrauliques",
+        "camions-bennes a systemes hydrauliques",
+        "camions à ordures à hydromoteurs de chargement",
+        "camions a ordures a hydromoteurs de chargement",
+        "malaxeurs à béton à hydromoteurs",
+        "malaxeurs a beton a hydromoteurs",
+        "installations de grues à hydromoteurs de rotation",
+        "installations de grues a hydromoteurs de rotation",
+        "dépanneuses à treuils hydrauliques",
+        "depanneuses a treuils hydrauliques",
+        "transporteurs de conteneurs à hydroentraînements",
+        "transporteurs de conteneurs a hydroentrainements",
+        "hydromoteurs de roue", "transmissions hydrostatiques",
+        "équipement aéroportuaire à moteurs hydrauliques",
+        "equipement aeroportuaire a moteurs hydrauliques"
+      ],
+      "english": [
+        "semi-trucks with hydraulic motors",
+        "city tractors with hydraulic drive",
+        "flatbed trucks hydraulic",
+        "dump trucks with hydraulic drives",
+        "garbage trucks with loading hydraulic motors",
+        "concrete mixer hydraulic motors",
+        "crane rotation hydraulic motors",
+        "tow trucks with hydraulic winches",
+        "container carriers with hydraulic drives",
+        "wheel drive hydraulic motors",
+        "hydrostatic transmissions",
+        "mobile crane winch motors",
+        "airport equipment hydraulic motors"
+      ]
+    },
+
+    "negative_keywords": [
+      "headhunting", "recruitment agency", "staffing",
+      "agence de recrutement", "intérim", "interim", "agence d'intérim", "agence d'interim",
+      "student", "étudiant", "etudiant", "élève", "eleve",
+      "university", "université", "universite", "école supérieure", "ecole superieure",
+      "hotel", "hôtel", "restaurant", "café", "cafe", "tourisme", "tourism",
+      "retail", "commerce de détail", "commerce de detail", "magasin",
+      "bank", "banque", "assurance", "insurance",
+      "immobilier", "real estate", "immobiliare",
+      "vélo", "velo", "bicycle", "bike"
+    ]
+  },
+
+  "domain_patterns": {
+    "hydraulic_fr": [
+      "hydraulique", "verin", "cylindre", "piston",
+      "pompe", "moteur", "entraînement", "entrainement", "actionneur",
+      "oleo", "oleodynamique", "systeme-hydraulique"
+    ],
+    "hydraulic_en": [
+      "hydraulic", "cylinder", "piston", "actuator",
+      "pump", "motor", "drive", "oleodynamic"
+    ],
+    "machinery_general": [
+      "machinery", "equipment", "machines", "macchine",
+      "industrial", "industrie", "industriel",
+      "engineering", "technique", "ingenierie",
+      "manufacturing", "fabrication", "production"
+    ],
+    "french_extensions": [
+      ".fr", "sarl", "sas", "eurl", "sa", "sasu",
+      "group", "groupe", "systems", "systemes"
+    ]
+  },
+
+  "scoring": {
+    "weights": {
+      "email_quality": 0.10,
+      "company_relevance": 0.45,
+      "geographic_priority": 0.30,
+      "engagement": 0.15
+    },
+    "thresholds": {
+      "high_priority": 100,
+      "medium_priority": 50,
+      "low_priority": 10
+    },
+    "bonus_multipliers": {
+      "oem_manufacturer": 1.3,
+      "target_geography": 2.0,
+      "domain_match": 1.5
+    }
+  },
+
+  "output_settings": {
+    "filename_prefix": "France_Hydraulic_Cylinders",
+    "split_by_priority": false,
+    "generate_clean_list": true,
+    "generate_excluded_list": true,
+    "generate_exclusion_report": true,
+    "include_metadata": true,
+    "generate_html_report": true
+  }
+}

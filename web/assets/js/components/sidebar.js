@@ -103,9 +103,17 @@ class Sidebar extends HTMLElement {
     }
 
     attachEventListeners() {
-        // Highlight active route with daisyUI active class
+        // Highlight active route with daisyUI active class (only if router exists)
         const updateActive = () => {
-            const currentPath = router.getCurrentRoute();
+            // Use router if available, otherwise check hash or pathname
+            let currentPath;
+            if (typeof router !== 'undefined') {
+                currentPath = router.getCurrentRoute();
+            } else {
+                // Fallback: check hash or pathname
+                currentPath = window.location.hash.slice(1) || window.location.pathname.split('/').pop().replace('.html', '');
+            }
+
             this.querySelectorAll('.nav-item').forEach(item => {
                 const path = item.getAttribute('data-path');
                 if (path === currentPath) {
@@ -119,8 +127,10 @@ class Sidebar extends HTMLElement {
         // Initial update
         updateActive();
 
-        // Subscribe to route changes
-        router.subscribe(() => updateActive());
+        // Subscribe to route changes (only if router exists)
+        if (typeof router !== 'undefined') {
+            router.subscribe(() => updateActive());
+        }
 
         // Close drawer on mobile when nav item clicked
         this.querySelectorAll('.nav-item').forEach(item => {

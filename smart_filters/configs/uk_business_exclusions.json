@@ -1,0 +1,271 @@
+{
+  "config_name": "uk_business_exclusions",
+  "display_name": "UK - Business (Exclusion Filter)",
+  "version": "1.0",
+  "target_market": {
+    "country_code": "GB",
+    "country_name": "United Kingdom",
+    "language_codes": ["en"],
+    "primary_language": "en"
+  },
+
+  "scoring": {
+    "weights": {
+      "email_quality": 0.15,
+      "company_relevance": 0.35,
+      "geographic_priority": 0.25,
+      "engagement": 0.25
+    },
+    "thresholds": {
+      "high_priority": 100,
+      "medium_priority": 50,
+      "low_priority": 10,
+      "exclude": 0
+    }
+  },
+
+  "target_industry": "general_business",
+
+  "keywords": {
+    "manufacturing": [
+      "manufacturer", "manufacturing", "factory", "production facility",
+      "industrial equipment", "machinery", "machine tools",
+      "automation", "robotics", "assembly", "fabrication",
+      "engineering services", "contract manufacturing",
+      "OEM", "component supplier", "parts supplier",
+      "precision engineering", "metal fabrication", "metalworking",
+      "CNC machining", "toolmaking", "die making"
+    ],
+
+    "construction": [
+      "construction equipment", "building materials", "construction machinery",
+      "civil engineering", "structural engineering", "contractor",
+      "construction company", "building contractor", "main contractor",
+      "specialist contractor", "mechanical contractor", "electrical contractor"
+    ],
+
+    "agriculture": [
+      "agricultural machinery", "farm equipment", "tractor", "harvester",
+      "agricultural supplies", "farming equipment", "irrigation",
+      "crop production", "livestock equipment", "dairy equipment"
+    ],
+
+    "logistics": [
+      "logistics", "freight", "haulage", "transport", "shipping",
+      "warehousing", "distribution", "supply chain", "fleet management",
+      "courier", "delivery", "cargo", "forwarding"
+    ],
+
+    "food_processing": [
+      "food processing", "food production", "food manufacturing",
+      "beverage production", "brewery", "bakery", "dairy processing",
+      "meat processing", "food packaging", "food machinery"
+    ],
+
+    "oem_indicators": [
+      "manufacturer", "producer", "maker", "factory", "plant",
+      "production", "OEM", "OEM supplier", "OEM manufacturer",
+      "fabricator", "builder", "assembly", "component supplier"
+    ]
+  },
+
+  "geographic_priorities": {
+    "high": [
+      "united kingdom", "uk", "gb", ".uk", ".co.uk",
+      "london", "manchester", "birmingham", "leeds", "glasgow", "sheffield",
+      "liverpool", "edinburgh", "bristol", "cardiff", "belfast",
+      "newcastle", "nottingham", "southampton", "portsmouth", "leicester",
+      "coventry", "bradford", "brighton", "wolverhampton", "reading",
+      "oxford", "cambridge", "milton keynes", "northampton", "luton",
+      "york", "exeter", "bath", "chester", "durham"
+    ],
+
+    "medium": [
+      "ireland", "ie", ".ie", "dublin", "cork", "galway",
+      "northern ireland", "scotland", "wales", "england"
+    ],
+
+    "regions": [
+      "england", "scotland", "wales", "northern ireland",
+      "great britain", "british isles"
+    ]
+  },
+
+  "exclusions": {
+    "personal_domains": [
+      "gmail.com", "yahoo.com", "yahoo.co.uk", "hotmail.com", "hotmail.co.uk",
+      "outlook.com", "live.com", "live.co.uk", "btinternet.com",
+      "icloud.com", "me.com", "mac.com", "aol.com", "aol.co.uk",
+      "mail.ru", "yandex.ru", "yandex.com",
+      "163.com", "126.com", "qq.com", "sina.com",
+      "talktalk.net", "virginmedia.com", "sky.com", "blueyonder.co.uk"
+    ],
+
+    "hr_prefixes": [
+      "hr@", "jobs@", "job@", "career@", "careers@", "recruitment@",
+      "recruiter@", "hiring@", "vacancy@", "vacancies@",
+      "work@", "employment@", "staff@", "personnel@",
+      "resume@", "cv@", "talent@", "headhunter@"
+    ],
+
+    "service_prefixes": [
+      "noreply@", "no-reply@", "donotreply@", "do-not-reply@",
+      "info@example", "contact@domain", "test@", "demo@", "sample@",
+      "webmaster@", "admin@", "postmaster@", "mailer-daemon@",
+      "newsletter@", "subscriptions@", "unsubscribe@"
+    ],
+
+    "suspicious_domains": [
+      "sentry.io", "panjiva.com", "temp-mail.org", "10minutemail.com",
+      "guerrillamail.com", "mailinator.com", "throwaway.email"
+    ],
+
+    "excluded_country_domains": [
+      ".cn", ".com.cn", ".hk", ".tw",
+      ".in", ".co.in",
+      ".tr", ".com.tr",
+      ".ru", ".by", ".ua",
+      ".pk", ".bd",
+      ".vn", ".th", ".id", ".my", ".ph"
+    ],
+
+    "excluded_industries": {
+      "travel_tourism": [
+        "travel agency", "travel agent", "tour operator", "tourism",
+        "holiday", "holidays", "vacation", "vacations", "cruise",
+        "flight booking", "hotel booking", "accommodation booking",
+        "travel management", "business travel", "leisure travel",
+        "tourist", "sightseeing", "excursion", "package holiday",
+        "charter flight", "airline ticket", "flight ticket",
+        "travel", "trip", "journey", "tourist office", "visitor centre",
+        "travel insurance", "visa service", "passport service",
+        "destination management", "incoming tour", "outgoing tour",
+        "travel consultant", "holiday package", "city break",
+        "weekend break", "all-inclusive", "resort", "safari"
+      ],
+
+      "media_news": [
+        "newspaper", "magazine", "journal", "publication", "publisher",
+        "broadcasting", "television", "tv station", "radio station",
+        "news agency", "press agency", "media outlet", "news portal",
+        "online news", "digital media", "media company",
+        "press office", "newsroom", "editorial", "journalist",
+        "reporter", "correspondent", "news editor", "media group",
+        "news", "press", "media", "broadcast", "channel",
+        "production company", "media production", "content creator",
+        "podcast", "streaming", "video production", "documentary",
+        "communication agency", "pr agency", "public relations",
+        "media relations", "press release", "journalism"
+      ],
+
+      "legal_services": [
+        "solicitor", "solicitors", "lawyer", "lawyers", "barrister", "barristers",
+        "law firm", "law practice", "legal practice", "legal services",
+        "attorney", "attorneys", "advocate", "legal advice",
+        "legal consultant", "legal advisor", "chambers", "QC", "KC",
+        "litigation", "conveyancing", "family law", "criminal law",
+        "commercial law", "corporate law", "employment law", "property law",
+        "legal", "law", "juridical", "notary", "notaries",
+        "paralegal", "legal assistant", "court", "tribunal",
+        "arbitration", "mediation", "dispute resolution",
+        "intellectual property", "patent attorney", "trademark attorney",
+        "immigration lawyer", "tax advisor", "legal counsel"
+      ],
+
+      "financial_services": [
+        "bank", "banking", "building society", "credit union",
+        "insurance", "assurance", "life insurance", "general insurance",
+        "financial services", "financial advisor", "financial planning",
+        "wealth management", "asset management", "investment management",
+        "private banking", "retail banking", "commercial banking",
+        "mortgage broker", "loan provider", "credit provider",
+        "pension fund", "pension advisor", "pension scheme",
+        "investment bank", "investment firm", "fund manager",
+        "finance", "financial", "fintech", "banking services",
+        "credit", "loan", "mortgage", "lending", "borrowing",
+        "investment", "investor", "investment fund", "hedge fund",
+        "trading", "stock broker", "forex", "currency exchange",
+        "insurance broker", "underwriter", "actuarial",
+        "financial consultant", "financial analyst"
+      ],
+
+      "accounting_audit": [
+        "accountant", "accountants", "accounting firm", "chartered accountant",
+        "certified accountant", "auditor", "auditors", "audit firm",
+        "tax advisor", "tax consultant", "tax accountant",
+        "bookkeeper", "bookkeeping", "payroll services",
+        "VAT services", "corporation tax", "self-assessment",
+        "accounting", "audit", "taxation", "tax", "financial reporting",
+        "compliance", "regulatory compliance", "IFRS", "GAAP",
+        "financial statements", "annual accounts", "management accounts"
+      ],
+
+      "advertising_marketing": [
+        "advertising agency", "marketing agency", "digital agency",
+        "creative agency", "media agency", "branding agency",
+        "seo agency", "ppc agency", "social media agency",
+        "content marketing", "influencer marketing", "affiliate marketing",
+        "advertising", "marketing", "promotion", "campaign",
+        "brand consultant", "market research", "pr agency"
+      ],
+
+      "education": [
+        "school", "college", "university", "academy", "institute",
+        "education", "training", "learning", "course provider",
+        "training centre", "education centre", "tutor", "tuition",
+        "student", "pupil", "teacher", "lecturer", "professor",
+        "teaching", "educational", "e-learning", "online learning"
+      ],
+
+      "recruitment_agencies": [
+        "recruitment agency", "staffing agency", "employment agency",
+        "temp agency", "temporary staffing", "permanent recruitment",
+        "executive search", "headhunter", "headhunting",
+        "talent acquisition", "hr consultancy", "hr services",
+        "recruitment", "staffing", "hiring", "job placement",
+        "candidate sourcing", "talent management"
+      ],
+
+      "retail_ecommerce": [
+        "retail shop", "retail store", "e-commerce", "online shop",
+        "online store", "webshop", "marketplace", "consumer goods",
+        "supermarket", "hypermarket", "chain store", "retail chain",
+        "retail", "shop", "store", "shopping", "consumer",
+        "wholesale", "distribution", "reseller"
+      ]
+    },
+
+    "suspicious_patterns": [
+      "^[a-f0-9]{20,}@",
+      "^[a-z0-9]{15,}@"
+    ]
+  },
+
+  "domain_patterns": {
+    "relevant_patterns": [
+      "engineering", "industrial", "machinery", "equipment", "manufacturing",
+      "fabrication", "precision", "machining", "tooling", "components"
+    ],
+    "high_value_domains": [
+      "ltd", "limited", "plc", "corp", "corporation", "inc",
+      "group", "industries", "systems", "solutions", "technologies"
+    ]
+  },
+
+  "processing": {
+    "batch_size": 100,
+    "max_retries": 3,
+    "processing_delay": 50,
+    "backup_original": true,
+    "preserve_metadata": true,
+    "generate_reports": true
+  },
+
+  "output": {
+    "prefix": "uk_business_filtered_",
+    "include_metadata": true,
+    "metadata_format": "csv",
+    "generate_statistics": true,
+    "create_backup": true
+  }
+}

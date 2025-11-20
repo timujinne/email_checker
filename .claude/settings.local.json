@@ -1,0 +1,21 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python:*)",
+      "Bash(cat:*)",
+      "Bash(lsof:*)",
+      "Bash(mv:*)",
+      "Bash(rm:*)",
+      "Bash(awk:*)",
+      "Bash(python3:*)",
+      "Bash(mkdir:*)",
+      "Read(//tmp/**)",
+      "Bash(chmod:*)",
+      "Bash(curl:*)",
+      "Bash(npm run css:build:*)",
+      "Read(//e/Shtim/Downloads/**)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

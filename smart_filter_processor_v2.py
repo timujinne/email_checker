@@ -228,15 +228,126 @@ class SmartHydraulicDetector:
         self.config = config
         self.logger = SmartFilterLogger("hydraulic_detector")
 
-        # Загружаем ключевые слова
-        self.hydraulic_keywords = config.get('keywords', {}).get('hydraulic_cylinders', [])
-        self.application_keywords = config.get('keywords', {}).get('applications', [])
-        self.component_keywords = config.get('keywords', {}).get('components', [])
-        self.oem_indicators = config.get('keywords', {}).get('oem_indicators', [])
+        # Detect keyword structure type
+        self.keyword_structure = self._detect_keyword_structure()
+        self.logger.info(f"Using keyword structure: {self.keyword_structure}")
+
+        # Normalize keywords to unified format
+        self.normalized_keywords = self._normalize_keywords()
+
+        # For backward compatibility - keep old attributes
+        self.hydraulic_keywords = self.normalized_keywords.get('primary', [])
+        self.application_keywords = self.normalized_keywords.get('applications', [])
+        self.component_keywords = self.normalized_keywords.get('secondary', [])
+        self.oem_indicators = self.normalized_keywords.get('oem_indicators', [])
 
         # Доменные паттерны
         self.domain_patterns = config.get('domain_patterns', {}).get('relevant_patterns', [])
         self.high_value_domains = config.get('domain_patterns', {}).get('high_value_domains', [])
+
+    def _detect_keyword_structure(self) -> str:
+        """
+        Detect which keyword structure is used in config
+
+        Returns:
+            'flat' - Simple flat structure with keywords.primary/secondary
+            'multilingual' - Language-specific groups under industry_keywords
+            'unknown' - Unknown or missing structure
+        """
+        # Check for industry_keywords (multilingual structure)
+        if 'industry_keywords' in self.config:
+            industry_kw = self.config['industry_keywords']
+
+            # Check if it has language-specific subgroups
+            for key, value in industry_kw.items():
+                if isinstance(value, dict) and ('primary' in value or 'secondary' in value):
+                    return 'multilingual'
+
+            # Has industry_keywords but flat structure inside
+            if 'primary' in industry_kw or 'secondary' in industry_kw:
+                return 'flat'
+
+        # Check for old-style keywords
+        if 'keywords' in self.config:
+            return 'flat'
+
+        self.logger.warning("⚠️  Unknown keyword structure in config! Using empty keywords.")
+        print("⚠️  WARNING: Config does not contain 'keywords' or 'industry_keywords'")
+        return 'unknown'
+
+    def _normalize_keywords(self) -> Dict[str, List[str]]:
+        """
+        Normalize keywords from any structure to unified flat format
+
+        Returns:
+            {
+                'primary': [...],      # All primary keywords from all languages
+                'secondary': [...],    # All secondary keywords
+                'oem_indicators': [...],
+                'applications': [...],
+                'negative': [...]
+            }
+        """
+        normalized = {
+            'primary': [],
+            'secondary': [],
+            'oem_indicators': [],
+            'applications': [],
+            'negative': []
+        }
+
+        if self.keyword_structure == 'flat':
+            # Simple flat structure
+            source = self.config.get('keywords') or self.config.get('industry_keywords', {})
+
+            normalized['primary'] = source.get('primary', []) or source.get('hydraulic_cylinders', [])
+            normalized['secondary'] = source.get('secondary', []) or source.get('components', [])
+            normalized['oem_indicators'] = source.get('oem_indicators', [])
+            normalized['applications'] = source.get('applications', [])
+            normalized['negative'] = source.get('negative_keywords', [])
+
+        elif self.keyword_structure == 'multilingual':
+            # Multilingual structure - merge all language groups
+            industry_kw = self.config.get('industry_keywords', {})
+
+            for group_name, group_data in industry_kw.items():
+                if isinstance(group_data, dict):
+                    # Language-specific group (e.g., hydraulic_cylinders_dutch)
+                    if 'primary' in group_data or 'secondary' in group_data:
+                        normalized['primary'].extend(group_data.get('primary', []))
+                        normalized['secondary'].extend(group_data.get('secondary', []))
+                        normalized['oem_indicators'].extend(group_data.get('oem_indicators', []))
+                        normalized['applications'].extend(group_data.get('applications', []))
+
+                    # Nested language groups (e.g., mobile_hydraulics_keywords.dutch)
+                    else:
+                        for lang_key, lang_data in group_data.items():
+                            if isinstance(lang_data, list):
+                                # Add to primary by default
+                                normalized['primary'].extend(lang_data)
+
+                elif isinstance(group_data, list):
+                    # Direct list (e.g., negative_keywords)
+                    if 'negative' in group_name.lower():
+                        normalized['negative'].extend(group_data)
+                    else:
+                        normalized['primary'].extend(group_data)
+
+            # Remove duplicates while preserving order
+            for key in normalized:
+                seen = set()
+                normalized[key] = [x for x in normalized[key] if not (x.lower() in seen or seen.add(x.lower()))]
+
+        # Log statistics
+        total_keywords = sum(len(v) for v in normalized.values())
+        self.logger.info(f"Normalized {total_keywords} keywords: "
+                        f"primary={len(normalized['primary'])}, "
+                        f"secondary={len(normalized['secondary'])}, "
+                        f"oem={len(normalized['oem_indicators'])}, "
+                        f"applications={len(normalized['applications'])}, "
+                        f"negative={len(normalized['negative'])}")
+
+        return normalized
 
     def detect_hydraulic_relevance(self, text: str) -> Dict[str, Any]:
         """Определяет релевантность текста гидравлической тематике"""
@@ -709,13 +820,16 @@ class SmartFilterProcessor:
         self.lead_scorer = SmartLeadScorer(self.config)
         self.file_processor = SmartFileProcessor(self.config)
 
+        # Load metadata from output directory
+        self.metadata_store = self._load_metadata_from_outputs()
+
         # Статистика
         self.statistics = SmartFilterStatistics()
 
     def _load_config(self, filter_name: str) -> Optional[Dict]:
         """Загружает конфигурацию"""
         try:
-            config_path = Path("configs") / f"{filter_name}.json"
+            config_path = Path("smart_filters") / "configs" / f"{filter_name}.json"
             if not config_path.exists():
                 self.logger.error(f"Configuration file not found: {config_path}")
                 return None
@@ -729,6 +843,68 @@ class SmartFilterProcessor:
         except Exception as error:
             self.logger.error(f"Failed to load configuration {filter_name}", str(error))
             return None
+
+    def _load_metadata_from_outputs(self) -> Dict[str, Dict]:
+        """Load metadata from all *_metadata_*.json files in output/"""
+        metadata_store = {}
+        output_dir = Path("output")
+
+        if not output_dir.exists():
+            self.logger.warning("Output directory not found, metadata will not be loaded")
+            return metadata_store
+
+        print("🔄 Загружаем метаданные из JSON файлов...")
+        total_files = 0
+        total_records = 0
+
+        for json_file in output_dir.glob("*_metadata_*.json"):
+            try:
+                with open(json_file, 'r', encoding='utf-8') as f:
+                    data = json.load(f)
+
+                    # Check if it's the new format with "metadata" and "emails" keys
+                    if isinstance(data, dict) and 'emails' in data:
+                        records = data['emails']
+                    else:
+                        records = data  # Old format: array of records
+
+                    for record in records:
+                        email = record.get('email', '').lower()
+                        if email:
+                            # Only store/update if we have meaningful metadata
+                            # Skip records with all null/empty metadata (preserve existing data)
+                            page_title = record.get('page_title') or ''
+                            meta_desc = record.get('meta_description') or ''
+                            category = record.get('category') or ''
+                            keywords = record.get('keywords') or ''
+
+                            # If this email already exists and current record has no metadata, skip it
+                            if email in metadata_store:
+                                existing = metadata_store[email]
+                                # Only update if new record has more data than existing
+                                if not (page_title or meta_desc or category or keywords):
+                                    # New record has no useful data, keep existing
+                                    continue
+
+                            metadata_store[email] = {
+                                'page_title': page_title,
+                                'meta_description': meta_desc,
+                                'category': category,
+                                'keywords': keywords,
+                                'validation_status': record.get('validation_status', 'Valid'),
+                                'country': record.get('country', ''),
+                                'city': record.get('city', ''),
+                                'domain': record.get('domain', '')
+                            }
+
+                    total_files += 1
+                    total_records += len(records)
+
+            except Exception as e:
+                self.logger.error(f"Failed to load metadata from {json_file.name}", str(e))
+
+        print(f"📊 Загружено metadata из {total_files} файлов для {len(metadata_store)} emails")
+        return metadata_store
 
     def process_clean_file(self, file_path: Path, include_metadata: bool = True) -> Dict[str, Any]:
         """Обрабатывает clean файл"""
@@ -877,20 +1053,36 @@ class SmartFilterProcessor:
 
             self.statistics.valid_emails += 1
 
+            # Get metadata for this email
+            meta = self.metadata_store.get(item.lower(), {})
+
+            # Exclude invalid emails from source data
+            if meta.get('validation_status', '').lower() == 'invalid':
+                self.statistics.hard_excluded += 1
+                self.statistics.excluded_by_category['invalid_status'] += 1
+                return None
+
             # Жесткие исключения
-            exclusion_result = self.exclusion_filter.should_exclude(item)
+            exclusion_result = self.exclusion_filter.should_exclude(
+                item,
+                company_name=meta.get('page_title', ''),
+                description=meta.get('meta_description', ''),
+                domain=meta.get('domain', '')
+            )
             if exclusion_result['should_exclude']:
                 self.statistics.hard_excluded += 1
                 for reason in exclusion_result['reasons']:
                     self.statistics.excluded_by_category[reason] += 1
                 return None
 
-            # Скоринг
+            # Скоринг с метаданными
             scoring_result = self.lead_scorer.score_contact(
                 email=item,
-                company_name="",  # Будет извлечено из метаданных если доступно
-                description="",
-                domain=item.split('@')[1] if '@' in item else ""
+                company_name=meta.get('page_title', ''),        # ✅ Company name from title
+                description=meta.get('meta_description', ''),   # ✅ Description (MAIN!)
+                title=meta.get('category', ''),                 # ✅ Business category
+                domain=meta.get('domain', '') or (item.split('@')[1] if '@' in item else ""),
+                source=meta.get('keywords', '')                 # ✅ Search keywords
             )
 
             if not scoring_result['is_qualified']:

@@ -1,0 +1,265 @@
+{
+  "filter_name": "Italy Powder Metallurgy Filter",
+  "version": "1.0.0",
+  "description": "Smart filter for Italian powder metallurgy and transmission components with IT+EN language support",
+  "target_country": "IT",
+  "target_industry": "powder_metallurgy",
+  "languages": ["it", "en"],
+
+  "geographic": {
+    "priority_high": [
+      "italia", "italy", ".it",
+      "milano", "milan", "torino", "turin", "bologna", "brescia", "vicenza",
+      "bergamo", "verona", "padova", "modena", "reggio emilia", "parma",
+      "piacenza", "cremona", "mantova", "como", "lecco", "varese"
+    ],
+    "priority_medium": [
+      "europa", "europe", "eu", "union europea", "european union",
+      "svizzera", "switzerland", "austria", "slovenia"
+    ],
+    "excluded_countries": [
+      ".cn", ".com.cn", ".hk", ".tw",
+      ".in", ".co.in",
+      ".tr", ".com.tr",
+      ".pl",
+      ".ru", ".by", ".ua",
+      ".pk", ".bd",
+      ".vn", ".th", ".id", ".my", ".ph"
+    ],
+    "excluded_cities": [
+      "mumbai", "delhi", "bangalore", "pune", "chennai", "hyderabad", "kolkata",
+      "beijing", "shanghai", "guangzhou", "shenzhen", "hangzhou", "chengdu",
+      "warszawa", "krakow", "gdansk", "wroclaw", "poznan",
+      "istanbul", "ankara", "izmir",
+      "manila", "cebu", "jakarta", "bangkok", "ho chi minh", "hanoi"
+    ]
+  },
+
+  "hard_exclusions": {
+    "personal_domains": [
+      "gmail.com", "yahoo.com", "yahoo.it", "hotmail.com", "hotmail.it",
+      "outlook.com", "outlook.it", "live.com", "live.it",
+      "libero.it", "virgilio.it", "tin.it", "tiscali.it", "alice.it",
+      "icloud.com", "me.com", "mac.com",
+      "mail.ru", "yandex.ru", "yandex.com",
+      "163.com", "126.com", "qq.com", "sina.com"
+    ],
+
+    "hr_prefixes": {
+      "italian": [
+        "hr@", "lavoro@", "carriere@", "risorse@", "personale@",
+        "assunzioni@", "recruiting@", "selezione@", "ricerca@",
+        "risorseumane@", "reclutamento@", "occupazione@"
+      ],
+      "english": [
+        "jobs@", "job@", "career@", "careers@", "recruitment@",
+        "recruiter@", "hiring@", "vacancy@", "vacancies@",
+        "work@", "employment@", "staff@", "personnel@",
+        "resume@", "cv@", "talent@", "headhunter@"
+      ]
+    },
+
+    "service_prefixes": [
+      "noreply@", "no-reply@", "donotreply@", "do-not-reply@",
+      "info@example", "contact@domain", "test@", "demo@", "sample@",
+      "webmaster@", "admin@", "postmaster@", "mailer-daemon@"
+    ],
+
+    "excluded_industries": {
+      "education": {
+        "italian": [
+          "scuola", "università", "istituto", "formazione", "educazione",
+          "accademia", "liceo", "politecnico", "conservatorio", "corso",
+          "lezioni", "insegnamento", "didattica", "studente", "docente"
+        ],
+        "english": [
+          "school", "university", "college", "education", "training",
+          "academy", "institute", "course", "lesson", "teaching",
+          "student", "teacher", "professor", "learning"
+        ]
+      },
+      "media": {
+        "italian": [
+          "giornale", "rivista", "quotidiano", "magazine", "televisione",
+          "radio", "pubblicità", "marketing", "agenzia pubblicitaria",
+          "comunicazione", "editore", "editrice", "stampa", "media"
+        ],
+        "english": [
+          "newspaper", "magazine", "journal", "television", "tv",
+          "radio", "advertising", "marketing", "media", "publisher",
+          "press", "communication", "agency"
+        ]
+      },
+      "finance": {
+        "italian": [
+          "banca", "assicurazione", "finanza", "credito", "prestito",
+          "leasing", "factoring", "finanziamento", "mutuo", "investimento",
+          "borsa", "trading", "broker", "consulenza finanziaria"
+        ],
+        "english": [
+          "bank", "banking", "insurance", "finance", "financial",
+          "credit", "loan", "leasing", "factoring", "investment",
+          "stock", "trading", "broker", "financial consulting"
+        ]
+      },
+      "hr_agencies": {
+        "italian": [
+          "agenzia del lavoro", "agenzia di lavoro temporaneo", "ricerca personale",
+          "selezione del personale", "risorse umane", "head hunter",
+          "somministrazione lavoro", "recruiting agency", "agenzia recruiting"
+        ],
+        "english": [
+          "staffing agency", "recruitment agency", "temp agency",
+          "employment agency", "headhunter", "hr agency",
+          "human resources agency", "personnel agency"
+        ]
+      },
+      "retail": {
+        "italian": [
+          "negozio", "e-commerce", "vendita al dettaglio", "retail",
+          "supermercato", "ipermercato", "grande distribuzione",
+          "rivendita", "rivenditore", "commercio"
+        ],
+        "english": [
+          "shop", "store", "retail", "e-commerce", "online shop",
+          "supermarket", "hypermarket", "reseller", "dealer", "distributor"
+        ]
+      }
+    }
+  },
+
+  "industry_keywords": {
+    "powder_metallurgy_italian": {
+      "primary": [
+        "polveri metalliche", "metallurgia delle polveri", "sinterizzazione", "sinterizzato",
+        "ingranaggi sinterizzati", "componenti sinterizzati", "PM parts",
+        "metallo sinterizzato", "parti in metallo sinterizzato"
+      ],
+      "secondary": [
+        "processo PM", "tecnologia PM", "materiali sinterizzati",
+        "compattazione", "pressa per polveri", "forno di sinterizzazione",
+        "componenti metallici", "lavorazione polveri metalliche"
+      ]
+    },
+
+    "transmission_components_italian": {
+      "primary": [
+        "ingranaggi", "ruote dentate", "ruota dentata", "ingranaggio",
+        "catene di trasmissione", "catena di trasmissione", "catene",
+        "pignoni", "pignone", "rocchetti", "corone dentate",
+        "trasmissione meccanica", "trasmissioni meccaniche"
+      ],
+      "secondary": [
+        "riduttori", "riduttore", "cambio", "cambi", "scatola del cambio",
+        "ingranaggi conici", "ingranaggi cilindrici", "ingranaggi elicoidali",
+        "trasmissione", "trasmissioni", "cinghie dentate", "pulegge"
+      ],
+      "oem_indicators": [
+        "produttore", "fabbricante", "costruttore", "produzione", "fabbrica",
+        "officina", "stabilimento", "assemblaggio", "manifattura", "fornitore OEM",
+        "OEM", "componentistica", "ricambi", "lavorazioni meccaniche"
+      ],
+      "applications": [
+        "automotive", "autoveicoli", "veicoli industriali", "camion",
+        "macchine agricole", "trattori", "mietitrebbie",
+        "macchine movimento terra", "escavatori", "pale caricatrici",
+        "macchine industriali", "impianti industriali", "macchinari"
+      ]
+    },
+
+    "powder_metallurgy_english": {
+      "primary": [
+        "metal powder", "powder metallurgy", "PM parts", "sintering", "sintered",
+        "sintered components", "sintered parts", "powder metal",
+        "PM technology", "sintered gears"
+      ],
+      "secondary": [
+        "compaction", "pressing", "sintering furnace", "powder compacts",
+        "metal injection molding", "MIM", "powder forming",
+        "powder processing", "metal powder processing"
+      ]
+    },
+
+    "transmission_components_english": {
+      "primary": [
+        "gears", "gear", "transmission gears", "cogwheel", "cogwheels",
+        "chains", "transmission chains", "drive chains", "chain drive",
+        "sprockets", "sprocket wheels", "pinions", "gear wheels"
+      ],
+      "secondary": [
+        "gearbox", "gearboxes", "transmission", "transmissions", "reducer", "reducers",
+        "spur gears", "helical gears", "bevel gears", "worm gears",
+        "timing belts", "pulleys", "drive systems", "power transmission"
+      ],
+      "oem_indicators": [
+        "manufacturer", "producer", "maker", "factory", "plant",
+        "production", "OEM", "OEM supplier", "OEM manufacturer",
+        "fabricator", "builder", "assembly", "component supplier",
+        "machine shop", "precision machining"
+      ],
+      "applications": [
+        "automotive", "vehicles", "trucks", "industrial vehicles",
+        "agricultural machinery", "tractors", "combines",
+        "construction equipment", "excavators", "loaders",
+        "industrial machinery", "machine tools", "equipment"
+      ]
+    },
+
+    "negative_keywords": [
+      "vendita", "rivendita", "commercio", "negozio", "e-commerce",
+      "sales", "retail", "shop", "store", "distributor",
+      "кадровое агентство", "подбор персонала", "рекрутинг", "вакансии",
+      "staffing", "recruitment agency", "headhunting", "job placement",
+      "agenzia di lavoro temporaneo", "ricerca e selezione",
+      "student", "studente", "school", "scuola", "university", "università"
+    ]
+  },
+
+  "domain_patterns": {
+    "powder_metallurgy_it": [
+      "polveri", "sinteriz", "ingranaggi", "trasmission", "meccan",
+      "ruote", "catene", "componentist"
+    ],
+    "powder_metallurgy_en": [
+      "powder", "sinter", "gear", "transmission", "chain",
+      "sprocket", "mechanical", "component", "precision"
+    ],
+    "manufacturing": [
+      "industry", "industrial", "machinery", "equipment", "component",
+      "manifattura", "industria", "macchinar", "componentist",
+      "lavorazioni", "meccanica", "precisione"
+    ]
+  },
+
+  "scoring": {
+    "weights": {
+      "email_quality": 0.10,
+      "company_relevance": 0.45,
+      "geographic_priority": 0.30,
+      "engagement": 0.15
+    },
+    "thresholds": {
+      "high_priority": 100,
+      "medium_priority": 50,
+      "low_priority": 10
+    },
+    "bonus_multipliers": {
+      "oem_manufacturer": 1.3,
+      "target_geography": 2.0,
+      "domain_match": 1.5
+    }
+  },
+
+  "output_settings": {
+    "filename_prefix": "Italy_PowderMetallurgy",
+    "categories": {
+      "high": "HIGH_PRIORITY",
+      "medium": "MEDIUM_PRIORITY",
+      "low": "LOW_PRIORITY",
+      "excluded": "EXCLUDED"
+    },
+    "include_metadata": true,
+    "generate_html_report": true,
+    "generate_exclusion_report": true
+  }
+}

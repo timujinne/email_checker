@@ -1,0 +1,314 @@
+{
+  "filter_name": "Mechanical Power Transmission Components Filter",
+  "version": "1.0.0",
+  "description": "Smart filter for mechanical power transmission industry: gears, bearings, pumps, synchronizers, sprockets, and pulleys manufacturers and suppliers",
+  "target_country": "international",
+  "target_industry": "mechanical_power_transmission",
+  "languages": ["en"],
+
+  "geographic": {
+    "priority_high": [
+      "usa", "united states", ".us",
+      "germany", "deutschland", ".de",
+      "uk", "united kingdom", ".uk", ".co.uk",
+      "japan", "日本", ".jp",
+      "italy", "italia", ".it",
+      "switzerland", "schweiz", ".ch"
+    ],
+    "priority_medium": [
+      "europe", "eu", "european union",
+      "canada", ".ca",
+      "france", ".fr",
+      "netherlands", ".nl",
+      "sweden", ".se",
+      "austria", ".at",
+      "spain", "españa", ".es",
+      "belgium", ".be"
+    ],
+    "excluded_countries": [
+      ".cn", ".com.cn", ".hk", ".tw",
+      ".in", ".co.in",
+      ".tr", ".com.tr",
+      ".pl",
+      ".ru", ".by", ".ua",
+      ".pk", ".bd",
+      ".vn", ".th", ".id", ".my", ".ph",
+      ".edu", ".ac.uk", ".ac.nz", ".ac.za"
+    ],
+    "excluded_cities": [
+      "mumbai", "delhi", "bangalore", "pune", "chennai", "hyderabad", "kolkata",
+      "beijing", "shanghai", "guangzhou", "shenzhen", "hangzhou", "chengdu",
+      "warszawa", "krakow", "gdansk", "wroclaw", "poznan",
+      "istanbul", "ankara", "izmir",
+      "manila", "cebu", "jakarta", "bangkok", "ho chi minh", "hanoi"
+    ]
+  },
+
+  "hard_exclusions": {
+    "personal_domains": [
+      "gmail.com", "yahoo.com", "hotmail.com", "outlook.com",
+      "live.com", "aol.com", "mail.com", "gmx.com",
+      "icloud.com", "me.com", "mac.com",
+      "mail.ru", "yandex.ru", "yandex.com",
+      "163.com", "126.com", "qq.com", "sina.com"
+    ],
+
+    "excluded_media_domains": [
+      "cnet.com", "interestingengineering.com", "redventures.com",
+      "ziffdavis.com", "educba.com"
+    ],
+
+    "hr_prefixes": {
+      "english": [
+        "hr@", "jobs@", "job@", "career@", "careers@", "recruitment@",
+        "recruiter@", "hiring@", "vacancy@", "vacancies@",
+        "work@", "employment@", "staff@", "personnel@",
+        "resume@", "cv@", "talent@", "headhunter@"
+      ]
+    },
+
+    "service_prefixes": [
+      "noreply@", "no-reply@", "donotreply@", "do-not-reply@",
+      "info@example", "contact@domain", "test@", "demo@", "sample@",
+      "webmaster@", "admin@", "postmaster@", "mailer-daemon@"
+    ],
+
+    "excluded_industries": {
+      "education": {
+        "english": [
+          "school", "university", "college", "education", "training",
+          "academy", "institute", "course", "lesson", "teaching",
+          "student", "teacher", "professor", "learning", "academic"
+        ]
+      },
+      "media": {
+        "english": [
+          "newspaper", "magazine", "journal", "television", "tv",
+          "radio", "advertising", "marketing", "media", "publisher",
+          "press", "communication", "agency"
+        ]
+      },
+      "finance": {
+        "english": [
+          "bank", "banking", "insurance", "finance", "financial",
+          "credit", "loan", "leasing", "factoring", "investment",
+          "stock", "trading", "broker", "financial consulting"
+        ]
+      },
+      "hr_agencies": {
+        "english": [
+          "staffing agency", "recruitment agency", "temp agency",
+          "employment agency", "headhunter", "hr agency",
+          "human resources agency", "personnel agency"
+        ]
+      },
+      "retail": {
+        "english": [
+          "shop", "store", "retail", "e-commerce", "online shop",
+          "supermarket", "hypermarket", "marketplace"
+        ]
+      },
+      "automotive_repair": {
+        "english": [
+          "auto repair", "car repair", "mechanic shop", "garage",
+          "body shop", "collision repair", "tire shop", "oil change"
+        ]
+      }
+    }
+  },
+
+  "industry_keywords": {
+    "transmission_gears": {
+      "primary": [
+        "transmission gear", "transmission gears", "gearbox", "gear box",
+        "gear manufacturing", "gear manufacturer", "gear cutting",
+        "gear grinding", "gear hobbing", "gear shaping",
+        "spur gear", "helical gear", "bevel gear", "worm gear",
+        "planetary gear", "epicyclic gear", "precision gear",
+        "custom gear", "gear teeth", "gear tooth"
+      ],
+      "secondary": [
+        "gear ratio", "gear drive", "gear train", "gear set",
+        "gear contact", "tooth contact", "gear mesh", "gear transmission",
+        "power transmission", "motion transmission", "speed reducer",
+        "gearbox assembly", "gear system", "mechanical drive"
+      ],
+      "oem_indicators": [
+        "oem manufacturer", "oem supplier", "gear manufacturer",
+        "gear producer", "gear factory", "gear machining",
+        "custom manufacturing", "precision machining", "cnc gear cutting"
+      ],
+      "applications": [
+        "industrial gearbox", "automotive transmission", "marine gearbox",
+        "aerospace gearbox", "motorsport gearbox", "racing gearbox",
+        "heavy duty gearbox", "construction equipment", "agricultural machinery"
+      ]
+    },
+
+    "bearings": {
+      "primary": [
+        "plain bearing", "plain bearings", "sleeve bearing", "bushing",
+        "journal bearing", "thrust bearing", "spherical bearing",
+        "radial bearing", "angular contact bearing", "sliding bearing",
+        "bearing manufacturer", "bearing supplier", "custom bearing",
+        "precision bearing", "bearing engineering"
+      ],
+      "secondary": [
+        "bearing design", "bearing material", "bearing surface",
+        "load capacity", "friction coefficient", "wear resistance",
+        "lubrication", "self-lubricating", "maintenance-free bearing",
+        "ptfe bearing", "composite bearing", "metal bearing"
+      ],
+      "oem_indicators": [
+        "bearing manufacturer", "bearing producer", "bearing fabrication",
+        "oem bearing", "custom bearing engineering", "bearing design services"
+      ],
+      "applications": [
+        "industrial bearing", "automotive bearing", "aerospace bearing",
+        "construction equipment bearing", "agricultural equipment bearing",
+        "heavy machinery bearing", "marine bearing"
+      ]
+    },
+
+    "oil_pumps": {
+      "primary": [
+        "oil pump", "oil pumps", "pump rotor", "pump rotors",
+        "gear pump", "vane pump", "trochoid pump", "gerotor pump",
+        "internal gear pump", "external gear pump",
+        "pump assembly", "pump component", "pump manufacturing"
+      ],
+      "secondary": [
+        "hydraulic pump", "lubrication pump", "circulating pump",
+        "pressure pump", "flow control", "pump design",
+        "pump engineering", "fluid transfer", "oil circulation"
+      ],
+      "oem_indicators": [
+        "pump manufacturer", "pump producer", "oem pump",
+        "custom pump", "pump fabrication", "pump assembly"
+      ],
+      "applications": [
+        "engine oil pump", "transmission oil pump", "hydraulic system",
+        "industrial pump", "automotive pump", "machinery lubrication"
+      ]
+    },
+
+    "synchronizers": {
+      "primary": [
+        "synchronizer", "synchronizers", "synchromesh", "gear synchronizer",
+        "transmission synchronizer", "gearbox synchronizer",
+        "synchronizer ring", "synchronizer assembly", "synchro ring"
+      ],
+      "secondary": [
+        "gear shifting", "smooth shifting", "manual transmission",
+        "gear engagement", "clutch engagement", "shift mechanism",
+        "transmission component", "gear selector"
+      ],
+      "oem_indicators": [
+        "synchronizer manufacturer", "oem synchronizer", "custom synchronizer",
+        "synchronizer production", "transmission parts manufacturer"
+      ],
+      "applications": [
+        "automotive transmission", "truck transmission", "industrial gearbox",
+        "manual transmission", "automated manual transmission"
+      ]
+    },
+
+    "pulleys_sprockets": {
+      "primary": [
+        "pulley", "pulleys", "sprocket", "sprockets",
+        "timing belt pulley", "v-belt pulley", "chain sprocket",
+        "roller chain sprocket", "toothed pulley", "sheave"
+      ],
+      "secondary": [
+        "power transmission", "belt drive", "chain drive",
+        "timing belt", "v-belt", "roller chain", "industrial chain",
+        "drive system", "mechanical drive", "belt and pulley"
+      ],
+      "oem_indicators": [
+        "pulley manufacturer", "sprocket manufacturer", "oem pulley",
+        "custom pulley", "precision machining", "cnc manufacturing"
+      ],
+      "applications": [
+        "industrial equipment", "conveyor system", "power transmission",
+        "machinery drive", "agricultural equipment", "construction equipment"
+      ]
+    },
+
+    "shock_absorbers": {
+      "primary": [
+        "shock absorber", "shock absorbers", "damper", "suspension",
+        "rod guide", "piston rod", "shock absorber component",
+        "damper component", "suspension component"
+      ],
+      "secondary": [
+        "vibration control", "suspension system", "shock absorption",
+        "damping", "ride comfort", "vehicle suspension",
+        "hydraulic damper", "gas shock"
+      ],
+      "oem_indicators": [
+        "shock absorber manufacturer", "oem shock absorber", "suspension manufacturer",
+        "damper production", "component supplier"
+      ],
+      "applications": [
+        "automotive suspension", "motorcycle suspension", "industrial equipment",
+        "heavy equipment", "construction machinery", "racing suspension"
+      ]
+    },
+
+    "negative_keywords": [
+      "recruitment", "staffing", "headhunting", "job placement",
+      "student", "school", "university", "college",
+      "repair shop", "service center", "auto repair", "mechanic shop",
+      "retail store", "online shop", "marketplace", "distributor only",
+      "academic", "research only", "educational"
+    ]
+  },
+
+  "domain_patterns": {
+    "gears": [
+      "gear", "gears", "gearbox", "transmission", "drive", "motion"
+    ],
+    "bearings": [
+      "bearing", "bearings", "bushing", "sleeve", "journal"
+    ],
+    "pumps": [
+      "pump", "pumps", "hydraulic", "fluid", "lubrication"
+    ],
+    "manufacturing": [
+      "manufacturing", "manufacturer", "machining", "precision",
+      "engineering", "industrial", "components", "oem"
+    ]
+  },
+
+  "scoring": {
+    "weights": {
+      "email_quality": 0.10,
+      "company_relevance": 0.45,
+      "geographic_priority": 0.30,
+      "engagement": 0.15
+    },
+    "thresholds": {
+      "high_priority": 100,
+      "medium_priority": 50,
+      "low_priority": 10
+    },
+    "bonus_multipliers": {
+      "oem_manufacturer": 1.3,
+      "target_geography": 2.0,
+      "domain_match": 1.5
+    }
+  },
+
+  "output_settings": {
+    "filename_prefix": "Power_Transmission",
+    "categories": {
+      "high": "HIGH_PRIORITY",
+      "medium": "MEDIUM_PRIORITY",
+      "low": "LOW_PRIORITY",
+      "excluded": "EXCLUDED"
+    },
+    "include_metadata": true,
+    "generate_html_report": true,
+    "generate_exclusion_report": true
+  }
+}

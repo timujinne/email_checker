@@ -1,0 +1,280 @@
+{
+  "config_name": "spain_agriculture",
+  "display_name": "Spain - Agricultural Machinery & Equipment",
+  "version": "1.0",
+  "target_market": {
+    "country_code": "ES",
+    "country_name": "Spain",
+    "language_codes": ["es", "en"],
+    "primary_language": "es"
+  },
+
+  "scoring": {
+    "weights": {
+      "email_quality": 0.10,
+      "company_relevance": 0.45,
+      "geographic_priority": 0.30,
+      "engagement": 0.15
+    },
+    "thresholds": {
+      "high_priority": 100,
+      "medium_priority": 50,
+      "low_priority": 10,
+      "exclude": 0
+    }
+  },
+
+  "target_industry": "agricultural_machinery",
+
+  "keywords": {
+    "hydraulic_cylinders": [
+      "tractores",
+      "tractor",
+      "cosechadora",
+      "combine harvester",
+      "sembradora",
+      "seeder",
+      "arado",
+      "plough",
+      "plow",
+      "cultivador",
+      "cultivator",
+      "maquinaria agrícola",
+      "farm machinery",
+      "remolque agrícola",
+      "agricultural trailer",
+      "equipo agrícola",
+      "farm equipment",
+      "pulverizador",
+      "sprayer",
+      "abonadora",
+      "fertilizer spreader",
+      "segadora",
+      "mower",
+      "empacadora",
+      "baler",
+      "cosechadora de cereales",
+      "grain harvester",
+      "implementos agrícolas",
+      "agricultural implements"
+    ],
+
+    "applications": [
+      "agricultura",
+      "agriculture",
+      "agrícola",
+      "agricultural",
+      "explotación agrícola",
+      "farm",
+      "campo",
+      "field",
+      "cultivo",
+      "cultivation",
+      "cosecha",
+      "harvest",
+      "ganadería",
+      "livestock",
+      "viñedo",
+      "vineyard",
+      "olivar",
+      "olive grove",
+      "huerta",
+      "orchard",
+      "producción agrícola",
+      "agricultural production"
+    ],
+
+    "components": [
+      "repuestos",
+      "spare parts",
+      "recambios",
+      "replacement parts",
+      "piezas",
+      "parts",
+      "servicio técnico",
+      "technical service",
+      "taller",
+      "workshop",
+      "mantenimiento",
+      "maintenance",
+      "reparación",
+      "repair",
+      "neumáticos agrícolas",
+      "agricultural tires",
+      "filtros",
+      "filters",
+      "aceites",
+      "oils",
+      "lubricantes",
+      "lubricants"
+    ],
+
+    "oem_indicators": [
+      "fabricante",
+      "manufacturer",
+      "productor",
+      "producer",
+      "concesionario oficial",
+      "official dealer",
+      "distribuidor autorizado",
+      "authorized distributor",
+      "distribuidor oficial",
+      "official distributor",
+      "taller especializado",
+      "specialized workshop",
+      "servicio oficial",
+      "official service",
+      "importador",
+      "importer",
+      "servicio postventa",
+      "after-sales service",
+      "representante",
+      "representative",
+      "agente",
+      "agent"
+    ]
+  },
+
+  "geographic_priorities": {
+    "high": [
+      "españa", "spain", "es", ".es", "spanish",
+      "madrid", "barcelona", "valencia", "sevilla", "seville",
+      "zaragoza", "málaga", "malaga", "bilbao", "murcia",
+      "palma", "las palmas", "alicante", "córdoba", "cordoba",
+      "valladolid", "vigo", "gijón", "gijon", "hospitalet",
+      "vitoria", "coruña", "coruna", "granada", "elche",
+      "oviedo", "badalona", "cartagena", "terrassa", "jerez",
+      "sabadell", "santa cruz", "pamplona", "almería", "almeria",
+      "fuenlabrada", "leganés", "leganes", "santander", "burgos",
+      "cataluña", "catalunya", "catalonia", "andalucía", "andalusia",
+      "comunidad valenciana", "valencian community", "castilla y león",
+      "aragón", "aragon", "galicia", "castilla-la mancha",
+      "país vasco", "basque country", "extremadura", "asturias"
+    ],
+
+    "medium": [
+      "portugal", ".pt", "lisboa", "lisbon", "porto", "oporto",
+      "coimbra", "braga", "faro", "funchal",
+      "andorra", ".ad", "principado de andorra", "andorra la vella",
+      "perpignan", "toulouse", "montpellier", "bordeaux",
+      "perpinyà", "tolosa", "montpelhièr"
+    ],
+
+    "regions": [
+      "navarra", "cantabria", "la rioja", "región de murcia",
+      "islas baleares", "baleares", "balearic islands",
+      "canarias", "islas canarias", "canary islands",
+      "comunidad de madrid", "madrid region",
+      "castilla", "león", "salamanca", "león", "zamora",
+      "palencia", "ávila", "segovia", "soria", "ávila",
+      "cáceres", "badajoz", "mérida", "plasencia",
+      "tarragona", "lleida", "lérida", "girona", "gerona",
+      "huesca", "teruel", "lugo", "ourense", "pontevedra"
+    ]
+  },
+
+  "exclusions": {
+    "personal_domains": [
+      "gmail.com", "yahoo.es", "yahoo.com", "hotmail.es", "hotmail.com",
+      "outlook.es", "outlook.com", "live.com", "icloud.com",
+      "terra.es", "movistar.es", "orange.es", "vodafone.es",
+      "ono.com", "jazztel.es", "yoigo.com", "masmovil.es",
+      "wanadoo.es", "ya.com"
+    ],
+
+    "hr_prefixes": [
+      "hr@", "jobs@", "career@", "careers@", "recruitment@",
+      "recruiter@", "vacancy@", "vacancies@", "work@",
+      "employment@", "staff@", "personnel@", "resume@",
+      "cv@", "hiring@", "talent@", "headhunter@",
+      "trabajo@", "empleo@", "rrhh@", "recursos@",
+      "humanos@", "talento@", "seleccion@", "selección@",
+      "personal@", "contratar@", "ofertas@"
+    ],
+
+    "service_prefixes": [
+      "example@", "test@", "demo@", "sample@", "noreply@",
+      "donotreply@", "no-reply@", "info@example", "contact@domain",
+      "webmaster@", "admin@", "support@", "help@", "ayuda@",
+      "soporte@", "asistencia@"
+    ],
+
+    "suspicious_domains": [
+      "sentry.io", "panjiva.com", "temp-mail.org", "10minutemail.com",
+      "guerrillamail.com", "mailinator.com", "throwaway.email"
+    ],
+
+    "excluded_country_domains": [
+      ".cn", ".com.cn", ".hk", ".tw", ".in", ".co.in", ".tr",
+      ".de", ".it", ".nl", ".cz", ".hu", ".ro", ".jp", ".kr",
+      ".th", ".vn", ".id", ".my", ".ph", ".ar", ".mx", ".co",
+      ".pe", ".cl", ".sg", ".ae", ".pl", ".ru", ".ua", ".by",
+      ".kz", ".uz", ".br"
+    ],
+
+    "excluded_industries": {
+      "education": [
+        "escuela", "escuelas", "universidad", "universidades", "college",
+        "instituto", "institutos", "formación", "formacion", "cursos",
+        "academia", "school", "university", "education", "learning",
+        "educación", "educacion", "enseñanza"
+      ],
+      "media": [
+        "periódico", "periodico", "diario", "revista", "revistas",
+        "televisión", "television", "radio", "medios", "publicidad",
+        "editorial", "editora", "newspaper", "magazine", "media",
+        "advertising", "prensa"
+      ],
+      "finance": [
+        "banco", "bancos", "caja", "cajas", "seguro", "seguros",
+        "aseguradora", "finanzas", "crédito", "credito", "préstamo",
+        "prestamo", "hipoteca", "inversión", "inversion",
+        "bank", "insurance", "finance", "credit", "loan", "investment"
+      ],
+      "retail": [
+        "tienda", "tiendas", "comercio", "comercios", "venta al por menor",
+        "supermercado", "supermercados", "centro comercial",
+        "shop", "store", "retail", "shopping", "mall", "hypermarket"
+      ]
+    },
+
+    "suspicious_patterns": [
+      "^[a-f0-9]{20,}@",
+      "^[a-z0-9]{15,}@",
+      "[\\u4e00-\\u9fff]",
+      "[\\u0590-\\u05FF]",
+      "[\\u0600-\\u06FF]"
+    ]
+  },
+
+  "domain_patterns": {
+    "relevant_patterns": [
+      "agricola", "agro", "tractor", "maquinaria", "cosecha",
+      "campo", "rural", "agri", "farm", "machinery", "equipment",
+      "implements", "harvester", "agraria", "agrario", "agrícola"
+    ],
+    "high_value_domains": [
+      "s.l.", "s.a.", "s.l.u.", "slu", "group", "grupo",
+      "concesionario", "distribuidor", "technology", "tecnología",
+      "systems", "sistemas", "solutions", "soluciones",
+      "manufacturing", "fabricación", "industrial", "servicios"
+    ]
+  },
+
+  "processing": {
+    "batch_size": 100,
+    "max_retries": 3,
+    "processing_delay": 50,
+    "backup_original": true,
+    "preserve_metadata": true,
+    "generate_reports": true
+  },
+
+  "output": {
+    "prefix": "smart_filtered_",
+    "include_metadata": true,
+    "metadata_format": "csv",
+    "generate_statistics": true,
+    "create_backup": true
+  }
+}

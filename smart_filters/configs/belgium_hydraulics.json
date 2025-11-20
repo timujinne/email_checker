@@ -1,0 +1,794 @@
+{
+  "filter_name": "Belgium Hydraulic Cylinders Filter",
+  "version": "1.0.0",
+  "description": "Comprehensive smart filter for Belgian hydraulic cylinders industry with NL/FR/DE/EN multilingual support targeting mobile hydraulics, construction equipment, and industrial machinery manufacturers",
+  "target_country": "BE",
+  "target_industry": "hydraulic_cylinders",
+  "languages": ["nl", "fr", "de", "en"],
+
+  "geographic": {
+    "priority_high": [
+      "belgium", "belgique", "belgië", "belgien", ".be", "belgian",
+      "brussels", "bruxelles", "brussel", "brüssel",
+      "antwerp", "antwerpen", "anvers", "antwerpia",
+      "ghent", "gent", "gand", "gante",
+      "charleroi", "charleroi", "charleroi",
+      "liège", "luik", "lüttich", "liegi",
+      "bruges", "brugge", "brugge",
+      "mons", "bergen", "bergen",
+      "leuven", "louvain", "löwen",
+      "namur", "namen", "namür",
+      "mechelen", "malines", "mecheln",
+      "aalst", "alost", "aalst",
+      "hasselt", "hasselt", "hasselt",
+      "ostend", "oostende", "ostende",
+      "kortrijk", "courtrai", "kortrijk",
+      "tournai", "doornik", "tournai",
+      "verviers", "verviers", "verviers",
+      "spa", "spa", "arlon", "aarlen",
+      "lokeren", "lokeren", "roeselare", "roulers",
+      "mouscron", "moeskroen", "beringen", "beringen",
+      "waregem", "waregem", "dendermonde", "termonde",
+      "genk", "genk", "turnhout", "turnhout"
+    ],
+    "regions": [
+      "flanders", "vlaanderen", "flandre", "flandern",
+      "wallonia", "wallonie", "wallonië", "wallonien",
+      "brussels capital", "région bruxelles-capitale",
+      "brussels hoofdstedelijk gewest", "region brüssel-hauptstadt",
+      "antwerp", "antwerpen", "anvers", "province d'anvers",
+      "limburg", "limbourg", "limburg",
+      "east flanders", "oost-vlaanderen", "flandre-orientale",
+      "west flanders", "west-vlaanderen", "flandre-occidentale",
+      "flemish brabant", "vlaams-brabant", "brabant flamand",
+      "walloon brabant", "waals-brabant", "brabant wallon",
+      "hainaut", "henegouwen", "hennegau",
+      "liège", "luik", "lüttich",
+      "namur", "namen", "namür",
+      "luxembourg", "luxemburg"
+    ],
+    "priority_medium": [
+      "netherlands", "nederland", "pays-bas", "niederlande", ".nl",
+      "holland", "hollande",
+      "france", "frankrijk", "frankreich", ".fr",
+      "germany", "duitsland", "allemagne", "deutschland", ".de",
+      "luxembourg", "luxemburg", ".lu",
+      "united kingdom", "verenigd koninkrijk", "royaume-uni", ".uk", ".co.uk"
+    ],
+    "excluded_countries": [
+      ".cn", ".com.cn", ".hk", ".tw",
+      ".in", ".co.in",
+      ".ru", ".by", ".ua", ".kz",
+      ".tr", ".com.tr",
+      ".br", ".com.br",
+      ".au", ".com.au",
+      ".za", ".co.za",
+      ".pk", ".bd",
+      ".vn", ".th", ".id", ".my", ".ph",
+      ".ke", ".tz", ".ug", ".ng",
+      ".ar", ".mx", ".co", ".pe", ".cl"
+    ],
+    "excluded_cities": [
+      "mumbai", "delhi", "bangalore", "pune", "chennai", "hyderabad", "kolkata",
+      "beijing", "shanghai", "guangzhou", "shenzhen", "hangzhou", "chengdu",
+      "moscow", "moscou", "moskau", "mosca", "petersburg", "kiev", "kyiv", "kiew",
+      "istanbul", "ankara", "izmir",
+      "são paulo", "rio de janeiro", "brasilia",
+      "nairobi", "dar es salaam", "kampala", "lagos", "johannesburg",
+      "manila", "jakarta", "bangkok", "ho chi minh", "hanoi"
+    ]
+  },
+
+  "hard_exclusions": {
+    "personal_domains": [
+      "gmail.com", "googlemail.com",
+      "yahoo.com", "yahoo.de", "yahoo.fr", "yahoo.nl", "yahoo.be",
+      "hotmail.com", "hotmail.de", "hotmail.fr", "hotmail.nl", "hotmail.be",
+      "outlook.com", "outlook.de", "outlook.fr", "outlook.nl", "outlook.be",
+      "live.com", "live.de", "live.fr", "live.nl", "live.be",
+      "telenet.be", "skynet.be", "scarlet.be", "proximus.be", "voo.be",
+      "gmx.de", "gmx.net", "gmx.at",
+      "web.de", "t-online.de", "freenet.de",
+      "orange.fr", "wanadoo.fr", "free.fr", "laposte.net", "sfr.fr",
+      "icloud.com", "me.com", "mac.com",
+      "mail.ru", "yandex.ru", "yandex.com",
+      "163.com", "126.com", "qq.com", "sina.com"
+    ],
+
+    "hr_prefixes": {
+      "dutch": [
+        "hr@", "jobs@", "job@", "carriere@", "carrieres@", "vacature@", "vacatures@",
+        "personeel@", "personeelszaken@", "recruitment@", "werving@",
+        "sollicitatie@", "sollicitaties@", "arbeidsvoorwaarden@",
+        "stage@", "stages@", "opleiding@", "scholing@"
+      ],
+      "french": [
+        "emploi@", "emplois@", "recrutement@", "carriere@", "carrieres@",
+        "rh@", "ressourceshumaines@", "travail@",
+        "candidature@", "candidatures@", "embauche@",
+        "stage@", "stages@", "apprentissage@", "formation@"
+      ],
+      "german": [
+        "hr@", "jobs@", "job@", "karriere@", "karrieren@", "career@", "careers@",
+        "personal@", "personalabteilung@", "bewerbung@", "bewerbungen@",
+        "stellenangebote@", "stellenangebot@", "recruiting@",
+        "ausbildung@", "lehrstellen@", "praktikum@"
+      ],
+      "english": [
+        "jobs@", "job@", "career@", "careers@", "recruitment@",
+        "recruiter@", "hiring@", "vacancy@", "vacancies@",
+        "work@", "employment@", "staff@", "personnel@",
+        "resume@", "cv@", "talent@", "headhunter@"
+      ]
+    },
+
+    "service_prefixes": [
+      "noreply@", "no-reply@", "donotreply@", "do-not-reply@",
+      "info@example", "contact@domain", "test@", "demo@", "sample@",
+      "webmaster@", "admin@", "postmaster@", "mailer-daemon@",
+      "privacy@", "legal@", "juridique@", "juridisch@", "legale@",
+      "cert@", "security@", "abuse@", "reportphishing@",
+      "compliance@", "audit@", "revision@"
+    ],
+
+    "financial_prefixes": [
+      "investors@", "investor@", "investor-relations@", "ir@",
+      "finance@", "finanzen@", "finances@", "financien@", "finanza@",
+      "accounting@", "buchhaltung@", "comptabilité@", "boekhouding@",
+      "treasury@", "tresorerie@", "schatkist@"
+    ],
+
+    "excluded_industries": {
+      "education": {
+        "dutch": [
+          "school", "scholen", "universiteit", "hogeschool", "college",
+          "onderwijs", "opleiding", "vorming", "bijscholing",
+          "cursus", "cursussen", "seminarie", "training",
+          "student", "studenten", "leerling", "leraar", "docent", "professor",
+          "academie", "opleidingscentrum", "vormingscentrum"
+        ],
+        "french": [
+          "école", "écoles", "collège", "lycée", "université", "haute école",
+          "éducation", "enseignement", "formation",
+          "cours", "séminaire", "stage", "formation professionnelle",
+          "étudiant", "étudiants", "élève", "professeur", "enseignant",
+          "académie", "centre de formation"
+        ],
+        "german": [
+          "schule", "schulen", "gymnasium", "universität", "hochschule",
+          "bildung", "ausbildung", "weiterbildung",
+          "kurs", "kurse", "seminar", "schulung",
+          "student", "studenten", "schüler", "lehrer", "dozent",
+          "akademie", "bildungszentrum"
+        ],
+        "english": [
+          "school", "college", "university", "academy", "institute",
+          "education", "training", "learning",
+          "course", "lesson", "seminar", "workshop",
+          "student", "pupil", "teacher", "professor"
+        ]
+      },
+
+      "media": {
+        "dutch": [
+          "krant", "tijdschrift", "magazine", "uitgeverij", "pers",
+          "televisie", "tv", "radio", "omroep", "zender",
+          "reclame", "marketing", "bureau", "reclamebureau", "marketingbureau",
+          "media", "communicatie", "public relations", "pr",
+          "digitale marketing", "sociale media", "online marketing"
+        ],
+        "french": [
+          "journal", "magazine", "revue", "édition", "presse",
+          "télévision", "tv", "radio", "radiodiffusion", "chaîne",
+          "publicité", "marketing", "agence", "agence de publicité",
+          "médias", "communication", "relations publiques",
+          "marketing digital", "médias sociaux"
+        ],
+        "german": [
+          "zeitung", "zeitschrift", "magazin", "verlag", "presse",
+          "fernsehen", "tv", "radio", "rundfunk", "sender",
+          "werbung", "marketing", "agentur", "werbeagentur",
+          "medien", "kommunikation", "public relations",
+          "digitalmarketing", "social media"
+        ],
+        "english": [
+          "newspaper", "magazine", "journal", "publisher", "press",
+          "television", "tv", "radio", "broadcasting",
+          "advertising", "marketing", "agency", "ad agency",
+          "media", "communication", "public relations"
+        ]
+      },
+
+      "finance": {
+        "dutch": [
+          "bank", "financiële instelling", "kredietinstelling",
+          "verzekering", "verzekeraar", "herverzekering",
+          "financiering", "krediet", "lening", "hypotheek",
+          "leasing", "factoring", "investering", "vermogensbeheer",
+          "beurs", "trading", "makelaar", "broker",
+          "fiduciair", "vermogensadvies", "beleggingsadvies"
+        ],
+        "french": [
+          "banque", "établissement financier", "institut financier",
+          "assurance", "réassurance", "compagnie d'assurance",
+          "financement", "crédit", "prêt", "hypothèque",
+          "leasing", "crédit-bail", "affacturage", "investissement",
+          "bourse", "trading", "courtier",
+          "fiduciaire", "conseil financier"
+        ],
+        "german": [
+          "bank", "sparkasse", "finanzinstitut",
+          "versicherung", "assekuranz", "rückversicherung",
+          "finanzierung", "kredit", "darlehen", "hypothek",
+          "leasing", "factoring", "investition",
+          "börse", "trading", "broker",
+          "treuhand", "vermögensberatung"
+        ],
+        "english": [
+          "bank", "banking", "financial institution",
+          "insurance", "reinsurance", "assurance",
+          "financing", "credit", "loan", "mortgage",
+          "leasing", "factoring", "investment",
+          "stock exchange", "trading", "broker"
+        ]
+      },
+
+      "legal": {
+        "dutch": [
+          "notaris", "notariskantoor", "notariaat",
+          "advocaat", "advocatenkantoor", "juridisch kantoor",
+          "juridisch advies", "rechtsadvies", "jurist",
+          "octrooigemachtigde", "accountant", "belastingadviseur"
+        ],
+        "french": [
+          "notaire", "étude notariale",
+          "avocat", "cabinet d'avocats", "cabinet juridique",
+          "conseil juridique", "juriste",
+          "conseil en brevets", "expert-comptable"
+        ],
+        "german": [
+          "notar", "notariat", "notariatskanzlei",
+          "anwalt", "rechtsanwalt", "anwaltskanzlei",
+          "rechtsberatung", "jurist",
+          "patentanwalt", "steuerberater"
+        ],
+        "english": [
+          "notary", "notary public", "notary office",
+          "lawyer", "attorney", "law firm",
+          "legal services", "legal counsel",
+          "patent attorney", "accountant"
+        ]
+      },
+
+      "tourism": {
+        "dutch": [
+          "hotel", "gasthof", "pension", "resort", "accommodatie",
+          "toerisme", "reis", "reizen", "vakantie",
+          "restaurant", "café", "horeca", "catering",
+          "camping", "kampeerterrein", "jeugdherberg",
+          "ski", "skigebied", "skischool", "wellness", "spa", "thermaal",
+          "reisbureau", "touroperator", "reisorganisatie"
+        ],
+        "french": [
+          "hôtel", "auberge", "pension", "hébergement",
+          "tourisme", "voyage", "voyages", "vacances",
+          "restaurant", "café", "gastronomie", "traiteur",
+          "camping", "auberge de jeunesse",
+          "ski", "station de ski", "wellness", "spa",
+          "agence de voyages", "tour-opérateur"
+        ],
+        "german": [
+          "hotel", "gasthof", "pension", "resort",
+          "tourismus", "reise", "ferien", "urlaub",
+          "restaurant", "café", "gastronomie",
+          "camping", "jugendherberge",
+          "ski", "skigebiet", "wellness", "spa",
+          "reisebüro", "reiseveranstalter"
+        ],
+        "english": [
+          "hotel", "motel", "hostel", "resort",
+          "tourism", "travel", "vacation", "holiday",
+          "restaurant", "café", "catering",
+          "camping", "campsite",
+          "ski", "ski resort", "wellness", "spa",
+          "travel agency", "tour operator"
+        ]
+      },
+
+      "healthcare": {
+        "dutch": [
+          "ziekenhuis", "kliniek", "klinieken",
+          "arts", "artspraktijk", "gezondheid", "geneeskunde",
+          "zorg", "verzorgingshuis", "bejaardentehuis",
+          "therapie", "fysiotherapie", "ergotherapie",
+          "tandarts", "tandkliniek", "tandlaboratorium"
+        ],
+        "french": [
+          "hôpital", "clinique", "établissement de santé",
+          "médecin", "cabinet médical", "santé", "médecine",
+          "soins", "maison de retraite",
+          "thérapie", "physiothérapie", "ergothérapie",
+          "dentiste", "clinique dentaire"
+        ],
+        "german": [
+          "krankenhaus", "spital", "klinik",
+          "arzt", "arztpraxis", "gesundheit", "medizin",
+          "pflege", "pflegeheim", "altersheim",
+          "therapie", "physiotherapie",
+          "zahnarzt", "zahnklinik"
+        ],
+        "english": [
+          "hospital", "clinic", "medical center",
+          "doctor", "physician", "health", "medicine",
+          "care", "nursing home", "retirement home",
+          "therapy", "physiotherapy", "physical therapy",
+          "dentist", "dental clinic"
+        ]
+      },
+
+      "pharmacy": {
+        "dutch": [
+          "apotheek", "farmacie", "farmaceutisch bedrijf",
+          "medicijn", "geneesmiddel", "recept", "voorschrift"
+        ],
+        "french": [
+          "pharmacie", "pharmaceutique", "entreprise pharmaceutique",
+          "médicament", "produit pharmaceutique", "ordonnance"
+        ],
+        "german": [
+          "apotheke", "pharmazie", "pharmaunternehmen",
+          "medikament", "arzneimittel", "rezept"
+        ],
+        "english": [
+          "pharmacy", "pharmaceutical", "pharma company",
+          "medication", "medicine", "prescription"
+        ]
+      },
+
+      "retail": {
+        "dutch": [
+          "detailhandel", "winkel", "zaak", "shop",
+          "e-commerce", "webwinkel", "online winkel",
+          "supermarkt", "warenhuis",
+          "mode", "kleding", "textiel",
+          "meubels", "meubilair", "decoratie", "interieur",
+          "fietsenwinkel", "fietsenzaak", "bicycle store"
+        ],
+        "french": [
+          "commerce de détail", "magasin", "boutique",
+          "e-commerce", "boutique en ligne",
+          "supermarché", "grand magasin",
+          "mode", "vêtements", "textiles",
+          "meubles", "ameublement", "décoration",
+          "magasin de vélos", "vélo"
+        ],
+        "german": [
+          "einzelhandel", "laden", "geschäft", "shop",
+          "e-commerce", "online-shop", "webshop",
+          "supermarkt", "kaufhaus",
+          "mode", "bekleidung", "textilien",
+          "möbel", "einrichtung", "dekoration"
+        ],
+        "english": [
+          "retail", "shop", "store", "boutique",
+          "e-commerce", "online shop", "webshop",
+          "supermarket", "department store",
+          "fashion", "clothing", "textiles",
+          "furniture", "home decor"
+        ]
+      },
+
+      "logistics": {
+        "dutch": [
+          "transportbedrijf", "vrachtvervoer", "vrachttransport",
+          "logistiek", "logistieke diensten", "expeditie",
+          "autoverhuur", "bestelwagenverhuur", "voertuigverhuur",
+          "vracht", "vrachtvervoerder", "koerier"
+        ],
+        "french": [
+          "entreprise de transport", "transport de marchandises",
+          "logistique", "services logistiques", "expédition",
+          "location de voiture", "location de véhicules",
+          "fret", "transporteur", "coursier"
+        ],
+        "german": [
+          "transportunternehmen", "spedition", "frachttransport",
+          "logistik", "logistikdienstleistung",
+          "autovermietung", "lkw-vermietung",
+          "fracht", "spediteur", "kurier"
+        ],
+        "english": [
+          "trucking company", "freight transport",
+          "logistics", "logistics services", "forwarding",
+          "car rental", "van rental", "vehicle rental",
+          "freight", "carrier", "courier"
+        ]
+      },
+
+      "hr_agencies": {
+        "dutch": [
+          "uitzendbureau", "arbeidsbemiddeling", "personeelsdiensten",
+          "recruitment", "headhunter", "werving en selectie",
+          "interim", "detachering", "personeelsadvies"
+        ],
+        "french": [
+          "agence de placement", "agence d'intérim", "travail temporaire",
+          "recrutement", "chasseur de têtes", "cabinet de recrutement",
+          "agence de personnel", "intérim"
+        ],
+        "german": [
+          "personalvermittlung", "arbeitsvermittlung", "zeitarbeit",
+          "recruiting", "headhunter", "personalberatung",
+          "temporärarbeit", "zeitarbeitsfirma"
+        ],
+        "english": [
+          "staffing agency", "recruitment agency", "temp agency",
+          "employment agency", "headhunter", "hr agency",
+          "temporary work agency", "placement agency"
+        ]
+      },
+
+      "government": {
+        "dutch": [
+          "overheid", "gemeente", "stad", "provincie", "gewest",
+          "ministerie", "federaal", "vlaams", "waals",
+          "politie", "brandweer", "hulpdiensten"
+        ],
+        "french": [
+          "autorité", "commune", "ville", "province", "région",
+          "ministère", "fédéral", "flamand", "wallon",
+          "police", "pompiers", "services de secours"
+        ],
+        "german": [
+          "behörde", "gemeinde", "stadt", "provinz", "region",
+          "ministerium", "föderal", "flämisch", "wallonisch",
+          "polizei", "feuerwehr", "rettungsdienst"
+        ],
+        "english": [
+          "authority", "municipality", "city", "province", "region",
+          "ministry", "federal", "flemish", "walloon",
+          "police", "fire department", "emergency services"
+        ]
+      },
+
+      "research_ngo": {
+        "dutch": [
+          "onderzoek", "onderzoeksinstituut", "wetenschappelijk",
+          "vereniging", "stichting", "hulporganisatie", "ngo",
+          "ontwikkelingshulp", "liefdadigheid", "non-profit"
+        ],
+        "french": [
+          "recherche", "institut de recherche", "scientifique",
+          "association", "fondation", "organisation humanitaire", "ong",
+          "aide au développement", "charité", "sans but lucratif"
+        ],
+        "german": [
+          "forschung", "forschungsinstitut", "wissenschaftlich",
+          "verein", "stiftung", "hilfsorganisation", "ngo",
+          "entwicklungshilfe", "wohltätigkeit", "non-profit"
+        ],
+        "english": [
+          "research", "research institute", "scientific",
+          "association", "foundation", "humanitarian", "ngo",
+          "development aid", "charity", "non-profit"
+        ]
+      }
+    }
+  },
+
+  "industry_keywords": {
+    "hydraulic_cylinders_dutch": {
+      "primary": [
+        "hydraulische cilinder", "hydraulische cilinders",
+        "hydraulische actuator", "hydraulische actuatoren",
+        "hydraulische zuiger", "hydraulische zuigers",
+        "hydraulische pomp", "hydraulische pompen",
+        "hydraulische motor", "hydraulische motoren",
+        "hydromotor", "hydromotoren",
+        "hydraulische aandrijving", "hydraulische aandrijvingen",
+        "telescopische cilinder", "telescopische cilinders",
+        "dubbelwerkende cilinder", "enkelwerkende cilinder"
+      ],
+      "secondary": [
+        "hydraulisch systeem", "hydraulische systemen",
+        "hydraulische installatie", "hydraulische installaties",
+        "oliehydraulica", "hydraulische besturing",
+        "zuigerstang", "cilinderbus", "afdichtingen", "o-ringen",
+        "hydraulische olie", "hydraulische vloeistof", "drukolie"
+      ],
+      "parts_and_service": [
+        "onderdelen", "wisselstukken", "vervangingsonderdelen",
+        "hydraulische onderdelen", "hydraulische accessoires",
+        "reserveonderdelen", "spare parts",
+        "hydraulisch onderhoud", "onderhoudsdienst",
+        "hydraulische reparatie", "reparatiedienst",
+        "hydraulische storingsdienst", "dépannage hydraulique",
+        "technische dienst", "klantenservice", "after-sales service",
+        "SAV", "nazorg", "service-afdeling"
+      ],
+      "rental_leasing": [
+        "materiaalhuur", "verhuur hydraulische apparatuur",
+        "machine verhuur", "hydraulische verhuur",
+        "huur van bouwmachines", "verhuur graafmachines",
+        "materieelleasing", "leasing", "verhuurservice"
+      ],
+      "oem_indicators": [
+        "fabrikant", "producent", "constructeur", "toeleverancier",
+        "vervaardiging", "productie", "fabricage",
+        "fabriek", "werkplaats", "atelier", "productielocatie",
+        "OEM", "oorspronkelijke fabrikant", "componentenleverancier",
+        "serieproductie", "maatwerk", "op maat gemaakt"
+      ],
+      "applications": [
+        "landbouwmachines", "agrarische machines", "landbouw",
+        "bouwmachines", "graafmachines", "grondverzetmachines", "kraan", "lader",
+        "materialhandling", "heftrucks", "vorkheftrucks", "pallettruck",
+        "heftechniek", "hijstechniek", "kranen", "hoogwerker",
+        "mobiele hydraulica", "voertuighydraulica",
+        "industriële machines", "werktuigmachines", "persen",
+        "laadbak", "kipwagen", "kipperbak", "betonmixer",
+        "vuilniswagen", "takelwagen", "container"
+      ]
+    },
+
+    "hydraulic_cylinders_french": {
+      "primary": [
+        "vérin hydraulique", "vérins hydrauliques",
+        "cylindre hydraulique", "cylindres hydrauliques",
+        "actionneur hydraulique", "actionneurs hydrauliques",
+        "piston hydraulique", "pistons hydrauliques",
+        "pompe hydraulique", "pompes hydrauliques",
+        "moteur hydraulique", "moteurs hydrauliques",
+        "hydromoteur", "hydromoteurs",
+        "entraînement hydraulique", "entraînements hydrauliques",
+        "vérin télescopique", "vérins télescopiques",
+        "vérin double effet", "vérin simple effet"
+      ],
+      "secondary": [
+        "système hydraulique", "systèmes hydrauliques",
+        "installation hydraulique", "installations hydrauliques",
+        "oléohydraulique", "commande hydraulique",
+        "tige de piston", "tube de cylindre", "joints", "joints toriques",
+        "huile hydraulique", "fluide hydraulique", "huile de pression"
+      ],
+      "parts_and_service": [
+        "pièces détachées", "pièces de rechange", "pièces hydrauliques",
+        "accessoires hydrauliques", "composants hydrauliques",
+        "pièces pour engins", "spare parts",
+        "entretien hydraulique", "maintenance hydraulique", "maintenance préventive",
+        "réparation hydraulique", "service de réparation",
+        "dépannage hydraulique", "service de dépannage",
+        "service technique", "service après-vente", "SAV",
+        "assistance technique", "support technique"
+      ],
+      "rental_leasing": [
+        "location de matériel", "location d'engins", "location d'équipements",
+        "location hydraulique", "location de machines",
+        "location d'engins de chantier", "location de pelles",
+        "leasing matériel", "leasing", "service de location"
+      ],
+      "oem_indicators": [
+        "fabricant", "producteur", "constructeur", "fournisseur",
+        "fabrication", "production", "manufacture",
+        "usine", "atelier", "site de production",
+        "OEM", "équipementier", "fournisseur OEM",
+        "production en série", "fabrication spéciale", "sur mesure"
+      ],
+      "applications": [
+        "machines agricoles", "engins agricoles", "agriculture",
+        "engins de chantier", "machines de terrassement", "pelle", "chargeuse",
+        "manutention", "chariots élévateurs", "transpalettes",
+        "levage", "élévation", "grues", "nacelles élévatrices",
+        "hydraulique mobile", "hydraulique véhicules",
+        "machines industrielles", "machines-outils", "presses",
+        "benne", "camion-benne", "malaxeur béton",
+        "camion à ordures", "dépanneuse", "container"
+      ]
+    },
+
+    "hydraulic_cylinders_german": {
+      "primary": [
+        "hydraulikzylinder", "hydraulische zylinder",
+        "hydraulikaktor", "hydraulische aktoren",
+        "hydraulikkolben", "hydraulikpumpe", "hydraulikpumpen",
+        "hydraulikmotor", "hydromotoren",
+        "hydraulikantrieb", "hydraulische antriebe",
+        "teleskopzylinder", "doppeltwirkende zylinder",
+        "einfachwirkende zylinder"
+      ],
+      "secondary": [
+        "hydrauliksystem", "hydrauliksysteme",
+        "hydraulikanlage", "hydraulikanlagen",
+        "ölhydraulik", "hydraulische steuerung",
+        "kolbenstange", "zylinderrohr", "dichtungen", "o-ringe",
+        "hydrauliköl", "hydraulikflüssigkeit", "drucköl"
+      ],
+      "parts_and_service": [
+        "ersatzteile", "austauschteile", "hydraulische ersatzteile",
+        "hydraulische zubehör", "hydraulische komponenten",
+        "reserveteile", "spare parts",
+        "hydraulik wartung", "wartungsdienst", "vorbeugende wartung",
+        "hydraulik reparatur", "reparaturdienst",
+        "hydraulik notdienst", "störungsdienst",
+        "technischer dienst", "kundendienst", "after-sales service",
+        "service-abteilung", "technischer support"
+      ],
+      "rental_leasing": [
+        "gerätevermietung", "baumaschinen vermietung",
+        "hydraulik vermietung", "maschinen vermietung",
+        "bagger vermietung", "baugeräte mieten",
+        "leasing", "equipment leasing", "mietservice"
+      ],
+      "oem_indicators": [
+        "hersteller", "produzent", "fabrikant", "zulieferer",
+        "fertigung", "produktion", "herstellung",
+        "fabrik", "werk", "produktionswerk",
+        "OEM", "erstausrüster", "komponentenhersteller",
+        "serienproduktion", "sonderfertigung"
+      ],
+      "applications": [
+        "landmaschinen", "agrarmaschinen", "ackerbau",
+        "baumaschinen", "erdbaumaschinen", "bagger", "lader",
+        "materialhandling", "flurförderzeuge", "stapler",
+        "hebetechnik", "hubtechnik", "krane", "hebebühnen",
+        "mobile hydraulik", "fahrzeughydraulik",
+        "industriemaschinen", "werkzeugmaschinen", "pressen",
+        "kipper", "kippmulde", "betonmischer",
+        "müllwagen", "abschleppwagen", "container"
+      ]
+    },
+
+    "hydraulic_cylinders_english": {
+      "primary": [
+        "hydraulic cylinder", "hydraulic cylinders",
+        "hydraulic actuator", "hydraulic actuators",
+        "hydraulic piston", "hydraulic pistons",
+        "hydraulic pump", "hydraulic pumps",
+        "hydraulic motor", "hydraulic motors",
+        "hydraulic drive", "hydraulic drives",
+        "telescopic cylinder", "telescoping cylinder",
+        "double-acting cylinder", "single-acting cylinder",
+        "heavy-duty cylinder", "mobile cylinder"
+      ],
+      "secondary": [
+        "hydraulic system", "hydraulic systems",
+        "hydraulic installation", "hydraulic installations",
+        "oleodynamic", "hydraulic control",
+        "piston rod", "cylinder tube", "seals", "o-rings",
+        "hydraulic oil", "hydraulic fluid", "pressure oil",
+        "hydrostatic transmission", "hydrostatic drive"
+      ],
+      "parts_and_service": [
+        "spare parts", "replacement parts", "hydraulic parts",
+        "hydraulic accessories", "hydraulic components",
+        "parts for equipment", "aftermarket parts",
+        "hydraulic maintenance", "maintenance service", "preventive maintenance",
+        "hydraulic repair", "repair service",
+        "hydraulic breakdown service", "emergency service",
+        "technical service", "after-sales service", "customer service",
+        "service department", "technical support"
+      ],
+      "rental_leasing": [
+        "equipment rental", "machinery rental", "hydraulic equipment rental",
+        "construction equipment rental", "excavator rental",
+        "machine hire", "rental service",
+        "leasing", "equipment leasing"
+      ],
+      "oem_indicators": [
+        "manufacturer", "producer", "maker", "supplier",
+        "manufacturing", "production", "fabrication",
+        "factory", "plant", "production facility",
+        "OEM", "original equipment manufacturer", "component supplier",
+        "series production", "custom manufacturing", "made-to-order"
+      ],
+      "applications": [
+        "agricultural machinery", "farm equipment", "agriculture",
+        "construction equipment", "earthmoving equipment", "excavator", "loader",
+        "material handling", "forklifts", "pallet jacks",
+        "lifting equipment", "hoisting", "cranes", "aerial platforms",
+        "mobile hydraulics", "vehicle hydraulics",
+        "industrial machinery", "machine tools", "presses",
+        "dump body", "dump truck", "tipper", "concrete mixer",
+        "garbage truck", "refuse truck", "tow truck", "container"
+      ]
+    },
+
+    "mobile_hydraulics_keywords": {
+      "dutch": [
+        "tractoren met hydroaandrijving", "vrachtwagens met hydraulische motoren",
+        "opleggers met hydraulische systemen", "kiepwagens met hydraulische aandrijvingen",
+        "vuilniswagens met laad-hydromotoren", "betonmixers met hydromotoren",
+        "kraaninstallaties met rotatie-hydromotoren", "takelwagens met hydraulische lieren",
+        "containervervoerders met hydroaandrijvingen", "wielaangedreven hydromotoren"
+      ],
+      "french": [
+        "tracteurs routiers à hydromoteurs", "semi-remorques à systèmes hydrauliques",
+        "camions-bennes à systèmes hydrauliques", "camions à ordures à hydromoteurs de chargement",
+        "malaxeurs à béton à hydromoteurs", "installations de grues à hydromoteurs de rotation",
+        "dépanneuses à treuils hydrauliques", "transporteurs de conteneurs à hydroentraînements",
+        "hydromoteurs de roue", "transmissions hydrostatiques"
+      ],
+      "english": [
+        "semi-trucks with hydraulic motors", "city tractors with hydraulic drive",
+        "flatbed trucks hydraulic", "dump trucks with hydraulic drives",
+        "garbage trucks with loading hydraulic motors", "concrete mixer hydraulic motors",
+        "crane rotation hydraulic motors", "tow trucks with hydraulic winches",
+        "container carriers with hydraulic drives", "wheel drive hydraulic motors",
+        "hydrostatic transmissions", "mobile crane winch motors"
+      ]
+    },
+
+    "negative_keywords": [
+      "headhunting", "recruitment agency", "staffing", "uitzendbureau",
+      "personalvermittlung", "zeitarbeit", "temporärarbeit",
+      "agence de recrutement", "intérim", "agence d'intérim",
+      "student", "schüler", "étudiant", "leerling",
+      "university", "universiteit", "université", "hogeschool",
+      "hotel", "restaurant", "café", "toerisme", "tourism", "tourisme",
+      "retail", "detailhandel", "einzelhandel", "commerce de détail",
+      "bank", "verzekering", "versicherung", "assurance",
+      "immobilien", "vastgoed", "immobilier", "real estate",
+      "bicycle", "fiets", "vélo", "fahrrad"
+    ]
+  },
+
+  "domain_patterns": {
+    "hydraulic_nl": [
+      "hydrauliek", "hydraulische", "cilinder", "cilinders",
+      "pomp", "pompen", "motor", "motoren", "zuiger",
+      "aandrijving", "aandrijvingen", "oliehydraulica"
+    ],
+    "hydraulic_fr": [
+      "hydraulique", "verin", "cylindre", "piston",
+      "pompe", "moteur", "entraînement", "actionneur",
+      "oleo", "oleodynamique", "systeme-hydraulique"
+    ],
+    "hydraulic_de": [
+      "hydraulik", "zylinder", "kolben", "pumpe",
+      "motor", "antrieb", "aktor", "oelhydraulik"
+    ],
+    "hydraulic_en": [
+      "hydraulic", "cylinder", "piston", "actuator",
+      "pump", "motor", "drive", "oleodynamic"
+    ],
+    "machinery_general": [
+      "machinery", "equipment", "machines", "maschinen", "macchine",
+      "industrial", "industrie", "industrieel", "industriel",
+      "engineering", "techniek", "technique", "technik",
+      "manufacturing", "productie", "production", "fabrication"
+    ],
+    "belgian_extensions": [
+      ".be", "bvba", "nv", "sa", "sprl", "bv", "cv",
+      "group", "groep", "groupe", "systems", "systemen", "systèmes"
+    ]
+  },
+
+  "scoring": {
+    "weights": {
+      "email_quality": 0.10,
+      "company_relevance": 0.45,
+      "geographic_priority": 0.30,
+      "engagement": 0.15
+    },
+    "thresholds": {
+      "high_priority": 100,
+      "medium_priority": 50,
+      "low_priority": 10
+    },
+    "bonus_multipliers": {
+      "oem_manufacturer": 1.3,
+      "target_geography": 2.0,
+      "domain_match": 1.5
+    }
+  },
+
+  "output_settings": {
+    "filename_prefix": "Belgium_Hydraulic_Cylinders",
+    "split_by_priority": false,
+    "generate_clean_list": true,
+    "generate_excluded_list": true,
+    "generate_exclusion_report": true,
+    "include_metadata": true,
+    "generate_html_report": true
+  }
+}
