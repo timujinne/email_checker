@@ -433,6 +433,17 @@ class ListsManagerComponent {
                         </div>
                     </div>
 
+                    <div class="flex flex-wrap gap-2">
+                <button class="btn btn-primary btn-sm gap-2" onclick="window.listsManager.showUploadModal()">
+                    <i class="fas fa-upload"></i> Upload
+                </button>
+                <button class="btn btn-ghost btn-sm gap-2" onclick="window.metadataManager.open()">
+                    <i class="fas fa-tags"></i> Metadata
+                </button>
+                <button class="btn btn-ghost btn-sm btn-square" onclick="window.listsManager.loadLists()" title="Refresh">
+                    <i class="fas fa-sync-alt"></i>
+                </button>
+            </div>
                     <div class="modal-action">
                         <button class="btn" onclick="document.getElementById('shortcuts-modal').close()">Закрыть</button>
                     </div>
@@ -945,7 +956,7 @@ class ListsManagerComponent {
             const config = this.getColumnConfig(colId);
             const widthStyle = config.width ? `style="width: ${config.width}; min-width: ${config.width};"` : '';
             const alignClass = config.align === 'center' ? 'text-center' :
-                               config.align === 'right' ? 'text-right' : 'text-left';
+                config.align === 'right' ? 'text-right' : 'text-left';
 
             // Special handling for select column with header checkbox
             if (colId === 'select') {
@@ -975,7 +986,7 @@ class ListsManagerComponent {
                 const colId = typeof col === 'string' ? col : col.id;
                 const config = this.getColumnConfig(colId);
                 const alignClass = config.align === 'center' ? 'text-center' :
-                                   config.align === 'right' ? 'text-right' : 'text-left';
+                    config.align === 'right' ? 'text-right' : 'text-left';
                 bodyHTML += `<td class="${alignClass}">${this.renderCell(list, colId)}</td>`;
             });
             bodyHTML += '</tr>';
@@ -1107,7 +1118,7 @@ class ListsManagerComponent {
      * Render individual table cell
      */
     renderCell(list, columnId) {
-        switch(columnId) {
+        switch (columnId) {
             case 'select':
                 return `
                     <label>
@@ -1802,7 +1813,7 @@ class ListsManagerComponent {
 
                         // Переход на Processing Queue для отслеживания прогресса
                         setTimeout(() => {
-                            window.location.href = '/processing-queue.html';
+                            window.location.hash = 'processing';
                         }, 2000);
                     } else {
                         throw new Error(result.error || 'Ошибка запуска обработки');
@@ -1896,7 +1907,7 @@ class ListsManagerComponent {
 
                 // Перенаправление на страницу очереди обработки через 2 секунды
                 setTimeout(() => {
-                    window.location.href = '/processing-queue.html';
+                    window.location.hash = 'processing';
                 }, 2000);
             } else {
                 throw new Error(result.error || 'Неизвестная ошибка');

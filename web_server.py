@@ -1670,12 +1670,13 @@ class EmailCheckerWebHandler(BaseHTTPRequestHandler):
             file_exists_in_config = any(lst.get("filename") == filename for lst in lists)
 
             if not file_exists_in_config:
-                # Используем EmailChecker для авто-определения метаданных
+                # Используем ConfigManager для авто-определения метаданных
                 try:
-                    checker = EmailChecker(str(self.base_dir))
-                    # Временно добавляем файл в конфигурацию для _get_list_metadata
-                    checker.lists_config = {"lists": lists}
-                    metadata = checker._get_list_metadata(filename)
+                    from email_checker_core.config import ConfigManager
+                    
+                    config_manager = ConfigManager(str(self.base_dir))
+                    output_dir = self.base_dir / "output"
+                    metadata = config_manager.get_list_metadata(filename, output_dir)
 
                     # Обновляем метаданные из загруженного файла
                     metadata["file_size"] = len(file_data)

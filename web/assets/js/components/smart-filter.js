@@ -241,6 +241,12 @@ ${json}
      */
     handleWizardComplete(result) {
         const exportType = result.exportType;
+        const mode = result.mode; // 'clean' or 'raw'
+
+        if (mode === 'raw' && exportType === 'apply') {
+            this.startFullWorkflow(result);
+            return;
+        }
 
         switch (exportType) {
             case 'apply':
@@ -382,6 +388,116 @@ ${json}
             // Always hide loading state and cleanup
             this.hideLoading();
             this.abortController = null;
+        }
+    }
+
+    /**
+     * Start full workflow (Base Filter -> Smart Filter)
+     */
+    async startFullWorkflow(wizardResult) {
+        try {
+            const { selectedList, config, scoreThreshold, skipBaseFiltering } = wizardResult;
+
+            // Show loading state with logs
+            this.showLoading('Initializing workflow...', true);
+
+            // Create abort controller
+            this.abortController = new AbortController();
+
+            const payload = {
+                input_file: selectedList.filename || selectedList,
+                config_name: config.metadata?.name || 'custom', // Backend expects a name or uses default
+                // If custom config, we might need to pass the full config object if backend supports it,
+                // but currently backend seems to rely on config_name or hardcoded logic.
+                // For now, we'll assume we pass the config object if supported, or just parameters.
+                // The backend `handle_smart_filter_workflow` takes `config_name`.
+                // If it's a custom config from wizard, we might need to save it first or pass it.
+                // Let's pass the full config in the payload just in case backend is updated to use it.
+                config: config,
+                score_threshold: parseFloat(scoreThreshold || 30),
+                skip_base_filtering: skipBaseFiltering
+            };
+
+            console.log('Starting full workflow:', payload);
+
+            const response = await api.post('/api/smart-filter/workflow', payload, {
+                signal: this.abortController.signal
+            });
+
+            if (response.data.success) {
+                console.log('Workflow started:', response.data);
+                this.monitorProgress();
+            } else {
+                throw new Error(response.data.error || 'Failed to start workflow');
+            }
+
+        } catch (error) {
+            console.error('❌ Error starting workflow:', error);
+            this.hideLoading();
+            toast.error(this.formatError(error));
+        }
+    }
+
+    /**
+     * Monitor workflow progress
+     */
+    monitorProgress() {
+        // Poll every 2 seconds
+        const interval = setInterval(async () => {
+            // Check if cancelled
+            if (!this.abortController) {
+                clearInterval(interval);
+                return;
+            }
+
+            try {
+                const response = await api.get('/api/processing-status');
+                const data = response.data;
+
+                // Update UI
+                this.updateProgressUI(data);
+
+                // Check if completed
+                if (!data.is_running) {
+                    clearInterval(interval);
+                    this.hideLoading();
+
+                    // Show results
+                    this.showSuccessModal({
+                        output_files: [], // Backend might not return files in status, need to check
+                        message: 'Workflow completed successfully!'
+                    });
+
+                    // Refresh lists if needed
+                    if (window.listsManager) {
+                        window.listsManager.loadLists();
+                    }
+                }
+
+            } catch (error) {
+                console.error('Error monitoring progress:', error);
+                // Don't stop polling on transient errors
+            }
+        }, 2000);
+    }
+
+    /**
+     * Update progress UI with logs
+     */
+    updateProgressUI(data) {
+        const logs = data.logs || [];
+        const lastLog = logs[logs.length - 1];
+
+        if (lastLog) {
+            this.updateLoading(lastLog.message, `Last update: ${lastLog.timestamp}`);
+        }
+
+        // Update log container if exists
+        const logContainer = document.getElementById('loading-logs');
+        if (logContainer) {
+            logContainer.innerHTML = logs.slice(-5).map(log =>
+                `<div class="text-xs text-gray-400"><span class="text-gray-500">[${log.timestamp}]</span> ${log.message}</div>`
+            ).join('');
         }
     }
 
@@ -542,21 +658,33 @@ ${json}
         overlay.id = 'smart-filter-loading';
         overlay.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50';
         overlay.innerHTML = `
-            <div class="bg-white dark:bg-gray-800 rounded-lg p-6 max-w-sm shadow-xl">
-                <div class="flex items-center space-x-4">
-                    <div class="spinner-border animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
-                    <div>
-                        <p class="text-lg font-semibold dark:text-white" id="loading-message">${message}</p>
-                        <p class="text-sm text-gray-500 dark:text-gray-400 mt-1" id="loading-progress"></p>
+            <div class="bg-white dark:bg-gray-800 rounded-lg p-6 max-w-md w-full shadow-xl">
+                <div class="flex items-center space-x-4 mb-4">
+                    <div class="spinner-border animate-spin rounded-full h-12 w-12 border-b-2 border-primary flex-shrink-0"></div>
+                    <div class="flex-1 min-w-0">
+                        <p class="text-lg font-semibold dark:text-white truncate" id="loading-message">${message}</p>
+                        <p class="text-sm text-gray-500 dark:text-gray-400 mt-1 truncate" id="loading-progress"></p>
                     </div>
                 </div>
-                <button class="btn btn-sm btn-ghost mt-4 w-full" onclick="window.smartFilterCancelOperation()">
+                
+                <!-- Logs Container -->
+                <div id="loading-logs" class="bg-gray-900 rounded p-3 h-32 overflow-y-auto font-mono text-xs mb-4 hidden">
+                    <!-- Logs will appear here -->
+                </div>
+
+                <button class="btn btn-sm btn-ghost mt-2 w-full" onclick="window.smartFilterCancelOperation()">
                     Cancel
                 </button>
             </div>
         `;
 
         document.body.appendChild(overlay);
+
+        // Show logs container if requested
+        if (arguments[1] === true) { // showLogs param
+            const logs = document.getElementById('loading-logs');
+            if (logs) logs.classList.remove('hidden');
+        }
     }
 
     /**

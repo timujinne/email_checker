@@ -49,7 +49,7 @@ class EmailCheckerApp {
             this.initialized = true;
             console.log('✅ Application initialized successfully');
             console.log('📊 Performance monitoring enabled - Use window.debug.monitor() to view metrics');
-            
+
             if (typeof toast !== 'undefined') {
                 toast.success('Application ready');
             }
@@ -151,7 +151,7 @@ class EmailCheckerApp {
             'dashboard': (route) => {
                 console.log('🔀 Navigating to: dashboard');
                 this.showPage('dashboard-page');
-                
+
                 // Initialize dashboard if available
                 if (typeof dashboardManager !== 'undefined') {
                     try {
@@ -629,17 +629,11 @@ class EmailCheckerApp {
 }
 
 // Initialize app when DOM is ready
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => {
-        const app = new EmailCheckerApp();
-        app.init();
-        window.emailCheckerApp = app;
-    });
-} else {
+document.addEventListener('DOMContentLoaded', () => {
     const app = new EmailCheckerApp();
     app.init();
     window.emailCheckerApp = app;
-}
+});
 
 // Export for debugging
 window.EmailCheckerApp = EmailCheckerApp;
